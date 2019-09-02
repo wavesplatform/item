@@ -1,24 +1,20 @@
 import * as Debug from 'debug'
 import * as http from 'http'
-import { getCompletedCount, initProcessPolling, startPolling } from './polling'
 import { config } from './config'
+import { initProcessTxs } from './txs'
 
-const debug = Debug('observer')
+const debug = Debug('combine')
 
-debug('👀 Observer is starting...')
+debug('🚜 Combine is starting...')
 
 // Worker
 const server = http.createServer(async (req, res) => {
   res.writeHead(200, { 'Content-Type': 'application/json' })
-  res.end(JSON.stringify({ status: 'UP', completed: await getCompletedCount() }))
+  res.end(JSON.stringify({ status: 'UP' }))
 })
 
 const run = async () => {
-  initProcessPolling()
-
-  // Restart job
-  debug('⌚️ Start polling...')
-  await startPolling()
+  initProcessTxs()
 }
 
 run()

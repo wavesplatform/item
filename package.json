@@ -8,15 +8,19 @@
     "services/*"
   ],
   "scripts": {
+    "bootstrap": "lerna bootstrap",
     "build": "lerna run --stream --concurrency 1 --sort build",
     "start": "lerna run --stream --parallel start",
-    "dev": "lerna run --stream --parallel dev",
+    "dev": "cross-env DEBUG=observer,combine,writer lerna run --stream --parallel dev",
     "fix": "lerna run --stream --concurrency 1 fix",
-    "test": "lerna run --stream --concurrency 1 --sort test"
+    "test": "lerna run --stream --concurrency 1 --sort test",
+    "prisma:generate": "cross-env PRISMA_HOST=prisma prisma generate",
+    "prisma:deploy:dev": "cross-env PRISMA_HOST=localhost prisma deploy"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.2",
+    "cross-env": "^5.2.0",
     "jest": "^24.9.0",
     "lerna": "^3.16.4",
     "prettier": "^1.18.2",

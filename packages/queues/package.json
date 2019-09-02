@@ -1,13 +1,11 @@
 {
-  "name": "@item/observer",
+  "name": "@item/queues",
   "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "start": "node ./dist/index.js",
-    "dev": "nodemon",
     "fix": "run-s fix:tslint fix:prettier",
     "fix:prettier": "prettier --write \"{src,test}/**/*.ts\" --ignore-path ../../.prettierignore",
     "fix:tslint": "tslint --fix -t stylish -p .",
@@ -16,15 +14,13 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
-    "@item/queues": "^1.0.0",
-    "@waves/waves-rest": "^0.0.34",
-    "axios": "^0.19.0",
-    "debug": "^4.1.1"
+    "bull": "^3.10.0"
   },
   "devDependencies": {
     "@item/types": "^1.0.0",
+    "@types/bull": "^3.10.2",
     "@types/node": "^12.7.2",
-    "nodemon": "^1.19.1",
+    "@waves/waves-rest": "^0.0.36",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.18.2",
     "ts-node": "^8.3.0",

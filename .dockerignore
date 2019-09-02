@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Build and test
+dist/
+coverage/
+
+# Logs
+yarn-error.log
+npm-debug.log
+lerna-debug.log
+local.log
+
+# IDE
+.idea/
+.vscode/
+*.sublime-*
+
+# Misc
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+

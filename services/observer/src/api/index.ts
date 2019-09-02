@@ -1,7 +1,7 @@
-import Axios from 'axios'
-import { config as wavesApiConfig, wavesApi } from '@waves/waves-rest'
+import axios from 'axios'
+import { axiosHttp, config as wavesApiConfig, wavesApi } from '@waves/waves-rest'
 import config from '../config'
 
-const { getIssueTxs, getDataTxs } = wavesApi(wavesApiConfig[config.network], Axios.create())
+const { getIssueTxs, getDataTxs, getInvokeScriptTxs } = wavesApi(wavesApiConfig[config.network], axiosHttp(axios))
 
-export { getIssueTxs, getDataTxs }
+export { getIssueTxs, getDataTxs, getInvokeScriptTxs }

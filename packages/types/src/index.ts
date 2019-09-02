@@ -1,1 +1,7 @@
-export { Item } from './item'
+export {
+  OPERATION_TYPE,
+  CreateOperation,
+  UpdateOperation,
+  DeleteOperation,
+  Operation,
+} from './operations'

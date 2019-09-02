@@ -1,0 +1,25 @@
+type Issue {
+  id: ID! @id
+  txId: String! @unique
+  name: String!
+  description: String!
+  decimals: Int!
+  quantity: Int!
+  reissuable: Boolean!
+  timestamp: DateTime!
+  sender: String!
+  senderPublicKey: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Item {
+  id: ID! @id
+  txId: String! @unique
+  name: String!
+  quantity: Int!
+  reissuable: Boolean!
+  timestamp: DateTime!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

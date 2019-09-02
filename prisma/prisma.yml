@@ -1,0 +1,9 @@
+endpoint: http://${env:PRISMA_HOST}:4466
+datamodel:
+  - datamodel.prisma
+
+generate:
+  - generator: typescript-client
+    output: ../services/combine/src/__generated__/prisma-client/
+  - generator: typescript-client
+    output: ../services/writer/src/__generated__/prisma-client/
