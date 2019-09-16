@@ -1,6 +1,19 @@
 version: 2.1
 
 aliases:
+  - &restore-yarn-cache
+    name: Restore Yarn package cache
+    keys:
+      - v1-dependencies-{{ checksum "yarn.lock" }}
+      - v1-dependencies-
+
+  - &save-yarn-cache
+    name: Save Yarn package cache
+    key: v1-dependencies-{{ checksum "yarn.lock" }}
+    paths:
+      - node_modules
+      - ~/.cache/yarn
+
   - &bootstrap
     name: Lerna bootstrap
     command: yarn bootstrap
@@ -39,19 +52,13 @@ jobs:
     <<: *node_defaults
     steps:
       - checkout
-      - restore_cache:
-          name: Restore Yarn package cache
-          keys:
-            - v1-dependencies-{{ checksum "yarn.lock" }}
-            - v1-dependencies-
+      - restore_cache: *restore-yarn-cache
       - run: yarn --frozen-lockfile
       - run: *bootstrap
-      - save_cache:
-          name: Save Yarn package cache
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
-          paths:
-            - node_modules
-            - ~/.cache/yarn
+      - save_cache: *save-yarn-cache
+      - persist_to_workspace:
+          root: .
+          paths: .
   build:
     <<: *node_defaults
     steps:
