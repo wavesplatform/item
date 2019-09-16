@@ -79,9 +79,9 @@ workflows:
   test:
     jobs:
       - checkout_env
-      - test_unit:
-          requires:
-            - checkout_env
       - build:
           requires:
             - checkout_env
+      - test_unit:
+          requires:
+            - build
