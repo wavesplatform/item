@@ -1,7 +1,12 @@
 import { config } from './config'
-import { queues } from '@item/queues'
-import { collectIssueTxs } from './collect'
+import { Queue, queues, TxsJobData } from '@item/queues'
+import { collectTxs, GetTxFunction } from './collect'
 import * as Debug from 'debug'
+import { DataTransaction, IssueTransaction } from '@waves/waves-rest'
+import { InvokeScriptTransaction } from '@waves/waves-rest/types'
+import { getIssueTxsForPeriod } from './txs/issue'
+import { getDataTxsForPeriod } from './txs/data'
+import { getInvokeScriptTxsForPeriod } from './txs/invokeScript'
 
 const debug = Debug('observer')
 
@@ -12,6 +17,7 @@ const pollingKey = 'polling'
 // Out
 const issueTxsQueue = queues.issueTxsQueue
 const dataTxsQueue = queues.dataTxsQueue
+const invokeTxsQueue = queues.invokeTxsQueue
 
 /**
  * Init process polling queue with repeatable job
@@ -52,13 +58,27 @@ const processPolling = async () => {
     const timeStart = Date.now() - config.fetchOffsetTxs
     const addresses = ['3N2MUXXWL1Ws9bCAdrR1xoZWKwBAtyaowFH']
 
-    // Fetch txs for specified addresses
-    const issueTxs = await collectIssueTxs(addresses, timeStart)
-
-    // Broadcast txs to queue for another service
-    await issueTxsQueue.add({ txs: issueTxs, timeStart })
+    await Promise.all([
+      fetchTxs<IssueTransaction>(getIssueTxsForPeriod, issueTxsQueue, addresses, timeStart),
+      fetchTxs<DataTransaction>(getDataTxsForPeriod, dataTxsQueue, addresses, timeStart),
+      fetchTxs<InvokeScriptTransaction>(getInvokeScriptTxsForPeriod, invokeTxsQueue, addresses, timeStart),
+    ])
   } catch (err) {
-    debug(err)
+    debug(err.message)
     throw err
   }
+}
+
+const fetchTxs = async <Tx>(
+  getTxFn: GetTxFunction<Tx>,
+  queue: Queue<TxsJobData<Tx>>,
+  addresses: string[],
+  timeStart: number,
+  timeEnd?: number
+) => {
+  // Fetch txs for specified addresses
+  const txs = await collectTxs<Tx>(getTxFn, addresses, timeStart, timeEnd)
+
+  // Broadcast txs to queue for another service
+  await queue.add({ txs, timeStart, timeEnd })
 }

@@ -12,8 +12,13 @@ export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
 export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
+  data: (where?: DataWhereInput) => Promise<boolean>;
+  invokeScript: (where?: InvokeScriptWhereInput) => Promise<boolean>;
   issue: (where?: IssueWhereInput) => Promise<boolean>;
   item: (where?: ItemWhereInput) => Promise<boolean>;
+  itemParams: (where?: ItemParamsWhereInput) => Promise<boolean>;
+  lot: (where?: LotWhereInput) => Promise<boolean>;
+  user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
 export interface Node {
@@ -36,6 +41,46 @@ export interface Prisma {
    * Queries
    */
 
+  data: (where: DataWhereUniqueInput) => DataNullablePromise;
+  datas: (args?: {
+    where?: DataWhereInput;
+    orderBy?: DataOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Data>;
+  datasConnection: (args?: {
+    where?: DataWhereInput;
+    orderBy?: DataOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => DataConnectionPromise;
+  invokeScript: (
+    where: InvokeScriptWhereUniqueInput
+  ) => InvokeScriptNullablePromise;
+  invokeScripts: (args?: {
+    where?: InvokeScriptWhereInput;
+    orderBy?: InvokeScriptOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<InvokeScript>;
+  invokeScriptsConnection: (args?: {
+    where?: InvokeScriptWhereInput;
+    orderBy?: InvokeScriptOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => InvokeScriptConnectionPromise;
   issue: (where: IssueWhereUniqueInput) => IssueNullablePromise;
   issues: (args?: {
     where?: IssueWhereInput;
@@ -74,12 +119,105 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => ItemConnectionPromise;
+  itemParams: (where: ItemParamsWhereUniqueInput) => ItemParamsNullablePromise;
+  itemParamses: (args?: {
+    where?: ItemParamsWhereInput;
+    orderBy?: ItemParamsOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<ItemParams>;
+  itemParamsesConnection: (args?: {
+    where?: ItemParamsWhereInput;
+    orderBy?: ItemParamsOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ItemParamsConnectionPromise;
+  lot: (where: LotWhereUniqueInput) => LotNullablePromise;
+  lots: (args?: {
+    where?: LotWhereInput;
+    orderBy?: LotOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Lot>;
+  lotsConnection: (args?: {
+    where?: LotWhereInput;
+    orderBy?: LotOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => LotConnectionPromise;
+  user: (where: UserWhereUniqueInput) => UserNullablePromise;
+  users: (args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<User>;
+  usersConnection: (args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => UserConnectionPromise;
   node: (args: { id: ID_Output }) => Node;
 
   /**
    * Mutations
    */
 
+  createData: (data: DataCreateInput) => DataPromise;
+  updateData: (args: {
+    data: DataUpdateInput;
+    where: DataWhereUniqueInput;
+  }) => DataPromise;
+  updateManyDatas: (args: {
+    data: DataUpdateManyMutationInput;
+    where?: DataWhereInput;
+  }) => BatchPayloadPromise;
+  upsertData: (args: {
+    where: DataWhereUniqueInput;
+    create: DataCreateInput;
+    update: DataUpdateInput;
+  }) => DataPromise;
+  deleteData: (where: DataWhereUniqueInput) => DataPromise;
+  deleteManyDatas: (where?: DataWhereInput) => BatchPayloadPromise;
+  createInvokeScript: (data: InvokeScriptCreateInput) => InvokeScriptPromise;
+  updateInvokeScript: (args: {
+    data: InvokeScriptUpdateInput;
+    where: InvokeScriptWhereUniqueInput;
+  }) => InvokeScriptPromise;
+  updateManyInvokeScripts: (args: {
+    data: InvokeScriptUpdateManyMutationInput;
+    where?: InvokeScriptWhereInput;
+  }) => BatchPayloadPromise;
+  upsertInvokeScript: (args: {
+    where: InvokeScriptWhereUniqueInput;
+    create: InvokeScriptCreateInput;
+    update: InvokeScriptUpdateInput;
+  }) => InvokeScriptPromise;
+  deleteInvokeScript: (
+    where: InvokeScriptWhereUniqueInput
+  ) => InvokeScriptPromise;
+  deleteManyInvokeScripts: (
+    where?: InvokeScriptWhereInput
+  ) => BatchPayloadPromise;
   createIssue: (data: IssueCreateInput) => IssuePromise;
   updateIssue: (args: {
     data: IssueUpdateInput;
@@ -112,6 +250,54 @@ export interface Prisma {
   }) => ItemPromise;
   deleteItem: (where: ItemWhereUniqueInput) => ItemPromise;
   deleteManyItems: (where?: ItemWhereInput) => BatchPayloadPromise;
+  createItemParams: (data: ItemParamsCreateInput) => ItemParamsPromise;
+  updateItemParams: (args: {
+    data: ItemParamsUpdateInput;
+    where: ItemParamsWhereUniqueInput;
+  }) => ItemParamsPromise;
+  updateManyItemParamses: (args: {
+    data: ItemParamsUpdateManyMutationInput;
+    where?: ItemParamsWhereInput;
+  }) => BatchPayloadPromise;
+  upsertItemParams: (args: {
+    where: ItemParamsWhereUniqueInput;
+    create: ItemParamsCreateInput;
+    update: ItemParamsUpdateInput;
+  }) => ItemParamsPromise;
+  deleteItemParams: (where: ItemParamsWhereUniqueInput) => ItemParamsPromise;
+  deleteManyItemParamses: (where?: ItemParamsWhereInput) => BatchPayloadPromise;
+  createLot: (data: LotCreateInput) => LotPromise;
+  updateLot: (args: {
+    data: LotUpdateInput;
+    where: LotWhereUniqueInput;
+  }) => LotPromise;
+  updateManyLots: (args: {
+    data: LotUpdateManyMutationInput;
+    where?: LotWhereInput;
+  }) => BatchPayloadPromise;
+  upsertLot: (args: {
+    where: LotWhereUniqueInput;
+    create: LotCreateInput;
+    update: LotUpdateInput;
+  }) => LotPromise;
+  deleteLot: (where: LotWhereUniqueInput) => LotPromise;
+  deleteManyLots: (where?: LotWhereInput) => BatchPayloadPromise;
+  createUser: (data: UserCreateInput) => UserPromise;
+  updateUser: (args: {
+    data: UserUpdateInput;
+    where: UserWhereUniqueInput;
+  }) => UserPromise;
+  updateManyUsers: (args: {
+    data: UserUpdateManyMutationInput;
+    where?: UserWhereInput;
+  }) => BatchPayloadPromise;
+  upsertUser: (args: {
+    where: UserWhereUniqueInput;
+    create: UserCreateInput;
+    update: UserUpdateInput;
+  }) => UserPromise;
+  deleteUser: (where: UserWhereUniqueInput) => UserPromise;
+  deleteManyUsers: (where?: UserWhereInput) => BatchPayloadPromise;
 
   /**
    * Subscriptions
@@ -121,12 +307,27 @@ export interface Prisma {
 }
 
 export interface Subscription {
+  data: (
+    where?: DataSubscriptionWhereInput
+  ) => DataSubscriptionPayloadSubscription;
+  invokeScript: (
+    where?: InvokeScriptSubscriptionWhereInput
+  ) => InvokeScriptSubscriptionPayloadSubscription;
   issue: (
     where?: IssueSubscriptionWhereInput
   ) => IssueSubscriptionPayloadSubscription;
   item: (
     where?: ItemSubscriptionWhereInput
   ) => ItemSubscriptionPayloadSubscription;
+  itemParams: (
+    where?: ItemParamsSubscriptionWhereInput
+  ) => ItemParamsSubscriptionPayloadSubscription;
+  lot: (
+    where?: LotSubscriptionWhereInput
+  ) => LotSubscriptionPayloadSubscription;
+  user: (
+    where?: UserSubscriptionWhereInput
+  ) => UserSubscriptionPayloadSubscription;
 }
 
 export interface ClientConstructor<T> {
@@ -137,11 +338,47 @@ export interface ClientConstructor<T> {
  * Types
  */
 
+export type DataOrderByInput =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'txId_ASC'
+  | 'txId_DESC'
+  | 'timestamp_ASC'
+  | 'timestamp_DESC'
+  | 'sender_ASC'
+  | 'sender_DESC'
+  | 'senderPublicKey_ASC'
+  | 'senderPublicKey_DESC';
+
+export type InvokeScriptOrderByInput =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'txId_ASC'
+  | 'txId_DESC'
+  | 'timestamp_ASC'
+  | 'timestamp_DESC'
+  | 'sender_ASC'
+  | 'sender_DESC'
+  | 'senderPublicKey_ASC'
+  | 'senderPublicKey_DESC'
+  | 'dapp_ASC'
+  | 'dapp_DESC'
+  | 'feeAssetId_ASC'
+  | 'feeAssetId_DESC'
+  | 'call_ASC'
+  | 'call_DESC';
+
 export type IssueOrderByInput =
   | 'id_ASC'
   | 'id_DESC'
   | 'txId_ASC'
   | 'txId_DESC'
+  | 'timestamp_ASC'
+  | 'timestamp_DESC'
+  | 'sender_ASC'
+  | 'sender_DESC'
+  | 'senderPublicKey_ASC'
+  | 'senderPublicKey_DESC'
   | 'name_ASC'
   | 'name_DESC'
   | 'description_ASC'
@@ -151,17 +388,11 @@ export type IssueOrderByInput =
   | 'quantity_ASC'
   | 'quantity_DESC'
   | 'reissuable_ASC'
-  | 'reissuable_DESC'
-  | 'timestamp_ASC'
-  | 'timestamp_DESC'
-  | 'sender_ASC'
-  | 'sender_DESC'
-  | 'senderPublicKey_ASC'
-  | 'senderPublicKey_DESC'
-  | 'createdAt_ASC'
-  | 'createdAt_DESC'
-  | 'updatedAt_ASC'
-  | 'updatedAt_DESC';
+  | 'reissuable_DESC';
+
+export type UserRole = 'USER' | 'TEST' | 'DAPP';
+
+export type UserPermission = 'COMMON' | 'DAPP';
 
 export type ItemOrderByInput =
   | 'id_ASC'
@@ -181,7 +412,241 @@ export type ItemOrderByInput =
   | 'updatedAt_ASC'
   | 'updatedAt_DESC';
 
+export type LotOrderByInput =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'txId_ASC'
+  | 'txId_DESC'
+  | 'priceAsset_ASC'
+  | 'priceAsset_DESC'
+  | 'price_ASC'
+  | 'price_DESC'
+  | 'stock_ASC'
+  | 'stock_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC';
+
+export type ItemParamsOrderByInput =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'txId_ASC'
+  | 'txId_DESC'
+  | 'paramsId_ASC'
+  | 'paramsId_DESC'
+  | 'version_ASC'
+  | 'version_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
+  | 'imageUrl_ASC'
+  | 'imageUrl_DESC'
+  | 'storageImageUrl_ASC'
+  | 'storageImageUrl_DESC'
+  | 'misc_ASC'
+  | 'misc_DESC'
+  | 'timestamp_ASC'
+  | 'timestamp_DESC';
+
+export type UserOrderByInput =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'address_ASC'
+  | 'address_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
+  | 'email_ASC'
+  | 'email_DESC'
+  | 'role_ASC'
+  | 'role_DESC'
+  | 'image_ASC'
+  | 'image_DESC'
+  | 'meta_ASC'
+  | 'meta_DESC'
+  | 'createdAt_ASC'
+  | 'createdAt_DESC'
+  | 'updatedAt_ASC'
+  | 'updatedAt_DESC';
+
 export type MutationType = 'CREATED' | 'UPDATED' | 'DELETED';
+
+export type DataWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  txId?: Maybe<String>;
+}>;
+
+export interface DataWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  txId?: Maybe<String>;
+  txId_not?: Maybe<String>;
+  txId_in?: Maybe<String[] | String>;
+  txId_not_in?: Maybe<String[] | String>;
+  txId_lt?: Maybe<String>;
+  txId_lte?: Maybe<String>;
+  txId_gt?: Maybe<String>;
+  txId_gte?: Maybe<String>;
+  txId_contains?: Maybe<String>;
+  txId_not_contains?: Maybe<String>;
+  txId_starts_with?: Maybe<String>;
+  txId_not_starts_with?: Maybe<String>;
+  txId_ends_with?: Maybe<String>;
+  txId_not_ends_with?: Maybe<String>;
+  timestamp?: Maybe<DateTimeInput>;
+  timestamp_not?: Maybe<DateTimeInput>;
+  timestamp_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  timestamp_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  timestamp_lt?: Maybe<DateTimeInput>;
+  timestamp_lte?: Maybe<DateTimeInput>;
+  timestamp_gt?: Maybe<DateTimeInput>;
+  timestamp_gte?: Maybe<DateTimeInput>;
+  sender?: Maybe<String>;
+  sender_not?: Maybe<String>;
+  sender_in?: Maybe<String[] | String>;
+  sender_not_in?: Maybe<String[] | String>;
+  sender_lt?: Maybe<String>;
+  sender_lte?: Maybe<String>;
+  sender_gt?: Maybe<String>;
+  sender_gte?: Maybe<String>;
+  sender_contains?: Maybe<String>;
+  sender_not_contains?: Maybe<String>;
+  sender_starts_with?: Maybe<String>;
+  sender_not_starts_with?: Maybe<String>;
+  sender_ends_with?: Maybe<String>;
+  sender_not_ends_with?: Maybe<String>;
+  senderPublicKey?: Maybe<String>;
+  senderPublicKey_not?: Maybe<String>;
+  senderPublicKey_in?: Maybe<String[] | String>;
+  senderPublicKey_not_in?: Maybe<String[] | String>;
+  senderPublicKey_lt?: Maybe<String>;
+  senderPublicKey_lte?: Maybe<String>;
+  senderPublicKey_gt?: Maybe<String>;
+  senderPublicKey_gte?: Maybe<String>;
+  senderPublicKey_contains?: Maybe<String>;
+  senderPublicKey_not_contains?: Maybe<String>;
+  senderPublicKey_starts_with?: Maybe<String>;
+  senderPublicKey_not_starts_with?: Maybe<String>;
+  senderPublicKey_ends_with?: Maybe<String>;
+  senderPublicKey_not_ends_with?: Maybe<String>;
+  AND?: Maybe<DataWhereInput[] | DataWhereInput>;
+  OR?: Maybe<DataWhereInput[] | DataWhereInput>;
+  NOT?: Maybe<DataWhereInput[] | DataWhereInput>;
+}
+
+export type InvokeScriptWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  txId?: Maybe<String>;
+}>;
+
+export interface InvokeScriptWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  txId?: Maybe<String>;
+  txId_not?: Maybe<String>;
+  txId_in?: Maybe<String[] | String>;
+  txId_not_in?: Maybe<String[] | String>;
+  txId_lt?: Maybe<String>;
+  txId_lte?: Maybe<String>;
+  txId_gt?: Maybe<String>;
+  txId_gte?: Maybe<String>;
+  txId_contains?: Maybe<String>;
+  txId_not_contains?: Maybe<String>;
+  txId_starts_with?: Maybe<String>;
+  txId_not_starts_with?: Maybe<String>;
+  txId_ends_with?: Maybe<String>;
+  txId_not_ends_with?: Maybe<String>;
+  timestamp?: Maybe<DateTimeInput>;
+  timestamp_not?: Maybe<DateTimeInput>;
+  timestamp_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  timestamp_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  timestamp_lt?: Maybe<DateTimeInput>;
+  timestamp_lte?: Maybe<DateTimeInput>;
+  timestamp_gt?: Maybe<DateTimeInput>;
+  timestamp_gte?: Maybe<DateTimeInput>;
+  sender?: Maybe<String>;
+  sender_not?: Maybe<String>;
+  sender_in?: Maybe<String[] | String>;
+  sender_not_in?: Maybe<String[] | String>;
+  sender_lt?: Maybe<String>;
+  sender_lte?: Maybe<String>;
+  sender_gt?: Maybe<String>;
+  sender_gte?: Maybe<String>;
+  sender_contains?: Maybe<String>;
+  sender_not_contains?: Maybe<String>;
+  sender_starts_with?: Maybe<String>;
+  sender_not_starts_with?: Maybe<String>;
+  sender_ends_with?: Maybe<String>;
+  sender_not_ends_with?: Maybe<String>;
+  senderPublicKey?: Maybe<String>;
+  senderPublicKey_not?: Maybe<String>;
+  senderPublicKey_in?: Maybe<String[] | String>;
+  senderPublicKey_not_in?: Maybe<String[] | String>;
+  senderPublicKey_lt?: Maybe<String>;
+  senderPublicKey_lte?: Maybe<String>;
+  senderPublicKey_gt?: Maybe<String>;
+  senderPublicKey_gte?: Maybe<String>;
+  senderPublicKey_contains?: Maybe<String>;
+  senderPublicKey_not_contains?: Maybe<String>;
+  senderPublicKey_starts_with?: Maybe<String>;
+  senderPublicKey_not_starts_with?: Maybe<String>;
+  senderPublicKey_ends_with?: Maybe<String>;
+  senderPublicKey_not_ends_with?: Maybe<String>;
+  dapp?: Maybe<String>;
+  dapp_not?: Maybe<String>;
+  dapp_in?: Maybe<String[] | String>;
+  dapp_not_in?: Maybe<String[] | String>;
+  dapp_lt?: Maybe<String>;
+  dapp_lte?: Maybe<String>;
+  dapp_gt?: Maybe<String>;
+  dapp_gte?: Maybe<String>;
+  dapp_contains?: Maybe<String>;
+  dapp_not_contains?: Maybe<String>;
+  dapp_starts_with?: Maybe<String>;
+  dapp_not_starts_with?: Maybe<String>;
+  dapp_ends_with?: Maybe<String>;
+  dapp_not_ends_with?: Maybe<String>;
+  feeAssetId?: Maybe<String>;
+  feeAssetId_not?: Maybe<String>;
+  feeAssetId_in?: Maybe<String[] | String>;
+  feeAssetId_not_in?: Maybe<String[] | String>;
+  feeAssetId_lt?: Maybe<String>;
+  feeAssetId_lte?: Maybe<String>;
+  feeAssetId_gt?: Maybe<String>;
+  feeAssetId_gte?: Maybe<String>;
+  feeAssetId_contains?: Maybe<String>;
+  feeAssetId_not_contains?: Maybe<String>;
+  feeAssetId_starts_with?: Maybe<String>;
+  feeAssetId_not_starts_with?: Maybe<String>;
+  feeAssetId_ends_with?: Maybe<String>;
+  feeAssetId_not_ends_with?: Maybe<String>;
+  AND?: Maybe<InvokeScriptWhereInput[] | InvokeScriptWhereInput>;
+  OR?: Maybe<InvokeScriptWhereInput[] | InvokeScriptWhereInput>;
+  NOT?: Maybe<InvokeScriptWhereInput[] | InvokeScriptWhereInput>;
+}
 
 export type IssueWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
@@ -217,6 +682,42 @@ export interface IssueWhereInput {
   txId_not_starts_with?: Maybe<String>;
   txId_ends_with?: Maybe<String>;
   txId_not_ends_with?: Maybe<String>;
+  timestamp?: Maybe<DateTimeInput>;
+  timestamp_not?: Maybe<DateTimeInput>;
+  timestamp_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  timestamp_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  timestamp_lt?: Maybe<DateTimeInput>;
+  timestamp_lte?: Maybe<DateTimeInput>;
+  timestamp_gt?: Maybe<DateTimeInput>;
+  timestamp_gte?: Maybe<DateTimeInput>;
+  sender?: Maybe<String>;
+  sender_not?: Maybe<String>;
+  sender_in?: Maybe<String[] | String>;
+  sender_not_in?: Maybe<String[] | String>;
+  sender_lt?: Maybe<String>;
+  sender_lte?: Maybe<String>;
+  sender_gt?: Maybe<String>;
+  sender_gte?: Maybe<String>;
+  sender_contains?: Maybe<String>;
+  sender_not_contains?: Maybe<String>;
+  sender_starts_with?: Maybe<String>;
+  sender_not_starts_with?: Maybe<String>;
+  sender_ends_with?: Maybe<String>;
+  sender_not_ends_with?: Maybe<String>;
+  senderPublicKey?: Maybe<String>;
+  senderPublicKey_not?: Maybe<String>;
+  senderPublicKey_in?: Maybe<String[] | String>;
+  senderPublicKey_not_in?: Maybe<String[] | String>;
+  senderPublicKey_lt?: Maybe<String>;
+  senderPublicKey_lte?: Maybe<String>;
+  senderPublicKey_gt?: Maybe<String>;
+  senderPublicKey_gte?: Maybe<String>;
+  senderPublicKey_contains?: Maybe<String>;
+  senderPublicKey_not_contains?: Maybe<String>;
+  senderPublicKey_starts_with?: Maybe<String>;
+  senderPublicKey_not_starts_with?: Maybe<String>;
+  senderPublicKey_ends_with?: Maybe<String>;
+  senderPublicKey_not_ends_with?: Maybe<String>;
   name?: Maybe<String>;
   name_not?: Maybe<String>;
   name_in?: Maybe<String[] | String>;
@@ -263,6 +764,70 @@ export interface IssueWhereInput {
   quantity_gte?: Maybe<Int>;
   reissuable?: Maybe<Boolean>;
   reissuable_not?: Maybe<Boolean>;
+  AND?: Maybe<IssueWhereInput[] | IssueWhereInput>;
+  OR?: Maybe<IssueWhereInput[] | IssueWhereInput>;
+  NOT?: Maybe<IssueWhereInput[] | IssueWhereInput>;
+}
+
+export type ItemWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  txId?: Maybe<String>;
+}>;
+
+export interface ItemWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  txId?: Maybe<String>;
+  txId_not?: Maybe<String>;
+  txId_in?: Maybe<String[] | String>;
+  txId_not_in?: Maybe<String[] | String>;
+  txId_lt?: Maybe<String>;
+  txId_lte?: Maybe<String>;
+  txId_gt?: Maybe<String>;
+  txId_gte?: Maybe<String>;
+  txId_contains?: Maybe<String>;
+  txId_not_contains?: Maybe<String>;
+  txId_starts_with?: Maybe<String>;
+  txId_not_starts_with?: Maybe<String>;
+  txId_ends_with?: Maybe<String>;
+  txId_not_ends_with?: Maybe<String>;
+  dapp?: Maybe<UserWhereInput>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  quantity?: Maybe<Int>;
+  quantity_not?: Maybe<Int>;
+  quantity_in?: Maybe<Int[] | Int>;
+  quantity_not_in?: Maybe<Int[] | Int>;
+  quantity_lt?: Maybe<Int>;
+  quantity_lte?: Maybe<Int>;
+  quantity_gt?: Maybe<Int>;
+  quantity_gte?: Maybe<Int>;
+  reissuable?: Maybe<Boolean>;
+  reissuable_not?: Maybe<Boolean>;
   timestamp?: Maybe<DateTimeInput>;
   timestamp_not?: Maybe<DateTimeInput>;
   timestamp_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -271,34 +836,12 @@ export interface IssueWhereInput {
   timestamp_lte?: Maybe<DateTimeInput>;
   timestamp_gt?: Maybe<DateTimeInput>;
   timestamp_gte?: Maybe<DateTimeInput>;
-  sender?: Maybe<String>;
-  sender_not?: Maybe<String>;
-  sender_in?: Maybe<String[] | String>;
-  sender_not_in?: Maybe<String[] | String>;
-  sender_lt?: Maybe<String>;
-  sender_lte?: Maybe<String>;
-  sender_gt?: Maybe<String>;
-  sender_gte?: Maybe<String>;
-  sender_contains?: Maybe<String>;
-  sender_not_contains?: Maybe<String>;
-  sender_starts_with?: Maybe<String>;
-  sender_not_starts_with?: Maybe<String>;
-  sender_ends_with?: Maybe<String>;
-  sender_not_ends_with?: Maybe<String>;
-  senderPublicKey?: Maybe<String>;
-  senderPublicKey_not?: Maybe<String>;
-  senderPublicKey_in?: Maybe<String[] | String>;
-  senderPublicKey_not_in?: Maybe<String[] | String>;
-  senderPublicKey_lt?: Maybe<String>;
-  senderPublicKey_lte?: Maybe<String>;
-  senderPublicKey_gt?: Maybe<String>;
-  senderPublicKey_gte?: Maybe<String>;
-  senderPublicKey_contains?: Maybe<String>;
-  senderPublicKey_not_contains?: Maybe<String>;
-  senderPublicKey_starts_with?: Maybe<String>;
-  senderPublicKey_not_starts_with?: Maybe<String>;
-  senderPublicKey_ends_with?: Maybe<String>;
-  senderPublicKey_not_ends_with?: Maybe<String>;
+  params_every?: Maybe<ItemParamsWhereInput>;
+  params_some?: Maybe<ItemParamsWhereInput>;
+  params_none?: Maybe<ItemParamsWhereInput>;
+  lots_every?: Maybe<LotWhereInput>;
+  lots_some?: Maybe<LotWhereInput>;
+  lots_none?: Maybe<LotWhereInput>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -315,17 +858,969 @@ export interface IssueWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<IssueWhereInput[] | IssueWhereInput>;
-  OR?: Maybe<IssueWhereInput[] | IssueWhereInput>;
-  NOT?: Maybe<IssueWhereInput[] | IssueWhereInput>;
+  AND?: Maybe<ItemWhereInput[] | ItemWhereInput>;
+  OR?: Maybe<ItemWhereInput[] | ItemWhereInput>;
+  NOT?: Maybe<ItemWhereInput[] | ItemWhereInput>;
 }
 
-export type ItemWhereUniqueInput = AtLeastOne<{
+export interface UserWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  address?: Maybe<String>;
+  address_not?: Maybe<String>;
+  address_in?: Maybe<String[] | String>;
+  address_not_in?: Maybe<String[] | String>;
+  address_lt?: Maybe<String>;
+  address_lte?: Maybe<String>;
+  address_gt?: Maybe<String>;
+  address_gte?: Maybe<String>;
+  address_contains?: Maybe<String>;
+  address_not_contains?: Maybe<String>;
+  address_starts_with?: Maybe<String>;
+  address_not_starts_with?: Maybe<String>;
+  address_ends_with?: Maybe<String>;
+  address_not_ends_with?: Maybe<String>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
+  role?: Maybe<UserRole>;
+  role_not?: Maybe<UserRole>;
+  role_in?: Maybe<UserRole[] | UserRole>;
+  role_not_in?: Maybe<UserRole[] | UserRole>;
+  items_every?: Maybe<ItemWhereInput>;
+  items_some?: Maybe<ItemWhereInput>;
+  items_none?: Maybe<ItemWhereInput>;
+  lots_every?: Maybe<LotWhereInput>;
+  lots_some?: Maybe<LotWhereInput>;
+  lots_none?: Maybe<LotWhereInput>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
+  OR?: Maybe<UserWhereInput[] | UserWhereInput>;
+  NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
+}
+
+export interface LotWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  txId?: Maybe<String>;
+  txId_not?: Maybe<String>;
+  txId_in?: Maybe<String[] | String>;
+  txId_not_in?: Maybe<String[] | String>;
+  txId_lt?: Maybe<String>;
+  txId_lte?: Maybe<String>;
+  txId_gt?: Maybe<String>;
+  txId_gte?: Maybe<String>;
+  txId_contains?: Maybe<String>;
+  txId_not_contains?: Maybe<String>;
+  txId_starts_with?: Maybe<String>;
+  txId_not_starts_with?: Maybe<String>;
+  txId_ends_with?: Maybe<String>;
+  txId_not_ends_with?: Maybe<String>;
+  item?: Maybe<ItemWhereInput>;
+  seller?: Maybe<UserWhereInput>;
+  priceAsset?: Maybe<String>;
+  priceAsset_not?: Maybe<String>;
+  priceAsset_in?: Maybe<String[] | String>;
+  priceAsset_not_in?: Maybe<String[] | String>;
+  priceAsset_lt?: Maybe<String>;
+  priceAsset_lte?: Maybe<String>;
+  priceAsset_gt?: Maybe<String>;
+  priceAsset_gte?: Maybe<String>;
+  priceAsset_contains?: Maybe<String>;
+  priceAsset_not_contains?: Maybe<String>;
+  priceAsset_starts_with?: Maybe<String>;
+  priceAsset_not_starts_with?: Maybe<String>;
+  priceAsset_ends_with?: Maybe<String>;
+  priceAsset_not_ends_with?: Maybe<String>;
+  price?: Maybe<Float>;
+  price_not?: Maybe<Float>;
+  price_in?: Maybe<Float[] | Float>;
+  price_not_in?: Maybe<Float[] | Float>;
+  price_lt?: Maybe<Float>;
+  price_lte?: Maybe<Float>;
+  price_gt?: Maybe<Float>;
+  price_gte?: Maybe<Float>;
+  stock?: Maybe<Int>;
+  stock_not?: Maybe<Int>;
+  stock_in?: Maybe<Int[] | Int>;
+  stock_not_in?: Maybe<Int[] | Int>;
+  stock_lt?: Maybe<Int>;
+  stock_lte?: Maybe<Int>;
+  stock_gt?: Maybe<Int>;
+  stock_gte?: Maybe<Int>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<LotWhereInput[] | LotWhereInput>;
+  OR?: Maybe<LotWhereInput[] | LotWhereInput>;
+  NOT?: Maybe<LotWhereInput[] | LotWhereInput>;
+}
+
+export interface ItemParamsWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  txId?: Maybe<String>;
+  txId_not?: Maybe<String>;
+  txId_in?: Maybe<String[] | String>;
+  txId_not_in?: Maybe<String[] | String>;
+  txId_lt?: Maybe<String>;
+  txId_lte?: Maybe<String>;
+  txId_gt?: Maybe<String>;
+  txId_gte?: Maybe<String>;
+  txId_contains?: Maybe<String>;
+  txId_not_contains?: Maybe<String>;
+  txId_starts_with?: Maybe<String>;
+  txId_not_starts_with?: Maybe<String>;
+  txId_ends_with?: Maybe<String>;
+  txId_not_ends_with?: Maybe<String>;
+  paramsId?: Maybe<String>;
+  paramsId_not?: Maybe<String>;
+  paramsId_in?: Maybe<String[] | String>;
+  paramsId_not_in?: Maybe<String[] | String>;
+  paramsId_lt?: Maybe<String>;
+  paramsId_lte?: Maybe<String>;
+  paramsId_gt?: Maybe<String>;
+  paramsId_gte?: Maybe<String>;
+  paramsId_contains?: Maybe<String>;
+  paramsId_not_contains?: Maybe<String>;
+  paramsId_starts_with?: Maybe<String>;
+  paramsId_not_starts_with?: Maybe<String>;
+  paramsId_ends_with?: Maybe<String>;
+  paramsId_not_ends_with?: Maybe<String>;
+  item?: Maybe<ItemWhereInput>;
+  version?: Maybe<Int>;
+  version_not?: Maybe<Int>;
+  version_in?: Maybe<Int[] | Int>;
+  version_not_in?: Maybe<Int[] | Int>;
+  version_lt?: Maybe<Int>;
+  version_lte?: Maybe<Int>;
+  version_gt?: Maybe<Int>;
+  version_gte?: Maybe<Int>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  imageUrl_not?: Maybe<String>;
+  imageUrl_in?: Maybe<String[] | String>;
+  imageUrl_not_in?: Maybe<String[] | String>;
+  imageUrl_lt?: Maybe<String>;
+  imageUrl_lte?: Maybe<String>;
+  imageUrl_gt?: Maybe<String>;
+  imageUrl_gte?: Maybe<String>;
+  imageUrl_contains?: Maybe<String>;
+  imageUrl_not_contains?: Maybe<String>;
+  imageUrl_starts_with?: Maybe<String>;
+  imageUrl_not_starts_with?: Maybe<String>;
+  imageUrl_ends_with?: Maybe<String>;
+  imageUrl_not_ends_with?: Maybe<String>;
+  storageImageUrl?: Maybe<String>;
+  storageImageUrl_not?: Maybe<String>;
+  storageImageUrl_in?: Maybe<String[] | String>;
+  storageImageUrl_not_in?: Maybe<String[] | String>;
+  storageImageUrl_lt?: Maybe<String>;
+  storageImageUrl_lte?: Maybe<String>;
+  storageImageUrl_gt?: Maybe<String>;
+  storageImageUrl_gte?: Maybe<String>;
+  storageImageUrl_contains?: Maybe<String>;
+  storageImageUrl_not_contains?: Maybe<String>;
+  storageImageUrl_starts_with?: Maybe<String>;
+  storageImageUrl_not_starts_with?: Maybe<String>;
+  storageImageUrl_ends_with?: Maybe<String>;
+  storageImageUrl_not_ends_with?: Maybe<String>;
+  timestamp?: Maybe<DateTimeInput>;
+  timestamp_not?: Maybe<DateTimeInput>;
+  timestamp_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  timestamp_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  timestamp_lt?: Maybe<DateTimeInput>;
+  timestamp_lte?: Maybe<DateTimeInput>;
+  timestamp_gt?: Maybe<DateTimeInput>;
+  timestamp_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ItemParamsWhereInput[] | ItemParamsWhereInput>;
+  OR?: Maybe<ItemParamsWhereInput[] | ItemParamsWhereInput>;
+  NOT?: Maybe<ItemParamsWhereInput[] | ItemParamsWhereInput>;
+}
+
+export type ItemParamsWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  paramsId?: Maybe<String>;
+}>;
+
+export type LotWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
   txId?: Maybe<String>;
 }>;
 
-export interface ItemWhereInput {
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  address?: Maybe<String>;
+}>;
+
+export interface DataCreateInput {
+  id?: Maybe<ID_Input>;
+  txId: String;
+  timestamp: DateTimeInput;
+  sender: String;
+  senderPublicKey: String;
+  data?: Maybe<DataCreatedataInput>;
+}
+
+export interface DataCreatedataInput {
+  set?: Maybe<Json[] | Json>;
+}
+
+export interface DataUpdateInput {
+  txId?: Maybe<String>;
+  timestamp?: Maybe<DateTimeInput>;
+  sender?: Maybe<String>;
+  senderPublicKey?: Maybe<String>;
+  data?: Maybe<DataUpdatedataInput>;
+}
+
+export interface DataUpdatedataInput {
+  set?: Maybe<Json[] | Json>;
+}
+
+export interface DataUpdateManyMutationInput {
+  txId?: Maybe<String>;
+  timestamp?: Maybe<DateTimeInput>;
+  sender?: Maybe<String>;
+  senderPublicKey?: Maybe<String>;
+  data?: Maybe<DataUpdatedataInput>;
+}
+
+export interface InvokeScriptCreateInput {
+  id?: Maybe<ID_Input>;
+  txId: String;
+  timestamp: DateTimeInput;
+  sender: String;
+  senderPublicKey: String;
+  dapp: String;
+  feeAssetId?: Maybe<String>;
+  call?: Maybe<Json>;
+  payment?: Maybe<InvokeScriptCreatepaymentInput>;
+}
+
+export interface InvokeScriptCreatepaymentInput {
+  set?: Maybe<Json[] | Json>;
+}
+
+export interface InvokeScriptUpdateInput {
+  txId?: Maybe<String>;
+  timestamp?: Maybe<DateTimeInput>;
+  sender?: Maybe<String>;
+  senderPublicKey?: Maybe<String>;
+  dapp?: Maybe<String>;
+  feeAssetId?: Maybe<String>;
+  call?: Maybe<Json>;
+  payment?: Maybe<InvokeScriptUpdatepaymentInput>;
+}
+
+export interface InvokeScriptUpdatepaymentInput {
+  set?: Maybe<Json[] | Json>;
+}
+
+export interface InvokeScriptUpdateManyMutationInput {
+  txId?: Maybe<String>;
+  timestamp?: Maybe<DateTimeInput>;
+  sender?: Maybe<String>;
+  senderPublicKey?: Maybe<String>;
+  dapp?: Maybe<String>;
+  feeAssetId?: Maybe<String>;
+  call?: Maybe<Json>;
+  payment?: Maybe<InvokeScriptUpdatepaymentInput>;
+}
+
+export interface IssueCreateInput {
+  id?: Maybe<ID_Input>;
+  txId: String;
+  timestamp: DateTimeInput;
+  sender: String;
+  senderPublicKey: String;
+  name: String;
+  description: String;
+  decimals: Int;
+  quantity: Int;
+  reissuable: Boolean;
+}
+
+export interface IssueUpdateInput {
+  txId?: Maybe<String>;
+  timestamp?: Maybe<DateTimeInput>;
+  sender?: Maybe<String>;
+  senderPublicKey?: Maybe<String>;
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  decimals?: Maybe<Int>;
+  quantity?: Maybe<Int>;
+  reissuable?: Maybe<Boolean>;
+}
+
+export interface IssueUpdateManyMutationInput {
+  txId?: Maybe<String>;
+  timestamp?: Maybe<DateTimeInput>;
+  sender?: Maybe<String>;
+  senderPublicKey?: Maybe<String>;
+  name?: Maybe<String>;
+  description?: Maybe<String>;
+  decimals?: Maybe<Int>;
+  quantity?: Maybe<Int>;
+  reissuable?: Maybe<Boolean>;
+}
+
+export interface ItemCreateInput {
+  id?: Maybe<ID_Input>;
+  txId: String;
+  dapp: UserCreateOneWithoutItemsInput;
+  name: String;
+  quantity: Int;
+  reissuable: Boolean;
+  timestamp: DateTimeInput;
+  params?: Maybe<ItemParamsCreateManyWithoutItemInput>;
+  lots?: Maybe<LotCreateManyWithoutItemInput>;
+}
+
+export interface UserCreateOneWithoutItemsInput {
+  create?: Maybe<UserCreateWithoutItemsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserCreateWithoutItemsInput {
+  id?: Maybe<ID_Input>;
+  address: String;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  role?: Maybe<UserRole>;
+  permissions?: Maybe<UserCreatepermissionsInput>;
+  image?: Maybe<Json>;
+  meta?: Maybe<Json>;
+  lots?: Maybe<LotCreateManyWithoutSellerInput>;
+}
+
+export interface UserCreatepermissionsInput {
+  set?: Maybe<UserPermission[] | UserPermission>;
+}
+
+export interface LotCreateManyWithoutSellerInput {
+  create?: Maybe<LotCreateWithoutSellerInput[] | LotCreateWithoutSellerInput>;
+  connect?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
+}
+
+export interface LotCreateWithoutSellerInput {
+  id?: Maybe<ID_Input>;
+  txId: String;
+  item: ItemCreateOneWithoutLotsInput;
+  priceAsset: String;
+  price: Float;
+  stock: Int;
+}
+
+export interface ItemCreateOneWithoutLotsInput {
+  create?: Maybe<ItemCreateWithoutLotsInput>;
+  connect?: Maybe<ItemWhereUniqueInput>;
+}
+
+export interface ItemCreateWithoutLotsInput {
+  id?: Maybe<ID_Input>;
+  txId: String;
+  dapp: UserCreateOneWithoutItemsInput;
+  name: String;
+  quantity: Int;
+  reissuable: Boolean;
+  timestamp: DateTimeInput;
+  params?: Maybe<ItemParamsCreateManyWithoutItemInput>;
+}
+
+export interface ItemParamsCreateManyWithoutItemInput {
+  create?: Maybe<ItemParamsCreateWithoutItemInput[] | ItemParamsCreateWithoutItemInput>;
+  connect?: Maybe<ItemParamsWhereUniqueInput[] | ItemParamsWhereUniqueInput>;
+}
+
+export interface ItemParamsCreateWithoutItemInput {
+  id?: Maybe<ID_Input>;
+  txId: String;
+  paramsId: String;
+  version: Int;
+  name: String;
+  imageUrl: String;
+  storageImageUrl?: Maybe<String>;
+  misc?: Maybe<Json>;
+  timestamp: DateTimeInput;
+}
+
+export interface LotCreateManyWithoutItemInput {
+  create?: Maybe<LotCreateWithoutItemInput[] | LotCreateWithoutItemInput>;
+  connect?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
+}
+
+export interface LotCreateWithoutItemInput {
+  id?: Maybe<ID_Input>;
+  txId: String;
+  seller?: Maybe<UserCreateOneWithoutLotsInput>;
+  priceAsset: String;
+  price: Float;
+  stock: Int;
+}
+
+export interface UserCreateOneWithoutLotsInput {
+  create?: Maybe<UserCreateWithoutLotsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserCreateWithoutLotsInput {
+  id?: Maybe<ID_Input>;
+  address: String;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  role?: Maybe<UserRole>;
+  permissions?: Maybe<UserCreatepermissionsInput>;
+  image?: Maybe<Json>;
+  meta?: Maybe<Json>;
+  items?: Maybe<ItemCreateManyWithoutDappInput>;
+}
+
+export interface ItemCreateManyWithoutDappInput {
+  create?: Maybe<ItemCreateWithoutDappInput[] | ItemCreateWithoutDappInput>;
+  connect?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
+}
+
+export interface ItemCreateWithoutDappInput {
+  id?: Maybe<ID_Input>;
+  txId: String;
+  name: String;
+  quantity: Int;
+  reissuable: Boolean;
+  timestamp: DateTimeInput;
+  params?: Maybe<ItemParamsCreateManyWithoutItemInput>;
+  lots?: Maybe<LotCreateManyWithoutItemInput>;
+}
+
+export interface ItemUpdateInput {
+  txId?: Maybe<String>;
+  dapp?: Maybe<UserUpdateOneRequiredWithoutItemsInput>;
+  name?: Maybe<String>;
+  quantity?: Maybe<Int>;
+  reissuable?: Maybe<Boolean>;
+  timestamp?: Maybe<DateTimeInput>;
+  params?: Maybe<ItemParamsUpdateManyWithoutItemInput>;
+  lots?: Maybe<LotUpdateManyWithoutItemInput>;
+}
+
+export interface UserUpdateOneRequiredWithoutItemsInput {
+  create?: Maybe<UserCreateWithoutItemsInput>;
+  update?: Maybe<UserUpdateWithoutItemsDataInput>;
+  upsert?: Maybe<UserUpsertWithoutItemsInput>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateWithoutItemsDataInput {
+  address?: Maybe<String>;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  role?: Maybe<UserRole>;
+  permissions?: Maybe<UserUpdatepermissionsInput>;
+  image?: Maybe<Json>;
+  meta?: Maybe<Json>;
+  lots?: Maybe<LotUpdateManyWithoutSellerInput>;
+}
+
+export interface UserUpdatepermissionsInput {
+  set?: Maybe<UserPermission[] | UserPermission>;
+}
+
+export interface LotUpdateManyWithoutSellerInput {
+  create?: Maybe<LotCreateWithoutSellerInput[] | LotCreateWithoutSellerInput>;
+  delete?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
+  connect?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
+  set?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
+  disconnect?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
+  update?: Maybe<| LotUpdateWithWhereUniqueWithoutSellerInput[]
+    | LotUpdateWithWhereUniqueWithoutSellerInput>;
+  upsert?: Maybe<| LotUpsertWithWhereUniqueWithoutSellerInput[]
+    | LotUpsertWithWhereUniqueWithoutSellerInput>;
+  deleteMany?: Maybe<LotScalarWhereInput[] | LotScalarWhereInput>;
+  updateMany?: Maybe<LotUpdateManyWithWhereNestedInput[] | LotUpdateManyWithWhereNestedInput>;
+}
+
+export interface LotUpdateWithWhereUniqueWithoutSellerInput {
+  where: LotWhereUniqueInput;
+  data: LotUpdateWithoutSellerDataInput;
+}
+
+export interface LotUpdateWithoutSellerDataInput {
+  txId?: Maybe<String>;
+  item?: Maybe<ItemUpdateOneRequiredWithoutLotsInput>;
+  priceAsset?: Maybe<String>;
+  price?: Maybe<Float>;
+  stock?: Maybe<Int>;
+}
+
+export interface ItemUpdateOneRequiredWithoutLotsInput {
+  create?: Maybe<ItemCreateWithoutLotsInput>;
+  update?: Maybe<ItemUpdateWithoutLotsDataInput>;
+  upsert?: Maybe<ItemUpsertWithoutLotsInput>;
+  connect?: Maybe<ItemWhereUniqueInput>;
+}
+
+export interface ItemUpdateWithoutLotsDataInput {
+  txId?: Maybe<String>;
+  dapp?: Maybe<UserUpdateOneRequiredWithoutItemsInput>;
+  name?: Maybe<String>;
+  quantity?: Maybe<Int>;
+  reissuable?: Maybe<Boolean>;
+  timestamp?: Maybe<DateTimeInput>;
+  params?: Maybe<ItemParamsUpdateManyWithoutItemInput>;
+}
+
+export interface ItemParamsUpdateManyWithoutItemInput {
+  create?: Maybe<ItemParamsCreateWithoutItemInput[] | ItemParamsCreateWithoutItemInput>;
+  delete?: Maybe<ItemParamsWhereUniqueInput[] | ItemParamsWhereUniqueInput>;
+  connect?: Maybe<ItemParamsWhereUniqueInput[] | ItemParamsWhereUniqueInput>;
+  set?: Maybe<ItemParamsWhereUniqueInput[] | ItemParamsWhereUniqueInput>;
+  disconnect?: Maybe<ItemParamsWhereUniqueInput[] | ItemParamsWhereUniqueInput>;
+  update?: Maybe<| ItemParamsUpdateWithWhereUniqueWithoutItemInput[]
+    | ItemParamsUpdateWithWhereUniqueWithoutItemInput>;
+  upsert?: Maybe<| ItemParamsUpsertWithWhereUniqueWithoutItemInput[]
+    | ItemParamsUpsertWithWhereUniqueWithoutItemInput>;
+  deleteMany?: Maybe<ItemParamsScalarWhereInput[] | ItemParamsScalarWhereInput>;
+  updateMany?: Maybe<| ItemParamsUpdateManyWithWhereNestedInput[]
+    | ItemParamsUpdateManyWithWhereNestedInput>;
+}
+
+export interface ItemParamsUpdateWithWhereUniqueWithoutItemInput {
+  where: ItemParamsWhereUniqueInput;
+  data: ItemParamsUpdateWithoutItemDataInput;
+}
+
+export interface ItemParamsUpdateWithoutItemDataInput {
+  txId?: Maybe<String>;
+  paramsId?: Maybe<String>;
+  version?: Maybe<Int>;
+  name?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  storageImageUrl?: Maybe<String>;
+  misc?: Maybe<Json>;
+  timestamp?: Maybe<DateTimeInput>;
+}
+
+export interface ItemParamsUpsertWithWhereUniqueWithoutItemInput {
+  where: ItemParamsWhereUniqueInput;
+  update: ItemParamsUpdateWithoutItemDataInput;
+  create: ItemParamsCreateWithoutItemInput;
+}
+
+export interface ItemParamsScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  txId?: Maybe<String>;
+  txId_not?: Maybe<String>;
+  txId_in?: Maybe<String[] | String>;
+  txId_not_in?: Maybe<String[] | String>;
+  txId_lt?: Maybe<String>;
+  txId_lte?: Maybe<String>;
+  txId_gt?: Maybe<String>;
+  txId_gte?: Maybe<String>;
+  txId_contains?: Maybe<String>;
+  txId_not_contains?: Maybe<String>;
+  txId_starts_with?: Maybe<String>;
+  txId_not_starts_with?: Maybe<String>;
+  txId_ends_with?: Maybe<String>;
+  txId_not_ends_with?: Maybe<String>;
+  paramsId?: Maybe<String>;
+  paramsId_not?: Maybe<String>;
+  paramsId_in?: Maybe<String[] | String>;
+  paramsId_not_in?: Maybe<String[] | String>;
+  paramsId_lt?: Maybe<String>;
+  paramsId_lte?: Maybe<String>;
+  paramsId_gt?: Maybe<String>;
+  paramsId_gte?: Maybe<String>;
+  paramsId_contains?: Maybe<String>;
+  paramsId_not_contains?: Maybe<String>;
+  paramsId_starts_with?: Maybe<String>;
+  paramsId_not_starts_with?: Maybe<String>;
+  paramsId_ends_with?: Maybe<String>;
+  paramsId_not_ends_with?: Maybe<String>;
+  version?: Maybe<Int>;
+  version_not?: Maybe<Int>;
+  version_in?: Maybe<Int[] | Int>;
+  version_not_in?: Maybe<Int[] | Int>;
+  version_lt?: Maybe<Int>;
+  version_lte?: Maybe<Int>;
+  version_gt?: Maybe<Int>;
+  version_gte?: Maybe<Int>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  imageUrl_not?: Maybe<String>;
+  imageUrl_in?: Maybe<String[] | String>;
+  imageUrl_not_in?: Maybe<String[] | String>;
+  imageUrl_lt?: Maybe<String>;
+  imageUrl_lte?: Maybe<String>;
+  imageUrl_gt?: Maybe<String>;
+  imageUrl_gte?: Maybe<String>;
+  imageUrl_contains?: Maybe<String>;
+  imageUrl_not_contains?: Maybe<String>;
+  imageUrl_starts_with?: Maybe<String>;
+  imageUrl_not_starts_with?: Maybe<String>;
+  imageUrl_ends_with?: Maybe<String>;
+  imageUrl_not_ends_with?: Maybe<String>;
+  storageImageUrl?: Maybe<String>;
+  storageImageUrl_not?: Maybe<String>;
+  storageImageUrl_in?: Maybe<String[] | String>;
+  storageImageUrl_not_in?: Maybe<String[] | String>;
+  storageImageUrl_lt?: Maybe<String>;
+  storageImageUrl_lte?: Maybe<String>;
+  storageImageUrl_gt?: Maybe<String>;
+  storageImageUrl_gte?: Maybe<String>;
+  storageImageUrl_contains?: Maybe<String>;
+  storageImageUrl_not_contains?: Maybe<String>;
+  storageImageUrl_starts_with?: Maybe<String>;
+  storageImageUrl_not_starts_with?: Maybe<String>;
+  storageImageUrl_ends_with?: Maybe<String>;
+  storageImageUrl_not_ends_with?: Maybe<String>;
+  timestamp?: Maybe<DateTimeInput>;
+  timestamp_not?: Maybe<DateTimeInput>;
+  timestamp_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  timestamp_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  timestamp_lt?: Maybe<DateTimeInput>;
+  timestamp_lte?: Maybe<DateTimeInput>;
+  timestamp_gt?: Maybe<DateTimeInput>;
+  timestamp_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<ItemParamsScalarWhereInput[] | ItemParamsScalarWhereInput>;
+  OR?: Maybe<ItemParamsScalarWhereInput[] | ItemParamsScalarWhereInput>;
+  NOT?: Maybe<ItemParamsScalarWhereInput[] | ItemParamsScalarWhereInput>;
+}
+
+export interface ItemParamsUpdateManyWithWhereNestedInput {
+  where: ItemParamsScalarWhereInput;
+  data: ItemParamsUpdateManyDataInput;
+}
+
+export interface ItemParamsUpdateManyDataInput {
+  txId?: Maybe<String>;
+  paramsId?: Maybe<String>;
+  version?: Maybe<Int>;
+  name?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  storageImageUrl?: Maybe<String>;
+  misc?: Maybe<Json>;
+  timestamp?: Maybe<DateTimeInput>;
+}
+
+export interface ItemUpsertWithoutLotsInput {
+  update: ItemUpdateWithoutLotsDataInput;
+  create: ItemCreateWithoutLotsInput;
+}
+
+export interface LotUpsertWithWhereUniqueWithoutSellerInput {
+  where: LotWhereUniqueInput;
+  update: LotUpdateWithoutSellerDataInput;
+  create: LotCreateWithoutSellerInput;
+}
+
+export interface LotScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  txId?: Maybe<String>;
+  txId_not?: Maybe<String>;
+  txId_in?: Maybe<String[] | String>;
+  txId_not_in?: Maybe<String[] | String>;
+  txId_lt?: Maybe<String>;
+  txId_lte?: Maybe<String>;
+  txId_gt?: Maybe<String>;
+  txId_gte?: Maybe<String>;
+  txId_contains?: Maybe<String>;
+  txId_not_contains?: Maybe<String>;
+  txId_starts_with?: Maybe<String>;
+  txId_not_starts_with?: Maybe<String>;
+  txId_ends_with?: Maybe<String>;
+  txId_not_ends_with?: Maybe<String>;
+  priceAsset?: Maybe<String>;
+  priceAsset_not?: Maybe<String>;
+  priceAsset_in?: Maybe<String[] | String>;
+  priceAsset_not_in?: Maybe<String[] | String>;
+  priceAsset_lt?: Maybe<String>;
+  priceAsset_lte?: Maybe<String>;
+  priceAsset_gt?: Maybe<String>;
+  priceAsset_gte?: Maybe<String>;
+  priceAsset_contains?: Maybe<String>;
+  priceAsset_not_contains?: Maybe<String>;
+  priceAsset_starts_with?: Maybe<String>;
+  priceAsset_not_starts_with?: Maybe<String>;
+  priceAsset_ends_with?: Maybe<String>;
+  priceAsset_not_ends_with?: Maybe<String>;
+  price?: Maybe<Float>;
+  price_not?: Maybe<Float>;
+  price_in?: Maybe<Float[] | Float>;
+  price_not_in?: Maybe<Float[] | Float>;
+  price_lt?: Maybe<Float>;
+  price_lte?: Maybe<Float>;
+  price_gt?: Maybe<Float>;
+  price_gte?: Maybe<Float>;
+  stock?: Maybe<Int>;
+  stock_not?: Maybe<Int>;
+  stock_in?: Maybe<Int[] | Int>;
+  stock_not_in?: Maybe<Int[] | Int>;
+  stock_lt?: Maybe<Int>;
+  stock_lte?: Maybe<Int>;
+  stock_gt?: Maybe<Int>;
+  stock_gte?: Maybe<Int>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<LotScalarWhereInput[] | LotScalarWhereInput>;
+  OR?: Maybe<LotScalarWhereInput[] | LotScalarWhereInput>;
+  NOT?: Maybe<LotScalarWhereInput[] | LotScalarWhereInput>;
+}
+
+export interface LotUpdateManyWithWhereNestedInput {
+  where: LotScalarWhereInput;
+  data: LotUpdateManyDataInput;
+}
+
+export interface LotUpdateManyDataInput {
+  txId?: Maybe<String>;
+  priceAsset?: Maybe<String>;
+  price?: Maybe<Float>;
+  stock?: Maybe<Int>;
+}
+
+export interface UserUpsertWithoutItemsInput {
+  update: UserUpdateWithoutItemsDataInput;
+  create: UserCreateWithoutItemsInput;
+}
+
+export interface LotUpdateManyWithoutItemInput {
+  create?: Maybe<LotCreateWithoutItemInput[] | LotCreateWithoutItemInput>;
+  delete?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
+  connect?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
+  set?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
+  disconnect?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
+  update?: Maybe<| LotUpdateWithWhereUniqueWithoutItemInput[]
+    | LotUpdateWithWhereUniqueWithoutItemInput>;
+  upsert?: Maybe<| LotUpsertWithWhereUniqueWithoutItemInput[]
+    | LotUpsertWithWhereUniqueWithoutItemInput>;
+  deleteMany?: Maybe<LotScalarWhereInput[] | LotScalarWhereInput>;
+  updateMany?: Maybe<LotUpdateManyWithWhereNestedInput[] | LotUpdateManyWithWhereNestedInput>;
+}
+
+export interface LotUpdateWithWhereUniqueWithoutItemInput {
+  where: LotWhereUniqueInput;
+  data: LotUpdateWithoutItemDataInput;
+}
+
+export interface LotUpdateWithoutItemDataInput {
+  txId?: Maybe<String>;
+  seller?: Maybe<UserUpdateOneWithoutLotsInput>;
+  priceAsset?: Maybe<String>;
+  price?: Maybe<Float>;
+  stock?: Maybe<Int>;
+}
+
+export interface UserUpdateOneWithoutLotsInput {
+  create?: Maybe<UserCreateWithoutLotsInput>;
+  update?: Maybe<UserUpdateWithoutLotsDataInput>;
+  upsert?: Maybe<UserUpsertWithoutLotsInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserUpdateWithoutLotsDataInput {
+  address?: Maybe<String>;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  role?: Maybe<UserRole>;
+  permissions?: Maybe<UserUpdatepermissionsInput>;
+  image?: Maybe<Json>;
+  meta?: Maybe<Json>;
+  items?: Maybe<ItemUpdateManyWithoutDappInput>;
+}
+
+export interface ItemUpdateManyWithoutDappInput {
+  create?: Maybe<ItemCreateWithoutDappInput[] | ItemCreateWithoutDappInput>;
+  delete?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
+  connect?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
+  set?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
+  disconnect?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
+  update?: Maybe<| ItemUpdateWithWhereUniqueWithoutDappInput[]
+    | ItemUpdateWithWhereUniqueWithoutDappInput>;
+  upsert?: Maybe<| ItemUpsertWithWhereUniqueWithoutDappInput[]
+    | ItemUpsertWithWhereUniqueWithoutDappInput>;
+  deleteMany?: Maybe<ItemScalarWhereInput[] | ItemScalarWhereInput>;
+  updateMany?: Maybe<ItemUpdateManyWithWhereNestedInput[] | ItemUpdateManyWithWhereNestedInput>;
+}
+
+export interface ItemUpdateWithWhereUniqueWithoutDappInput {
+  where: ItemWhereUniqueInput;
+  data: ItemUpdateWithoutDappDataInput;
+}
+
+export interface ItemUpdateWithoutDappDataInput {
+  txId?: Maybe<String>;
+  name?: Maybe<String>;
+  quantity?: Maybe<Int>;
+  reissuable?: Maybe<Boolean>;
+  timestamp?: Maybe<DateTimeInput>;
+  params?: Maybe<ItemParamsUpdateManyWithoutItemInput>;
+  lots?: Maybe<LotUpdateManyWithoutItemInput>;
+}
+
+export interface ItemUpsertWithWhereUniqueWithoutDappInput {
+  where: ItemWhereUniqueInput;
+  update: ItemUpdateWithoutDappDataInput;
+  create: ItemCreateWithoutDappInput;
+}
+
+export interface ItemScalarWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -402,63 +1897,33 @@ export interface ItemWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<ItemWhereInput[] | ItemWhereInput>;
-  OR?: Maybe<ItemWhereInput[] | ItemWhereInput>;
-  NOT?: Maybe<ItemWhereInput[] | ItemWhereInput>;
+  AND?: Maybe<ItemScalarWhereInput[] | ItemScalarWhereInput>;
+  OR?: Maybe<ItemScalarWhereInput[] | ItemScalarWhereInput>;
+  NOT?: Maybe<ItemScalarWhereInput[] | ItemScalarWhereInput>;
 }
 
-export interface IssueCreateInput {
-  id?: Maybe<ID_Input>;
-  txId: String;
-  name: String;
-  description: String;
-  decimals: Int;
-  quantity: Int;
-  reissuable: Boolean;
-  timestamp: DateTimeInput;
-  sender: String;
-  senderPublicKey: String;
+export interface ItemUpdateManyWithWhereNestedInput {
+  where: ItemScalarWhereInput;
+  data: ItemUpdateManyDataInput;
 }
 
-export interface IssueUpdateInput {
-  txId?: Maybe<String>;
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  decimals?: Maybe<Int>;
-  quantity?: Maybe<Int>;
-  reissuable?: Maybe<Boolean>;
-  timestamp?: Maybe<DateTimeInput>;
-  sender?: Maybe<String>;
-  senderPublicKey?: Maybe<String>;
-}
-
-export interface IssueUpdateManyMutationInput {
-  txId?: Maybe<String>;
-  name?: Maybe<String>;
-  description?: Maybe<String>;
-  decimals?: Maybe<Int>;
-  quantity?: Maybe<Int>;
-  reissuable?: Maybe<Boolean>;
-  timestamp?: Maybe<DateTimeInput>;
-  sender?: Maybe<String>;
-  senderPublicKey?: Maybe<String>;
-}
-
-export interface ItemCreateInput {
-  id?: Maybe<ID_Input>;
-  txId: String;
-  name: String;
-  quantity: Int;
-  reissuable: Boolean;
-  timestamp: DateTimeInput;
-}
-
-export interface ItemUpdateInput {
+export interface ItemUpdateManyDataInput {
   txId?: Maybe<String>;
   name?: Maybe<String>;
   quantity?: Maybe<Int>;
   reissuable?: Maybe<Boolean>;
   timestamp?: Maybe<DateTimeInput>;
+}
+
+export interface UserUpsertWithoutLotsInput {
+  update: UserUpdateWithoutLotsDataInput;
+  create: UserCreateWithoutLotsInput;
+}
+
+export interface LotUpsertWithWhereUniqueWithoutItemInput {
+  where: LotWhereUniqueInput;
+  update: LotUpdateWithoutItemDataInput;
+  create: LotCreateWithoutItemInput;
 }
 
 export interface ItemUpdateManyMutationInput {
@@ -467,6 +1932,163 @@ export interface ItemUpdateManyMutationInput {
   quantity?: Maybe<Int>;
   reissuable?: Maybe<Boolean>;
   timestamp?: Maybe<DateTimeInput>;
+}
+
+export interface ItemParamsCreateInput {
+  id?: Maybe<ID_Input>;
+  txId: String;
+  paramsId: String;
+  item: ItemCreateOneWithoutParamsInput;
+  version: Int;
+  name: String;
+  imageUrl: String;
+  storageImageUrl?: Maybe<String>;
+  misc?: Maybe<Json>;
+  timestamp: DateTimeInput;
+}
+
+export interface ItemCreateOneWithoutParamsInput {
+  create?: Maybe<ItemCreateWithoutParamsInput>;
+  connect?: Maybe<ItemWhereUniqueInput>;
+}
+
+export interface ItemCreateWithoutParamsInput {
+  id?: Maybe<ID_Input>;
+  txId: String;
+  dapp: UserCreateOneWithoutItemsInput;
+  name: String;
+  quantity: Int;
+  reissuable: Boolean;
+  timestamp: DateTimeInput;
+  lots?: Maybe<LotCreateManyWithoutItemInput>;
+}
+
+export interface ItemParamsUpdateInput {
+  txId?: Maybe<String>;
+  paramsId?: Maybe<String>;
+  item?: Maybe<ItemUpdateOneRequiredWithoutParamsInput>;
+  version?: Maybe<Int>;
+  name?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  storageImageUrl?: Maybe<String>;
+  misc?: Maybe<Json>;
+  timestamp?: Maybe<DateTimeInput>;
+}
+
+export interface ItemUpdateOneRequiredWithoutParamsInput {
+  create?: Maybe<ItemCreateWithoutParamsInput>;
+  update?: Maybe<ItemUpdateWithoutParamsDataInput>;
+  upsert?: Maybe<ItemUpsertWithoutParamsInput>;
+  connect?: Maybe<ItemWhereUniqueInput>;
+}
+
+export interface ItemUpdateWithoutParamsDataInput {
+  txId?: Maybe<String>;
+  dapp?: Maybe<UserUpdateOneRequiredWithoutItemsInput>;
+  name?: Maybe<String>;
+  quantity?: Maybe<Int>;
+  reissuable?: Maybe<Boolean>;
+  timestamp?: Maybe<DateTimeInput>;
+  lots?: Maybe<LotUpdateManyWithoutItemInput>;
+}
+
+export interface ItemUpsertWithoutParamsInput {
+  update: ItemUpdateWithoutParamsDataInput;
+  create: ItemCreateWithoutParamsInput;
+}
+
+export interface ItemParamsUpdateManyMutationInput {
+  txId?: Maybe<String>;
+  paramsId?: Maybe<String>;
+  version?: Maybe<Int>;
+  name?: Maybe<String>;
+  imageUrl?: Maybe<String>;
+  storageImageUrl?: Maybe<String>;
+  misc?: Maybe<Json>;
+  timestamp?: Maybe<DateTimeInput>;
+}
+
+export interface LotCreateInput {
+  id?: Maybe<ID_Input>;
+  txId: String;
+  item: ItemCreateOneWithoutLotsInput;
+  seller?: Maybe<UserCreateOneWithoutLotsInput>;
+  priceAsset: String;
+  price: Float;
+  stock: Int;
+}
+
+export interface LotUpdateInput {
+  txId?: Maybe<String>;
+  item?: Maybe<ItemUpdateOneRequiredWithoutLotsInput>;
+  seller?: Maybe<UserUpdateOneWithoutLotsInput>;
+  priceAsset?: Maybe<String>;
+  price?: Maybe<Float>;
+  stock?: Maybe<Int>;
+}
+
+export interface LotUpdateManyMutationInput {
+  txId?: Maybe<String>;
+  priceAsset?: Maybe<String>;
+  price?: Maybe<Float>;
+  stock?: Maybe<Int>;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  address: String;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  role?: Maybe<UserRole>;
+  permissions?: Maybe<UserCreatepermissionsInput>;
+  image?: Maybe<Json>;
+  meta?: Maybe<Json>;
+  items?: Maybe<ItemCreateManyWithoutDappInput>;
+  lots?: Maybe<LotCreateManyWithoutSellerInput>;
+}
+
+export interface UserUpdateInput {
+  address?: Maybe<String>;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  role?: Maybe<UserRole>;
+  permissions?: Maybe<UserUpdatepermissionsInput>;
+  image?: Maybe<Json>;
+  meta?: Maybe<Json>;
+  items?: Maybe<ItemUpdateManyWithoutDappInput>;
+  lots?: Maybe<LotUpdateManyWithoutSellerInput>;
+}
+
+export interface UserUpdateManyMutationInput {
+  address?: Maybe<String>;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  role?: Maybe<UserRole>;
+  permissions?: Maybe<UserUpdatepermissionsInput>;
+  image?: Maybe<Json>;
+  meta?: Maybe<Json>;
+}
+
+export interface DataSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<DataWhereInput>;
+  AND?: Maybe<DataSubscriptionWhereInput[] | DataSubscriptionWhereInput>;
+  OR?: Maybe<DataSubscriptionWhereInput[] | DataSubscriptionWhereInput>;
+  NOT?: Maybe<DataSubscriptionWhereInput[] | DataSubscriptionWhereInput>;
+}
+
+export interface InvokeScriptSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<InvokeScriptWhereInput>;
+  AND?: Maybe<InvokeScriptSubscriptionWhereInput[] | InvokeScriptSubscriptionWhereInput>;
+  OR?: Maybe<InvokeScriptSubscriptionWhereInput[] | InvokeScriptSubscriptionWhereInput>;
+  NOT?: Maybe<InvokeScriptSubscriptionWhereInput[] | InvokeScriptSubscriptionWhereInput>;
 }
 
 export interface IssueSubscriptionWhereInput {
@@ -491,93 +2113,102 @@ export interface ItemSubscriptionWhereInput {
   NOT?: Maybe<ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput>;
 }
 
+export interface ItemParamsSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ItemParamsWhereInput>;
+  AND?: Maybe<ItemParamsSubscriptionWhereInput[] | ItemParamsSubscriptionWhereInput>;
+  OR?: Maybe<ItemParamsSubscriptionWhereInput[] | ItemParamsSubscriptionWhereInput>;
+  NOT?: Maybe<ItemParamsSubscriptionWhereInput[] | ItemParamsSubscriptionWhereInput>;
+}
+
+export interface LotSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<LotWhereInput>;
+  AND?: Maybe<LotSubscriptionWhereInput[] | LotSubscriptionWhereInput>;
+  OR?: Maybe<LotSubscriptionWhereInput[] | LotSubscriptionWhereInput>;
+  NOT?: Maybe<LotSubscriptionWhereInput[] | LotSubscriptionWhereInput>;
+}
+
+export interface UserSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  OR?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+}
+
 export interface NodeNode {
   id: ID_Output;
 }
 
-export interface Issue {
+export interface Data {
   id: ID_Output;
   txId: String;
-  name: String;
-  description: String;
-  decimals: Int;
-  quantity: Int;
-  reissuable: Boolean;
   timestamp: DateTimeOutput;
   sender: String;
   senderPublicKey: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
+  data: Json[];
 }
 
-export interface IssuePromise extends Promise<Issue>, Fragmentable {
+export interface DataPromise extends Promise<Data>, Fragmentable {
   id: () => Promise<ID_Output>;
   txId: () => Promise<String>;
-  name: () => Promise<String>;
-  description: () => Promise<String>;
-  decimals: () => Promise<Int>;
-  quantity: () => Promise<Int>;
-  reissuable: () => Promise<Boolean>;
   timestamp: () => Promise<DateTimeOutput>;
   sender: () => Promise<String>;
   senderPublicKey: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
+  data: () => Promise<Json[]>;
 }
 
-export interface IssueSubscription
-  extends Promise<AsyncIterator<Issue>>,
+export interface DataSubscription
+  extends Promise<AsyncIterator<Data>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   txId: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  decimals: () => Promise<AsyncIterator<Int>>;
-  quantity: () => Promise<AsyncIterator<Int>>;
-  reissuable: () => Promise<AsyncIterator<Boolean>>;
   timestamp: () => Promise<AsyncIterator<DateTimeOutput>>;
   sender: () => Promise<AsyncIterator<String>>;
   senderPublicKey: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  data: () => Promise<AsyncIterator<Json[]>>;
 }
 
-export interface IssueNullablePromise
-  extends Promise<Issue | null>,
+export interface DataNullablePromise
+  extends Promise<Data | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
   txId: () => Promise<String>;
-  name: () => Promise<String>;
-  description: () => Promise<String>;
-  decimals: () => Promise<Int>;
-  quantity: () => Promise<Int>;
-  reissuable: () => Promise<Boolean>;
   timestamp: () => Promise<DateTimeOutput>;
   sender: () => Promise<String>;
   senderPublicKey: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
+  data: () => Promise<Json[]>;
 }
 
-export interface IssueConnection {
+export interface DataConnection {
   pageInfo: PageInfo;
-  edges: IssueEdge[];
+  edges: DataEdge[];
 }
 
-export interface IssueConnectionPromise
-  extends Promise<IssueConnection>,
+export interface DataConnectionPromise
+  extends Promise<DataConnection>,
     Fragmentable {
   pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<IssueEdge>>() => T;
-  aggregate: <T = AggregateIssuePromise>() => T;
+  edges: <T = FragmentableArray<DataEdge>>() => T;
+  aggregate: <T = AggregateDataPromise>() => T;
 }
 
-export interface IssueConnectionSubscription
-  extends Promise<AsyncIterator<IssueConnection>>,
+export interface DataConnectionSubscription
+  extends Promise<AsyncIterator<DataConnection>>,
     Fragmentable {
   pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<IssueEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateIssueSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<DataEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateDataSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -601,6 +2232,226 @@ export interface PageInfoSubscription
   hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
   startCursor: () => Promise<AsyncIterator<String>>;
   endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface DataEdge {
+  node: Data;
+  cursor: String;
+}
+
+export interface DataEdgePromise extends Promise<DataEdge>, Fragmentable {
+  node: <T = DataPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface DataEdgeSubscription
+  extends Promise<AsyncIterator<DataEdge>>,
+    Fragmentable {
+  node: <T = DataSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateData {
+  count: Int;
+}
+
+export interface AggregateDataPromise
+  extends Promise<AggregateData>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateDataSubscription
+  extends Promise<AsyncIterator<AggregateData>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface InvokeScript {
+  id: ID_Output;
+  txId: String;
+  timestamp: DateTimeOutput;
+  sender: String;
+  senderPublicKey: String;
+  dapp: String;
+  feeAssetId?: String;
+  call?: Json;
+  payment: Json[];
+}
+
+export interface InvokeScriptPromise
+  extends Promise<InvokeScript>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  txId: () => Promise<String>;
+  timestamp: () => Promise<DateTimeOutput>;
+  sender: () => Promise<String>;
+  senderPublicKey: () => Promise<String>;
+  dapp: () => Promise<String>;
+  feeAssetId: () => Promise<String>;
+  call: () => Promise<Json>;
+  payment: () => Promise<Json[]>;
+}
+
+export interface InvokeScriptSubscription
+  extends Promise<AsyncIterator<InvokeScript>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  txId: () => Promise<AsyncIterator<String>>;
+  timestamp: () => Promise<AsyncIterator<DateTimeOutput>>;
+  sender: () => Promise<AsyncIterator<String>>;
+  senderPublicKey: () => Promise<AsyncIterator<String>>;
+  dapp: () => Promise<AsyncIterator<String>>;
+  feeAssetId: () => Promise<AsyncIterator<String>>;
+  call: () => Promise<AsyncIterator<Json>>;
+  payment: () => Promise<AsyncIterator<Json[]>>;
+}
+
+export interface InvokeScriptNullablePromise
+  extends Promise<InvokeScript | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  txId: () => Promise<String>;
+  timestamp: () => Promise<DateTimeOutput>;
+  sender: () => Promise<String>;
+  senderPublicKey: () => Promise<String>;
+  dapp: () => Promise<String>;
+  feeAssetId: () => Promise<String>;
+  call: () => Promise<Json>;
+  payment: () => Promise<Json[]>;
+}
+
+export interface InvokeScriptConnection {
+  pageInfo: PageInfo;
+  edges: InvokeScriptEdge[];
+}
+
+export interface InvokeScriptConnectionPromise
+  extends Promise<InvokeScriptConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<InvokeScriptEdge>>() => T;
+  aggregate: <T = AggregateInvokeScriptPromise>() => T;
+}
+
+export interface InvokeScriptConnectionSubscription
+  extends Promise<AsyncIterator<InvokeScriptConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<InvokeScriptEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateInvokeScriptSubscription>() => T;
+}
+
+export interface InvokeScriptEdge {
+  node: InvokeScript;
+  cursor: String;
+}
+
+export interface InvokeScriptEdgePromise
+  extends Promise<InvokeScriptEdge>,
+    Fragmentable {
+  node: <T = InvokeScriptPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface InvokeScriptEdgeSubscription
+  extends Promise<AsyncIterator<InvokeScriptEdge>>,
+    Fragmentable {
+  node: <T = InvokeScriptSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateInvokeScript {
+  count: Int;
+}
+
+export interface AggregateInvokeScriptPromise
+  extends Promise<AggregateInvokeScript>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateInvokeScriptSubscription
+  extends Promise<AsyncIterator<AggregateInvokeScript>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface Issue {
+  id: ID_Output;
+  txId: String;
+  timestamp: DateTimeOutput;
+  sender: String;
+  senderPublicKey: String;
+  name: String;
+  description: String;
+  decimals: Int;
+  quantity: Int;
+  reissuable: Boolean;
+}
+
+export interface IssuePromise extends Promise<Issue>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  txId: () => Promise<String>;
+  timestamp: () => Promise<DateTimeOutput>;
+  sender: () => Promise<String>;
+  senderPublicKey: () => Promise<String>;
+  name: () => Promise<String>;
+  description: () => Promise<String>;
+  decimals: () => Promise<Int>;
+  quantity: () => Promise<Int>;
+  reissuable: () => Promise<Boolean>;
+}
+
+export interface IssueSubscription
+  extends Promise<AsyncIterator<Issue>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  txId: () => Promise<AsyncIterator<String>>;
+  timestamp: () => Promise<AsyncIterator<DateTimeOutput>>;
+  sender: () => Promise<AsyncIterator<String>>;
+  senderPublicKey: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  decimals: () => Promise<AsyncIterator<Int>>;
+  quantity: () => Promise<AsyncIterator<Int>>;
+  reissuable: () => Promise<AsyncIterator<Boolean>>;
+}
+
+export interface IssueNullablePromise
+  extends Promise<Issue | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  txId: () => Promise<String>;
+  timestamp: () => Promise<DateTimeOutput>;
+  sender: () => Promise<String>;
+  senderPublicKey: () => Promise<String>;
+  name: () => Promise<String>;
+  description: () => Promise<String>;
+  decimals: () => Promise<Int>;
+  quantity: () => Promise<Int>;
+  reissuable: () => Promise<Boolean>;
+}
+
+export interface IssueConnection {
+  pageInfo: PageInfo;
+  edges: IssueEdge[];
+}
+
+export interface IssueConnectionPromise
+  extends Promise<IssueConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<IssueEdge>>() => T;
+  aggregate: <T = AggregateIssuePromise>() => T;
+}
+
+export interface IssueConnectionSubscription
+  extends Promise<AsyncIterator<IssueConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<IssueEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateIssueSubscription>() => T;
 }
 
 export interface IssueEdge {
@@ -650,10 +2501,29 @@ export interface Item {
 export interface ItemPromise extends Promise<Item>, Fragmentable {
   id: () => Promise<ID_Output>;
   txId: () => Promise<String>;
+  dapp: <T = UserPromise>() => T;
   name: () => Promise<String>;
   quantity: () => Promise<Int>;
   reissuable: () => Promise<Boolean>;
   timestamp: () => Promise<DateTimeOutput>;
+  params: <T = FragmentableArray<ItemParams>>(args?: {
+    where?: ItemParamsWhereInput;
+    orderBy?: ItemParamsOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  lots: <T = FragmentableArray<Lot>>(args?: {
+    where?: LotWhereInput;
+    orderBy?: LotOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -663,10 +2533,29 @@ export interface ItemSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   txId: () => Promise<AsyncIterator<String>>;
+  dapp: <T = UserSubscription>() => T;
   name: () => Promise<AsyncIterator<String>>;
   quantity: () => Promise<AsyncIterator<Int>>;
   reissuable: () => Promise<AsyncIterator<Boolean>>;
   timestamp: () => Promise<AsyncIterator<DateTimeOutput>>;
+  params: <T = Promise<AsyncIterator<ItemParamsSubscription>>>(args?: {
+    where?: ItemParamsWhereInput;
+    orderBy?: ItemParamsOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  lots: <T = Promise<AsyncIterator<LotSubscription>>>(args?: {
+    where?: LotWhereInput;
+    orderBy?: LotOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -676,12 +2565,244 @@ export interface ItemNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   txId: () => Promise<String>;
+  dapp: <T = UserPromise>() => T;
   name: () => Promise<String>;
   quantity: () => Promise<Int>;
   reissuable: () => Promise<Boolean>;
   timestamp: () => Promise<DateTimeOutput>;
+  params: <T = FragmentableArray<ItemParams>>(args?: {
+    where?: ItemParamsWhereInput;
+    orderBy?: ItemParamsOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  lots: <T = FragmentableArray<Lot>>(args?: {
+    where?: LotWhereInput;
+    orderBy?: LotOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface User {
+  id: ID_Output;
+  address: String;
+  name?: String;
+  email?: String;
+  role: UserRole;
+  permissions: UserPermission[];
+  image?: Json;
+  meta?: Json;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface UserPromise extends Promise<User>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  address: () => Promise<String>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  role: () => Promise<UserRole>;
+  permissions: () => Promise<UserPermission[]>;
+  image: () => Promise<Json>;
+  meta: () => Promise<Json>;
+  items: <T = FragmentableArray<Item>>(args?: {
+    where?: ItemWhereInput;
+    orderBy?: ItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  lots: <T = FragmentableArray<Lot>>(args?: {
+    where?: LotWhereInput;
+    orderBy?: LotOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  address: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  role: () => Promise<AsyncIterator<UserRole>>;
+  permissions: () => Promise<AsyncIterator<UserPermission[]>>;
+  image: () => Promise<AsyncIterator<Json>>;
+  meta: () => Promise<AsyncIterator<Json>>;
+  items: <T = Promise<AsyncIterator<ItemSubscription>>>(args?: {
+    where?: ItemWhereInput;
+    orderBy?: ItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  lots: <T = Promise<AsyncIterator<LotSubscription>>>(args?: {
+    where?: LotWhereInput;
+    orderBy?: LotOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface UserNullablePromise
+  extends Promise<User | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  address: () => Promise<String>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  role: () => Promise<UserRole>;
+  permissions: () => Promise<UserPermission[]>;
+  image: () => Promise<Json>;
+  meta: () => Promise<Json>;
+  items: <T = FragmentableArray<Item>>(args?: {
+    where?: ItemWhereInput;
+    orderBy?: ItemOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  lots: <T = FragmentableArray<Lot>>(args?: {
+    where?: LotWhereInput;
+    orderBy?: LotOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface Lot {
+  id: ID_Output;
+  txId: String;
+  priceAsset: String;
+  price: Float;
+  stock: Int;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface LotPromise extends Promise<Lot>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  txId: () => Promise<String>;
+  item: <T = ItemPromise>() => T;
+  seller: <T = UserPromise>() => T;
+  priceAsset: () => Promise<String>;
+  price: () => Promise<Float>;
+  stock: () => Promise<Int>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface LotSubscription
+  extends Promise<AsyncIterator<Lot>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  txId: () => Promise<AsyncIterator<String>>;
+  item: <T = ItemSubscription>() => T;
+  seller: <T = UserSubscription>() => T;
+  priceAsset: () => Promise<AsyncIterator<String>>;
+  price: () => Promise<AsyncIterator<Float>>;
+  stock: () => Promise<AsyncIterator<Int>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface LotNullablePromise extends Promise<Lot | null>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  txId: () => Promise<String>;
+  item: <T = ItemPromise>() => T;
+  seller: <T = UserPromise>() => T;
+  priceAsset: () => Promise<String>;
+  price: () => Promise<Float>;
+  stock: () => Promise<Int>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ItemParams {
+  id: ID_Output;
+  txId: String;
+  paramsId: String;
+  version: Int;
+  name: String;
+  imageUrl: String;
+  storageImageUrl?: String;
+  misc?: Json;
+  timestamp: DateTimeOutput;
+}
+
+export interface ItemParamsPromise extends Promise<ItemParams>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  txId: () => Promise<String>;
+  paramsId: () => Promise<String>;
+  item: <T = ItemPromise>() => T;
+  version: () => Promise<Int>;
+  name: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  storageImageUrl: () => Promise<String>;
+  misc: () => Promise<Json>;
+  timestamp: () => Promise<DateTimeOutput>;
+}
+
+export interface ItemParamsSubscription
+  extends Promise<AsyncIterator<ItemParams>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  txId: () => Promise<AsyncIterator<String>>;
+  paramsId: () => Promise<AsyncIterator<String>>;
+  item: <T = ItemSubscription>() => T;
+  version: () => Promise<AsyncIterator<Int>>;
+  name: () => Promise<AsyncIterator<String>>;
+  imageUrl: () => Promise<AsyncIterator<String>>;
+  storageImageUrl: () => Promise<AsyncIterator<String>>;
+  misc: () => Promise<AsyncIterator<Json>>;
+  timestamp: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ItemParamsNullablePromise
+  extends Promise<ItemParams | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  txId: () => Promise<String>;
+  paramsId: () => Promise<String>;
+  item: <T = ItemPromise>() => T;
+  version: () => Promise<Int>;
+  name: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  storageImageUrl: () => Promise<String>;
+  misc: () => Promise<Json>;
+  timestamp: () => Promise<DateTimeOutput>;
 }
 
 export interface ItemConnection {
@@ -738,6 +2859,170 @@ export interface AggregateItemSubscription
   count: () => Promise<AsyncIterator<Int>>;
 }
 
+export interface ItemParamsConnection {
+  pageInfo: PageInfo;
+  edges: ItemParamsEdge[];
+}
+
+export interface ItemParamsConnectionPromise
+  extends Promise<ItemParamsConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ItemParamsEdge>>() => T;
+  aggregate: <T = AggregateItemParamsPromise>() => T;
+}
+
+export interface ItemParamsConnectionSubscription
+  extends Promise<AsyncIterator<ItemParamsConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ItemParamsEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateItemParamsSubscription>() => T;
+}
+
+export interface ItemParamsEdge {
+  node: ItemParams;
+  cursor: String;
+}
+
+export interface ItemParamsEdgePromise
+  extends Promise<ItemParamsEdge>,
+    Fragmentable {
+  node: <T = ItemParamsPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ItemParamsEdgeSubscription
+  extends Promise<AsyncIterator<ItemParamsEdge>>,
+    Fragmentable {
+  node: <T = ItemParamsSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateItemParams {
+  count: Int;
+}
+
+export interface AggregateItemParamsPromise
+  extends Promise<AggregateItemParams>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateItemParamsSubscription
+  extends Promise<AsyncIterator<AggregateItemParams>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface LotConnection {
+  pageInfo: PageInfo;
+  edges: LotEdge[];
+}
+
+export interface LotConnectionPromise
+  extends Promise<LotConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<LotEdge>>() => T;
+  aggregate: <T = AggregateLotPromise>() => T;
+}
+
+export interface LotConnectionSubscription
+  extends Promise<AsyncIterator<LotConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<LotEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateLotSubscription>() => T;
+}
+
+export interface LotEdge {
+  node: Lot;
+  cursor: String;
+}
+
+export interface LotEdgePromise extends Promise<LotEdge>, Fragmentable {
+  node: <T = LotPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface LotEdgeSubscription
+  extends Promise<AsyncIterator<LotEdge>>,
+    Fragmentable {
+  node: <T = LotSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateLot {
+  count: Int;
+}
+
+export interface AggregateLotPromise
+  extends Promise<AggregateLot>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateLotSubscription
+  extends Promise<AsyncIterator<AggregateLot>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
 export interface BatchPayload {
   count: Long;
 }
@@ -752,6 +3037,127 @@ export interface BatchPayloadSubscription
   extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface DataSubscriptionPayload {
+  mutation: MutationType;
+  node: Data;
+  updatedFields: String[];
+  previousValues: DataPreviousValues;
+}
+
+export interface DataSubscriptionPayloadPromise
+  extends Promise<DataSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = DataPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = DataPreviousValuesPromise>() => T;
+}
+
+export interface DataSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<DataSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = DataSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = DataPreviousValuesSubscription>() => T;
+}
+
+export interface DataPreviousValues {
+  id: ID_Output;
+  txId: String;
+  timestamp: DateTimeOutput;
+  sender: String;
+  senderPublicKey: String;
+  data: Json[];
+}
+
+export interface DataPreviousValuesPromise
+  extends Promise<DataPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  txId: () => Promise<String>;
+  timestamp: () => Promise<DateTimeOutput>;
+  sender: () => Promise<String>;
+  senderPublicKey: () => Promise<String>;
+  data: () => Promise<Json[]>;
+}
+
+export interface DataPreviousValuesSubscription
+  extends Promise<AsyncIterator<DataPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  txId: () => Promise<AsyncIterator<String>>;
+  timestamp: () => Promise<AsyncIterator<DateTimeOutput>>;
+  sender: () => Promise<AsyncIterator<String>>;
+  senderPublicKey: () => Promise<AsyncIterator<String>>;
+  data: () => Promise<AsyncIterator<Json[]>>;
+}
+
+export interface InvokeScriptSubscriptionPayload {
+  mutation: MutationType;
+  node: InvokeScript;
+  updatedFields: String[];
+  previousValues: InvokeScriptPreviousValues;
+}
+
+export interface InvokeScriptSubscriptionPayloadPromise
+  extends Promise<InvokeScriptSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = InvokeScriptPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = InvokeScriptPreviousValuesPromise>() => T;
+}
+
+export interface InvokeScriptSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<InvokeScriptSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = InvokeScriptSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = InvokeScriptPreviousValuesSubscription>() => T;
+}
+
+export interface InvokeScriptPreviousValues {
+  id: ID_Output;
+  txId: String;
+  timestamp: DateTimeOutput;
+  sender: String;
+  senderPublicKey: String;
+  dapp: String;
+  feeAssetId?: String;
+  call?: Json;
+  payment: Json[];
+}
+
+export interface InvokeScriptPreviousValuesPromise
+  extends Promise<InvokeScriptPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  txId: () => Promise<String>;
+  timestamp: () => Promise<DateTimeOutput>;
+  sender: () => Promise<String>;
+  senderPublicKey: () => Promise<String>;
+  dapp: () => Promise<String>;
+  feeAssetId: () => Promise<String>;
+  call: () => Promise<Json>;
+  payment: () => Promise<Json[]>;
+}
+
+export interface InvokeScriptPreviousValuesSubscription
+  extends Promise<AsyncIterator<InvokeScriptPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  txId: () => Promise<AsyncIterator<String>>;
+  timestamp: () => Promise<AsyncIterator<DateTimeOutput>>;
+  sender: () => Promise<AsyncIterator<String>>;
+  senderPublicKey: () => Promise<AsyncIterator<String>>;
+  dapp: () => Promise<AsyncIterator<String>>;
+  feeAssetId: () => Promise<AsyncIterator<String>>;
+  call: () => Promise<AsyncIterator<Json>>;
+  payment: () => Promise<AsyncIterator<Json[]>>;
 }
 
 export interface IssueSubscriptionPayload {
@@ -782,16 +3188,14 @@ export interface IssueSubscriptionPayloadSubscription
 export interface IssuePreviousValues {
   id: ID_Output;
   txId: String;
+  timestamp: DateTimeOutput;
+  sender: String;
+  senderPublicKey: String;
   name: String;
   description: String;
   decimals: Int;
   quantity: Int;
   reissuable: Boolean;
-  timestamp: DateTimeOutput;
-  sender: String;
-  senderPublicKey: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
 }
 
 export interface IssuePreviousValuesPromise
@@ -799,16 +3203,14 @@ export interface IssuePreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   txId: () => Promise<String>;
+  timestamp: () => Promise<DateTimeOutput>;
+  sender: () => Promise<String>;
+  senderPublicKey: () => Promise<String>;
   name: () => Promise<String>;
   description: () => Promise<String>;
   decimals: () => Promise<Int>;
   quantity: () => Promise<Int>;
   reissuable: () => Promise<Boolean>;
-  timestamp: () => Promise<DateTimeOutput>;
-  sender: () => Promise<String>;
-  senderPublicKey: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface IssuePreviousValuesSubscription
@@ -816,16 +3218,14 @@ export interface IssuePreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   txId: () => Promise<AsyncIterator<String>>;
+  timestamp: () => Promise<AsyncIterator<DateTimeOutput>>;
+  sender: () => Promise<AsyncIterator<String>>;
+  senderPublicKey: () => Promise<AsyncIterator<String>>;
   name: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
   decimals: () => Promise<AsyncIterator<Int>>;
   quantity: () => Promise<AsyncIterator<Int>>;
   reissuable: () => Promise<AsyncIterator<Boolean>>;
-  timestamp: () => Promise<AsyncIterator<DateTimeOutput>>;
-  sender: () => Promise<AsyncIterator<String>>;
-  senderPublicKey: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface ItemSubscriptionPayload {
@@ -890,6 +3290,198 @@ export interface ItemPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
+export interface ItemParamsSubscriptionPayload {
+  mutation: MutationType;
+  node: ItemParams;
+  updatedFields: String[];
+  previousValues: ItemParamsPreviousValues;
+}
+
+export interface ItemParamsSubscriptionPayloadPromise
+  extends Promise<ItemParamsSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ItemParamsPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ItemParamsPreviousValuesPromise>() => T;
+}
+
+export interface ItemParamsSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ItemParamsSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ItemParamsSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ItemParamsPreviousValuesSubscription>() => T;
+}
+
+export interface ItemParamsPreviousValues {
+  id: ID_Output;
+  txId: String;
+  paramsId: String;
+  version: Int;
+  name: String;
+  imageUrl: String;
+  storageImageUrl?: String;
+  misc?: Json;
+  timestamp: DateTimeOutput;
+}
+
+export interface ItemParamsPreviousValuesPromise
+  extends Promise<ItemParamsPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  txId: () => Promise<String>;
+  paramsId: () => Promise<String>;
+  version: () => Promise<Int>;
+  name: () => Promise<String>;
+  imageUrl: () => Promise<String>;
+  storageImageUrl: () => Promise<String>;
+  misc: () => Promise<Json>;
+  timestamp: () => Promise<DateTimeOutput>;
+}
+
+export interface ItemParamsPreviousValuesSubscription
+  extends Promise<AsyncIterator<ItemParamsPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  txId: () => Promise<AsyncIterator<String>>;
+  paramsId: () => Promise<AsyncIterator<String>>;
+  version: () => Promise<AsyncIterator<Int>>;
+  name: () => Promise<AsyncIterator<String>>;
+  imageUrl: () => Promise<AsyncIterator<String>>;
+  storageImageUrl: () => Promise<AsyncIterator<String>>;
+  misc: () => Promise<AsyncIterator<Json>>;
+  timestamp: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface LotSubscriptionPayload {
+  mutation: MutationType;
+  node: Lot;
+  updatedFields: String[];
+  previousValues: LotPreviousValues;
+}
+
+export interface LotSubscriptionPayloadPromise
+  extends Promise<LotSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = LotPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = LotPreviousValuesPromise>() => T;
+}
+
+export interface LotSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<LotSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = LotSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = LotPreviousValuesSubscription>() => T;
+}
+
+export interface LotPreviousValues {
+  id: ID_Output;
+  txId: String;
+  priceAsset: String;
+  price: Float;
+  stock: Int;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface LotPreviousValuesPromise
+  extends Promise<LotPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  txId: () => Promise<String>;
+  priceAsset: () => Promise<String>;
+  price: () => Promise<Float>;
+  stock: () => Promise<Int>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface LotPreviousValuesSubscription
+  extends Promise<AsyncIterator<LotPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  txId: () => Promise<AsyncIterator<String>>;
+  priceAsset: () => Promise<AsyncIterator<String>>;
+  price: () => Promise<AsyncIterator<Float>>;
+  stock: () => Promise<AsyncIterator<Int>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  node: User;
+  updatedFields: String[];
+  previousValues: UserPreviousValues;
+}
+
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
+}
+
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
+}
+
+export interface UserPreviousValues {
+  id: ID_Output;
+  address: String;
+  name?: String;
+  email?: String;
+  role: UserRole;
+  permissions: UserPermission[];
+  image?: Json;
+  meta?: Json;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface UserPreviousValuesPromise
+  extends Promise<UserPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  address: () => Promise<String>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  role: () => Promise<UserRole>;
+  permissions: () => Promise<UserPermission[]>;
+  image: () => Promise<Json>;
+  meta: () => Promise<Json>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface UserPreviousValuesSubscription
+  extends Promise<AsyncIterator<UserPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  address: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  role: () => Promise<AsyncIterator<UserRole>>;
+  permissions: () => Promise<AsyncIterator<UserPermission[]>>;
+  image: () => Promise<AsyncIterator<Json>>;
+  meta: () => Promise<AsyncIterator<Json>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
 /*
 The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
@@ -902,6 +3494,18 @@ The `String` scalar type represents textual data, represented as UTF-8 character
 export type String = string;
 
 /*
+DateTime scalar input type, allowing Date
+*/
+export type DateTimeInput = Date | string;
+
+/*
+DateTime scalar output type, which is always a string
+*/
+export type DateTimeOutput = string;
+
+export type Json = any;
+
+/*
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
 export type Int = number;
@@ -912,14 +3516,9 @@ The `Boolean` scalar type represents `true` or `false`.
 export type Boolean = boolean;
 
 /*
-DateTime scalar input type, allowing Date
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point). 
 */
-export type DateTimeInput = Date | string;
-
-/*
-DateTime scalar output type, which is always a string
-*/
-export type DateTimeOutput = string;
+export type Float = number;
 
 export type Long = string;
 
@@ -929,11 +3528,39 @@ export type Long = string;
 
 export const models: Model[] = [
   {
+    name: 'UserRole',
+    embedded: false
+  },
+  {
+    name: 'UserPermission',
+    embedded: false
+  },
+  {
     name: 'Issue',
     embedded: false
   },
   {
+    name: 'Data',
+    embedded: false
+  },
+  {
+    name: 'InvokeScript',
+    embedded: false
+  },
+  {
+    name: 'User',
+    embedded: false
+  },
+  {
     name: 'Item',
+    embedded: false
+  },
+  {
+    name: 'ItemParams',
+    embedded: false
+  },
+  {
+    name: 'Lot',
     embedded: false
   }
 ]

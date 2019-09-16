@@ -1,7 +1,7 @@
 import * as Debug from 'debug'
 import * as http from 'http'
 import { config } from './config'
-import { initProcessTxs } from './txs'
+import { handlingFailedParams, initProcessTxs } from './txs'
 
 const debug = Debug('combine')
 
@@ -14,12 +14,13 @@ const server = http.createServer(async (req, res) => {
 })
 
 const run = async () => {
+  handlingFailedParams()
   initProcessTxs()
 }
 
 run()
   .then(() => {
     server.listen(config.port, () => {
-      debug(`💉 Healthcheck server running at ${config.port} port`)
+      debug(`💉 Healthcheck running at ${config.port} port`)
     })
   })

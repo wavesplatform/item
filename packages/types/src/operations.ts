@@ -16,7 +16,7 @@ export type UpdateOperation<T = any> = {
 
 export type DeleteOperation = {
   type: OPERATION_TYPE.DELETE
-  id: string
+  txId: string
 }
 
 export type Operation<C = any, U = any> = CreateOperation<C> | UpdateOperation<U> | DeleteOperation

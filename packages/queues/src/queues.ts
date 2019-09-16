@@ -10,7 +10,11 @@ const queueNames = {
   pollingQueue: 'POLLING',
   issueTxsQueue: 'ISSUE_TXS',
   dataTxsQueue: 'DATA_TXS',
+  invokeTxsQueue: 'INVOKE_TXS',
   itemOpsQueue: 'ITEM_OPS',
+  paramsOpsQueue: 'PARAMS_OPS',
+  lotOpsQueue: 'LOT_OPS',
+  preserveMediaQueue: 'PRESERVE_MEDIA',
 }
 
 const createQueue = (name: string) => {

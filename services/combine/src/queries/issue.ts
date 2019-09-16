@@ -39,12 +39,12 @@ export const overwriteIssueRange = async (
   }
 }
 
-export const upsertIssue = (issue: IssueCreateInput) => {
+export const upsertIssue = (input: IssueCreateInput) => {
   return prisma.upsertIssue({
     where: {
-      txId: issue.txId,
+      txId: input.txId,
     },
-    create: issue,
-    update: issue,
+    create: input,
+    update: input,
   })
 }

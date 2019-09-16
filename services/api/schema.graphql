@@ -1,0 +1,151 @@
+scalar DateTime
+scalar Json
+scalar Upload
+
+# Enums
+
+enum UserRole {
+  USER
+  TEST
+  DAPP
+}
+
+enum UserPermission {
+  COMMON
+  DAPP
+}
+
+enum ItemOrderByInput {
+  timestamp_ASC
+  timestamp_DESC
+}
+
+# Directives
+
+directive @auth(requires: UserPermission) on QUERY | MUTATION | FIELD | FIELD_DEFINITION
+directive @internal on FIELD_DEFINITION
+
+# Shared types
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type PlatformStats {
+  dapps: Int!
+  items: Int!
+  transactions: Int!
+}
+
+# Common
+
+type User {
+  id: ID!
+  address: String!
+  name: String
+  email: String @internal
+
+  # Access
+  role: UserRole!
+  permissions: [UserPermission!]!
+
+  # Dapp fields
+  image: Json
+  meta: Json
+  items: [Item!]
+  totalItems: Int
+}
+
+type Item {
+  id: ID!
+  txId: String!
+  dapp: User!
+  name: String!
+  quantity: Int!
+  reissuable: Boolean!
+  timestamp: DateTime!
+  params: ItemParams!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  balance: Int
+}
+
+type ItemEdge {
+  node: Item!,
+  cursor: String!
+}
+
+type ItemConnection {
+  pageInfo: PageInfo!
+  edges: [ItemEdge!]
+}
+
+type ItemParams {
+  id: ID!
+  paramsId: String!
+  txId: String!
+  item: Item!
+  version: Int!
+  name: String!
+  imageUrl: String!
+  misc: Json
+  timestamp: DateTime!
+}
+
+# Inputs
+
+input ItemFilter {
+  dappAddress: String
+  searchString: String
+  inclusions: [String!]
+  creatorRole: String
+}
+
+input SigninUser {
+  address: String!
+  publicKey: String!
+  sign: String!
+  webappHost: String!
+}
+
+input DappInfo {
+  name: String
+  url: String
+  description: String
+  iconFile: Upload
+  pageFile: Upload
+}
+
+input UserInfo {
+  name: String
+  email: String
+}
+
+# Queries
+
+type Query {
+  items(filter: ItemFilter, orderBy: ItemOrderByInput, after: String, first: Int): ItemConnection
+  item(assetId: String!): Item
+  dapps: [User!]!
+  user(address: String!): User
+  inventory(address: String!, orderBy: ItemOrderByInput): [Item!]!
+  me: User @auth
+  platformStats: PlatformStats!
+}
+
+# Mutations
+
+type Mutation {
+  signin(input: SigninUser!): AuthPayload!
+  updateUserInfo(input: UserInfo!): User! @auth
+  updateTestRole(enable: Boolean!): User! @auth(requires: COMMON)
+  updateDappInfo(input: DappInfo!): User! @auth(requires: DAPP)
+}

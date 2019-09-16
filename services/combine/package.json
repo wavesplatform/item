@@ -12,11 +12,13 @@
     "fix:prettier": "prettier --write \"{src,test}/**/*.ts\" --ignore-path ../../.prettierignore",
     "fix:tslint": "tslint --fix -t stylish -p .",
     "test": "run-s test:jest",
-    "test:jest": "jest",
-    "test:watch": "jest --watch"
+    "test:jest": "jest --passWithNoTests --config=jest.json",
+    "test:watch": "jest --passWithNoTests --config=jest.json --watch"
   },
   "dependencies": {
     "@item/queues": "^1.0.0",
+    "@waves/bignumber": "^0.0.1",
+    "@waves/ts-lib-crypto": "^1.3.1",
     "debug": "^4.1.1",
     "prisma-client-lib": "^1.34.8"
   },

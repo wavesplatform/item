@@ -13,7 +13,6 @@ export const getIssueTxsForPeriod = async (
   timeEnd?: number
 ): Promise<IssueTransaction[]> => {
   const chunks = getIssueTxs({
-    limit: 1,
     sender: address,
     timeStart,
     timeEnd,

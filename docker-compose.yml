@@ -10,11 +10,18 @@ services:
       NETWORK: testnet
       REDIS_URL: redis://redis:6379
       PRISMA_HOST: prisma
+      BUCKET_NAME: ${BUCKET_NAME}
+      S3_TOKEN: ${S3_TOKEN}
+      S3_SECRET: ${S3_SECRET}
     ports:
+      - "4000:4000"
       - "3001:3001"
       - "3002:3002"
+      - "3003:3003"
+      - "3004:3004"
     links:
       - redis
+      - prisma
   redis:
     image: redis
     ports:

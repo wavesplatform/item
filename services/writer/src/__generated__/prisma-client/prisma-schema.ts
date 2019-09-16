@@ -2,7 +2,15 @@
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-export const typeDefs = /* GraphQL */ `type AggregateIssue {
+export const typeDefs = /* GraphQL */ `type AggregateData {
+  count: Int!
+}
+
+type AggregateInvokeScript {
+  count: Int!
+}
+
+type AggregateIssue {
   count: Int!
 }
 
@@ -10,25 +18,420 @@ type AggregateItem {
   count: Int!
 }
 
+type AggregateItemParams {
+  count: Int!
+}
+
+type AggregateLot {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
 type BatchPayload {
   count: Long!
 }
 
+type Data {
+  id: ID!
+  txId: String!
+  timestamp: DateTime!
+  sender: String!
+  senderPublicKey: String!
+  data: [Json!]!
+}
+
+type DataConnection {
+  pageInfo: PageInfo!
+  edges: [DataEdge]!
+  aggregate: AggregateData!
+}
+
+input DataCreatedataInput {
+  set: [Json!]
+}
+
+input DataCreateInput {
+  id: ID
+  txId: String!
+  timestamp: DateTime!
+  sender: String!
+  senderPublicKey: String!
+  data: DataCreatedataInput
+}
+
+type DataEdge {
+  node: Data!
+  cursor: String!
+}
+
+enum DataOrderByInput {
+  id_ASC
+  id_DESC
+  txId_ASC
+  txId_DESC
+  timestamp_ASC
+  timestamp_DESC
+  sender_ASC
+  sender_DESC
+  senderPublicKey_ASC
+  senderPublicKey_DESC
+}
+
+type DataPreviousValues {
+  id: ID!
+  txId: String!
+  timestamp: DateTime!
+  sender: String!
+  senderPublicKey: String!
+  data: [Json!]!
+}
+
+type DataSubscriptionPayload {
+  mutation: MutationType!
+  node: Data
+  updatedFields: [String!]
+  previousValues: DataPreviousValues
+}
+
+input DataSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: DataWhereInput
+  AND: [DataSubscriptionWhereInput!]
+  OR: [DataSubscriptionWhereInput!]
+  NOT: [DataSubscriptionWhereInput!]
+}
+
+input DataUpdatedataInput {
+  set: [Json!]
+}
+
+input DataUpdateInput {
+  txId: String
+  timestamp: DateTime
+  sender: String
+  senderPublicKey: String
+  data: DataUpdatedataInput
+}
+
+input DataUpdateManyMutationInput {
+  txId: String
+  timestamp: DateTime
+  sender: String
+  senderPublicKey: String
+  data: DataUpdatedataInput
+}
+
+input DataWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  txId: String
+  txId_not: String
+  txId_in: [String!]
+  txId_not_in: [String!]
+  txId_lt: String
+  txId_lte: String
+  txId_gt: String
+  txId_gte: String
+  txId_contains: String
+  txId_not_contains: String
+  txId_starts_with: String
+  txId_not_starts_with: String
+  txId_ends_with: String
+  txId_not_ends_with: String
+  timestamp: DateTime
+  timestamp_not: DateTime
+  timestamp_in: [DateTime!]
+  timestamp_not_in: [DateTime!]
+  timestamp_lt: DateTime
+  timestamp_lte: DateTime
+  timestamp_gt: DateTime
+  timestamp_gte: DateTime
+  sender: String
+  sender_not: String
+  sender_in: [String!]
+  sender_not_in: [String!]
+  sender_lt: String
+  sender_lte: String
+  sender_gt: String
+  sender_gte: String
+  sender_contains: String
+  sender_not_contains: String
+  sender_starts_with: String
+  sender_not_starts_with: String
+  sender_ends_with: String
+  sender_not_ends_with: String
+  senderPublicKey: String
+  senderPublicKey_not: String
+  senderPublicKey_in: [String!]
+  senderPublicKey_not_in: [String!]
+  senderPublicKey_lt: String
+  senderPublicKey_lte: String
+  senderPublicKey_gt: String
+  senderPublicKey_gte: String
+  senderPublicKey_contains: String
+  senderPublicKey_not_contains: String
+  senderPublicKey_starts_with: String
+  senderPublicKey_not_starts_with: String
+  senderPublicKey_ends_with: String
+  senderPublicKey_not_ends_with: String
+  AND: [DataWhereInput!]
+  OR: [DataWhereInput!]
+  NOT: [DataWhereInput!]
+}
+
+input DataWhereUniqueInput {
+  id: ID
+  txId: String
+}
+
 scalar DateTime
+
+type InvokeScript {
+  id: ID!
+  txId: String!
+  timestamp: DateTime!
+  sender: String!
+  senderPublicKey: String!
+  dapp: String!
+  feeAssetId: String
+  call: Json
+  payment: [Json!]!
+}
+
+type InvokeScriptConnection {
+  pageInfo: PageInfo!
+  edges: [InvokeScriptEdge]!
+  aggregate: AggregateInvokeScript!
+}
+
+input InvokeScriptCreateInput {
+  id: ID
+  txId: String!
+  timestamp: DateTime!
+  sender: String!
+  senderPublicKey: String!
+  dapp: String!
+  feeAssetId: String
+  call: Json
+  payment: InvokeScriptCreatepaymentInput
+}
+
+input InvokeScriptCreatepaymentInput {
+  set: [Json!]
+}
+
+type InvokeScriptEdge {
+  node: InvokeScript!
+  cursor: String!
+}
+
+enum InvokeScriptOrderByInput {
+  id_ASC
+  id_DESC
+  txId_ASC
+  txId_DESC
+  timestamp_ASC
+  timestamp_DESC
+  sender_ASC
+  sender_DESC
+  senderPublicKey_ASC
+  senderPublicKey_DESC
+  dapp_ASC
+  dapp_DESC
+  feeAssetId_ASC
+  feeAssetId_DESC
+  call_ASC
+  call_DESC
+}
+
+type InvokeScriptPreviousValues {
+  id: ID!
+  txId: String!
+  timestamp: DateTime!
+  sender: String!
+  senderPublicKey: String!
+  dapp: String!
+  feeAssetId: String
+  call: Json
+  payment: [Json!]!
+}
+
+type InvokeScriptSubscriptionPayload {
+  mutation: MutationType!
+  node: InvokeScript
+  updatedFields: [String!]
+  previousValues: InvokeScriptPreviousValues
+}
+
+input InvokeScriptSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: InvokeScriptWhereInput
+  AND: [InvokeScriptSubscriptionWhereInput!]
+  OR: [InvokeScriptSubscriptionWhereInput!]
+  NOT: [InvokeScriptSubscriptionWhereInput!]
+}
+
+input InvokeScriptUpdateInput {
+  txId: String
+  timestamp: DateTime
+  sender: String
+  senderPublicKey: String
+  dapp: String
+  feeAssetId: String
+  call: Json
+  payment: InvokeScriptUpdatepaymentInput
+}
+
+input InvokeScriptUpdateManyMutationInput {
+  txId: String
+  timestamp: DateTime
+  sender: String
+  senderPublicKey: String
+  dapp: String
+  feeAssetId: String
+  call: Json
+  payment: InvokeScriptUpdatepaymentInput
+}
+
+input InvokeScriptUpdatepaymentInput {
+  set: [Json!]
+}
+
+input InvokeScriptWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  txId: String
+  txId_not: String
+  txId_in: [String!]
+  txId_not_in: [String!]
+  txId_lt: String
+  txId_lte: String
+  txId_gt: String
+  txId_gte: String
+  txId_contains: String
+  txId_not_contains: String
+  txId_starts_with: String
+  txId_not_starts_with: String
+  txId_ends_with: String
+  txId_not_ends_with: String
+  timestamp: DateTime
+  timestamp_not: DateTime
+  timestamp_in: [DateTime!]
+  timestamp_not_in: [DateTime!]
+  timestamp_lt: DateTime
+  timestamp_lte: DateTime
+  timestamp_gt: DateTime
+  timestamp_gte: DateTime
+  sender: String
+  sender_not: String
+  sender_in: [String!]
+  sender_not_in: [String!]
+  sender_lt: String
+  sender_lte: String
+  sender_gt: String
+  sender_gte: String
+  sender_contains: String
+  sender_not_contains: String
+  sender_starts_with: String
+  sender_not_starts_with: String
+  sender_ends_with: String
+  sender_not_ends_with: String
+  senderPublicKey: String
+  senderPublicKey_not: String
+  senderPublicKey_in: [String!]
+  senderPublicKey_not_in: [String!]
+  senderPublicKey_lt: String
+  senderPublicKey_lte: String
+  senderPublicKey_gt: String
+  senderPublicKey_gte: String
+  senderPublicKey_contains: String
+  senderPublicKey_not_contains: String
+  senderPublicKey_starts_with: String
+  senderPublicKey_not_starts_with: String
+  senderPublicKey_ends_with: String
+  senderPublicKey_not_ends_with: String
+  dapp: String
+  dapp_not: String
+  dapp_in: [String!]
+  dapp_not_in: [String!]
+  dapp_lt: String
+  dapp_lte: String
+  dapp_gt: String
+  dapp_gte: String
+  dapp_contains: String
+  dapp_not_contains: String
+  dapp_starts_with: String
+  dapp_not_starts_with: String
+  dapp_ends_with: String
+  dapp_not_ends_with: String
+  feeAssetId: String
+  feeAssetId_not: String
+  feeAssetId_in: [String!]
+  feeAssetId_not_in: [String!]
+  feeAssetId_lt: String
+  feeAssetId_lte: String
+  feeAssetId_gt: String
+  feeAssetId_gte: String
+  feeAssetId_contains: String
+  feeAssetId_not_contains: String
+  feeAssetId_starts_with: String
+  feeAssetId_not_starts_with: String
+  feeAssetId_ends_with: String
+  feeAssetId_not_ends_with: String
+  AND: [InvokeScriptWhereInput!]
+  OR: [InvokeScriptWhereInput!]
+  NOT: [InvokeScriptWhereInput!]
+}
+
+input InvokeScriptWhereUniqueInput {
+  id: ID
+  txId: String
+}
 
 type Issue {
   id: ID!
   txId: String!
+  timestamp: DateTime!
+  sender: String!
+  senderPublicKey: String!
   name: String!
   description: String!
   decimals: Int!
   quantity: Int!
   reissuable: Boolean!
-  timestamp: DateTime!
-  sender: String!
-  senderPublicKey: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
 }
 
 type IssueConnection {
@@ -40,14 +443,14 @@ type IssueConnection {
 input IssueCreateInput {
   id: ID
   txId: String!
+  timestamp: DateTime!
+  sender: String!
+  senderPublicKey: String!
   name: String!
   description: String!
   decimals: Int!
   quantity: Int!
   reissuable: Boolean!
-  timestamp: DateTime!
-  sender: String!
-  senderPublicKey: String!
 }
 
 type IssueEdge {
@@ -60,6 +463,12 @@ enum IssueOrderByInput {
   id_DESC
   txId_ASC
   txId_DESC
+  timestamp_ASC
+  timestamp_DESC
+  sender_ASC
+  sender_DESC
+  senderPublicKey_ASC
+  senderPublicKey_DESC
   name_ASC
   name_DESC
   description_ASC
@@ -70,31 +479,19 @@ enum IssueOrderByInput {
   quantity_DESC
   reissuable_ASC
   reissuable_DESC
-  timestamp_ASC
-  timestamp_DESC
-  sender_ASC
-  sender_DESC
-  senderPublicKey_ASC
-  senderPublicKey_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
 }
 
 type IssuePreviousValues {
   id: ID!
   txId: String!
+  timestamp: DateTime!
+  sender: String!
+  senderPublicKey: String!
   name: String!
   description: String!
   decimals: Int!
   quantity: Int!
   reissuable: Boolean!
-  timestamp: DateTime!
-  sender: String!
-  senderPublicKey: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
 }
 
 type IssueSubscriptionPayload {
@@ -117,26 +514,26 @@ input IssueSubscriptionWhereInput {
 
 input IssueUpdateInput {
   txId: String
+  timestamp: DateTime
+  sender: String
+  senderPublicKey: String
   name: String
   description: String
   decimals: Int
   quantity: Int
   reissuable: Boolean
-  timestamp: DateTime
-  sender: String
-  senderPublicKey: String
 }
 
 input IssueUpdateManyMutationInput {
   txId: String
+  timestamp: DateTime
+  sender: String
+  senderPublicKey: String
   name: String
   description: String
   decimals: Int
   quantity: Int
   reissuable: Boolean
-  timestamp: DateTime
-  sender: String
-  senderPublicKey: String
 }
 
 input IssueWhereInput {
@@ -168,6 +565,42 @@ input IssueWhereInput {
   txId_not_starts_with: String
   txId_ends_with: String
   txId_not_ends_with: String
+  timestamp: DateTime
+  timestamp_not: DateTime
+  timestamp_in: [DateTime!]
+  timestamp_not_in: [DateTime!]
+  timestamp_lt: DateTime
+  timestamp_lte: DateTime
+  timestamp_gt: DateTime
+  timestamp_gte: DateTime
+  sender: String
+  sender_not: String
+  sender_in: [String!]
+  sender_not_in: [String!]
+  sender_lt: String
+  sender_lte: String
+  sender_gt: String
+  sender_gte: String
+  sender_contains: String
+  sender_not_contains: String
+  sender_starts_with: String
+  sender_not_starts_with: String
+  sender_ends_with: String
+  sender_not_ends_with: String
+  senderPublicKey: String
+  senderPublicKey_not: String
+  senderPublicKey_in: [String!]
+  senderPublicKey_not_in: [String!]
+  senderPublicKey_lt: String
+  senderPublicKey_lte: String
+  senderPublicKey_gt: String
+  senderPublicKey_gte: String
+  senderPublicKey_contains: String
+  senderPublicKey_not_contains: String
+  senderPublicKey_starts_with: String
+  senderPublicKey_not_starts_with: String
+  senderPublicKey_ends_with: String
+  senderPublicKey_not_ends_with: String
   name: String
   name_not: String
   name_in: [String!]
@@ -214,58 +647,6 @@ input IssueWhereInput {
   quantity_gte: Int
   reissuable: Boolean
   reissuable_not: Boolean
-  timestamp: DateTime
-  timestamp_not: DateTime
-  timestamp_in: [DateTime!]
-  timestamp_not_in: [DateTime!]
-  timestamp_lt: DateTime
-  timestamp_lte: DateTime
-  timestamp_gt: DateTime
-  timestamp_gte: DateTime
-  sender: String
-  sender_not: String
-  sender_in: [String!]
-  sender_not_in: [String!]
-  sender_lt: String
-  sender_lte: String
-  sender_gt: String
-  sender_gte: String
-  sender_contains: String
-  sender_not_contains: String
-  sender_starts_with: String
-  sender_not_starts_with: String
-  sender_ends_with: String
-  sender_not_ends_with: String
-  senderPublicKey: String
-  senderPublicKey_not: String
-  senderPublicKey_in: [String!]
-  senderPublicKey_not_in: [String!]
-  senderPublicKey_lt: String
-  senderPublicKey_lte: String
-  senderPublicKey_gt: String
-  senderPublicKey_gte: String
-  senderPublicKey_contains: String
-  senderPublicKey_not_contains: String
-  senderPublicKey_starts_with: String
-  senderPublicKey_not_starts_with: String
-  senderPublicKey_ends_with: String
-  senderPublicKey_not_ends_with: String
-  createdAt: DateTime
-  createdAt_not: DateTime
-  createdAt_in: [DateTime!]
-  createdAt_not_in: [DateTime!]
-  createdAt_lt: DateTime
-  createdAt_lte: DateTime
-  createdAt_gt: DateTime
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-  updatedAt_not: DateTime
-  updatedAt_in: [DateTime!]
-  updatedAt_not_in: [DateTime!]
-  updatedAt_lt: DateTime
-  updatedAt_lte: DateTime
-  updatedAt_gt: DateTime
-  updatedAt_gte: DateTime
   AND: [IssueWhereInput!]
   OR: [IssueWhereInput!]
   NOT: [IssueWhereInput!]
@@ -279,10 +660,13 @@ input IssueWhereUniqueInput {
 type Item {
   id: ID!
   txId: String!
+  dapp: User!
   name: String!
   quantity: Int!
   reissuable: Boolean!
   timestamp: DateTime!
+  params(where: ItemParamsWhereInput, orderBy: ItemParamsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ItemParams!]
+  lots(where: LotWhereInput, orderBy: LotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Lot!]
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -296,10 +680,61 @@ type ItemConnection {
 input ItemCreateInput {
   id: ID
   txId: String!
+  dapp: UserCreateOneWithoutItemsInput!
   name: String!
   quantity: Int!
   reissuable: Boolean!
   timestamp: DateTime!
+  params: ItemParamsCreateManyWithoutItemInput
+  lots: LotCreateManyWithoutItemInput
+}
+
+input ItemCreateManyWithoutDappInput {
+  create: [ItemCreateWithoutDappInput!]
+  connect: [ItemWhereUniqueInput!]
+}
+
+input ItemCreateOneWithoutLotsInput {
+  create: ItemCreateWithoutLotsInput
+  connect: ItemWhereUniqueInput
+}
+
+input ItemCreateOneWithoutParamsInput {
+  create: ItemCreateWithoutParamsInput
+  connect: ItemWhereUniqueInput
+}
+
+input ItemCreateWithoutDappInput {
+  id: ID
+  txId: String!
+  name: String!
+  quantity: Int!
+  reissuable: Boolean!
+  timestamp: DateTime!
+  params: ItemParamsCreateManyWithoutItemInput
+  lots: LotCreateManyWithoutItemInput
+}
+
+input ItemCreateWithoutLotsInput {
+  id: ID
+  txId: String!
+  dapp: UserCreateOneWithoutItemsInput!
+  name: String!
+  quantity: Int!
+  reissuable: Boolean!
+  timestamp: DateTime!
+  params: ItemParamsCreateManyWithoutItemInput
+}
+
+input ItemCreateWithoutParamsInput {
+  id: ID
+  txId: String!
+  dapp: UserCreateOneWithoutItemsInput!
+  name: String!
+  quantity: Int!
+  reissuable: Boolean!
+  timestamp: DateTime!
+  lots: LotCreateManyWithoutItemInput
 }
 
 type ItemEdge {
@@ -326,6 +761,402 @@ enum ItemOrderByInput {
   updatedAt_DESC
 }
 
+type ItemParams {
+  id: ID!
+  txId: String!
+  paramsId: String!
+  item: Item!
+  version: Int!
+  name: String!
+  imageUrl: String!
+  storageImageUrl: String
+  misc: Json
+  timestamp: DateTime!
+}
+
+type ItemParamsConnection {
+  pageInfo: PageInfo!
+  edges: [ItemParamsEdge]!
+  aggregate: AggregateItemParams!
+}
+
+input ItemParamsCreateInput {
+  id: ID
+  txId: String!
+  paramsId: String!
+  item: ItemCreateOneWithoutParamsInput!
+  version: Int!
+  name: String!
+  imageUrl: String!
+  storageImageUrl: String
+  misc: Json
+  timestamp: DateTime!
+}
+
+input ItemParamsCreateManyWithoutItemInput {
+  create: [ItemParamsCreateWithoutItemInput!]
+  connect: [ItemParamsWhereUniqueInput!]
+}
+
+input ItemParamsCreateWithoutItemInput {
+  id: ID
+  txId: String!
+  paramsId: String!
+  version: Int!
+  name: String!
+  imageUrl: String!
+  storageImageUrl: String
+  misc: Json
+  timestamp: DateTime!
+}
+
+type ItemParamsEdge {
+  node: ItemParams!
+  cursor: String!
+}
+
+enum ItemParamsOrderByInput {
+  id_ASC
+  id_DESC
+  txId_ASC
+  txId_DESC
+  paramsId_ASC
+  paramsId_DESC
+  version_ASC
+  version_DESC
+  name_ASC
+  name_DESC
+  imageUrl_ASC
+  imageUrl_DESC
+  storageImageUrl_ASC
+  storageImageUrl_DESC
+  misc_ASC
+  misc_DESC
+  timestamp_ASC
+  timestamp_DESC
+}
+
+type ItemParamsPreviousValues {
+  id: ID!
+  txId: String!
+  paramsId: String!
+  version: Int!
+  name: String!
+  imageUrl: String!
+  storageImageUrl: String
+  misc: Json
+  timestamp: DateTime!
+}
+
+input ItemParamsScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  txId: String
+  txId_not: String
+  txId_in: [String!]
+  txId_not_in: [String!]
+  txId_lt: String
+  txId_lte: String
+  txId_gt: String
+  txId_gte: String
+  txId_contains: String
+  txId_not_contains: String
+  txId_starts_with: String
+  txId_not_starts_with: String
+  txId_ends_with: String
+  txId_not_ends_with: String
+  paramsId: String
+  paramsId_not: String
+  paramsId_in: [String!]
+  paramsId_not_in: [String!]
+  paramsId_lt: String
+  paramsId_lte: String
+  paramsId_gt: String
+  paramsId_gte: String
+  paramsId_contains: String
+  paramsId_not_contains: String
+  paramsId_starts_with: String
+  paramsId_not_starts_with: String
+  paramsId_ends_with: String
+  paramsId_not_ends_with: String
+  version: Int
+  version_not: Int
+  version_in: [Int!]
+  version_not_in: [Int!]
+  version_lt: Int
+  version_lte: Int
+  version_gt: Int
+  version_gte: Int
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  imageUrl: String
+  imageUrl_not: String
+  imageUrl_in: [String!]
+  imageUrl_not_in: [String!]
+  imageUrl_lt: String
+  imageUrl_lte: String
+  imageUrl_gt: String
+  imageUrl_gte: String
+  imageUrl_contains: String
+  imageUrl_not_contains: String
+  imageUrl_starts_with: String
+  imageUrl_not_starts_with: String
+  imageUrl_ends_with: String
+  imageUrl_not_ends_with: String
+  storageImageUrl: String
+  storageImageUrl_not: String
+  storageImageUrl_in: [String!]
+  storageImageUrl_not_in: [String!]
+  storageImageUrl_lt: String
+  storageImageUrl_lte: String
+  storageImageUrl_gt: String
+  storageImageUrl_gte: String
+  storageImageUrl_contains: String
+  storageImageUrl_not_contains: String
+  storageImageUrl_starts_with: String
+  storageImageUrl_not_starts_with: String
+  storageImageUrl_ends_with: String
+  storageImageUrl_not_ends_with: String
+  timestamp: DateTime
+  timestamp_not: DateTime
+  timestamp_in: [DateTime!]
+  timestamp_not_in: [DateTime!]
+  timestamp_lt: DateTime
+  timestamp_lte: DateTime
+  timestamp_gt: DateTime
+  timestamp_gte: DateTime
+  AND: [ItemParamsScalarWhereInput!]
+  OR: [ItemParamsScalarWhereInput!]
+  NOT: [ItemParamsScalarWhereInput!]
+}
+
+type ItemParamsSubscriptionPayload {
+  mutation: MutationType!
+  node: ItemParams
+  updatedFields: [String!]
+  previousValues: ItemParamsPreviousValues
+}
+
+input ItemParamsSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ItemParamsWhereInput
+  AND: [ItemParamsSubscriptionWhereInput!]
+  OR: [ItemParamsSubscriptionWhereInput!]
+  NOT: [ItemParamsSubscriptionWhereInput!]
+}
+
+input ItemParamsUpdateInput {
+  txId: String
+  paramsId: String
+  item: ItemUpdateOneRequiredWithoutParamsInput
+  version: Int
+  name: String
+  imageUrl: String
+  storageImageUrl: String
+  misc: Json
+  timestamp: DateTime
+}
+
+input ItemParamsUpdateManyDataInput {
+  txId: String
+  paramsId: String
+  version: Int
+  name: String
+  imageUrl: String
+  storageImageUrl: String
+  misc: Json
+  timestamp: DateTime
+}
+
+input ItemParamsUpdateManyMutationInput {
+  txId: String
+  paramsId: String
+  version: Int
+  name: String
+  imageUrl: String
+  storageImageUrl: String
+  misc: Json
+  timestamp: DateTime
+}
+
+input ItemParamsUpdateManyWithoutItemInput {
+  create: [ItemParamsCreateWithoutItemInput!]
+  delete: [ItemParamsWhereUniqueInput!]
+  connect: [ItemParamsWhereUniqueInput!]
+  set: [ItemParamsWhereUniqueInput!]
+  disconnect: [ItemParamsWhereUniqueInput!]
+  update: [ItemParamsUpdateWithWhereUniqueWithoutItemInput!]
+  upsert: [ItemParamsUpsertWithWhereUniqueWithoutItemInput!]
+  deleteMany: [ItemParamsScalarWhereInput!]
+  updateMany: [ItemParamsUpdateManyWithWhereNestedInput!]
+}
+
+input ItemParamsUpdateManyWithWhereNestedInput {
+  where: ItemParamsScalarWhereInput!
+  data: ItemParamsUpdateManyDataInput!
+}
+
+input ItemParamsUpdateWithoutItemDataInput {
+  txId: String
+  paramsId: String
+  version: Int
+  name: String
+  imageUrl: String
+  storageImageUrl: String
+  misc: Json
+  timestamp: DateTime
+}
+
+input ItemParamsUpdateWithWhereUniqueWithoutItemInput {
+  where: ItemParamsWhereUniqueInput!
+  data: ItemParamsUpdateWithoutItemDataInput!
+}
+
+input ItemParamsUpsertWithWhereUniqueWithoutItemInput {
+  where: ItemParamsWhereUniqueInput!
+  update: ItemParamsUpdateWithoutItemDataInput!
+  create: ItemParamsCreateWithoutItemInput!
+}
+
+input ItemParamsWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  txId: String
+  txId_not: String
+  txId_in: [String!]
+  txId_not_in: [String!]
+  txId_lt: String
+  txId_lte: String
+  txId_gt: String
+  txId_gte: String
+  txId_contains: String
+  txId_not_contains: String
+  txId_starts_with: String
+  txId_not_starts_with: String
+  txId_ends_with: String
+  txId_not_ends_with: String
+  paramsId: String
+  paramsId_not: String
+  paramsId_in: [String!]
+  paramsId_not_in: [String!]
+  paramsId_lt: String
+  paramsId_lte: String
+  paramsId_gt: String
+  paramsId_gte: String
+  paramsId_contains: String
+  paramsId_not_contains: String
+  paramsId_starts_with: String
+  paramsId_not_starts_with: String
+  paramsId_ends_with: String
+  paramsId_not_ends_with: String
+  item: ItemWhereInput
+  version: Int
+  version_not: Int
+  version_in: [Int!]
+  version_not_in: [Int!]
+  version_lt: Int
+  version_lte: Int
+  version_gt: Int
+  version_gte: Int
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  imageUrl: String
+  imageUrl_not: String
+  imageUrl_in: [String!]
+  imageUrl_not_in: [String!]
+  imageUrl_lt: String
+  imageUrl_lte: String
+  imageUrl_gt: String
+  imageUrl_gte: String
+  imageUrl_contains: String
+  imageUrl_not_contains: String
+  imageUrl_starts_with: String
+  imageUrl_not_starts_with: String
+  imageUrl_ends_with: String
+  imageUrl_not_ends_with: String
+  storageImageUrl: String
+  storageImageUrl_not: String
+  storageImageUrl_in: [String!]
+  storageImageUrl_not_in: [String!]
+  storageImageUrl_lt: String
+  storageImageUrl_lte: String
+  storageImageUrl_gt: String
+  storageImageUrl_gte: String
+  storageImageUrl_contains: String
+  storageImageUrl_not_contains: String
+  storageImageUrl_starts_with: String
+  storageImageUrl_not_starts_with: String
+  storageImageUrl_ends_with: String
+  storageImageUrl_not_ends_with: String
+  timestamp: DateTime
+  timestamp_not: DateTime
+  timestamp_in: [DateTime!]
+  timestamp_not_in: [DateTime!]
+  timestamp_lt: DateTime
+  timestamp_lte: DateTime
+  timestamp_gt: DateTime
+  timestamp_gte: DateTime
+  AND: [ItemParamsWhereInput!]
+  OR: [ItemParamsWhereInput!]
+  NOT: [ItemParamsWhereInput!]
+}
+
+input ItemParamsWhereUniqueInput {
+  id: ID
+  paramsId: String
+}
+
 type ItemPreviousValues {
   id: ID!
   txId: String!
@@ -337,41 +1168,7 @@ type ItemPreviousValues {
   updatedAt: DateTime!
 }
 
-type ItemSubscriptionPayload {
-  mutation: MutationType!
-  node: Item
-  updatedFields: [String!]
-  previousValues: ItemPreviousValues
-}
-
-input ItemSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: ItemWhereInput
-  AND: [ItemSubscriptionWhereInput!]
-  OR: [ItemSubscriptionWhereInput!]
-  NOT: [ItemSubscriptionWhereInput!]
-}
-
-input ItemUpdateInput {
-  txId: String
-  name: String
-  quantity: Int
-  reissuable: Boolean
-  timestamp: DateTime
-}
-
-input ItemUpdateManyMutationInput {
-  txId: String
-  name: String
-  quantity: Int
-  reissuable: Boolean
-  timestamp: DateTime
-}
-
-input ItemWhereInput {
+input ItemScalarWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -448,6 +1245,222 @@ input ItemWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
+  AND: [ItemScalarWhereInput!]
+  OR: [ItemScalarWhereInput!]
+  NOT: [ItemScalarWhereInput!]
+}
+
+type ItemSubscriptionPayload {
+  mutation: MutationType!
+  node: Item
+  updatedFields: [String!]
+  previousValues: ItemPreviousValues
+}
+
+input ItemSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ItemWhereInput
+  AND: [ItemSubscriptionWhereInput!]
+  OR: [ItemSubscriptionWhereInput!]
+  NOT: [ItemSubscriptionWhereInput!]
+}
+
+input ItemUpdateInput {
+  txId: String
+  dapp: UserUpdateOneRequiredWithoutItemsInput
+  name: String
+  quantity: Int
+  reissuable: Boolean
+  timestamp: DateTime
+  params: ItemParamsUpdateManyWithoutItemInput
+  lots: LotUpdateManyWithoutItemInput
+}
+
+input ItemUpdateManyDataInput {
+  txId: String
+  name: String
+  quantity: Int
+  reissuable: Boolean
+  timestamp: DateTime
+}
+
+input ItemUpdateManyMutationInput {
+  txId: String
+  name: String
+  quantity: Int
+  reissuable: Boolean
+  timestamp: DateTime
+}
+
+input ItemUpdateManyWithoutDappInput {
+  create: [ItemCreateWithoutDappInput!]
+  delete: [ItemWhereUniqueInput!]
+  connect: [ItemWhereUniqueInput!]
+  set: [ItemWhereUniqueInput!]
+  disconnect: [ItemWhereUniqueInput!]
+  update: [ItemUpdateWithWhereUniqueWithoutDappInput!]
+  upsert: [ItemUpsertWithWhereUniqueWithoutDappInput!]
+  deleteMany: [ItemScalarWhereInput!]
+  updateMany: [ItemUpdateManyWithWhereNestedInput!]
+}
+
+input ItemUpdateManyWithWhereNestedInput {
+  where: ItemScalarWhereInput!
+  data: ItemUpdateManyDataInput!
+}
+
+input ItemUpdateOneRequiredWithoutLotsInput {
+  create: ItemCreateWithoutLotsInput
+  update: ItemUpdateWithoutLotsDataInput
+  upsert: ItemUpsertWithoutLotsInput
+  connect: ItemWhereUniqueInput
+}
+
+input ItemUpdateOneRequiredWithoutParamsInput {
+  create: ItemCreateWithoutParamsInput
+  update: ItemUpdateWithoutParamsDataInput
+  upsert: ItemUpsertWithoutParamsInput
+  connect: ItemWhereUniqueInput
+}
+
+input ItemUpdateWithoutDappDataInput {
+  txId: String
+  name: String
+  quantity: Int
+  reissuable: Boolean
+  timestamp: DateTime
+  params: ItemParamsUpdateManyWithoutItemInput
+  lots: LotUpdateManyWithoutItemInput
+}
+
+input ItemUpdateWithoutLotsDataInput {
+  txId: String
+  dapp: UserUpdateOneRequiredWithoutItemsInput
+  name: String
+  quantity: Int
+  reissuable: Boolean
+  timestamp: DateTime
+  params: ItemParamsUpdateManyWithoutItemInput
+}
+
+input ItemUpdateWithoutParamsDataInput {
+  txId: String
+  dapp: UserUpdateOneRequiredWithoutItemsInput
+  name: String
+  quantity: Int
+  reissuable: Boolean
+  timestamp: DateTime
+  lots: LotUpdateManyWithoutItemInput
+}
+
+input ItemUpdateWithWhereUniqueWithoutDappInput {
+  where: ItemWhereUniqueInput!
+  data: ItemUpdateWithoutDappDataInput!
+}
+
+input ItemUpsertWithoutLotsInput {
+  update: ItemUpdateWithoutLotsDataInput!
+  create: ItemCreateWithoutLotsInput!
+}
+
+input ItemUpsertWithoutParamsInput {
+  update: ItemUpdateWithoutParamsDataInput!
+  create: ItemCreateWithoutParamsInput!
+}
+
+input ItemUpsertWithWhereUniqueWithoutDappInput {
+  where: ItemWhereUniqueInput!
+  update: ItemUpdateWithoutDappDataInput!
+  create: ItemCreateWithoutDappInput!
+}
+
+input ItemWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  txId: String
+  txId_not: String
+  txId_in: [String!]
+  txId_not_in: [String!]
+  txId_lt: String
+  txId_lte: String
+  txId_gt: String
+  txId_gte: String
+  txId_contains: String
+  txId_not_contains: String
+  txId_starts_with: String
+  txId_not_starts_with: String
+  txId_ends_with: String
+  txId_not_ends_with: String
+  dapp: UserWhereInput
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  quantity: Int
+  quantity_not: Int
+  quantity_in: [Int!]
+  quantity_not_in: [Int!]
+  quantity_lt: Int
+  quantity_lte: Int
+  quantity_gt: Int
+  quantity_gte: Int
+  reissuable: Boolean
+  reissuable_not: Boolean
+  timestamp: DateTime
+  timestamp_not: DateTime
+  timestamp_in: [DateTime!]
+  timestamp_not_in: [DateTime!]
+  timestamp_lt: DateTime
+  timestamp_lte: DateTime
+  timestamp_gt: DateTime
+  timestamp_gte: DateTime
+  params_every: ItemParamsWhereInput
+  params_some: ItemParamsWhereInput
+  params_none: ItemParamsWhereInput
+  lots_every: LotWhereInput
+  lots_some: LotWhereInput
+  lots_none: LotWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
   AND: [ItemWhereInput!]
   OR: [ItemWhereInput!]
   NOT: [ItemWhereInput!]
@@ -458,9 +1471,386 @@ input ItemWhereUniqueInput {
   txId: String
 }
 
+scalar Json
+
 scalar Long
 
+type Lot {
+  id: ID!
+  txId: String!
+  item: Item!
+  seller: User
+  priceAsset: String!
+  price: Float!
+  stock: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type LotConnection {
+  pageInfo: PageInfo!
+  edges: [LotEdge]!
+  aggregate: AggregateLot!
+}
+
+input LotCreateInput {
+  id: ID
+  txId: String!
+  item: ItemCreateOneWithoutLotsInput!
+  seller: UserCreateOneWithoutLotsInput
+  priceAsset: String!
+  price: Float!
+  stock: Int!
+}
+
+input LotCreateManyWithoutItemInput {
+  create: [LotCreateWithoutItemInput!]
+  connect: [LotWhereUniqueInput!]
+}
+
+input LotCreateManyWithoutSellerInput {
+  create: [LotCreateWithoutSellerInput!]
+  connect: [LotWhereUniqueInput!]
+}
+
+input LotCreateWithoutItemInput {
+  id: ID
+  txId: String!
+  seller: UserCreateOneWithoutLotsInput
+  priceAsset: String!
+  price: Float!
+  stock: Int!
+}
+
+input LotCreateWithoutSellerInput {
+  id: ID
+  txId: String!
+  item: ItemCreateOneWithoutLotsInput!
+  priceAsset: String!
+  price: Float!
+  stock: Int!
+}
+
+type LotEdge {
+  node: Lot!
+  cursor: String!
+}
+
+enum LotOrderByInput {
+  id_ASC
+  id_DESC
+  txId_ASC
+  txId_DESC
+  priceAsset_ASC
+  priceAsset_DESC
+  price_ASC
+  price_DESC
+  stock_ASC
+  stock_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type LotPreviousValues {
+  id: ID!
+  txId: String!
+  priceAsset: String!
+  price: Float!
+  stock: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+input LotScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  txId: String
+  txId_not: String
+  txId_in: [String!]
+  txId_not_in: [String!]
+  txId_lt: String
+  txId_lte: String
+  txId_gt: String
+  txId_gte: String
+  txId_contains: String
+  txId_not_contains: String
+  txId_starts_with: String
+  txId_not_starts_with: String
+  txId_ends_with: String
+  txId_not_ends_with: String
+  priceAsset: String
+  priceAsset_not: String
+  priceAsset_in: [String!]
+  priceAsset_not_in: [String!]
+  priceAsset_lt: String
+  priceAsset_lte: String
+  priceAsset_gt: String
+  priceAsset_gte: String
+  priceAsset_contains: String
+  priceAsset_not_contains: String
+  priceAsset_starts_with: String
+  priceAsset_not_starts_with: String
+  priceAsset_ends_with: String
+  priceAsset_not_ends_with: String
+  price: Float
+  price_not: Float
+  price_in: [Float!]
+  price_not_in: [Float!]
+  price_lt: Float
+  price_lte: Float
+  price_gt: Float
+  price_gte: Float
+  stock: Int
+  stock_not: Int
+  stock_in: [Int!]
+  stock_not_in: [Int!]
+  stock_lt: Int
+  stock_lte: Int
+  stock_gt: Int
+  stock_gte: Int
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [LotScalarWhereInput!]
+  OR: [LotScalarWhereInput!]
+  NOT: [LotScalarWhereInput!]
+}
+
+type LotSubscriptionPayload {
+  mutation: MutationType!
+  node: Lot
+  updatedFields: [String!]
+  previousValues: LotPreviousValues
+}
+
+input LotSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: LotWhereInput
+  AND: [LotSubscriptionWhereInput!]
+  OR: [LotSubscriptionWhereInput!]
+  NOT: [LotSubscriptionWhereInput!]
+}
+
+input LotUpdateInput {
+  txId: String
+  item: ItemUpdateOneRequiredWithoutLotsInput
+  seller: UserUpdateOneWithoutLotsInput
+  priceAsset: String
+  price: Float
+  stock: Int
+}
+
+input LotUpdateManyDataInput {
+  txId: String
+  priceAsset: String
+  price: Float
+  stock: Int
+}
+
+input LotUpdateManyMutationInput {
+  txId: String
+  priceAsset: String
+  price: Float
+  stock: Int
+}
+
+input LotUpdateManyWithoutItemInput {
+  create: [LotCreateWithoutItemInput!]
+  delete: [LotWhereUniqueInput!]
+  connect: [LotWhereUniqueInput!]
+  set: [LotWhereUniqueInput!]
+  disconnect: [LotWhereUniqueInput!]
+  update: [LotUpdateWithWhereUniqueWithoutItemInput!]
+  upsert: [LotUpsertWithWhereUniqueWithoutItemInput!]
+  deleteMany: [LotScalarWhereInput!]
+  updateMany: [LotUpdateManyWithWhereNestedInput!]
+}
+
+input LotUpdateManyWithoutSellerInput {
+  create: [LotCreateWithoutSellerInput!]
+  delete: [LotWhereUniqueInput!]
+  connect: [LotWhereUniqueInput!]
+  set: [LotWhereUniqueInput!]
+  disconnect: [LotWhereUniqueInput!]
+  update: [LotUpdateWithWhereUniqueWithoutSellerInput!]
+  upsert: [LotUpsertWithWhereUniqueWithoutSellerInput!]
+  deleteMany: [LotScalarWhereInput!]
+  updateMany: [LotUpdateManyWithWhereNestedInput!]
+}
+
+input LotUpdateManyWithWhereNestedInput {
+  where: LotScalarWhereInput!
+  data: LotUpdateManyDataInput!
+}
+
+input LotUpdateWithoutItemDataInput {
+  txId: String
+  seller: UserUpdateOneWithoutLotsInput
+  priceAsset: String
+  price: Float
+  stock: Int
+}
+
+input LotUpdateWithoutSellerDataInput {
+  txId: String
+  item: ItemUpdateOneRequiredWithoutLotsInput
+  priceAsset: String
+  price: Float
+  stock: Int
+}
+
+input LotUpdateWithWhereUniqueWithoutItemInput {
+  where: LotWhereUniqueInput!
+  data: LotUpdateWithoutItemDataInput!
+}
+
+input LotUpdateWithWhereUniqueWithoutSellerInput {
+  where: LotWhereUniqueInput!
+  data: LotUpdateWithoutSellerDataInput!
+}
+
+input LotUpsertWithWhereUniqueWithoutItemInput {
+  where: LotWhereUniqueInput!
+  update: LotUpdateWithoutItemDataInput!
+  create: LotCreateWithoutItemInput!
+}
+
+input LotUpsertWithWhereUniqueWithoutSellerInput {
+  where: LotWhereUniqueInput!
+  update: LotUpdateWithoutSellerDataInput!
+  create: LotCreateWithoutSellerInput!
+}
+
+input LotWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  txId: String
+  txId_not: String
+  txId_in: [String!]
+  txId_not_in: [String!]
+  txId_lt: String
+  txId_lte: String
+  txId_gt: String
+  txId_gte: String
+  txId_contains: String
+  txId_not_contains: String
+  txId_starts_with: String
+  txId_not_starts_with: String
+  txId_ends_with: String
+  txId_not_ends_with: String
+  item: ItemWhereInput
+  seller: UserWhereInput
+  priceAsset: String
+  priceAsset_not: String
+  priceAsset_in: [String!]
+  priceAsset_not_in: [String!]
+  priceAsset_lt: String
+  priceAsset_lte: String
+  priceAsset_gt: String
+  priceAsset_gte: String
+  priceAsset_contains: String
+  priceAsset_not_contains: String
+  priceAsset_starts_with: String
+  priceAsset_not_starts_with: String
+  priceAsset_ends_with: String
+  priceAsset_not_ends_with: String
+  price: Float
+  price_not: Float
+  price_in: [Float!]
+  price_not_in: [Float!]
+  price_lt: Float
+  price_lte: Float
+  price_gt: Float
+  price_gte: Float
+  stock: Int
+  stock_not: Int
+  stock_in: [Int!]
+  stock_not_in: [Int!]
+  stock_lt: Int
+  stock_lte: Int
+  stock_gt: Int
+  stock_gte: Int
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [LotWhereInput!]
+  OR: [LotWhereInput!]
+  NOT: [LotWhereInput!]
+}
+
+input LotWhereUniqueInput {
+  id: ID
+  txId: String
+}
+
 type Mutation {
+  createData(data: DataCreateInput!): Data!
+  updateData(data: DataUpdateInput!, where: DataWhereUniqueInput!): Data
+  updateManyDatas(data: DataUpdateManyMutationInput!, where: DataWhereInput): BatchPayload!
+  upsertData(where: DataWhereUniqueInput!, create: DataCreateInput!, update: DataUpdateInput!): Data!
+  deleteData(where: DataWhereUniqueInput!): Data
+  deleteManyDatas(where: DataWhereInput): BatchPayload!
+  createInvokeScript(data: InvokeScriptCreateInput!): InvokeScript!
+  updateInvokeScript(data: InvokeScriptUpdateInput!, where: InvokeScriptWhereUniqueInput!): InvokeScript
+  updateManyInvokeScripts(data: InvokeScriptUpdateManyMutationInput!, where: InvokeScriptWhereInput): BatchPayload!
+  upsertInvokeScript(where: InvokeScriptWhereUniqueInput!, create: InvokeScriptCreateInput!, update: InvokeScriptUpdateInput!): InvokeScript!
+  deleteInvokeScript(where: InvokeScriptWhereUniqueInput!): InvokeScript
+  deleteManyInvokeScripts(where: InvokeScriptWhereInput): BatchPayload!
   createIssue(data: IssueCreateInput!): Issue!
   updateIssue(data: IssueUpdateInput!, where: IssueWhereUniqueInput!): Issue
   updateManyIssues(data: IssueUpdateManyMutationInput!, where: IssueWhereInput): BatchPayload!
@@ -473,6 +1863,24 @@ type Mutation {
   upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
   deleteItem(where: ItemWhereUniqueInput!): Item
   deleteManyItems(where: ItemWhereInput): BatchPayload!
+  createItemParams(data: ItemParamsCreateInput!): ItemParams!
+  updateItemParams(data: ItemParamsUpdateInput!, where: ItemParamsWhereUniqueInput!): ItemParams
+  updateManyItemParamses(data: ItemParamsUpdateManyMutationInput!, where: ItemParamsWhereInput): BatchPayload!
+  upsertItemParams(where: ItemParamsWhereUniqueInput!, create: ItemParamsCreateInput!, update: ItemParamsUpdateInput!): ItemParams!
+  deleteItemParams(where: ItemParamsWhereUniqueInput!): ItemParams
+  deleteManyItemParamses(where: ItemParamsWhereInput): BatchPayload!
+  createLot(data: LotCreateInput!): Lot!
+  updateLot(data: LotUpdateInput!, where: LotWhereUniqueInput!): Lot
+  updateManyLots(data: LotUpdateManyMutationInput!, where: LotWhereInput): BatchPayload!
+  upsertLot(where: LotWhereUniqueInput!, create: LotCreateInput!, update: LotUpdateInput!): Lot!
+  deleteLot(where: LotWhereUniqueInput!): Lot
+  deleteManyLots(where: LotWhereInput): BatchPayload!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -493,17 +1901,344 @@ type PageInfo {
 }
 
 type Query {
+  data(where: DataWhereUniqueInput!): Data
+  datas(where: DataWhereInput, orderBy: DataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Data]!
+  datasConnection(where: DataWhereInput, orderBy: DataOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DataConnection!
+  invokeScript(where: InvokeScriptWhereUniqueInput!): InvokeScript
+  invokeScripts(where: InvokeScriptWhereInput, orderBy: InvokeScriptOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [InvokeScript]!
+  invokeScriptsConnection(where: InvokeScriptWhereInput, orderBy: InvokeScriptOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): InvokeScriptConnection!
   issue(where: IssueWhereUniqueInput!): Issue
   issues(where: IssueWhereInput, orderBy: IssueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Issue]!
   issuesConnection(where: IssueWhereInput, orderBy: IssueOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): IssueConnection!
   item(where: ItemWhereUniqueInput!): Item
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
   itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
+  itemParams(where: ItemParamsWhereUniqueInput!): ItemParams
+  itemParamses(where: ItemParamsWhereInput, orderBy: ItemParamsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ItemParams]!
+  itemParamsesConnection(where: ItemParamsWhereInput, orderBy: ItemParamsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemParamsConnection!
+  lot(where: LotWhereUniqueInput!): Lot
+  lots(where: LotWhereInput, orderBy: LotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Lot]!
+  lotsConnection(where: LotWhereInput, orderBy: LotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LotConnection!
+  user(where: UserWhereUniqueInput!): User
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   node(id: ID!): Node
 }
 
 type Subscription {
+  data(where: DataSubscriptionWhereInput): DataSubscriptionPayload
+  invokeScript(where: InvokeScriptSubscriptionWhereInput): InvokeScriptSubscriptionPayload
   issue(where: IssueSubscriptionWhereInput): IssueSubscriptionPayload
   item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
+  itemParams(where: ItemParamsSubscriptionWhereInput): ItemParamsSubscriptionPayload
+  lot(where: LotSubscriptionWhereInput): LotSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type User {
+  id: ID!
+  address: String!
+  name: String
+  email: String
+  role: UserRole!
+  permissions: [UserPermission!]!
+  image: Json
+  meta: Json
+  items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item!]
+  lots(where: LotWhereInput, orderBy: LotOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Lot!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  id: ID
+  address: String!
+  name: String
+  email: String
+  role: UserRole
+  permissions: UserCreatepermissionsInput
+  image: Json
+  meta: Json
+  items: ItemCreateManyWithoutDappInput
+  lots: LotCreateManyWithoutSellerInput
+}
+
+input UserCreateOneWithoutItemsInput {
+  create: UserCreateWithoutItemsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutLotsInput {
+  create: UserCreateWithoutLotsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreatepermissionsInput {
+  set: [UserPermission!]
+}
+
+input UserCreateWithoutItemsInput {
+  id: ID
+  address: String!
+  name: String
+  email: String
+  role: UserRole
+  permissions: UserCreatepermissionsInput
+  image: Json
+  meta: Json
+  lots: LotCreateManyWithoutSellerInput
+}
+
+input UserCreateWithoutLotsInput {
+  id: ID
+  address: String!
+  name: String
+  email: String
+  role: UserRole
+  permissions: UserCreatepermissionsInput
+  image: Json
+  meta: Json
+  items: ItemCreateManyWithoutDappInput
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  id_ASC
+  id_DESC
+  address_ASC
+  address_DESC
+  name_ASC
+  name_DESC
+  email_ASC
+  email_DESC
+  role_ASC
+  role_DESC
+  image_ASC
+  image_DESC
+  meta_ASC
+  meta_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+enum UserPermission {
+  COMMON
+  DAPP
+}
+
+type UserPreviousValues {
+  id: ID!
+  address: String!
+  name: String
+  email: String
+  role: UserRole!
+  permissions: [UserPermission!]!
+  image: Json
+  meta: Json
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum UserRole {
+  USER
+  TEST
+  DAPP
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+  AND: [UserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
+}
+
+input UserUpdateInput {
+  address: String
+  name: String
+  email: String
+  role: UserRole
+  permissions: UserUpdatepermissionsInput
+  image: Json
+  meta: Json
+  items: ItemUpdateManyWithoutDappInput
+  lots: LotUpdateManyWithoutSellerInput
+}
+
+input UserUpdateManyMutationInput {
+  address: String
+  name: String
+  email: String
+  role: UserRole
+  permissions: UserUpdatepermissionsInput
+  image: Json
+  meta: Json
+}
+
+input UserUpdateOneRequiredWithoutItemsInput {
+  create: UserCreateWithoutItemsInput
+  update: UserUpdateWithoutItemsDataInput
+  upsert: UserUpsertWithoutItemsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdateOneWithoutLotsInput {
+  create: UserCreateWithoutLotsInput
+  update: UserUpdateWithoutLotsDataInput
+  upsert: UserUpsertWithoutLotsInput
+  delete: Boolean
+  disconnect: Boolean
+  connect: UserWhereUniqueInput
+}
+
+input UserUpdatepermissionsInput {
+  set: [UserPermission!]
+}
+
+input UserUpdateWithoutItemsDataInput {
+  address: String
+  name: String
+  email: String
+  role: UserRole
+  permissions: UserUpdatepermissionsInput
+  image: Json
+  meta: Json
+  lots: LotUpdateManyWithoutSellerInput
+}
+
+input UserUpdateWithoutLotsDataInput {
+  address: String
+  name: String
+  email: String
+  role: UserRole
+  permissions: UserUpdatepermissionsInput
+  image: Json
+  meta: Json
+  items: ItemUpdateManyWithoutDappInput
+}
+
+input UserUpsertWithoutItemsInput {
+  update: UserUpdateWithoutItemsDataInput!
+  create: UserCreateWithoutItemsInput!
+}
+
+input UserUpsertWithoutLotsInput {
+  update: UserUpdateWithoutLotsDataInput!
+  create: UserCreateWithoutLotsInput!
+}
+
+input UserWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  address: String
+  address_not: String
+  address_in: [String!]
+  address_not_in: [String!]
+  address_lt: String
+  address_lte: String
+  address_gt: String
+  address_gte: String
+  address_contains: String
+  address_not_contains: String
+  address_starts_with: String
+  address_not_starts_with: String
+  address_ends_with: String
+  address_not_ends_with: String
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  role: UserRole
+  role_not: UserRole
+  role_in: [UserRole!]
+  role_not_in: [UserRole!]
+  items_every: ItemWhereInput
+  items_some: ItemWhereInput
+  items_none: ItemWhereInput
+  lots_every: LotWhereInput
+  lots_some: LotWhereInput
+  lots_none: LotWhereInput
+  createdAt: DateTime
+  createdAt_not: DateTime
+  createdAt_in: [DateTime!]
+  createdAt_not_in: [DateTime!]
+  createdAt_lt: DateTime
+  createdAt_lte: DateTime
+  createdAt_gt: DateTime
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+  updatedAt_not: DateTime
+  updatedAt_in: [DateTime!]
+  updatedAt_not_in: [DateTime!]
+  updatedAt_lt: DateTime
+  updatedAt_lte: DateTime
+  updatedAt_gt: DateTime
+  updatedAt_gte: DateTime
+  AND: [UserWhereInput!]
+  OR: [UserWhereInput!]
+  NOT: [UserWhereInput!]
+}
+
+input UserWhereUniqueInput {
+  id: ID
+  address: String
 }
 `

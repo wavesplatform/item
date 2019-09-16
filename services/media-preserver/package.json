@@ -1,0 +1,34 @@
+{
+  "name": "@item/media-preserver",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "start": "node ./dist/index.js",
+    "dev": "nodemon",
+    "fix": "run-s fix:tslint fix:prettier",
+    "fix:prettier": "prettier --write \"{src,test}/**/*.ts\" --ignore-path ../../.prettierignore",
+    "fix:tslint": "tslint --fix -t stylish -p .",
+    "test": "run-s test:jest",
+    "test:jest": "jest --passWithNoTests --config=jest.json",
+    "test:watch": "jest --passWithNoTests --config=jest.json --watch"
+  },
+  "dependencies": {
+    "@item/queues": "^1.0.0",
+    "aws-sdk": "^2.524.0",
+    "axios": "^0.19.0",
+    "debug": "^4.1.1"
+  },
+  "devDependencies": {
+    "@item/types": "^1.0.0",
+    "@types/node": "^12.7.2",
+    "nodemon": "^1.19.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.19.0",
+    "typescript": "^3.5.3"
+  }
+}

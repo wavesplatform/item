@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "env": {
+    "DEBUG": "writer",
+    "BUCKET_NAME": "@bucket-name",
+    "S3_TOKEN": "@s3-token",
+    "S3_SECRET": "@s3-secret"
+  }
+}

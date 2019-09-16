@@ -20,6 +20,6 @@ const run = async () => {
 run()
   .then(() => {
     server.listen(config.port, () => {
-      debug(`💉 Healthcheck server running at ${config.port} port`)
+      debug(`💉 Healthcheck running at ${config.port} port`)
     })
   })

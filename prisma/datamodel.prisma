@@ -1,25 +1,125 @@
+# Enums
+
+enum UserRole {
+  USER
+  TEST
+  DAPP
+}
+
+enum UserPermission {
+  COMMON
+  DAPP
+}
+
+# Transactions
+
 type Issue {
   id: ID! @id
   txId: String! @unique
+  timestamp: DateTime!
+  sender: String!
+  senderPublicKey: String!
+
+  # Issue transaction
   name: String!
   description: String!
   decimals: Int!
   quantity: Int!
   reissuable: Boolean!
+}
+
+type Data {
+  id: ID! @id
+  txId: String! @unique
   timestamp: DateTime!
   sender: String!
   senderPublicKey: String!
+
+  # Data transaction
+  data: [Json!]! @scalarList(strategy: RELATION)
+}
+
+type InvokeScript {
+  id: ID! @id
+  txId: String! @unique
+  timestamp: DateTime!
+  sender: String!
+  senderPublicKey: String!
+
+  # InvokeScript transaction
+  dapp: String!
+  feeAssetId: String
+  call: Json
+  payment: [Json!] @scalarList(strategy: RELATION)
+}
+
+# Common
+
+type User {
+  id: ID! @id
+  address: String! @unique
+  name: String
+  email: String
+
+  # Access
+  role: UserRole! @default(value: USER)
+  permissions: [UserPermission!]! @default(value: COMMON) @scalarList(strategy: RELATION)
+
+  # Dapp fields
+  # Icon, page, promo
+  image: Json
+  # Description, url
+  meta: Json
+  items: [Item!]
+  lots: [Lot!]
+
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
 
+# Main entities
+
 type Item {
   id: ID! @id
   txId: String! @unique
+  dapp: User! @relation(link: INLINE)
+
   name: String!
   quantity: Int!
   reissuable: Boolean!
   timestamp: DateTime!
+  params: [ItemParams!] @relation(name: "ItemParams", onDelete: CASCADE)
+  lots: [Lot!] @relation(name: "LotsByItem", onDelete: CASCADE)
+
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type ItemParams {
+  id: ID! @id
+  # One data tx can contains many params
+  txId: String!
+  # Concat txIds (data, issue)
+  paramsId: String! @unique
+  item: Item! @unique @relation(name: "ItemParams")
+  version: Int!
+  name: String!
+  imageUrl: String!
+  storageImageUrl: String
+  misc: Json
+  timestamp: DateTime!
+}
+
+type Lot {
+  id: ID! @id
+  txId: String! @unique
+  item: Item! @relation(name: "LotsByItem")
+  seller: User @relation(link: INLINE)
+
+  priceAsset: String!
+  price: Float!
+  stock: Int!
+
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }

@@ -1,9 +1,5 @@
 {
-  "collectCoverage": true,
-  "transform": {
-    "^.+\\.ts$": "ts-jest"
-  },
-  "moduleFileExtensions": ["js", "ts"],
+  "preset": "ts-jest",
   "testEnvironment": "node",
   "testMatch": ["**/*.test.ts"],
   "globals": {

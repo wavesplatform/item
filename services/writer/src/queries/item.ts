@@ -1,12 +1,12 @@
 import { ItemCreateInput, prisma } from '../__generated__/prisma-client'
 
-export const upsertItem = (item: ItemCreateInput) => {
+export const upsertItem = (input: ItemCreateInput) => {
   return prisma.upsertItem({
     where: {
-      txId: item.txId,
+      txId: input.txId,
     },
-    create: item,
-    update: item,
+    create: input,
+    update: input,
   })
 }
 
