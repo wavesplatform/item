@@ -69,13 +69,14 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - build
+            - packages/types/dist
+            - packages/queues/dist
 
   test_unit:
     <<: *node_defaults
     steps:
       - attach_workspace:
-          at: ~/item/build
+          at: ~/item
       - run:
           name: Run Unit Tests
           command: yarn test
