@@ -62,11 +62,15 @@ jobs:
   build:
     <<: *node_defaults
     steps:
+      - attach_workspace:
+          at: ~/item
       - run: *build
 
   test_unit:
     <<: *node_defaults
     steps:
+      - attach_workspace:
+          at: ~/item
       - run:
           name: Run Unit Tests
           command: yarn test
