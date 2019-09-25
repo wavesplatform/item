@@ -32,6 +32,7 @@ export default {
     external(),
     url(),
     typescript({
+      tsconfig: 'tsconfig.build.json',
       clean: true,
     }),
     commonjs({
