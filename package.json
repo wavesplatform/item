@@ -14,6 +14,8 @@
     "dev": "cross-env DEBUG=observer,combine,writer,api,media-preserver lerna run --stream --parallel dev",
     "fix": "lerna run --stream --concurrency 1 fix",
     "test": "lerna run --stream --concurrency 1 --sort test",
+    "test:e2e": "cypress run",
+    "cypress:open": "cypress open",
     "prisma:generate": "cross-env PRISMA_HOST=prisma prisma generate",
     "prisma:deploy:dev": "cross-env PRISMA_HOST=localhost prisma deploy"
   },
@@ -21,6 +23,7 @@
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.2",
     "cross-env": "^5.2.0",
+    "cypress": "^3.4.1",
     "jest": "^24.9.0",
     "lerna": "^3.16.4",
     "npm-run-all": "^4.1.5",

@@ -1,5 +1,5 @@
 export const config = {
-  port: process.env.PORT || 3004,
+  port: process.env.PORT || 4004,
   production: process.env.NODE_ENV === 'production',
   s3: {
     token: process.env.S3_TOKEN || 's3token',

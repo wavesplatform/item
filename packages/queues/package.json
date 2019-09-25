@@ -11,7 +11,7 @@
     "fix:tslint": "tslint --fix -t stylish -p .",
     "test": "run-s test:jest",
     "test:jest": "jest --passWithNoTests --config=jest.json",
-    "test:watch": "jest --passWithNoTests --config=jest.json --watch"
+    "test:watch": "test:jest -- --watch"
   },
   "dependencies": {
     "bull": "^3.10.0"
