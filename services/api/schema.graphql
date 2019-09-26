@@ -96,6 +96,7 @@ type ItemParams {
   version: Int!
   name: String!
   imageUrl: String!
+  storageImageUrl: String
   misc: Json
   timestamp: DateTime!
 }

@@ -21,9 +21,11 @@ export const UserHeading = ({ user, size = 'md', ...rest }: IProps) => {
       />
       <Title
         as={'h2'}
-        fontSize={size}
-        fontWeight={'normal'}
-        flex='1'
+        sx={{
+          fontSize: size,
+          flex: '1',
+          fontWeight: 'body',
+        }}
       >
         {user.name || user.address}
       </Title>

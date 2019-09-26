@@ -7,6 +7,6 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "lib": ["es6"],
-    "types": ["node"]
+    "types": ["node", "jest"]
   }
 }

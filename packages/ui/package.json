@@ -6,8 +6,8 @@
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rollup -c",
-    "start": "rollup -c -w",
+    "build": "cross-env NODE_ENV=development rollup -c",
+    "start": "cross-env NODE_ENV=development rollup -c -w",
     "test": "cross-env CI=true react-scripts test --env=jsdom --passWithNoTests",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
@@ -19,6 +19,11 @@
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.6.2",
+    "@babel/plugin-transform-typescript": "^7.6.0",
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.6.0",
+    "@emotion/babel-preset-css-prop": "^10.0.17",
     "@emotion/core": "^10.0.17",
     "@emotion/styled": "^10.0.17",
     "@item/types": "^1.0.0",
@@ -29,7 +34,7 @@
     "@types/jest": "24.0.18",
     "@types/react": "16.9.2",
     "@types/react-dom": "16.9.0",
-    "@types/rebass": "^4.0.0",
+    "@types/rebass": "^4.0.1",
     "@types/styled-system": "^5.1.1",
     "@waves/bignumber": "^0.0.1",
     "babel-loader": "^8.0.6",

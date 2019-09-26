@@ -22,12 +22,13 @@ export const DappHeading = ({ dapp, size = 'md', ...rest }: IProps) => {
         size={size}
         mr={size}
       />
-      <Box>
+      <Box flex={'1'}>
         <Title
           as={'h1'}
-          fontSize={size}
-          fontWeight={'normal'}
-          flex='1'
+          sx={{
+            fontSize: size,
+            fontWeight: 'body',
+          }}
         >
           {dapp.name || dapp.address}
         </Title>
