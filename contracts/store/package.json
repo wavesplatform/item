@@ -1,0 +1,22 @@
+{
+  "name": "@item/contracts-store",
+  "version": "1.0.0",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "fix": "run-s fix:tslint fix:prettier",
+    "fix:prettier": "prettier --write \"{src,test}/**/*.ts\" --ignore-path ../../.prettierignore",
+    "fix:tslint": "tslint --fix -t stylish -p .",
+    "test:contract": "surfboard test store.test.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@waves/surfboard": "^1.6.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.18.2",
+    "tslint": "^5.19.0",
+    "typescript": "^3.5.3"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "ride_directory": "contract",
+  "test_directory": "test/contract",
+  "envs": {
+    "custom": {
+      "API_BASE": "http://localhost:6869/",
+      "CHAIN_ID": "R",
+      "SEED": "waves private node seed with waves tokens",
+      "timeout": 60000
+    },
+    "testnet": {
+      "API_BASE": "https://testnodes.wavesnodes.com/",
+      "CHAIN_ID": "T",
+      "SEED": "note pizza prize cinnamon circle month brisk rain hybrid model delay wash",
+      "timeout": 60000
+    }
+  },
+  "defaultEnv": "testnet",
+  "mocha": {
+    "timeout": 60000
+  }
+}

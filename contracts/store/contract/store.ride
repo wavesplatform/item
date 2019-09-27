@@ -1,0 +1,95 @@
+{-# STDLIB_VERSION 3 #-}
+{-# SCRIPT_TYPE ACCOUNT #-}
+{-# CONTENT_TYPE DAPP #-}
+let wavesAssetId = base58'11111111111111111111111111111111'
+
+func getPrice (data) = toInt(take(data, 8))
+func getStock (data) = toInt(take(drop(data, 8), 8))
+func getAmountAsset (data) = take(drop(data, ((8 + 8) + 32)), 32)
+func getSeller (data) = drop(data, (((8 + 8) + 32) + 32))
+
+func getPriceAsset (data) = {
+  let pr = take(drop(data, (8 + 8)), 32)
+  if ((pr == wavesAssetId))
+    then unit
+    else pr
+}
+
+
+func serialize (lotId,price,stock,priceAsset,amountAsset,seller) = {
+  let idAsString = match lotId {
+    case s: String =>
+      s
+    case bv: ByteVector =>
+      toBase58String(bv)
+    case _ =>
+      throw()
+  }
+  let priceAssetBytes = match priceAsset {
+    case u: Unit =>
+      wavesAssetId
+    case bv: ByteVector =>
+      bv
+    case _ =>
+      throw()
+  }
+  DataEntry(idAsString, ((((toBytes(price) + toBytes(stock)) + priceAssetBytes) + amountAsset) + seller))
+}
+
+
+@Callable(i)
+func sell (price,priceAsset) = {
+  let p = extract(i.payment)
+  if (if ((p.assetId == unit))
+    then true
+    else (p.assetId == wavesAssetId))
+    then throw("Invalid asset to sell.")
+    else if (!=(size(priceAsset), 32))
+      then throw((("Invalid asset: " + toBase58String(priceAsset)) + ", expected price asset size should be 32."))
+      else if ((0 >= price))
+        then throw((("Invalid price: " + toString(price)) + ", expected price should be greater than zero."))
+        else if ((0 >= p.amount))
+          then throw((("Invalid amount for sell: " + toString(p.amount)) + ", expected amount should be greater than zero."))
+          else WriteSet([serialize(i.transactionId, price, p.amount, priceAsset, extract(extract(i.payment).assetId), i.callerPublicKey)])
+}
+
+
+
+@Callable(i)
+func cancel (lotId) = {
+  let data = extract(getBinary(this, lotId))
+  let price = getPrice(data)
+  let stock = getStock(data)
+  let priceAsset = getPriceAsset(data)
+  let amountAsset = getAmountAsset(data)
+  let seller = getSeller(data)
+  if (!=(seller, i.callerPublicKey))
+    then throw("Only seller can cancel the lot.")
+    else ScriptResult(WriteSet([serialize(lotId, price, 0, priceAsset, amountAsset, seller)]), TransferSet([ScriptTransfer(addressFromPublicKey(seller), stock, amountAsset)]))
+}
+
+
+
+@Callable(i)
+func buy (lotId,amountToBuy) = {
+  let data = extract(getBinary(this, lotId))
+  let price = getPrice(data)
+  let stock = getStock(data)
+  let priceAsset = getPriceAsset(data)
+  let amountAsset = getAmountAsset(data)
+  let seller = getSeller(data)
+  let p = extract(i.payment)
+  if ((0 >= stock))
+    then throw("Lot is closed or cancelled, 0 items in stock.")
+    else if ((p.assetId == wavesAssetId))
+      then throw("Invalid payment asset.")
+      else if ((0 >= amountToBuy))
+        then throw((("Invalid amount to buy: " + toString(amountToBuy)) + ", expected amount should be greater than zero."))
+        else if (!=((amountToBuy * price), p.amount))
+          then throw((((("Invalid payment amount: " + toString(p.amount)) + ", expected amount should be: ") + toString((amountToBuy * price))) + "."))
+          else if ((amountToBuy > stock))
+            then throw("Not enough items in stock.")
+            else if (!=(priceAsset, p.assetId))
+              then throw("Invalid payment asset.")
+              else ScriptResult(WriteSet([serialize(lotId, price, (stock - amountToBuy), priceAsset, amountAsset, seller)]), TransferSet([ScriptTransfer(i.caller, amountToBuy, amountAsset), ScriptTransfer(addressFromPublicKey(seller), price, priceAsset)]))
+}
