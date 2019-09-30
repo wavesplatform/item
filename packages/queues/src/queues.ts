@@ -32,9 +32,4 @@ const queues: Queues = Object.keys(queueNames).reduce((queues, key) => {
   return queues
 }, {})
 
-export {
-  queueNames,
-  queues,
-  createQueue,
-  processQueue,
-}
+export { queueNames, queues, createQueue, processQueue }

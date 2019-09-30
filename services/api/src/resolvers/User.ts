@@ -8,12 +8,15 @@ export const User: UserResolvers.Type = {
   },
 
   totalItems: ({ address }, args, ctx) => {
-    return ctx.prisma.itemsConnection({
-      where: {
-        dapp: {
-          address,
+    return ctx.prisma
+      .itemsConnection({
+        where: {
+          dapp: {
+            address,
+          },
         },
-      },
-    }).aggregate().count()
+      })
+      .aggregate()
+      .count()
   },
 }

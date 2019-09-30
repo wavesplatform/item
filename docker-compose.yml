@@ -54,5 +54,10 @@ services:
       POSTGRES_PASSWORD: prisma
     volumes:
       - postgres:/var/lib/postgresql/data
+  private-node:
+    image: wavesplatform/waves-private-node
+    ports:
+      - "6869:6869"
+      - "6860:6860"
 volumes:
   postgres:

@@ -1,16 +1,16 @@
 import { DateTimeInput, InvokeScriptCreateInput, prisma } from '../__generated__/prisma-client'
 
-export const getInvokeScriptRange = (
-  dateStart: DateTimeInput,
-  dateEnd?: DateTimeInput
-) => {
+export const getInvokeScriptRange = (dateStart: DateTimeInput, dateEnd?: DateTimeInput) => {
   return prisma.invokeScripts({
     where: {
-      AND: [{
-        timestamp_gt: dateStart,
-      }, {
-        timestamp_lt: dateEnd,
-      }],
+      AND: [
+        {
+          timestamp_gt: dateStart,
+        },
+        {
+          timestamp_lt: dateEnd,
+        },
+      ],
     },
   })
 }
@@ -24,13 +24,17 @@ export const overwriteInvokeScriptRange = async (
 
   // Delete invokeScripts
   await prisma.deleteManyInvokeScripts({
-    AND: [{
-      timestamp_gt: dateStart,
-    }, {
-      timestamp_lt: dateEnd,
-    }, {
-      txId_not_in: nextTxsIds,
-    }],
+    AND: [
+      {
+        timestamp_gt: dateStart,
+      },
+      {
+        timestamp_lt: dateEnd,
+      },
+      {
+        txId_not_in: nextTxsIds,
+      },
+    ],
   })
 
   // Upsert new invokeScripts

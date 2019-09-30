@@ -18,9 +18,7 @@ export const initProcessMedia = () => {
   preserveMediaQueue.process(processMedia)
 }
 
-const processMedia = async (
-  { data: { url, entity, id } }: Job<PreserveMediaJobData>
-) => {
+const processMedia = async ({ data: { url, entity, id } }: Job<PreserveMediaJobData>) => {
   try {
     const storageImageUrl = await uploadImageByUrl(url, entity, id)
 

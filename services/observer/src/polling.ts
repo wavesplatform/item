@@ -36,11 +36,15 @@ export const startPolling = async () => {
   })
 
   // Adding new job with repeating every 5* sec
-  await pollingQueue.add(pollingKey, {}, {
-    repeat: {
-      every: config.pollingRepeatEvery,
-    },
-  })
+  await pollingQueue.add(
+    pollingKey,
+    {},
+    {
+      repeat: {
+        every: config.pollingRepeatEvery,
+      },
+    }
+  )
 }
 
 /**

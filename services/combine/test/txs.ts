@@ -52,52 +52,64 @@ export const invokeScriptTx: InvokeScriptTransaction = {
   senderPublicKey: '7GGPvAPV3Gmxo4eswmBRLb6bXXEhAovPinfcwVkA2LJh',
   timestamp: 1542539421523,
   proofs: ['3JYfajBS1KJFSu3cdkF3f3JpH9kGVPR1R1YEgV7LHCHJyQXa82k7SMu9rqwpMvAqCXoQeJa5rEQPF9NY9rnufUan'],
-  id: '6X7Fe82PcVeU9qMtscBA2fBzrSf96PtAwrynViR3zRjP'
+  id: '6X7Fe82PcVeU9qMtscBA2fBzrSf96PtAwrynViR3zRjP',
 }
 
 export const invokeScriptSellTx: InvokeScriptTransaction = {
   ...invokeScriptTx,
   call: {
     function: 'sell',
-    args: [{
-      type: 'integer',
-      value: 34500000000,
-    }, {
-      type: 'binary',
-      value: 'base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
-    }],
+    args: [
+      {
+        type: 'integer',
+        value: 34500000000,
+      },
+      {
+        type: 'binary',
+        value: 'base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
+      },
+    ],
   },
-  payment: [{
-    assetId: 'F7S8PUW7txDXWtBhN63G4rsZfX7E9885je57XgFKTUc1',
-    amount: 1,
-  }],
+  payment: [
+    {
+      assetId: 'F7S8PUW7txDXWtBhN63G4rsZfX7E9885je57XgFKTUc1',
+      amount: 1,
+    },
+  ],
 }
 
 export const invokeScriptBuyTx: InvokeScriptTransaction = {
   ...invokeScriptTx,
   call: {
     function: 'buy',
-    args: [{
-      type: 'string',
-      value: 'fSvK1SeesQr7ChYm5Au7kkgpgZLeCRLPC3t3Xy366QU',
-    }, {
-      type: 'integer',
-      value: 1,
-    }],
+    args: [
+      {
+        type: 'string',
+        value: 'fSvK1SeesQr7ChYm5Au7kkgpgZLeCRLPC3t3Xy366QU',
+      },
+      {
+        type: 'integer',
+        value: 1,
+      },
+    ],
   },
-  payment: [{
-    assetId: 'WAVES',
-    amount: 300,
-  }],
+  payment: [
+    {
+      assetId: 'WAVES',
+      amount: 300,
+    },
+  ],
 }
 
 export const invokeScriptCancelTx: InvokeScriptTransaction = {
   ...invokeScriptTx,
   call: {
     function: 'cancel',
-    args: [{
-      type: 'string',
-      value: 'fSvK1SeesQr7ChYm5Au7kkgpgZLeCRLPC3t3Xy366QU',
-    }],
+    args: [
+      {
+        type: 'string',
+        value: 'fSvK1SeesQr7ChYm5Au7kkgpgZLeCRLPC3t3Xy366QU',
+      },
+    ],
   },
 }

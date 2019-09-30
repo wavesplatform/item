@@ -30,9 +30,7 @@ export const initProcessOperations = () => {
   lotOpsQueue.process(processLotOp)
 }
 
-const processItemOp = async (
-  { data: op }: Job<ItemOperation>
-) => {
+const processItemOp = async ({ data: op }: Job<ItemOperation>) => {
   try {
     switch (op.type) {
       case OPERATION_TYPE.CREATE:
@@ -52,9 +50,7 @@ const processItemOp = async (
   }
 }
 
-const processParamsOp = async (
-  { data: op }: Job<ParamsOperation>
-) => {
+const processParamsOp = async ({ data: op }: Job<ParamsOperation>) => {
   try {
     switch (op.type) {
       case OPERATION_TYPE.CREATE:
@@ -65,11 +61,12 @@ const processParamsOp = async (
 
         // Preserve media
         // If storage url isn't set
-        !storageImageUrl && await preserveMediaQueue.add({
+        !storageImageUrl &&
+        (await preserveMediaQueue.add({
           url: imageUrl,
           id: paramsId,
           entity: 'items',
-        })
+        }))
 
         break
       case OPERATION_TYPE.UPDATE:
@@ -87,9 +84,7 @@ const processParamsOp = async (
   }
 }
 
-const processLotOp = async (
-  { data: op }: Job<LotOperation>
-) => {
+const processLotOp = async ({ data: op }: Job<LotOperation>) => {
   try {
     switch (op.type) {
       case OPERATION_TYPE.CREATE:

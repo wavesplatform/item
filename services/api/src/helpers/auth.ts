@@ -24,11 +24,7 @@ export const decodeToken = async (token: string): Promise<TokenPayload> => {
   return (await verify(token, config.jwtSecret)) as TokenPayload
 }
 
-export const verifySignature = async (
-  signature: string,
-  publicKey: string,
-  webappHost: string
-): Promise<boolean> => {
+export const verifySignature = async (signature: string, publicKey: string, webappHost: string): Promise<boolean> => {
   const bytes = await getAuthBytes(webappHost)
 
   return utils.crypto.isValidSignature(bytes, signature, publicKey)

@@ -17,12 +17,9 @@ describe('store', async () => {
     console.log('Contract deployed.')
   })
 
-  it('can sell', async () => {
-  })
+  it('can sell', async () => {})
 
-  it('can buy', async () => {
-  })
+  it('can buy', async () => {})
 
-  it('can cancel', async () => {
-  })
+  it('can cancel', async () => {})
 })

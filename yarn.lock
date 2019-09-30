@@ -3349,6 +3349,15 @@
     recursive-readdir "^2.2.2"
     tslib "^1.9.3"
 
+"@waves/ts-contract@^0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@waves/ts-contract/-/ts-contract-0.0.10.tgz#7768d68d63e379fe8346eeaae51674e70f361377"
+  integrity sha512-cwCSDVAdLjRRdmmUvnsZF6Toz1cheZkHVCDm7BfW5Z329W3Rl91kRoueiq0H/IEM0rBC9+CTeon3puJy9w1+Sw==
+  dependencies:
+    "@waves/waves-crypto" "^3.0.14"
+    "@waves/waves-rest" "0.0.26"
+    "@waves/waves-transactions" "^3.10.3"
+
 "@waves/ts-lib-crypto@^1.3.1":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@waves/ts-lib-crypto/-/ts-lib-crypto-1.3.1.tgz#33c91636733d5edcd45edffc60d8330d9961f184"
@@ -3357,12 +3366,19 @@
     js-sha3 "^0.8.0"
     node-forge "^0.8.5"
 
-"@waves/waves-crypto@^3.0.17":
+"@waves/waves-crypto@^3.0.14", "@waves/waves-crypto@^3.0.17":
   version "3.0.17"
   resolved "https://registry.yarnpkg.com/@waves/waves-crypto/-/waves-crypto-3.0.17.tgz#2317a64d9af3fe522a8a2233182760d3d5598725"
   integrity sha512-2YZ7KxH3npZhdXMGnw59orvm8FRhok8kQ91ex1/VJG/ZmtR16/S94ujqb6sf4vrrNB3+BryDStrSWeBeoYxHoQ==
   dependencies:
     crypto-js "^3.1.9-1"
+
+"@waves/waves-rest@0.0.26":
+  version "0.0.26"
+  resolved "https://registry.yarnpkg.com/@waves/waves-rest/-/waves-rest-0.0.26.tgz#98ec5ff0bb65342383eae9dc30c48c88e1608744"
+  integrity sha512-wo5Rgx9B+pt9qerM08QvSHqbKHBUvYFemfwGqeuRVJ1plvkU4MP8xhKvpBxk69MQZi6Vyqo3/ZDYcf1TTCYtFw==
+  dependencies:
+    "@waves/waves-transactions" "^3.10.1"
 
 "@waves/waves-rest@^0.0.34":
   version "0.0.34"
@@ -3382,6 +3398,15 @@
   version "3.18.1"
   resolved "https://registry.yarnpkg.com/@waves/waves-transactions/-/waves-transactions-3.18.1.tgz#b5d0eb58c846c9c1cd2487a548a2d133cf986bd3"
   integrity sha512-LZsPSzrNlCFlZg7F6jkwCHOa0DRYAXuYlqjGoOaQVtmuTMwfpwyXC4xpWZls9fg2NqFLm8A5AuIiZQh/MVxIzQ==
+  dependencies:
+    "@waves/marshall" "^0.8.0"
+    "@waves/ts-lib-crypto" "^1.3.1"
+    axios "^0.19.0"
+
+"@waves/waves-transactions@^3.19.0":
+  version "3.19.0"
+  resolved "https://registry.yarnpkg.com/@waves/waves-transactions/-/waves-transactions-3.19.0.tgz#0cbc6b01878d97b12de77fbc67562c8663055c78"
+  integrity sha512-iwtqYFZNBWZ37cmZpGgqOybznH6HAHN24LTRtk+u/QVf8KurQKRsF1QtWfI337eI1oykxhpdCb6C7Ldwa5d8HQ==
   dependencies:
     "@waves/marshall" "^0.8.0"
     "@waves/ts-lib-crypto" "^1.3.1"
@@ -7179,7 +7204,7 @@ es-to-primitive@^1.2.0:
     is-date-object "^1.0.1"
     is-symbol "^1.0.2"
 
-es5-ext@^0.10.35, es5-ext@^0.10.50, es5-ext@^0.10.51:
+es5-ext@^0.10.35, es5-ext@^0.10.45, es5-ext@^0.10.46, es5-ext@^0.10.50, es5-ext@^0.10.51, es5-ext@~0.10.14, es5-ext@~0.10.2, es5-ext@~0.10.46:
   version "0.10.51"
   resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.51.tgz#ed2d7d9d48a12df86e0299287e93a09ff478842f"
   integrity sha512-oRpWzM2WcLHVKpnrcyB7OW8j/s67Ba04JCm0WnNv3RiABSvs7mrQlutB8DBv793gKcp0XENR8Il8WxGTlZ73gQ==
@@ -7193,7 +7218,7 @@ es5-shim@^4.5.13:
   resolved "https://registry.yarnpkg.com/es5-shim/-/es5-shim-4.5.13.tgz#5d88062de049f8969f83783f4a4884395f21d28b"
   integrity sha512-xi6hh6gsvDE0MaW4Vp1lgNEBpVcCXRWfPXj5egDvtgLz4L9MEvNwYEMdJH+JJinWkwa8c3c3o5HduV7dB/e1Hw==
 
-es6-iterator@2.0.3, es6-iterator@~2.0.3:
+es6-iterator@2.0.3, es6-iterator@^2.0.3, es6-iterator@~2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/es6-iterator/-/es6-iterator-2.0.3.tgz#a7de889141a05a94b0854403b2d0a0fbfa98f3b7"
   integrity sha1-p96IkUGgWpSwhUQDstCg+/qY87c=
@@ -7226,6 +7251,16 @@ es6-symbol@^3.1.1, es6-symbol@~3.1.1:
   dependencies:
     d "^1.0.1"
     es5-ext "^0.10.51"
+
+es6-weak-map@^2.0.2:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/es6-weak-map/-/es6-weak-map-2.0.3.tgz#b6da1f16cc2cc0d9be43e6bdbfc5e7dfcdf31d53"
+  integrity sha512-p5um32HOTO1kP+w7PRnB+5lQ43Z6muuMuIMffvDN8ZB4GcnjLBV6zGStpbASIMk4DCAvEaamhe2zhyCb/QXXsA==
+  dependencies:
+    d "1"
+    es5-ext "^0.10.46"
+    es6-iterator "^2.0.3"
+    es6-symbol "^3.1.1"
 
 escape-html@^1.0.3, escape-html@~1.0.3:
   version "1.0.3"
@@ -7464,6 +7499,14 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
   integrity sha1-Qa4u62XvpiJorr/qg6x9eSmbCIc=
+
+event-emitter@^0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/event-emitter/-/event-emitter-0.3.5.tgz#df8c69eef1647923c7157b9ce83840610b02cc39"
+  integrity sha1-34xp7vFkeSPHFXuc6DhAYQsCzDk=
+  dependencies:
+    d "1"
+    es5-ext "~0.10.14"
 
 eventemitter3@^3.1.0:
   version "3.1.2"
@@ -9565,7 +9608,7 @@ is-plain-object@^3.0.0:
   dependencies:
     isobject "^4.0.0"
 
-is-promise@^2.1.0:
+is-promise@^2.1, is-promise@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/is-promise/-/is-promise-2.1.0.tgz#79a2a9ece7f096e80f36d2b2f3bc16c1ff4bf3fa"
   integrity sha1-eaKp7OfwlugPNtKy87wWwf9L8/o=
@@ -10875,6 +10918,13 @@ lru-cache@^5.0.0, lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
+lru-queue@0.1:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/lru-queue/-/lru-queue-0.1.0.tgz#2738bd9f0d3cf4f84490c5736c48699ac632cda3"
+  integrity sha1-Jzi9nw089PhEkMVzbEhpmsYyzaM=
+  dependencies:
+    es5-ext "~0.10.2"
+
 macos-release@^2.2.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/macos-release/-/macos-release-2.3.0.tgz#eb1930b036c0800adebccd5f17bc4c12de8bb71f"
@@ -11034,6 +11084,20 @@ memoize-one@^5.0.0:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.1.1.tgz#047b6e3199b508eaec03504de71229b8eb1d75c0"
   integrity sha512-HKeeBpWvqiVJD57ZUAsJNm71eHTykffzcLZVYWiVfQeI1rJtuEaS7hQiEpWfVVk18donPwJEcFKIkCmPJNOhHA==
+
+memoizee@^0.4.14:
+  version "0.4.14"
+  resolved "https://registry.yarnpkg.com/memoizee/-/memoizee-0.4.14.tgz#07a00f204699f9a95c2d9e77218271c7cd610d57"
+  integrity sha512-/SWFvWegAIYAO4NQMpcX+gcra0yEZu4OntmUdrBaWrJncxOqAziGFlHxc7yjKVK2uu3lpPW27P27wkR82wA8mg==
+  dependencies:
+    d "1"
+    es5-ext "^0.10.45"
+    es6-weak-map "^2.0.2"
+    event-emitter "^0.3.5"
+    is-promise "^2.1"
+    lru-queue "0.1"
+    next-tick "1"
+    timers-ext "^0.1.5"
 
 memoizerific@^1.11.3:
   version "1.11.3"
@@ -11501,7 +11565,7 @@ neo-async@^2.5.0, neo-async@^2.6.0, neo-async@^2.6.1:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
-next-tick@^1.0.0:
+next-tick@1, next-tick@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/next-tick/-/next-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
   integrity sha1-yobR/ogoFpsBICCOPchCS524NCw=
@@ -15944,6 +16008,14 @@ timers-browserify@^2.0.4:
   integrity sha512-60aV6sgJ5YEbzUdn9c8kYGIqOubPoUdqQCul3SBAsRCZ40s6Y5cMcrW4dt3/k/EsbLVJNl9n6Vz3fTc+k2GeKQ==
   dependencies:
     setimmediate "^1.0.4"
+
+timers-ext@^0.1.5:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/timers-ext/-/timers-ext-0.1.7.tgz#6f57ad8578e07a3fb9f91d9387d65647555e25c6"
+  integrity sha512-b85NUNzTSdodShTIbky6ZF02e8STtVVfD+fu4aXXShEELpozH+bCpJLYMPZbsABN2wDH7fJpqIoXxJpzbf0NqQ==
+  dependencies:
+    es5-ext "~0.10.46"
+    next-tick "1"
 
 timsort@^0.3.0:
   version "0.3.0"

@@ -23,11 +23,13 @@ export const uploadImageWithStream = (mimetype: string, entity: EntityTypes, id:
   }
 
   const pass = new stream.PassThrough()
-  const promise = s3.upload({
-    Bucket: path,
-    Key: fileKey,
-    Body: pass,
-  }).promise()
+  const promise = s3
+    .upload({
+      Bucket: path,
+      Key: fileKey,
+      Body: pass,
+    })
+    .promise()
 
   return { pass, promise }
 }

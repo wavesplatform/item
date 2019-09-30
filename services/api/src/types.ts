@@ -20,7 +20,7 @@ export type AuthPayload = {
 
 export interface SearchableItem<T = any> {
   objectID: string
-  id: string,
+  id: string
   txId?: string
   name?: string
   quantity?: number

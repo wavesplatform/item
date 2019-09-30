@@ -44,9 +44,7 @@ export const handlingFailedParams = () => {
   })
 }
 
-const processIssueTxs = async (
-  { data: { txs, timeStart, timeEnd } }: Job<TxsJobData<IssueTransaction>>
-) => {
+const processIssueTxs = async ({ data: { txs, timeStart, timeEnd } }: Job<TxsJobData<IssueTransaction>>) => {
   try {
     const dateStart = new Date(timeStart)
     const dateEnd = timeEnd && new Date(timeEnd)
@@ -71,9 +69,7 @@ const processIssueTxs = async (
   }
 }
 
-const processDataTxs = async (
-  { data: { txs, timeStart, timeEnd } }: Job<TxsJobData<DataTransaction>>
-) => {
+const processDataTxs = async ({ data: { txs, timeStart, timeEnd } }: Job<TxsJobData<DataTransaction>>) => {
   try {
     const dateStart = new Date(timeStart)
     const dateEnd = timeEnd && new Date(timeEnd)
@@ -102,9 +98,9 @@ const processDataTxs = async (
   }
 }
 
-const processInvokeScriptTxs = async (
-  { data: { txs, timeStart, timeEnd } }: Job<TxsJobData<InvokeScriptTransaction>>
-) => {
+const processInvokeScriptTxs = async ({
+                                        data: { txs, timeStart, timeEnd },
+                                      }: Job<TxsJobData<InvokeScriptTransaction>>) => {
   try {
     const dateStart = new Date(timeStart)
     const dateEnd = timeEnd && new Date(timeEnd)

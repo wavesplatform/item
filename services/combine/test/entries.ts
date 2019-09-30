@@ -19,11 +19,13 @@ export const dataMock: Data = {
   timestamp: '2019-09-02 13:50:50.535',
   sender: 'sender',
   senderPublicKey: 'senderPublicKey',
-  data: [{
-    key: 'EF21HJKrzxKq8nn1gDWNzYAHX3VzdqAa2LSHjL9i33s5',
-    type: 'string',
-    value: '{"version":1,"name":"sword","imageUrl":"#","misc":{"power":13}}',
-  }],
+  data: [
+    {
+      key: 'EF21HJKrzxKq8nn1gDWNzYAHX3VzdqAa2LSHjL9i33s5',
+      type: 'string',
+      value: '{"version":1,"name":"sword","imageUrl":"#","misc":{"power":13}}',
+    },
+  ],
 }
 
 export const invokeScriptMock: InvokeScript = {

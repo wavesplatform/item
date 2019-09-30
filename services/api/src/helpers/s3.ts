@@ -25,20 +25,23 @@ export const uploadImage = async (file: FileUpload, entity: EntityTypes, id: str
   const stream = createReadStream()
 
   return new Promise<string>(async (resolve, reject) => {
-    s3.upload({
-      Bucket: path,
-      Key: fileKey,
-      Body: stream,
-    }, (err, data) => {
-      if (err) {
-        reject(err)
-      }
+    s3.upload(
+      {
+        Bucket: path,
+        Key: fileKey,
+        Body: stream,
+      },
+      (err, data) => {
+        if (err) {
+          reject(err)
+        }
 
-      if (!data || !data.Key) {
-        reject(new Error('Image upload failed. Please try again.'))
-      }
+        if (!data || !data.Key) {
+          reject(new Error('Image upload failed. Please try again.'))
+        }
 
-      resolve(data.Location)
-    })
+        resolve(data.Location)
+      }
+    )
   })
 }

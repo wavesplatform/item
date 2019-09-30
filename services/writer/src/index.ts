@@ -17,9 +17,8 @@ const run = async () => {
   initProcessOperations()
 }
 
-run()
-  .then(() => {
-    server.listen(config.port, () => {
-      debug(`💉 Healthcheck running at ${config.port} port`)
-    })
+run().then(() => {
+  server.listen(config.port, () => {
+    debug(`💉 Healthcheck running at ${config.port} port`)
   })
+})

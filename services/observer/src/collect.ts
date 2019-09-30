@@ -1,14 +1,6 @@
-export type CollectTxsFunction<Tx> = (
-  addresses: string[],
-  timeStart: number,
-  timeEnd?: number
-) => Promise<Tx[]>
+export type CollectTxsFunction<Tx> = (addresses: string[], timeStart: number, timeEnd?: number) => Promise<Tx[]>
 
-export type GetTxFunction<Tx> = (
-  addresses: string,
-  timeStart: number,
-  timeEnd?: number
-) => Promise<Tx[]>
+export type GetTxFunction<Tx> = (addresses: string, timeStart: number, timeEnd?: number) => Promise<Tx[]>
 
 /**
  * Get any txs and concat them
@@ -23,9 +15,5 @@ export const collectTxs = async <Tx>(
   timeStart: number,
   timeEnd?: number
 ): Promise<Tx[]> => {
-  return [].concat(
-    ...await Promise.all(
-      addresses.map(address => getTxsFn(address, timeStart, timeEnd))
-    )
-  )
+  return [].concat(...(await Promise.all(addresses.map(address => getTxsFn(address, timeStart, timeEnd)))))
 }

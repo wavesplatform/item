@@ -10,13 +10,15 @@ export const Query: QueryResolvers.Type = {
   ...QueryResolvers.defaultResolvers,
 
   items: async (parent, { filter, orderBy, first, after }, ctx) => {
-    const where: ItemWhereInput = filter ? {
-      // Dapp filter
-      dapp: {
-        address: filter.dappAddress,
-        role: filter.creatorRole as UserRole,
-      },
-    } : {}
+    const where: ItemWhereInput = filter
+      ? {
+        // Dapp filter
+        dapp: {
+          address: filter.dappAddress,
+          role: filter.creatorRole as UserRole,
+        },
+      }
+      : {}
 
     // Inclusions
     if (filter && filter.inclusions) {
@@ -77,12 +79,16 @@ export const Query: QueryResolvers.Type = {
 
   platformStats: async (parent, args, ctx) => {
     // Dapps
-    const dapps = await ctx.prisma.usersConnection({ where: { role: 'DAPP' } })
-      .aggregate().count()
+    const dapps = await ctx.prisma
+      .usersConnection({ where: { role: 'DAPP' } })
+      .aggregate()
+      .count()
 
     // Items
-    const items = await ctx.prisma.itemsConnection({ where: { dapp: { role: 'DAPP' } } })
-      .aggregate().count()
+    const items = await ctx.prisma
+      .itemsConnection({ where: { dapp: { role: 'DAPP' } } })
+      .aggregate()
+      .count()
 
     // Transactions
     const transactions = 0

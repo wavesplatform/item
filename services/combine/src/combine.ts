@@ -4,7 +4,7 @@ import {
   Issue,
   ItemCreateInput,
   ItemParamsCreateInput,
-  LotCreateInput
+  LotCreateInput,
 } from './__generated__/prisma-client'
 import { DataTransaction, IssueTransaction } from '@waves/waves-rest'
 import { Operation, OPERATION_TYPE } from '@item/types'
@@ -13,7 +13,7 @@ import {
   cancelTxToLotInput,
   dataEntryToParamsInput,
   issueTxToItemInput,
-  sellTxToLotInput
+  sellTxToLotInput,
 } from './converter'
 import { InvokeScriptTransaction } from '@waves/waves-rest/types'
 import { LotUpdateMutation } from './types'
@@ -31,10 +31,7 @@ type LotOperation = Operation<LotCreateInput, LotUpdateMutation>
  * @param current
  * @param newTxs
  */
-export const combineItemOps = (
-  current: Issue[],
-  newTxs: IssueTransaction[]
-): ItemOperation[] => {
+export const combineItemOps = (current: Issue[], newTxs: IssueTransaction[]): ItemOperation[] => {
   return combineOps<Issue, IssueTransaction>(current, newTxs, processNewIssueTx)
 }
 
@@ -44,10 +41,7 @@ export const combineItemOps = (
  * @param current
  * @param newTxs
  */
-export const combineParamsOps = (
-  current: Data[],
-  newTxs: DataTransaction[]
-): ParamsOperation[] => {
+export const combineParamsOps = (current: Data[], newTxs: DataTransaction[]): ParamsOperation[] => {
   return combineOps<Data, DataTransaction>(current, newTxs, processNewDataTx)
 }
 
@@ -57,10 +51,7 @@ export const combineParamsOps = (
  * @param current
  * @param newTxs
  */
-export const combineLotOps = (
-  current: InvokeScript[],
-  newTxs: InvokeScriptTransaction[]
-): LotOperation[] => {
+export const combineLotOps = (current: InvokeScript[], newTxs: InvokeScriptTransaction[]): LotOperation[] => {
   return combineOps<InvokeScript, InvokeScriptTransaction>(current, newTxs, processNewInvokeScriptTx)
 }
 

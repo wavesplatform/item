@@ -4,15 +4,15 @@ import {
   IssueCreateInput,
   ItemCreateInput,
   ItemParamsCreateInput,
-  LotCreateInput
+  LotCreateInput,
 } from './__generated__/prisma-client'
 import { InvokeScriptTransaction } from '@waves/waves-rest/types'
 import { BigNumber } from '@waves/bignumber'
 import { base58Encode, base64Decode } from '@waves/ts-lib-crypto'
 import { isAssetId } from './utils'
 import { LotUpdateMutation } from './types'
-
-const originWavesAssetId = '11111111111111111111111111111111'
+import { parseParamsPayload } from '@item/utils'
+import { config as globalConfig } from '@item/config'
 
 // Issue Txs
 
@@ -24,7 +24,7 @@ export const issueTxToIssueInput = (tx: IssueTransaction): IssueCreateInput => {
     description,
     decimals,
     // Handle LONG type
-    quantity: (typeof quantity === 'string') ? parseInt(quantity, 10) : quantity,
+    quantity: typeof quantity === 'string' ? parseInt(quantity, 10) : quantity,
     reissuable,
     timestamp: new Date(timestamp),
     sender,
@@ -39,7 +39,7 @@ export const issueTxToItemInput = (tx: IssueTransaction): ItemCreateInput => {
     dapp: { connect: { address: sender } },
     name,
     // Handle LONG type
-    quantity: (typeof quantity === 'string') ? parseInt(quantity, 10) : quantity,
+    quantity: typeof quantity === 'string' ? parseInt(quantity, 10) : quantity,
     reissuable,
     timestamp: new Date(timestamp),
   }
@@ -58,7 +58,7 @@ export const dataTxToDataInput = (tx: DataTransaction): DataCreateInput => {
   }
 }
 
-export type DataEntry = { key: string, value: string | number | boolean }
+export type DataEntry = { key: string; value: string | number | boolean }
 export const dataEntryToParamsInput = (txId: string, timestamp: number, entry: DataEntry): ItemParamsCreateInput => {
   if (!isAssetId(entry.key)) {
     throw new Error('Key is not asset ID')
@@ -84,44 +84,15 @@ export const dataEntryToParamsInput = (txId: string, timestamp: number, entry: D
   }
 }
 
-export type Versions = 1
-export type Params<T = any> = {
-  version: number
-  name: string
-  imageUrl: string
-  misc: T
-}
-export const parseParamsPayload = (value: string, version?: Versions): Params => {
-  const json = JSON.parse(value)
-
-  version = version || json.version
-
-  switch (version) {
-    case 1:
-      const data = { misc: {}, ...json }
-
-      if (!data.name || !data.imageUrl || data.version != version) {
-        throw new Error('Invalid payload')
-      }
-
-      if (data.name.length > 128) {
-        throw new Error('Item name is too long')
-      }
-
-      if (Object.values(data.misc).some(x => typeof x === 'object')) {
-        throw new Error('No internal objects allowed')
-      }
-
-      return { ...data }
-    default:
-      throw new Error(`Version ${version} is no supported.`)
-  }
-}
-
 // InvokeScript Txs
 
 export const sellTxToLotInput = (tx: InvokeScriptTransaction): LotCreateInput => {
-  const { id: txId, call: { args }, payment, sender } = tx
+  const {
+    id: txId,
+    call: { args },
+    payment,
+    sender,
+  } = tx
 
   if (!payment || !payment[0]) {
     throw new Error('Invalid payment')
@@ -143,7 +114,11 @@ export const sellTxToLotInput = (tx: InvokeScriptTransaction): LotCreateInput =>
 }
 
 export const buyTxToLotInput = (tx: InvokeScriptTransaction): LotUpdateMutation => {
-  const { call: { args }, payment, sender } = tx
+  const {
+    call: { args },
+    payment,
+    sender,
+  } = tx
   const { lotId, amount } = getBuyArgs(args)
 
   return {
@@ -153,7 +128,11 @@ export const buyTxToLotInput = (tx: InvokeScriptTransaction): LotUpdateMutation 
 }
 
 export const cancelTxToLotInput = (tx: InvokeScriptTransaction): LotUpdateMutation => {
-  const { call: { args }, payment, sender } = tx
+  const {
+    call: { args },
+    payment,
+    sender,
+  } = tx
   const { lotId } = getCancelArgs(args)
 
   return {
@@ -163,11 +142,11 @@ export const cancelTxToLotInput = (tx: InvokeScriptTransaction): LotUpdateMutati
 }
 
 type CallArg = {
-  type: 'binary' | 'integer' | 'boolean' | 'string',
+  type: 'binary' | 'integer' | 'boolean' | 'string'
   value: string | number | boolean
 }
 
-const getSellArgs = (args: CallArg[]): { price: number, priceAsset: string } => {
+const getSellArgs = (args: CallArg[]): { price: number; priceAsset: string } => {
   if (args.length !== 2) {
     throw new Error('Invalid args length')
   }
@@ -184,12 +163,12 @@ const getSellArgs = (args: CallArg[]): { price: number, priceAsset: string } => 
   const price = args[0].value
   const priceAssetBytes = base64Decode(args[1].value.replace('base64:', ''))
   const assetId = base58Encode(priceAssetBytes)
-  const priceAsset = assetId === originWavesAssetId ? 'WAVES' : assetId
+  const priceAsset = assetId === globalConfig.originWavesAssetId ? 'WAVES' : assetId
 
   return { price, priceAsset }
 }
 
-const getBuyArgs = (args: CallArg[]): { lotId: string, amount: number } => {
+const getBuyArgs = (args: CallArg[]): { lotId: string; amount: number } => {
   if (args.length !== 2) {
     throw new Error('Invalid args length')
   }
@@ -214,10 +193,7 @@ const getCancelArgs = (args: CallArg[]): { lotId: string } => {
     throw new Error('Invalid args length')
   }
 
-  if (
-    args[0].type !== 'string' ||
-    typeof args[0].value !== 'string'
-  ) {
+  if (args[0].type !== 'string' || typeof args[0].value !== 'string') {
     throw new Error('Invalid args types')
   }
 

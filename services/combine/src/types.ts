@@ -1,1 +1,1 @@
-export type LotUpdateMutation = { txId: string, amount?: number, cancel?: boolean }
+export type LotUpdateMutation = { txId: string; amount?: number; cancel?: boolean }

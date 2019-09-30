@@ -1,16 +1,16 @@
 import { DataCreateInput, DateTimeInput, prisma } from '../__generated__/prisma-client'
 
-export const getDataRange = (
-  dateStart: DateTimeInput,
-  dateEnd?: DateTimeInput
-) => {
+export const getDataRange = (dateStart: DateTimeInput, dateEnd?: DateTimeInput) => {
   return prisma.datas({
     where: {
-      AND: [{
-        timestamp_gt: dateStart,
-      }, {
-        timestamp_lt: dateEnd,
-      }],
+      AND: [
+        {
+          timestamp_gt: dateStart,
+        },
+        {
+          timestamp_lt: dateEnd,
+        },
+      ],
     },
   })
 }
@@ -24,13 +24,17 @@ export const overwriteDataRange = async (
 
   // Delete datas
   await prisma.deleteManyDatas({
-    AND: [{
-      timestamp_gt: dateStart,
-    }, {
-      timestamp_lt: dateEnd,
-    }, {
-      txId_not_in: nextTxsIds,
-    }],
+    AND: [
+      {
+        timestamp_gt: dateStart,
+      },
+      {
+        timestamp_lt: dateEnd,
+      },
+      {
+        txId_not_in: nextTxsIds,
+      },
+    ],
   })
 
   // Upsert new datas
