@@ -52,7 +52,7 @@ export const buy = (
     async (seed: string = ''): Promise<TInvokeScriptTx> => {
       const senderPublicKey = await getSenderPublicKey(seed)
 
-      const { value } = await getValueByKey(globalConfig.dappAddress, lotId)
+      const { value } = await getValueByKey(globalConfig.dappAddresses.store, lotId)
       const bytes = base64Decode(value.replace('base64:', ''))
       const price = BigNumber.fromBytes(bytes.slice(0, 8)).toNumber()
       const assetId = base58Encode(bytes.slice(8 + 8, 8 + 8 + 32))

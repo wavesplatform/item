@@ -7,4 +7,4 @@ export interface StoreContract {
   buy: (lotId: string, amountToBuy: number) => any
 }
 
-export const { sell, cancel, buy } = contract<StoreContract>()(globalConfig.dappAddress)
+export const { sell, cancel, buy } = contract<StoreContract>()(globalConfig.dappAddresses.store)
