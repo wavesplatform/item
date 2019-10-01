@@ -69,8 +69,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - packages/types/dist
-            - packages/queues/dist
+            - packages/*/dist
 
   test_unit:
     <<: *node_defaults
