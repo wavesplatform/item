@@ -1,5 +1,9 @@
 export * from './chains'
 
+export interface IDappAddresses {
+  store?: string
+}
+
 export interface IConfig {
   /**
    * Chains:
@@ -11,12 +15,13 @@ export interface IConfig {
   chainId: string
 
   originWavesAssetId: string
-  dappAddress?: string
+  dappAddresses: IDappAddresses
 }
 
 export const config: IConfig = {
   chainId: process.env.CHAIN_ID || 'T',
   originWavesAssetId: process.env.WAVES_ASSET_ID || '11111111111111111111111111111111',
+  dappAddresses: {},
 }
 
 export default config

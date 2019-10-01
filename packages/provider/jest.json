@@ -1,0 +1,12 @@
+{
+  "preset": "ts-jest",
+  "testEnvironment": "node",
+  "testMatch": ["**/*.test.ts"],
+  "globals": {
+    "ts-jest": {
+      "tsConfig": "./tsconfig.json",
+      "diagnostics": false
+    }
+  },
+  "setupFiles": ["dotenv/config"]
+}

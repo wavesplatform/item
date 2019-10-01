@@ -15,12 +15,7 @@ export const create = <V extends ItemVersions>(
 ): TIntent<[TIssueTx, TDataTx]> => {
   const txs = memoizee(
     async (seed: string = ''): Promise<[TIssueTx, TDataTx]> => {
-      let senderPublicKey = publicKey(seed)
-
-      if (!seed) {
-        senderPublicKey = (await WavesKeeper.publicState()).account.publicKey
-      }
-
+      const senderPublicKey = await getSenderPublicKey(seed)
       const txs = txsForItemCreate(params, chainId, senderPublicKey, seed)
 
       if (!seed) {
@@ -46,12 +41,7 @@ export const update = <V extends ItemVersions>(
 ): TIntent<[TDataTx]> => {
   const txs = memoizee(
     async (seed: string = ''): Promise<[TDataTx]> => {
-      let senderPublicKey = publicKey(seed)
-
-      if (!seed) {
-        senderPublicKey = (await WavesKeeper.publicState()).account.publicKey
-      }
-
+      const senderPublicKey = await getSenderPublicKey(seed)
       const txs = txsForItemUpdate(params, chainId, senderPublicKey, seed)
 
       if (!seed) {
@@ -69,4 +59,9 @@ export const update = <V extends ItemVersions>(
       await Promise.all([broadcast(data)])
     },
   }
+}
+
+const getSenderPublicKey = async (seed?: string) => {
+  const key = publicKey(seed)
+  return seed ? key : (await WavesKeeper.publicState()).account.publicKey
 }

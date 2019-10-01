@@ -31,3 +31,4 @@ local.log
 
 # Env variables
 .env
+.env.test
