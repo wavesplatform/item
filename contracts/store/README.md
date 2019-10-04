@@ -16,6 +16,20 @@ This package contains implementations of store contract based on [item protocol]
 yarn add @item/contracts-store
 ```
 
+## Usage
+
+```typescript
+import { sell } from '@item/contracts-store'
+
+const seed = 'your seed'
+
+export default async () => {
+  const assetId = '2iKLS4iYPU47MtmJYJji5iRPwPiRh1inDMNcX4p7t69W'
+  const req = sell(assetId, 10, 'WAVES', 25)
+  await req.broadcast(seed)
+} 
+```
+
 ## Contributing
 
 We strongly recommend that the community help us make improvements and determine the future direction of the protocol. To report bugs within this package, please create an issue in this repository.
