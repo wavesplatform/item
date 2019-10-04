@@ -4,9 +4,9 @@ This package contains implementations of store contract based on [item protocol]
 
 ### Features
 
-*   Sell any item based on [item protocol](https://github.com/wavesplatform/item)
-*   Buy an item for sale
-*   Cancel sale
+- Sell any item based on [item protocol](https://github.com/wavesplatform/item)
+- Buy an item for sale
+- Cancel sale
 
 ## Installation
 
