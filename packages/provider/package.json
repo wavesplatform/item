@@ -10,7 +10,7 @@
     "fix:prettier": "prettier --write \"{src,test}/**/*.ts\" --ignore-path ../../.prettierignore",
     "fix:tslint": "tslint --fix -t stylish -p .",
     "test": "run-s test:jest",
-    "test:jest": "jest --passWithNoTests --config=jest.json",
+    "test:jest": "CHAIN_ID=T jest --passWithNoTests --config=jest.json",
     "test:watch": "test:jest -- --watch"
   },
   "dependencies": {

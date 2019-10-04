@@ -1,5 +1,6 @@
 export interface IChainConfig {
-  nodeUri: string
+  node: string
+  api: string
   network: string
 }
 
@@ -11,15 +12,18 @@ export interface IChainConfig {
  */
 export const chains: Record<string, IChainConfig> = {
   W: {
-    nodeUri: 'https://nodes.wavesnodes.com',
+    node: 'https://nodes.wavesnodes.com',
+    api: 'https://api.wavesplatform.com/v0/',
     network: 'mainnet',
   },
   T: {
-    nodeUri: 'https://testnodes.wavesnodes.com',
+    node: 'https://testnodes.wavesnodes.com',
+    api: 'https://api.testnet.wavesplatform.com/v0/',
     network: 'testnet',
   },
   R: {
-    nodeUri: 'http://localhost:6869',
+    node: 'http://localhost:6869',
+    api: 'http://localhost:3010',
     network: 'custom',
   },
 }

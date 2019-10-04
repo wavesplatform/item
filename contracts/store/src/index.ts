@@ -20,11 +20,10 @@ export const sell = (
 
       if (!priceAsset || 'WAVES') priceAsset = globalConfig.originWavesAssetId
 
-      const tx = sellIntent(price, base58Decode(priceAsset))
-        .invoke(seed, {
-          payment: [{ amount, assetId }],
-          chainId,
-        })
+      const tx = sellIntent(price, base58Decode(priceAsset)).invoke(seed, {
+        payment: [{ amount, assetId }],
+        chainId,
+      })
 
       if (!seed) {
         return ((await signWithKeeper([tx])) as [TInvokeScriptTx])[0]
@@ -57,11 +56,10 @@ export const buy = (
       const price = BigNumber.fromBytes(bytes.slice(0, 8)).toNumber()
       const assetId = base58Encode(bytes.slice(8 + 8, 8 + 8 + 32))
 
-      const tx = buyIntent(lotId, amount)
-        .invoke(seed, {
-          payment: [{ amount: price * amount, assetId: assetId === globalConfig.originWavesAssetId ? null : assetId }],
-          chainId,
-        })
+      const tx = buyIntent(lotId, amount).invoke(seed, {
+        payment: [{ amount: price * amount, assetId: assetId === globalConfig.originWavesAssetId ? null : assetId }],
+        chainId,
+      })
 
       if (!seed) {
         return ((await signWithKeeper([tx])) as [TInvokeScriptTx])[0]
@@ -80,19 +78,15 @@ export const buy = (
   }
 }
 
-export const cancel = (
-  lotId: string,
-  chainId: TChainId = globalConfig.chainId
-): TIntent<[TInvokeScriptTx]> => {
+export const cancel = (lotId: string, chainId: TChainId = globalConfig.chainId): TIntent<[TInvokeScriptTx]> => {
   const txs = memoizee(
     async (seed: string = ''): Promise<TInvokeScriptTx> => {
       const senderPublicKey = await getSenderPublicKey(seed)
 
-      const tx = cancelIntent(lotId)
-        .invoke(seed, {
-          payment: [],
-          chainId,
-        })
+      const tx = cancelIntent(lotId).invoke(seed, {
+        payment: [],
+        chainId,
+      })
 
       if (!seed) {
         return ((await signWithKeeper([tx])) as [TInvokeScriptTx])[0]

@@ -2,9 +2,13 @@
 // Please don't change this file manually but run `prisma generate` to update it.
 // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-import { DocumentNode } from 'graphql'
-import { BaseClientOptions, makePrismaClientClass, Model } from 'prisma-client-lib'
-import { typeDefs } from './prisma-schema'
+import { DocumentNode } from "graphql";
+import {
+  makePrismaClientClass,
+  BaseClientOptions,
+  Model
+} from "prisma-client-lib";
+import { typeDefs } from "./prisma-schema";
 
 export type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
   U[keyof U];
@@ -21,8 +25,7 @@ export interface Exists {
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
-export interface Node {
-}
+export interface Node {}
 
 export type FragmentableArray<T> = Promise<Array<T>> & Fragmentable;
 
@@ -331,7 +334,7 @@ export interface Subscription {
 }
 
 export interface ClientConstructor<T> {
-  new(options?: BaseClientOptions): T;
+  new (options?: BaseClientOptions): T;
 }
 
 /**
@@ -339,136 +342,136 @@ export interface ClientConstructor<T> {
  */
 
 export type DataOrderByInput =
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'txId_ASC'
-  | 'txId_DESC'
-  | 'timestamp_ASC'
-  | 'timestamp_DESC'
-  | 'sender_ASC'
-  | 'sender_DESC'
-  | 'senderPublicKey_ASC'
-  | 'senderPublicKey_DESC';
+  | "id_ASC"
+  | "id_DESC"
+  | "txId_ASC"
+  | "txId_DESC"
+  | "timestamp_ASC"
+  | "timestamp_DESC"
+  | "sender_ASC"
+  | "sender_DESC"
+  | "senderPublicKey_ASC"
+  | "senderPublicKey_DESC";
 
 export type InvokeScriptOrderByInput =
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'txId_ASC'
-  | 'txId_DESC'
-  | 'timestamp_ASC'
-  | 'timestamp_DESC'
-  | 'sender_ASC'
-  | 'sender_DESC'
-  | 'senderPublicKey_ASC'
-  | 'senderPublicKey_DESC'
-  | 'dapp_ASC'
-  | 'dapp_DESC'
-  | 'feeAssetId_ASC'
-  | 'feeAssetId_DESC'
-  | 'call_ASC'
-  | 'call_DESC';
+  | "id_ASC"
+  | "id_DESC"
+  | "txId_ASC"
+  | "txId_DESC"
+  | "timestamp_ASC"
+  | "timestamp_DESC"
+  | "sender_ASC"
+  | "sender_DESC"
+  | "senderPublicKey_ASC"
+  | "senderPublicKey_DESC"
+  | "dapp_ASC"
+  | "dapp_DESC"
+  | "feeAssetId_ASC"
+  | "feeAssetId_DESC"
+  | "call_ASC"
+  | "call_DESC";
 
 export type IssueOrderByInput =
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'txId_ASC'
-  | 'txId_DESC'
-  | 'timestamp_ASC'
-  | 'timestamp_DESC'
-  | 'sender_ASC'
-  | 'sender_DESC'
-  | 'senderPublicKey_ASC'
-  | 'senderPublicKey_DESC'
-  | 'name_ASC'
-  | 'name_DESC'
-  | 'description_ASC'
-  | 'description_DESC'
-  | 'decimals_ASC'
-  | 'decimals_DESC'
-  | 'quantity_ASC'
-  | 'quantity_DESC'
-  | 'reissuable_ASC'
-  | 'reissuable_DESC';
+  | "id_ASC"
+  | "id_DESC"
+  | "txId_ASC"
+  | "txId_DESC"
+  | "timestamp_ASC"
+  | "timestamp_DESC"
+  | "sender_ASC"
+  | "sender_DESC"
+  | "senderPublicKey_ASC"
+  | "senderPublicKey_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "decimals_ASC"
+  | "decimals_DESC"
+  | "quantity_ASC"
+  | "quantity_DESC"
+  | "reissuable_ASC"
+  | "reissuable_DESC";
 
-export type UserRole = 'USER' | 'TEST' | 'DAPP';
+export type UserRole = "USER" | "TEST" | "DAPP";
 
-export type UserPermission = 'COMMON' | 'DAPP';
+export type UserPermission = "COMMON" | "DAPP";
 
 export type ItemOrderByInput =
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'txId_ASC'
-  | 'txId_DESC'
-  | 'name_ASC'
-  | 'name_DESC'
-  | 'quantity_ASC'
-  | 'quantity_DESC'
-  | 'reissuable_ASC'
-  | 'reissuable_DESC'
-  | 'timestamp_ASC'
-  | 'timestamp_DESC'
-  | 'createdAt_ASC'
-  | 'createdAt_DESC'
-  | 'updatedAt_ASC'
-  | 'updatedAt_DESC';
+  | "id_ASC"
+  | "id_DESC"
+  | "txId_ASC"
+  | "txId_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "quantity_ASC"
+  | "quantity_DESC"
+  | "reissuable_ASC"
+  | "reissuable_DESC"
+  | "timestamp_ASC"
+  | "timestamp_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type LotOrderByInput =
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'txId_ASC'
-  | 'txId_DESC'
-  | 'priceAsset_ASC'
-  | 'priceAsset_DESC'
-  | 'price_ASC'
-  | 'price_DESC'
-  | 'stock_ASC'
-  | 'stock_DESC'
-  | 'createdAt_ASC'
-  | 'createdAt_DESC'
-  | 'updatedAt_ASC'
-  | 'updatedAt_DESC';
+  | "id_ASC"
+  | "id_DESC"
+  | "txId_ASC"
+  | "txId_DESC"
+  | "priceAsset_ASC"
+  | "priceAsset_DESC"
+  | "price_ASC"
+  | "price_DESC"
+  | "stock_ASC"
+  | "stock_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
 export type ItemParamsOrderByInput =
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'txId_ASC'
-  | 'txId_DESC'
-  | 'paramsId_ASC'
-  | 'paramsId_DESC'
-  | 'version_ASC'
-  | 'version_DESC'
-  | 'name_ASC'
-  | 'name_DESC'
-  | 'imageUrl_ASC'
-  | 'imageUrl_DESC'
-  | 'storageImageUrl_ASC'
-  | 'storageImageUrl_DESC'
-  | 'misc_ASC'
-  | 'misc_DESC'
-  | 'timestamp_ASC'
-  | 'timestamp_DESC';
+  | "id_ASC"
+  | "id_DESC"
+  | "txId_ASC"
+  | "txId_DESC"
+  | "paramsId_ASC"
+  | "paramsId_DESC"
+  | "version_ASC"
+  | "version_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "imageUrl_ASC"
+  | "imageUrl_DESC"
+  | "storageImageUrl_ASC"
+  | "storageImageUrl_DESC"
+  | "misc_ASC"
+  | "misc_DESC"
+  | "timestamp_ASC"
+  | "timestamp_DESC";
 
 export type UserOrderByInput =
-  | 'id_ASC'
-  | 'id_DESC'
-  | 'address_ASC'
-  | 'address_DESC'
-  | 'name_ASC'
-  | 'name_DESC'
-  | 'email_ASC'
-  | 'email_DESC'
-  | 'role_ASC'
-  | 'role_DESC'
-  | 'image_ASC'
-  | 'image_DESC'
-  | 'meta_ASC'
-  | 'meta_DESC'
-  | 'createdAt_ASC'
-  | 'createdAt_DESC'
-  | 'updatedAt_ASC'
-  | 'updatedAt_DESC';
+  | "id_ASC"
+  | "id_DESC"
+  | "address_ASC"
+  | "address_DESC"
+  | "name_ASC"
+  | "name_DESC"
+  | "email_ASC"
+  | "email_DESC"
+  | "role_ASC"
+  | "role_DESC"
+  | "image_ASC"
+  | "image_DESC"
+  | "meta_ASC"
+  | "meta_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
 
-export type MutationType = 'CREATED' | 'UPDATED' | 'DELETED';
+export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
 export type DataWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
@@ -1331,7 +1334,9 @@ export interface ItemCreateWithoutLotsInput {
 }
 
 export interface ItemParamsCreateManyWithoutItemInput {
-  create?: Maybe<ItemParamsCreateWithoutItemInput[] | ItemParamsCreateWithoutItemInput>;
+  create?: Maybe<
+    ItemParamsCreateWithoutItemInput[] | ItemParamsCreateWithoutItemInput
+  >;
   connect?: Maybe<ItemParamsWhereUniqueInput[] | ItemParamsWhereUniqueInput>;
 }
 
@@ -1433,12 +1438,18 @@ export interface LotUpdateManyWithoutSellerInput {
   connect?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
   set?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
   disconnect?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
-  update?: Maybe<| LotUpdateWithWhereUniqueWithoutSellerInput[]
-    | LotUpdateWithWhereUniqueWithoutSellerInput>;
-  upsert?: Maybe<| LotUpsertWithWhereUniqueWithoutSellerInput[]
-    | LotUpsertWithWhereUniqueWithoutSellerInput>;
+  update?: Maybe<
+    | LotUpdateWithWhereUniqueWithoutSellerInput[]
+    | LotUpdateWithWhereUniqueWithoutSellerInput
+  >;
+  upsert?: Maybe<
+    | LotUpsertWithWhereUniqueWithoutSellerInput[]
+    | LotUpsertWithWhereUniqueWithoutSellerInput
+  >;
   deleteMany?: Maybe<LotScalarWhereInput[] | LotScalarWhereInput>;
-  updateMany?: Maybe<LotUpdateManyWithWhereNestedInput[] | LotUpdateManyWithWhereNestedInput>;
+  updateMany?: Maybe<
+    LotUpdateManyWithWhereNestedInput[] | LotUpdateManyWithWhereNestedInput
+  >;
 }
 
 export interface LotUpdateWithWhereUniqueWithoutSellerInput {
@@ -1472,18 +1483,26 @@ export interface ItemUpdateWithoutLotsDataInput {
 }
 
 export interface ItemParamsUpdateManyWithoutItemInput {
-  create?: Maybe<ItemParamsCreateWithoutItemInput[] | ItemParamsCreateWithoutItemInput>;
+  create?: Maybe<
+    ItemParamsCreateWithoutItemInput[] | ItemParamsCreateWithoutItemInput
+  >;
   delete?: Maybe<ItemParamsWhereUniqueInput[] | ItemParamsWhereUniqueInput>;
   connect?: Maybe<ItemParamsWhereUniqueInput[] | ItemParamsWhereUniqueInput>;
   set?: Maybe<ItemParamsWhereUniqueInput[] | ItemParamsWhereUniqueInput>;
   disconnect?: Maybe<ItemParamsWhereUniqueInput[] | ItemParamsWhereUniqueInput>;
-  update?: Maybe<| ItemParamsUpdateWithWhereUniqueWithoutItemInput[]
-    | ItemParamsUpdateWithWhereUniqueWithoutItemInput>;
-  upsert?: Maybe<| ItemParamsUpsertWithWhereUniqueWithoutItemInput[]
-    | ItemParamsUpsertWithWhereUniqueWithoutItemInput>;
+  update?: Maybe<
+    | ItemParamsUpdateWithWhereUniqueWithoutItemInput[]
+    | ItemParamsUpdateWithWhereUniqueWithoutItemInput
+  >;
+  upsert?: Maybe<
+    | ItemParamsUpsertWithWhereUniqueWithoutItemInput[]
+    | ItemParamsUpsertWithWhereUniqueWithoutItemInput
+  >;
   deleteMany?: Maybe<ItemParamsScalarWhereInput[] | ItemParamsScalarWhereInput>;
-  updateMany?: Maybe<| ItemParamsUpdateManyWithWhereNestedInput[]
-    | ItemParamsUpdateManyWithWhereNestedInput>;
+  updateMany?: Maybe<
+    | ItemParamsUpdateManyWithWhereNestedInput[]
+    | ItemParamsUpdateManyWithWhereNestedInput
+  >;
 }
 
 export interface ItemParamsUpdateWithWhereUniqueWithoutItemInput {
@@ -1744,12 +1763,18 @@ export interface LotUpdateManyWithoutItemInput {
   connect?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
   set?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
   disconnect?: Maybe<LotWhereUniqueInput[] | LotWhereUniqueInput>;
-  update?: Maybe<| LotUpdateWithWhereUniqueWithoutItemInput[]
-    | LotUpdateWithWhereUniqueWithoutItemInput>;
-  upsert?: Maybe<| LotUpsertWithWhereUniqueWithoutItemInput[]
-    | LotUpsertWithWhereUniqueWithoutItemInput>;
+  update?: Maybe<
+    | LotUpdateWithWhereUniqueWithoutItemInput[]
+    | LotUpdateWithWhereUniqueWithoutItemInput
+  >;
+  upsert?: Maybe<
+    | LotUpsertWithWhereUniqueWithoutItemInput[]
+    | LotUpsertWithWhereUniqueWithoutItemInput
+  >;
   deleteMany?: Maybe<LotScalarWhereInput[] | LotScalarWhereInput>;
-  updateMany?: Maybe<LotUpdateManyWithWhereNestedInput[] | LotUpdateManyWithWhereNestedInput>;
+  updateMany?: Maybe<
+    LotUpdateManyWithWhereNestedInput[] | LotUpdateManyWithWhereNestedInput
+  >;
 }
 
 export interface LotUpdateWithWhereUniqueWithoutItemInput {
@@ -1791,12 +1816,18 @@ export interface ItemUpdateManyWithoutDappInput {
   connect?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
   set?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
   disconnect?: Maybe<ItemWhereUniqueInput[] | ItemWhereUniqueInput>;
-  update?: Maybe<| ItemUpdateWithWhereUniqueWithoutDappInput[]
-    | ItemUpdateWithWhereUniqueWithoutDappInput>;
-  upsert?: Maybe<| ItemUpsertWithWhereUniqueWithoutDappInput[]
-    | ItemUpsertWithWhereUniqueWithoutDappInput>;
+  update?: Maybe<
+    | ItemUpdateWithWhereUniqueWithoutDappInput[]
+    | ItemUpdateWithWhereUniqueWithoutDappInput
+  >;
+  upsert?: Maybe<
+    | ItemUpsertWithWhereUniqueWithoutDappInput[]
+    | ItemUpsertWithWhereUniqueWithoutDappInput
+  >;
   deleteMany?: Maybe<ItemScalarWhereInput[] | ItemScalarWhereInput>;
-  updateMany?: Maybe<ItemUpdateManyWithWhereNestedInput[] | ItemUpdateManyWithWhereNestedInput>;
+  updateMany?: Maybe<
+    ItemUpdateManyWithWhereNestedInput[] | ItemUpdateManyWithWhereNestedInput
+  >;
 }
 
 export interface ItemUpdateWithWhereUniqueWithoutDappInput {
@@ -2086,9 +2117,15 @@ export interface InvokeScriptSubscriptionWhereInput {
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
   node?: Maybe<InvokeScriptWhereInput>;
-  AND?: Maybe<InvokeScriptSubscriptionWhereInput[] | InvokeScriptSubscriptionWhereInput>;
-  OR?: Maybe<InvokeScriptSubscriptionWhereInput[] | InvokeScriptSubscriptionWhereInput>;
-  NOT?: Maybe<InvokeScriptSubscriptionWhereInput[] | InvokeScriptSubscriptionWhereInput>;
+  AND?: Maybe<
+    InvokeScriptSubscriptionWhereInput[] | InvokeScriptSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    InvokeScriptSubscriptionWhereInput[] | InvokeScriptSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    InvokeScriptSubscriptionWhereInput[] | InvokeScriptSubscriptionWhereInput
+  >;
 }
 
 export interface IssueSubscriptionWhereInput {
@@ -2119,9 +2156,15 @@ export interface ItemParamsSubscriptionWhereInput {
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
   node?: Maybe<ItemParamsWhereInput>;
-  AND?: Maybe<ItemParamsSubscriptionWhereInput[] | ItemParamsSubscriptionWhereInput>;
-  OR?: Maybe<ItemParamsSubscriptionWhereInput[] | ItemParamsSubscriptionWhereInput>;
-  NOT?: Maybe<ItemParamsSubscriptionWhereInput[] | ItemParamsSubscriptionWhereInput>;
+  AND?: Maybe<
+    ItemParamsSubscriptionWhereInput[] | ItemParamsSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    ItemParamsSubscriptionWhereInput[] | ItemParamsSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    ItemParamsSubscriptionWhereInput[] | ItemParamsSubscriptionWhereInput
+  >;
 }
 
 export interface LotSubscriptionWhereInput {
@@ -3528,42 +3571,42 @@ export type Long = string;
 
 export const models: Model[] = [
   {
-    name: 'UserRole',
+    name: "UserRole",
     embedded: false
   },
   {
-    name: 'UserPermission',
+    name: "UserPermission",
     embedded: false
   },
   {
-    name: 'Issue',
+    name: "Issue",
     embedded: false
   },
   {
-    name: 'Data',
+    name: "Data",
     embedded: false
   },
   {
-    name: 'InvokeScript',
+    name: "InvokeScript",
     embedded: false
   },
   {
-    name: 'User',
+    name: "User",
     embedded: false
   },
   {
-    name: 'Item',
+    name: "Item",
     embedded: false
   },
   {
-    name: 'ItemParams',
+    name: "ItemParams",
     embedded: false
   },
   {
-    name: 'Lot',
+    name: "Lot",
     embedded: false
   }
-]
+];
 
 /**
  * Type Defs
@@ -3572,6 +3615,6 @@ export const models: Model[] = [
 export const Prisma = makePrismaClientClass<ClientConstructor<Prisma>>({
   typeDefs,
   models,
-  endpoint: `http://${process.env['PRISMA_HOST']}:4466`
-})
-export const prisma = new Prisma()
+  endpoint: `http://${process.env["PRISMA_HOST"]}:4466`
+});
+export const prisma = new Prisma();

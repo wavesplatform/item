@@ -2,9 +2,13 @@ import { ChaidId } from '@waves/ts-lib-crypto'
 import { ItemVersions } from '@item/types'
 import { create, update } from '../src'
 
-// Default testnet
-const testChainId = process.env.CHAIN_ID || 'T'
-const testSeed = process.env.TEST_SEED
+// Default devnet
+const testChainId = process.env.CHAIN_ID || 'R'
+
+// If you run tests on testnet you must set seed phrase of your account with positive balance
+// Otherwise default seed will be used (devnet)
+const testSeed = ChaidId.isTestnet(testChainId) ? process.env.TEST_SEED : 'waves private node seed with waves token'
+
 const createItemParams = {
   version: 1 as ItemVersions,
   name: 'Sword of Tests',
@@ -24,14 +28,7 @@ const updateItemParams = {
 // TODO: need to add more tests with exceptions
 // TODO: need to add support on a private node
 
-describe('item', () => {
-  beforeAll(async () => {
-    if (ChaidId.isTestnet(testChainId)) {
-      // Nothing
-    } else {
-    }
-  })
-
+describe.skip('item', () => {
   describe('create', () => {
     it('can create item', async () => {
       const request = create(createItemParams, testChainId)

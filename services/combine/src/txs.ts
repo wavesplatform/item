@@ -99,8 +99,8 @@ const processDataTxs = async ({ data: { txs, timeStart, timeEnd } }: Job<TxsJobD
 }
 
 const processInvokeScriptTxs = async ({
-                                        data: { txs, timeStart, timeEnd },
-                                      }: Job<TxsJobData<InvokeScriptTransaction>>) => {
+  data: { txs, timeStart, timeEnd },
+}: Job<TxsJobData<InvokeScriptTransaction>>) => {
   try {
     const dateStart = new Date(timeStart)
     const dateEnd = timeEnd && new Date(timeEnd)

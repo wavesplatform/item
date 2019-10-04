@@ -16,7 +16,7 @@ const debug = Debug('api')
 debug('🎹 API is starting...')
 
 const typeDefs = gql`
-    ${importSchema(resolve(__dirname, '../schema.graphql'))}
+  ${importSchema(resolve(__dirname, '../schema.graphql'))}
 `
 
 const schema = makeExecutableSchema({

@@ -1,0 +1,51 @@
+version: "3"
+services:
+  node:
+    image: wavesplatform/waves-private-node
+    ports:
+      - "6869:6869"
+      - "6860:6860"
+  postgres-blockchain:
+    image: postgres:alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: blockchain
+    volumes:
+      - postgres-blockchain:/var/lib/postgresql
+  crawler:
+    image: wavesplatform/blockchain-postgres-sync
+    restart: always
+    environment:
+      NODE_ADDRESS: node:6869
+      PGHOST: postgres-blockchain
+      PGPORT: 5432
+      PGDATABASE: blockchain
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      MIGRATE: "true"
+    depends_on:
+      - postgres-blockchain
+      - node
+  data-service:
+    image: wavesplatform/data-service
+    restart: always
+    environment:
+      PORT: 3010
+      PGHOST: postgres-blockchain
+      PGPORT: 5432
+      PGDATABASE: blockchain
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGPOOLSIZE: 20
+      LOG_LEVEL: info
+      DEFAULT_MATCHER: MATCHER
+    ports:
+      - "3010:3010"
+    depends_on:
+      - crawler
+volumes:
+  postgres-blockchain:
