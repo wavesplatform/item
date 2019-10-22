@@ -1,13 +1,12 @@
-import { ChaidId } from '@waves/ts-lib-crypto'
+import { address, ChaidId } from '@waves/ts-lib-crypto'
 import { ItemVersions } from '@item/types'
 import { create, update } from '../src'
 
-// Default devnet
-const testChainId = process.env.CHAIN_ID || 'R'
+const testChainId = process.env.CHAIN_ID
 
 // If you run tests on testnet you must set seed phrase of your account with positive balance
 // Otherwise default seed will be used (devnet)
-const testSeed = ChaidId.isTestnet(testChainId) ? process.env.TEST_SEED : 'waves private node seed with waves token'
+const testSeed = ChaidId.isTestnet(testChainId) ? process.env.TEST_SEED : 'waves private node seed with waves tokens'
 
 const createItemParams = {
   version: 1 as ItemVersions,
@@ -49,7 +48,7 @@ describe.skip('item', () => {
       // Create item
       const request = create(createItemParams, testChainId)
       const [issueTx] = await request.txs(testSeed)
-      await request.broadcast(testSeed)
+      // await request.broadcast(testSeed)
 
       assetId = issueTx.id
     })
@@ -57,7 +56,7 @@ describe.skip('item', () => {
     it('can update item', async () => {
       const request = update({ ...updateItemParams, assetId }, testChainId)
       const [dataTx] = await request.txs(testSeed)
-      await request.broadcast(testSeed)
+      // await request.broadcast(testSeed)
 
       // TODO: handle data entry to check
     })

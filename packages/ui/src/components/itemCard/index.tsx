@@ -52,8 +52,10 @@ export const ItemCard = ({ item, style, ...rest }: IProps) => {
       <Box px={'lg'} pb={'lg'}>
         {!isShort && <Flex justifyContent={'space-between'}>
           <DappHeading dapp={item.dapp} size={'sm'}/>
+          {/*Price*/}
         </Flex>}
         {isShort && item.quantity && <Box fontSize={'sm'}>
+          {/*Balance*/}
           <Quantity value={item.quantity}/>
         </Box>}
       </Box>

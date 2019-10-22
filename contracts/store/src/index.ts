@@ -12,7 +12,8 @@ export const sell = (
   amount: number,
   priceAsset: string,
   price: number,
-  chainId: TChainId = globalConfig.chainId
+  chainId: TChainId = globalConfig.chainId,
+  dApp?: string
 ): TIntent<[TInvokeScriptTx]> => {
   const txs = memoizee(
     async (seed: string = ''): Promise<TInvokeScriptTx> => {
@@ -23,6 +24,7 @@ export const sell = (
       const tx = sellIntent(price, base58Decode(priceAsset)).invoke(seed, {
         payment: [{ amount, assetId }],
         chainId,
+        dApp,
       })
 
       if (!seed) {
@@ -45,7 +47,8 @@ export const sell = (
 export const buy = (
   lotId: string,
   amount: number,
-  chainId: TChainId = globalConfig.chainId
+  chainId: TChainId = globalConfig.chainId,
+  dApp?: string
 ): TIntent<[TInvokeScriptTx]> => {
   const txs = memoizee(
     async (seed: string = ''): Promise<TInvokeScriptTx> => {
@@ -59,6 +62,7 @@ export const buy = (
       const tx = buyIntent(lotId, amount).invoke(seed, {
         payment: [{ amount: price * amount, assetId: assetId === globalConfig.originWavesAssetId ? null : assetId }],
         chainId,
+        dApp,
       })
 
       if (!seed) {
@@ -78,7 +82,11 @@ export const buy = (
   }
 }
 
-export const cancel = (lotId: string, chainId: TChainId = globalConfig.chainId): TIntent<[TInvokeScriptTx]> => {
+export const cancel = (
+  lotId: string,
+  chainId: TChainId = globalConfig.chainId,
+  dApp?: string
+): TIntent<[TInvokeScriptTx]> => {
   const txs = memoizee(
     async (seed: string = ''): Promise<TInvokeScriptTx> => {
       const senderPublicKey = await getSenderPublicKey(seed)
@@ -86,6 +94,7 @@ export const cancel = (lotId: string, chainId: TChainId = globalConfig.chainId):
       const tx = cancelIntent(lotId).invoke(seed, {
         payment: [],
         chainId,
+        dApp,
       })
 
       if (!seed) {
