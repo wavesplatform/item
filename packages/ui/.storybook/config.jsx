@@ -12,7 +12,7 @@ addDecorator(story => (
   </ThemeProvider>
 ))
 
-const req = require.context('../src', true, /\.stories\.tsx$|\/stories\/.*\.tsx$/)
+const req = require.context('../src', true, /\.stories\.tsx$|\/__stories__\/.*\.tsx$/)
 const loadStories = () => {
   req.keys().forEach(filename => req(filename))
 }
