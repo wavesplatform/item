@@ -4,7 +4,6 @@ import { Toast } from '../index'
 import { Box } from 'rebass'
 
 storiesOf('Toast', module)
-  .addDecorator(story => (<Box sx={{ p: 'lg' }}>{story()}</Box>))
   .add('Variants', () => (
     <Box>
       <Toast mb={'md'}>Default</Toast>

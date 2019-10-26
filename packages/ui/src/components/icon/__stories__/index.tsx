@@ -5,7 +5,6 @@ import { Icon } from '../index'
 import { Button } from '../../buttons'
 
 storiesOf('Icon', module)
-  .addDecorator(story => (<Box sx={{ p: 'lg' }}>{story()}</Box>))
   .add('Default', () => (
     <>
       {['md', 'xl'].map(size => (

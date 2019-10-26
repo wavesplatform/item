@@ -4,11 +4,12 @@ import { ThemeProvider } from 'emotion-theming'
 import { Global } from '@emotion/core'
 import { baseTheme } from '../src/styles/theme'
 import { globalStyle } from '../src/styles/global'
+import { Box } from 'rebass'
 
 addDecorator(story => (
   <ThemeProvider theme={baseTheme}>
     <Global styles={globalStyle}/>
-    {story()}
+    <Box p={'lg'}>{story()}</Box>
   </ThemeProvider>
 ))
 

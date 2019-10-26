@@ -1,6 +1,6 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
-import { Box, Flex } from 'rebass'
+import { Flex } from 'rebass'
 import { UserHeading } from '../userHeading'
 import { IDapp, IUser } from '@item/types'
 import { DappHeading } from '../dappHeading'
@@ -17,7 +17,6 @@ const dapp: IDapp = {
 }
 
 storiesOf('Heading', module)
-  .addDecorator(story => (<Box sx={{ p: 'lg' }}>{story()}</Box>))
   .add('User', () => (
     <Flex alignItems={'flex-start'} flexDirection={'column'}>
       <UserHeading user={user} size={'sm'} mb={'md'}/>

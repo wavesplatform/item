@@ -4,7 +4,6 @@ import { Box, Flex } from 'rebass'
 import { Button, IconButton } from '../index'
 
 storiesOf('Button', module)
-  .addDecorator(story => (<Box sx={{ p: 'lg' }}>{story()}</Box>))
   .add('Variants', () => (
     <Box>
       <Button variant={'secondary'} mr={'sm'}>Default</Button>

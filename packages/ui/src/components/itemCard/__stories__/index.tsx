@@ -25,7 +25,6 @@ const item: IItem = {
 }
 
 storiesOf('Item Card', module)
-  .addDecorator(story => (<Box sx={{ p: 'lg' }}>{story()}</Box>))
   .add('Default', () => (
     <Box sx={{
       display: 'grid',

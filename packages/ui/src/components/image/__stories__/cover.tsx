@@ -5,7 +5,6 @@ import { CoverImage } from '../cover'
 import emptyImage from '../empty.svg'
 
 storiesOf('Cover', module)
-  .addDecorator(story => (<Box sx={{ p: 'lg' }}>{story()}</Box>))
   .add('Default', () => (
     <Box height={'30vh'}>
       <CoverImage src={emptyImage} mb={'md'}/>
