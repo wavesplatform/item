@@ -24,7 +24,7 @@ export const Overview = styled(Box)<BoxProps & BordersProps>`
   bottom: 0;
   overflow: hidden;
   
-  ${borders}
+  ${borders};
   
   &:before {
     position: absolute;

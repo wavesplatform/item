@@ -11,7 +11,6 @@ export const UserAvatar = ({ size, icon, address, ...rest }: IProps) => {
   const imageUri = icon ? icon : generateAvatar(address)
 
   return (
-    // @ts-ignore
     <Avatar
       size={size || 'sm'}
       src={imageUri}

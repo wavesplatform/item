@@ -14,7 +14,6 @@ export const DappHeading = ({ dapp, size = 'md', ...rest }: IProps) => {
   const meta = dapp.meta
   const isExtended = ['xl', 'lg'].includes(size)
   return (
-    // @ts-ignore
     <Wrapper {...rest}>
       <UserAvatar
         icon={dapp.image && dapp.image.icon}

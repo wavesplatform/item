@@ -13,11 +13,10 @@ interface IProps extends Omit<WrapperProps, 'value'> {
   value: number | string | BigNumber
 }
 
-const Price = ({ value, ...rest }: IProps) => {
+export const Price = ({ value, ...rest }: IProps) => {
   const valueBn = new BigNumber(value)
 
   return (
-    // @ts-ignore
     <Wrapper {...rest}>
       <Flex alignItems={'center'}>
         <Text mr={'xs'}>{valueBn.toFixed()}</Text>

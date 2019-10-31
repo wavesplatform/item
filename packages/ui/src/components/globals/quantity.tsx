@@ -14,7 +14,7 @@ interface IProps extends Omit<WrapperProps, 'value'> {
   value: number | string | BigNumber
 }
 
-const Quantity = ({ value, ...rest }: IProps) => {
+export const Quantity = ({ value, ...rest }: IProps) => {
   const valueBn = value && new BigNumber(value)
 
   if (!valueBn) {
@@ -25,7 +25,6 @@ const Quantity = ({ value, ...rest }: IProps) => {
 
   if (valueBn.gt(1)) {
     return (
-      // @ts-ignore
       <Wrapper {...rest}>
         <Flex alignItems={'center'}>
           <Text mr={'xs'}>{valueBn.toFixed()}</Text>

@@ -27,8 +27,14 @@ export default {
     'react-dom',
     '@emotion/core',
     '@emotion/styled',
+    '@emotion/styled-base',
+    '@emotion/memoize',
+    '@emotion/is-prop-valid',
     'rebass',
+    '@rebass/forms',
     'styled-system',
+    '@styled-system/css',
+    '@styled-system/should-forward-prop',
     'polished',
     'identity-img',
     '@waves/bignumber',
@@ -38,7 +44,7 @@ export default {
     url(),
     typescript({
       tsconfig: 'tsconfig.build.json',
-      tsconfigOverride: { compilerOptions: { target: 'esnext' } },
+      tsconfigOverride: { compilerOptions: { target: 'esnext', jsx: 'preserve' } },
       clean: true,
     }),
     babel({

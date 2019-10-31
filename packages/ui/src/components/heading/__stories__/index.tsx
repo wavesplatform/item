@@ -21,7 +21,8 @@ storiesOf('Heading', module)
     <Flex alignItems={'flex-start'} flexDirection={'column'}>
       <UserHeading user={user} size={'sm'} mb={'md'}/>
       <UserHeading user={user} mb={'md'}/>
-      <UserHeading user={user} size={'lg'}/>
+      <UserHeading user={user} size={'lg'} mb={'md'}/>
+      <UserHeading user={user} flexDirection={'row-reverse'}/>
     </Flex>
   ))
   .add('Dapp', () => (

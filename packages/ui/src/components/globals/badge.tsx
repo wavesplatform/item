@@ -10,8 +10,7 @@ const StyledBadge = styled(Box)<BoxProps & BordersProps>`
   ${borders}
 `
 
-const Badge = (props: PropsWithChildren<BoxProps>) => (
-  // @ts-ignore
+export const Badge = (props: PropsWithChildren<BoxProps>) => (
   <StyledBadge
     as={'span'}
     p={'xs'}

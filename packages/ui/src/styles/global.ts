@@ -1,18 +1,49 @@
 import { css } from '@emotion/core'
 
+// We need interface for our theme
 // @ts-ignore
 export const globalStyle = theme => css`
-  ${reset}
+  ${reset};
+  ${keyframes};
   
   html {
     line-height: ${theme.lineHeights.body};
   }
   
   body {
+    font-family: ${theme.fonts.body};
     font-size: ${theme.fontSizes.body}px;
     font-weight: ${theme.fontWeights.body};
     color: ${theme.colors.text};
     background-color: ${theme.colors.background};
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    margin-bottom: ${theme.space.md}px;
+  }
+`
+
+const keyframes = css`
+  @keyframes rotate {
+    100% {
+      -webkit-transform: rotate(360deg);
+              transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes dash {
+    0% {
+      stroke-dasharray: 1, 150;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -35;
+    }
+    100% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -124;
+    }
   }
 `
 

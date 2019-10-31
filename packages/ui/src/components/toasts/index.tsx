@@ -18,13 +18,12 @@ const toastStyle = variant({
 })
 
 const StyledToast = styled(Box)<TProps>`
-  ${borders}
-  ${alignItems}
-  ${toastStyle}
+  ${borders};
+  ${alignItems};
+  ${toastStyle};
 `
 
 export const Toast = (props: TProps) =>
-  // @ts-ignore
   <StyledToast
     variant={'default'}
     px={4}
@@ -32,6 +31,4 @@ export const Toast = (props: TProps) =>
     borderRadius={'md'}
     alignItems={'center'}
     {...props}
-  >
-    {props.children}
-  </StyledToast>
+  />

@@ -24,7 +24,7 @@ const Wrapper = styled(Box, {
   border-radius: 50%;
   overflow: hidden;
   
-  ${avatarStyle}
+  ${avatarStyle};
 `
 
 export interface AvatarProps extends WrapperProps {
@@ -40,7 +40,6 @@ const StyledAvatar = styled(Image)`
 
 export const Avatar = ({ src, size, ...rest }: AvatarProps) => {
   return (
-    // @ts-ignore
     <Wrapper
       bg={'secondary'}
       // TODO: emotion styled is not working correctly

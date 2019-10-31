@@ -10,9 +10,7 @@ const iconStyle = variant({
   },
 })
 
-type WrapperProps = BoxProps & {
-  variant?: string
-}
+type WrapperProps = BoxProps
 const Wrapper = styled(Box)<WrapperProps>`
   display: inline-block;
   position: relative;
@@ -41,7 +39,6 @@ const StyledIcon = styled('svg')`
 `
 
 export const Icon = ({ glyph, ...rest }: IProps) => (
-  // @ts-ignore
   <Wrapper {...rest}>
     <StyledIcon viewBox='0 0 32 32'>
       <title>{glyph}</title>

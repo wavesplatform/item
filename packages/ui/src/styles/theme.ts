@@ -1,4 +1,4 @@
-import { buttonVariant } from './mixins'
+import { buttonVariant, fades } from './mixins'
 
 export type StyleSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
@@ -14,7 +14,7 @@ const preset: any = {
   colors: {
     white: '#ffffff',
     black: '#050c19',
-    blue: '#2254F5',
+    blue: '#204AC6',
     green: '#28a745',
     red: '#dc3545',
     yellow: '#efc62d',
@@ -48,6 +48,10 @@ fontWeights.body = fontWeights[1]
 fontWeights.heading = fontWeights[2]
 fontWeights.bold = fontWeights[2]
 
+// Fades
+colors.whites = fades(colors.white)
+colors.blacks = fades(colors.black)
+
 colors.text = colors.grays[0]
 colors.background = colors.black
 colors.primary = colors.blue
@@ -75,34 +79,72 @@ radii.xl = radii[4]
 radii.circle = 99999
 
 const buttons = {
-  primary: {
-    ...buttonVariant(colors.primary),
+  primary: { ...buttonVariant(colors.primary) },
+  secondary: { ...buttonVariant(colors.secondary) },
+  success: { ...buttonVariant(colors.success) },
+  danger: { ...buttonVariant(colors.danger) },
+  warn: { ...buttonVariant(colors.warn) },
+  info: { ...buttonVariant(colors.info) },
+  light: { ...buttonVariant(colors.light), color: colors.dark },
+  dark: { ...buttonVariant(colors.dark) },
+}
+
+const forms = {
+  field: {
+    borderWidth: '2px',
+    borderColor: 'grays.7',
+    px: 'md',
+    py: 'sm',
+    borderRadius: 'md',
+    outline: 'none',
+    '::placeholder': {
+      color: 'grays.4',
+    },
+    '&:focus, &:focus-within': {
+      borderColor: 'grays.6',
+      boxShadow: `0 0 0 1px ${colors.grays[6]}`,
+    },
   },
-  secondary: {
-    ...buttonVariant(colors.secondary),
+  flatField: {
+    variant: 'forms.field',
+    borderColor: 'transparent',
+    bg: 'grays.8',
+    '&:focus, &:focus-within': {
+      borderColor: 'transparent',
+      boxShadow: 'none',
+    },
   },
-  success: {
-    ...buttonVariant(colors.success),
+  input: {
+    variant: 'forms.field',
+    flat: {
+      variant: 'forms.flatField',
+    },
   },
-  danger: {
-    ...buttonVariant(colors.danger),
+}
+
+const dropdown = {
+  list: {
+    bg: 'background',
+    borderWidth: '1px',
+    borderStyle: 'solid',
+    borderColor: 'grays.7',
   },
-  warn: {
-    ...buttonVariant(colors.warn),
-  },
-  info: {
-    ...buttonVariant(colors.info),
-  },
-  light: {
-    ...buttonVariant(colors.light),
-    color: colors.dark,
-  },
-  dark: {
-    ...buttonVariant(colors.dark),
+  item: {
+    borderColor: 'grays.7',
+
+    active: {
+      bg: 'grays.8',
+    },
+
+    '&:hover, &:focus': {
+      variant: 'dropdown.item.active',
+    },
   },
 }
 
 export const baseTheme = {
   ...preset,
   buttons,
+  forms,
+  dropdown,
 }

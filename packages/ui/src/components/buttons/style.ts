@@ -34,7 +34,7 @@ export const StyledButton = styled(Button, {
   cursor: ${props => (props.disabled ? 'default' : 'pointer')};
   opacity: ${props => (props.disabled ? .5 : 1)};
   
-  ${borders}
-  ${fontWeight}
-  ${buttonSizeStyle}
+  ${borders};
+  ${fontWeight};
+  ${buttonSizeStyle};
 `

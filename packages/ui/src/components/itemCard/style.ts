@@ -12,7 +12,7 @@ export const StyledItemCard = styled(Box)<BoxProps & BordersProps>`
   background-clip: border-box;
   transition: background-color .2s ease-out;
   
-  ${borders}
+  ${borders};
 `
 
 export const Title = styled(Heading)<HeadingProps>`

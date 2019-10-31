@@ -10,14 +10,17 @@ interface IProps extends WrapperProps {
 }
 
 export const UserHeading = ({ user, size = 'md', ...rest }: IProps) => {
+  const reversed = rest.flexDirection === 'row-reverse'
   return (
-    // @ts-ignore
     <Wrapper {...rest}>
       <UserAvatar
         icon={user.image && user.image.icon}
         address={user.address}
         size={size}
-        mr={size}
+        sx={{
+          mr: reversed ? 0 : size,
+          ml: reversed ? size : 0,
+        }}
       />
       <Title
         as={'h2'}

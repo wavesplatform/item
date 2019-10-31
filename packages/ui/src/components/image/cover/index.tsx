@@ -1,5 +1,5 @@
 import React from 'react'
-import { Wrapper, StyledImage, WrapperProps } from './style'
+import { StyledImage, Wrapper, WrapperProps } from './style'
 
 interface IProps extends WrapperProps {
   src?: string
@@ -10,7 +10,6 @@ export const CoverImage = ({ src, editable, ...rest }: IProps) => {
   const isEmpty = !src
 
   return (
-    // @ts-ignore
     <Wrapper
       isEmpty={isEmpty}
       borderRadius={'lg'}
