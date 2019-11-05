@@ -5,12 +5,12 @@ import { IDapp } from '@item/types'
 import { Box } from 'rebass'
 import { StyleSize } from '../../styles'
 
-interface IProps extends WrapperProps {
+export interface DappHeadingProps extends WrapperProps {
   dapp: IDapp
   size?: StyleSize
 }
 
-export const DappHeading = ({ dapp, size = 'md', ...rest }: IProps) => {
+export const DappHeading = ({ dapp, size = 'md', ...rest }: DappHeadingProps) => {
   const meta = dapp.meta
   const isExtended = ['xl', 'lg'].includes(size)
   return (

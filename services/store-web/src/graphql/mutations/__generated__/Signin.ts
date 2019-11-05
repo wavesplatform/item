@@ -2,14 +2,14 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { SigninUser, UserRole } from './../../../__generated__/globalTypes'
+import { SigninUser, UserRole } from "./../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL mutation operation: Signin
 // ====================================================
 
 export interface Signin_signin_user {
-  __typename: 'User';
+  __typename: "User";
   id: string;
   address: string;
   name: string | null;
@@ -18,7 +18,7 @@ export interface Signin_signin_user {
 }
 
 export interface Signin_signin {
-  __typename: 'AuthPayload';
+  __typename: "AuthPayload";
   token: string;
   user: Signin_signin_user;
 }

@@ -2,14 +2,14 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { DappInfo } from './../../../__generated__/globalTypes'
+import { DappInfo } from "./../../../__generated__/globalTypes";
 
 // ====================================================
-// GraphQL mutation operation: UpdateGameInfo
+// GraphQL mutation operation: UpdateDappInfo
 // ====================================================
 
-export interface UpdateGameInfo_updateDappInfo {
-  __typename: 'User';
+export interface UpdateDappInfo_updateDappInfo {
+  __typename: "User";
   id: string;
   address: string;
   name: string | null;
@@ -18,10 +18,10 @@ export interface UpdateGameInfo_updateDappInfo {
   totalItems: number | null;
 }
 
-export interface UpdateGameInfo {
-  updateDappInfo: UpdateGameInfo_updateDappInfo;
+export interface UpdateDappInfo {
+  updateDappInfo: UpdateDappInfo_updateDappInfo;
 }
 
-export interface UpdateGameInfoVariables {
+export interface UpdateDappInfoVariables {
   input: DappInfo;
 }

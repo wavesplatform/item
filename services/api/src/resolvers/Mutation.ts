@@ -55,26 +55,6 @@ export const Mutation: MutationResolvers.Type = {
     })
   },
 
-  updateTestRole: (parent, { enable }, ctx) => {
-    const { address, permissions } = ctx.me
-
-    // Add dapp permissions
-    const newPermissions = permissions.filter(p => p !== 'DAPP')
-    if (enable) {
-      newPermissions.push('DAPP')
-    }
-
-    return ctx.prisma.updateUser({
-      where: {
-        address,
-      },
-      data: {
-        role: enable ? 'TEST' : 'USER',
-        permissions: { set: newPermissions },
-      },
-    })
-  },
-
   updateDappInfo: async (parent, { input }, ctx) => {
     const { name, url, description } = input
     const { address } = ctx.me

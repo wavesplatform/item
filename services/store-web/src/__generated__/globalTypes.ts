@@ -8,7 +8,6 @@
 
 export enum UserRole {
   DAPP = "DAPP",
-  TEST = "TEST",
   USER = "USER",
 }
 
@@ -24,7 +23,6 @@ export interface ItemFilter {
   dappAddress?: string | null;
   searchString?: string | null;
   inclusions?: string[] | null;
-  creatorRole?: string | null;
 }
 
 export interface SigninUser {

@@ -20,7 +20,7 @@ const Switch = (props: TSwitchProps) => {
 
   if (
     me &&
-    (!isDapp || (isDapp && me.role && [UserRole.DAPP, UserRole.TEST].includes(me.role as UserRole)))
+    (!isDapp || (isDapp && me.role && [UserRole.DAPP].includes(me.role as UserRole)))
   ) {
     return <Component {...rest}/>
   } else {

@@ -8,12 +8,12 @@ import { DappHeading } from '../heading'
 
 export type ItemCardStyle = 'base' | 'short'
 
-interface IProps {
+export interface ItemCardProps {
   item: IItem
   style?: ItemCardStyle
 }
 
-export const ItemCard = ({ item, style, ...rest }: IProps) => {
+export const ItemCard = ({ item, style, ...rest }: ItemCardProps) => {
   const isShort = style === 'short'
   const { imageUrl, storageImageUrl, name } = item.params
   const image = storageImageUrl || imageUrl || emptyImage

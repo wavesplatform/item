@@ -2,9 +2,10 @@ import React from 'react'
 import { StyledButton, StyledButtonProps } from './style'
 import { Icon } from '../icon'
 
-type TButtonProps = StyledButtonProps
+export interface ButtonProps extends StyledButtonProps {
+}
 
-export const Button = (props: TButtonProps) => (
+export const Button = (props: ButtonProps) => (
   <StyledButton
     type={'button'}
     borderRadius={'md'}
@@ -23,11 +24,11 @@ export const Button = (props: TButtonProps) => (
   </StyledButton>
 )
 
-type TIconButtonProps = TButtonProps & {
+export interface IconButtonProps extends ButtonProps {
   glyph: string
 }
 
-export const IconButton = ({ glyph, ...rest }: TIconButtonProps) => (
+export const IconButton = ({ glyph, ...rest }: IconButtonProps) => (
   <Button
     borderRadius={'circle'}
     px={0}

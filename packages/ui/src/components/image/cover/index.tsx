@@ -1,12 +1,12 @@
 import React from 'react'
 import { StyledImage, Wrapper, WrapperProps } from './style'
 
-interface IProps extends WrapperProps {
+export interface CoverImageProps extends WrapperProps {
   src?: string
   editable?: boolean
 }
 
-export const CoverImage = ({ src, editable, ...rest }: IProps) => {
+export const CoverImage = ({ src, editable, ...rest }: CoverImageProps) => {
   const isEmpty = !src
 
   return (

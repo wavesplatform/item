@@ -2,14 +2,14 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { UserInfo, UserRole } from './../../../__generated__/globalTypes'
+import { UserInfo, UserRole } from "./../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL mutation operation: UpdateUserInfo
 // ====================================================
 
 export interface UpdateUserInfo_updateUserInfo {
-  __typename: 'User';
+  __typename: "User";
   id: string;
   address: string;
   name: string | null;

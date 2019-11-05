@@ -4,12 +4,12 @@ import { IUser } from '@item/types'
 import { UserAvatar } from '../image'
 import { StyleSize } from '../../styles/theme'
 
-interface IProps extends WrapperProps {
+export interface UserHeadingProps extends WrapperProps {
   user: IUser
   size?: StyleSize
 }
 
-export const UserHeading = ({ user, size = 'md', ...rest }: IProps) => {
+export const UserHeading = ({ user, size = 'md', ...rest }: UserHeadingProps) => {
   const reversed = rest.flexDirection === 'row-reverse'
   return (
     <Wrapper {...rest}>

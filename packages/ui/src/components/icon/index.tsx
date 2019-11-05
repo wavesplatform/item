@@ -21,7 +21,7 @@ const Wrapper = styled(Box)<WrapperProps>`
   ${iconStyle};
 `
 
-interface IProps extends BoxProps {
+export interface IconProps extends BoxProps {
   glyph: string
 }
 
@@ -38,7 +38,7 @@ const StyledIcon = styled('svg')`
   fill: currentColor;
 `
 
-export const Icon = ({ glyph, ...rest }: IProps) => (
+export const Icon = ({ glyph, ...rest }: IconProps) => (
   <Wrapper {...rest}>
     <StyledIcon viewBox='0 0 32 32'>
       <title>{glyph}</title>

@@ -2,12 +2,12 @@ import React from 'react'
 import { generateAvatar } from '../../../helpers/avatar'
 import { Avatar, AvatarProps } from './avatar'
 
-interface IProps extends AvatarProps {
+export interface UserAvatarProps extends AvatarProps {
   address: string
   icon?: string
 }
 
-export const UserAvatar = ({ size, icon, address, ...rest }: IProps) => {
+export const UserAvatar = ({ size, icon, address, ...rest }: UserAvatarProps) => {
   const imageUri = icon ? icon : generateAvatar(address)
 
   return (

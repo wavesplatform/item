@@ -7,12 +7,12 @@ import emptyImage from '../image/empty.svg'
 
 export type DappCardStyle = 'base' | 'short'
 
-interface IProps {
+export interface DappCardProps {
   dapp: IDapp
   style?: DappCardStyle
 }
 
-export const DappCard = (props: IProps) => {
+export const DappCard = (props: DappCardProps) => {
   const { dapp } = props
   const image = (dapp.image && dapp.image.page) || emptyImage
 

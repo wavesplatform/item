@@ -8,6 +8,9 @@
 
 export interface itemParamsInfo {
   __typename: "ItemParams";
+  txId: string;
+  name: string;
+  version: number;
   imageUrl: string;
   storageImageUrl: string | null;
   misc: any | null;

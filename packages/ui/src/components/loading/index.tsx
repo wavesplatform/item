@@ -3,10 +3,10 @@ import { StyledLoading, StyledLoadingProps } from './style'
 import Spinner from './spinner'
 import { Text } from 'rebass'
 
-interface IProps extends StyledLoadingProps {
+export interface LoadingProps extends StyledLoadingProps {
 }
 
-export const Loading = (props: PropsWithChildren<IProps>) => (
+export const Loading = (props: PropsWithChildren<LoadingProps>) => (
   <StyledLoading
     alignItems={'center'}
     flexDirection={'column'}

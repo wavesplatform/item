@@ -12,12 +12,11 @@ export const Query: QueryResolvers.Type = {
   items: async (parent, { filter, orderBy, first, after }, ctx) => {
     const where: ItemWhereInput = filter
       ? {
-          // Dapp filter
-          dapp: {
-            address: filter.dappAddress,
-            role: filter.creatorRole as UserRole,
-          },
-        }
+        // Dapp filter
+        dapp: {
+          address: filter.dappAddress,
+        },
+      }
       : {}
 
     // Inclusions

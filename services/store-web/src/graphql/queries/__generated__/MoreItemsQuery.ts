@@ -2,21 +2,24 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { ItemFilter } from './../../../__generated__/globalTypes'
+import { ItemFilter } from "./../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL query operation: MoreItemsQuery
 // ====================================================
 
 export interface MoreItemsQuery_items_edges_node_params {
-  __typename: 'ItemParams';
+  __typename: "ItemParams";
+  txId: string;
+  name: string;
+  version: number;
   imageUrl: string;
   storageImageUrl: string | null;
   misc: any | null;
 }
 
 export interface MoreItemsQuery_items_edges_node_dapp {
-  __typename: 'User';
+  __typename: "User";
   id: string;
   address: string;
   name: string | null;
@@ -26,7 +29,7 @@ export interface MoreItemsQuery_items_edges_node_dapp {
 }
 
 export interface MoreItemsQuery_items_edges_node {
-  __typename: 'Item';
+  __typename: "Item";
   id: string;
   txId: string;
   name: string;
@@ -38,19 +41,19 @@ export interface MoreItemsQuery_items_edges_node {
 }
 
 export interface MoreItemsQuery_items_edges {
-  __typename: 'ItemEdge';
+  __typename: "ItemEdge";
   cursor: string;
   node: MoreItemsQuery_items_edges_node;
 }
 
 export interface MoreItemsQuery_items_pageInfo {
-  __typename: 'PageInfo';
+  __typename: "PageInfo";
   hasNextPage: boolean;
   endCursor: string | null;
 }
 
 export interface MoreItemsQuery_items {
-  __typename: 'ItemConnection';
+  __typename: "ItemConnection";
   edges: MoreItemsQuery_items_edges[] | null;
   pageInfo: MoreItemsQuery_items_pageInfo;
 }

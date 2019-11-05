@@ -1,7 +1,7 @@
 import { IDapp } from './dapp'
 
 export interface IItemParams {
-  txId: string
+  txId?: string
   version?: number
   name: string
   imageUrl: string

@@ -1,4 +1,4 @@
-export type UserRole = 'USER' | 'TEST' | 'DAPP'
+export type UserRole = 'USER' | 'DAPP'
 
 export interface UserImages {
   icon: string

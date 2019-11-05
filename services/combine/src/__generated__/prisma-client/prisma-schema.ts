@@ -2053,7 +2053,6 @@ type UserPreviousValues {
 
 enum UserRole {
   USER
-  TEST
   DAPP
 }
 

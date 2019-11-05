@@ -3,7 +3,7 @@ import { Box, BoxProps } from 'rebass'
 import { alignItems, AlignItemsProps, borders, BordersProps, variant } from 'styled-system'
 import styled from '@emotion/styled'
 
-type TProps = BoxProps & BordersProps & AlignItemsProps & {
+export interface ToastProps extends BoxProps, BordersProps, AlignItemsProps {
   variant?: string
 }
 
@@ -17,13 +17,13 @@ const toastStyle = variant({
   },
 })
 
-const StyledToast = styled(Box)<TProps>`
+const StyledToast = styled(Box)<ToastProps>`
   ${borders};
   ${alignItems};
   ${toastStyle};
 `
 
-export const Toast = (props: TProps) =>
+export const Toast = (props: ToastProps) =>
   <StyledToast
     variant={'default'}
     px={4}

@@ -43,6 +43,10 @@ fontSizes.md = fontSizes[2]
 fontSizes.lg = fontSizes[3]
 fontSizes.xl = fontSizes[4]
 fontSizes.body = fontSizes.md
+fontSizes.h1 = fontSizes.xl
+fontSizes.h2 = fontSizes.lg
+fontSizes.h3 = fontSizes.md
+fontSizes.h4 = fontSizes.md
 
 fontWeights.body = fontWeights[1]
 fontWeights.heading = fontWeights[2]

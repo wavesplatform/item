@@ -3,10 +3,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GamesQuery
+// GraphQL query operation: DappsQuery
 // ====================================================
 
-export interface GamesQuery_dapps {
+export interface DappsQuery_dapps {
   __typename: "User";
   id: string;
   address: string;
@@ -16,6 +16,6 @@ export interface GamesQuery_dapps {
   totalItems: number | null;
 }
 
-export interface GamesQuery {
-  dapps: GamesQuery_dapps[];
+export interface DappsQuery {
+  dapps: DappsQuery_dapps[];
 }

@@ -1,7 +1,7 @@
-import React, { Component, ReactNode } from 'react'
+import React, { useEffect } from 'react'
 import { Container, Section, ViewContainer, ViewWrapper } from '../../components/layout'
-import { RouteComponentProps } from 'react-router'
-import { Subscription, timer } from 'rxjs'
+import { useHistory } from 'react-router'
+import { Subject, timer } from 'rxjs'
 import { Box, Flex, Heading, Text } from 'rebass'
 import { Link as RouterLink } from 'react-router-dom'
 import queryString from 'query-string'
@@ -10,88 +10,85 @@ import { Button, themeGet } from '@item/ui'
 import Support from '../../components/support'
 import styled from '@emotion/styled'
 import Search from './components/search'
+import { debounce } from 'rxjs/operators'
 
-class HomeView extends Component<RouteComponentProps> {
-  _searchSub?: Subscription
+const searchParam$ = new Subject<string>()
 
-  componentWillUnmount(): void {
-    if (this._searchSub) {
-      this._searchSub.unsubscribe()
-    }
-  }
+export const HomeView = () => {
+  const history = useHistory()
 
-  render(): ReactNode {
-    return (
-      <ViewWrapper>
-        <Section
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Container>
-            <Heading as={'h1'} textAlign={'center'} mb={6}>
-              A safe place to trade <Text color={'primary'} as={'span'}>your</Text> digital posessions.
-            </Heading>
-            <Container maxWidth={'840px'}>
-              <Search onSearch={this._onSearch}/>
-            </Container>
-            <Box mt={'xl'}>
-              <Stats/>
-            </Box>
-          </Container>
-        </Section>
-        <ItemsSection>
-          <ViewContainer>
-            <Box mt={'xl'}>
-              <ItemsWrapper>
-                <ItemsWrapperInner>
-                  items
-                </ItemsWrapperInner>
-              </ItemsWrapper>
-            </Box>
-            <Flex mt={'xl'} justifyContent={'center'}>
-              <RouterLink to={'/items'}>
-                <Button size={'lg'} width={'128px'} variant={'primary'}>Show All</Button>
-              </RouterLink>
-            </Flex>
-          </ViewContainer>
-        </ItemsSection>
-        <Section>
-          <ViewContainer>
-            <Title>Popular Dapps</Title>
-            dapps
-          </ViewContainer>
-        </Section>
-        <Section>
-          <ViewContainer>
-            <Support/>
-          </ViewContainer>
-        </Section>
-      </ViewWrapper>
-    )
-  }
+  useEffect(() => {
+    const searchParamSub = searchParam$
+      .pipe(
+        debounce(() => timer(200))
+      )
+      .subscribe(search => {
+        if (search.length < 3) return
 
-  _onSearch = (searchString: string) => {
-    const { history } = this.props
-
-    if (this._searchSub) {
-      this._searchSub.unsubscribe()
-    }
-
-    if (searchString.length < 3) {
-      return
-    }
-
-    this._searchSub = timer(200)
-      .subscribe(() => {
+        // Update state & url
         history.push({
           pathname: '/items',
-          search: queryString.stringify({ search: searchString }),
+          search: queryString.stringify({ search }),
         })
       })
-  }
+
+    return () => {
+      if (searchParamSub) {
+        searchParamSub.unsubscribe()
+      }
+    }
+  }, [history])
+
+  return (
+    <ViewWrapper>
+      <Section
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Container>
+          <Heading as={'h1'} textAlign={'center'} mb={6}>
+            A safe place to trade <Text color={'primary'} as={'span'}>your</Text> digital posessions.
+          </Heading>
+          <Container maxWidth={'840px'}>
+            <Search onSearch={newSearchString => searchParam$.next(newSearchString)}/>
+          </Container>
+          <Box mt={'xl'}>
+            <Stats/>
+          </Box>
+        </Container>
+      </Section>
+      <ItemsSection>
+        <ViewContainer>
+          <Box mt={'xl'}>
+            <ItemsWrapper>
+              <ItemsWrapperInner>
+                items
+              </ItemsWrapperInner>
+            </ItemsWrapper>
+          </Box>
+          <Flex mt={'xl'} justifyContent={'center'}>
+            <RouterLink to={'/items'}>
+              <Button size={'lg'} width={'128px'} variant={'primary'}>Show All</Button>
+            </RouterLink>
+          </Flex>
+        </ViewContainer>
+      </ItemsSection>
+      <Section>
+        <ViewContainer>
+          <Title>Popular Dapps</Title>
+          dapps
+        </ViewContainer>
+      </Section>
+      <Section>
+        <ViewContainer>
+          <Support/>
+        </ViewContainer>
+      </Section>
+    </ViewWrapper>
+  )
 }
 
 export default HomeView

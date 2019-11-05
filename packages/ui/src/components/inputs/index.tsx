@@ -17,7 +17,7 @@ const inputSizeStyle = variant({
   },
 })
 
-interface TextInputProps extends FlexProps {
+export interface TextInputProps extends FlexProps {
   defaultValue?: string
   value?: any
   placeholder?: string
@@ -39,7 +39,7 @@ export const TextInput = ({ children, variant = 'input', sx, ...rest }: TextInpu
   )
 }
 
-interface TextInputWithUnitProps extends TextInputProps {
+export interface TextInputWithUnitProps extends TextInputProps {
   unit?: string
 }
 
@@ -80,7 +80,7 @@ export const TextInputWithUnit = (
   )
 }
 
-interface TextInputWithIconProps extends TextInputProps {
+export interface TextInputWithIconProps extends TextInputProps {
   glyph?: string
 }
 

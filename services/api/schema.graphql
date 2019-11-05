@@ -6,7 +6,6 @@ scalar Upload
 
 enum UserRole {
   USER
-  TEST
   DAPP
 }
 
@@ -107,7 +106,6 @@ input ItemFilter {
   dappAddress: String
   searchString: String
   inclusions: [String!]
-  creatorRole: String
 }
 
 input SigninUser {
@@ -147,6 +145,5 @@ type Query {
 type Mutation {
   signin(input: SigninUser!): AuthPayload!
   updateUserInfo(input: UserInfo!): User! @auth
-  updateTestRole(enable: Boolean!): User! @auth(requires: COMMON)
   updateDappInfo(input: DappInfo!): User! @auth(requires: DAPP)
 }
