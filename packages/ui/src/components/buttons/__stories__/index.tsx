@@ -26,6 +26,6 @@ storiesOf('Button', module)
   .add('Icon', () => (
     <Box>
       <IconButton glyph={'search'} mr={'sm'}/>
-      <IconButton glyph={'filter'}/>
+      <IconButton glyph={'filter'} opacity={.4}/>
     </Box>
   ))

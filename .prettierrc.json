@@ -6,6 +6,6 @@
   "bracketSpacing": true,
   "jsxSingleQuote": true,
   "jsxBracketSameLine": true,
-  "trailingComma": "es5",
+  "trailingComma": "all",
   "proseWrap": "preserve"
 }

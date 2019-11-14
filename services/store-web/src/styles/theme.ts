@@ -1,4 +1,5 @@
 import { baseTheme } from '@item/ui'
+import { transparentize } from 'polished'
 
 const header = {
   bg: 'background',
@@ -9,20 +10,28 @@ const header = {
 }
 
 const navs = {
-  default: {
+  item: {
     color: 'text',
+
+    '&:hover, &:focus': {
+      bg: 'grays.8',
+    },
   },
-  active: {
+  itemActive: {
+    variant: 'navs.item',
     bg: 'grays.8',
   },
-  item: {
-    variant: 'navs.default',
-    '&:hover, &:focus': {
-      variant: 'navs.active',
-    },
-    active: {
-      variant: 'navs.active',
-    },
+}
+
+const modal = {
+  backdrop: {
+    bg: transparentize(.7, '#03060f'),
+    p: 'lg',
+  },
+  content: {
+    bg: 'grays.8',
+    borderRadius: 'lg',
+    p: 'xl',
   },
 }
 
@@ -30,4 +39,5 @@ export const theme = {
   ...baseTheme,
   header,
   navs,
+  modal,
 }

@@ -1,6 +1,14 @@
 import memoizee from 'memoizee'
 import { TIntent, TInvokeScriptTx } from '@item/types'
-import { address, base58Decode, base58Encode, base64Decode, publicKey, TChainId } from '@waves/ts-lib-crypto'
+import {
+  address,
+  base58Decode,
+  base58Encode,
+  base64Decode,
+  base64Encode,
+  publicKey,
+  TChainId,
+} from '@waves/ts-lib-crypto'
 import { config as globalConfig } from '@item/config'
 import { signWithKeeper } from '@item/utils'
 import { broadcast, getValueByKey } from './api'
@@ -13,7 +21,7 @@ export const sell = (
   priceAsset: string,
   price: number,
   chainId: TChainId = globalConfig.chainId,
-  dApp?: string
+  dApp?: string,
 ): TIntent<[TInvokeScriptTx]> => {
   const txs = memoizee(
     async (seed: string = ''): Promise<TInvokeScriptTx> => {
@@ -24,7 +32,7 @@ export const sell = (
       const tx = sellIntent(price, base58Decode(priceAsset)).invoke(seed, {
         payment: [{ amount, assetId }],
         chainId,
-        dApp,
+        ...(dApp ? { dApp } : {}),
       })
 
       if (!seed) {
@@ -32,7 +40,7 @@ export const sell = (
       }
 
       return { sender: address({ publicKey: senderPublicKey }, chainId), ...tx }
-    }
+    },
   )
 
   return {
@@ -48,7 +56,7 @@ export const buy = (
   lotId: string,
   amount: number,
   chainId: TChainId = globalConfig.chainId,
-  dApp?: string
+  dApp?: string,
 ): TIntent<[TInvokeScriptTx]> => {
   const txs = memoizee(
     async (seed: string = ''): Promise<TInvokeScriptTx> => {
@@ -62,7 +70,7 @@ export const buy = (
       const tx = buyIntent(lotId, amount).invoke(seed, {
         payment: [{ amount: price * amount, assetId: assetId === globalConfig.originWavesAssetId ? null : assetId }],
         chainId,
-        dApp,
+        ...(dApp ? { dApp } : {}),
       })
 
       if (!seed) {
@@ -70,7 +78,7 @@ export const buy = (
       }
 
       return { sender: address({ publicKey: senderPublicKey }, chainId), ...tx }
-    }
+    },
   )
 
   return {
@@ -85,7 +93,7 @@ export const buy = (
 export const cancel = (
   lotId: string,
   chainId: TChainId = globalConfig.chainId,
-  dApp?: string
+  dApp?: string,
 ): TIntent<[TInvokeScriptTx]> => {
   const txs = memoizee(
     async (seed: string = ''): Promise<TInvokeScriptTx> => {
@@ -102,7 +110,7 @@ export const cancel = (
       }
 
       return { sender: address({ publicKey: senderPublicKey }, chainId), ...tx }
-    }
+    },
   )
 
   return {

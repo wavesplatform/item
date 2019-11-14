@@ -31,9 +31,6 @@ export type StyledButtonProps = Omit<ButtonProps, 'size'> & BordersProps & FontW
 export const StyledButton = styled(Button, {
   shouldForwardProp: prop => prop !== 'size',
 })<StyledButtonProps>`
-  cursor: ${props => (props.disabled ? 'default' : 'pointer')};
-  opacity: ${props => (props.disabled ? .5 : 1)};
-  
   ${borders};
   ${fontWeight};
   ${buttonSizeStyle};

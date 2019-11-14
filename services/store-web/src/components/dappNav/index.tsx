@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { useLocation } from 'react-router'
-import { DappHeading, Loading } from '@item/ui'
+import { DappHeading, List, ListItem, Loading } from '@item/ui'
 import { IDapp } from '@item/types'
-import { Box, BoxProps, Flex } from 'rebass'
+import { Box, BoxProps } from 'rebass'
 import { DappsQuery } from '../../graphql/queries/__generated__/DappsQuery'
 import { useQuery } from '@apollo/react-hooks'
 import { getDappsQuery } from '../../graphql/queries/getDapps'
@@ -28,8 +28,9 @@ export const DappNav = (props: DappNavProps) => {
   }
 
   const dapps = (data && data.dapps) || []
-  const dappsList = (<Flex sx={{
+  const dappsList = (<List sx={{
       flexDirection: 'column',
+      borderWidth: 0,
     }}>
       {dapps.map(dapp => (<RouterLink
         to={{
@@ -38,9 +39,11 @@ export const DappNav = (props: DappNavProps) => {
         }}
         key={dapp.id}
       >
-        <DappHeading dapp={dapp as IDapp} size={'sm'}/>
+        <ListItem>
+          <DappHeading dapp={dapp as IDapp} size={'md'}/>
+        </ListItem>
       </RouterLink>))}
-    </Flex>
+    </List>
   )
 
   return <Box>{dappsList}</Box>

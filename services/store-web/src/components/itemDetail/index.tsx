@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
-import { ImageWrapper, Overview, StyledParamKey, ParamValue, } from './style'
+import { ImageWrapper, Overview, StyledParamKey, ParamValue } from './style'
 import { Box, BoxProps, Flex, FlexProps, Heading, HeadingProps, Image, Link, Text } from 'rebass'
 import { recordToArray } from '@item/utils'
 import { Button, DappHeading, IconButton, Quantity, IconButtonProps, defaultImage } from '@item/ui'
 import useCurrentUser from '../../hooks/currentUser'
 import { useHistory, useLocation } from 'react-router'
 import { ItemQuery_item } from '../../graphql/queries/__generated__/ItemQuery'
-import { IDapp } from '@item/types'
+import { IDapp, IItem } from '@item/types'
+import { OrderModal } from '../modals/order'
 
 type TProps = {
   item: ItemQuery_item
@@ -35,6 +36,15 @@ export const ItemDetail = ({ item, isPage, onClose }: TProps) => {
   delete misc['Description']
 
   const imageUrl = params.storageImageUrl || defaultImage
+
+  const authGuard = (next: () => void) => {
+    // Redirect if not auth
+    if (!me) {
+      history.push('/signin', { from: location.pathname })
+    } else {
+      next()
+    }
+  }
 
   return (
     <Flex sx={{ position: 'relative', flexDirection: isPage ? 'row-reverse' : 'row' }}>
@@ -70,17 +80,31 @@ export const ItemDetail = ({ item, isPage, onClose }: TProps) => {
         </ParamList>
         <Flex justifyContent={'space-between'} flexDirection={'column'}>
           <Button
-            onClick={() => {
-              // Redirect if not auth
-              if (!me) {
-                history.push('/signin', { from: location.pathname })
-              }
-
-              setSellModalActive(true)
-            }}
+            onClick={() => authGuard(() => setBuyModalActive(true))}
+            variant='primary'
+            mb={'md'}
+          >
+            Buy
+          </Button>
+          <Button
+            variant={'secondary'}
+            onClick={() => authGuard(() => setSellModalActive(true))}
           >
             Sell
           </Button>
+          <OrderModal
+            item={item as IItem}
+            type={'buy'}
+            lotId={'LOTID'}
+            isOpen={buyModalActive}
+            onClose={() => setBuyModalActive(false)}
+          />
+          <OrderModal
+            item={item as IItem}
+            type={'sell'}
+            isOpen={sellModalActive}
+            onClose={() => setSellModalActive(false)}
+          />
         </Flex>
         <Box mt={'base'}>
         </Box>
@@ -121,6 +145,10 @@ const DisplayButton = (props: IconButtonProps) =>
       opacity: .4,
       bg: 'transparent',
       fontSize: 'lg',
+      '&:hover, &:focus': {
+        bg: 'transparent',
+        opacity: 1,
+      },
     }}
   />
 

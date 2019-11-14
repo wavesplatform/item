@@ -26,7 +26,7 @@ export const Header = (props: TProps) => {
               {/*<LogoImage src={logo}/>*/}
               <Icon glyph={'layers'} mr={'xs'} color={'primary'} fontSize={'lg'}/>
               <Heading sx={{ fontSize: 'body', fontWeight: 'body' }}>
-                <Text as={'span'} mr={'xs'}>Item Market</Text>
+                <Text as={'span'} mr={'xs'}>Item Store</Text>
                 {config.chainId === 'T'
                   ? <Text as={'span'} color={'yellow'} fontSize={'sm'}>Testnet</Text>
                   : <Text as={'span'} color={'grays.4'} fontSize={'sm'}>Beta</Text>}
@@ -100,7 +100,8 @@ const ProfileItem = ({ user, ...rest }: { user: IUser } & BoxProps) => {
 
 const NavItem = ({ isActive, sx, ...rest }: FlexProps & { isActive?: boolean }) =>
   <Flex
-    variant={isActive ? 'navs.item.active' : 'navs.item'}
+    tx={'navs'}
+    variant={isActive ? 'itemActive' : 'item'}
     {...rest}
     sx={{
       alignItems: 'center',

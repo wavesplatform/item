@@ -22,6 +22,7 @@ local.log
 .idea/
 .vscode/
 *.sublime-*
+*.code-workspace
 
 # Misc
 .DS_Store

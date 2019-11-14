@@ -97,6 +97,7 @@ const forms = {
   field: {
     borderWidth: '2px',
     borderColor: 'grays.7',
+    bg: 'background',
     px: 'md',
     py: 'sm',
     borderRadius: 'md',
@@ -146,9 +147,43 @@ const dropdown = {
   },
 }
 
+const list = {
+  default: {
+    borderColor: 'grays.7',
+    borderStyle: 'solid',
+    borderWidth: '1px',
+  },
+  item: {
+    borderWidth: '1px 0 0',
+    borderColor: 'grays.7',
+
+    '&:hover, &:focus': {
+      bg: 'grays.8',
+    },
+  },
+  itemActive: {
+    variant: 'list.item',
+    bg: 'grays.8',
+  },
+}
+
+const modal = {
+  backdrop: {
+    bg: 'blacks.5',
+    p: 'lg',
+  },
+  content: {
+    bg: 'grays.8',
+    borderRadius: 'lg',
+    p: 'lg',
+  },
+}
+
 export const baseTheme = {
   ...preset,
   buttons,
   forms,
   dropdown,
+  list,
+  modal,
 }

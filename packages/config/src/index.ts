@@ -15,13 +15,17 @@ export interface IConfig {
   chainId: string
 
   originWavesAssetId: string
+  wavesAssetId: string,
   dappAddresses: IDappAddresses
 }
 
 export const config: IConfig = {
   chainId: process.env.CHAIN_ID || 'T',
-  originWavesAssetId: process.env.WAVES_ASSET_ID || '11111111111111111111111111111111',
-  dappAddresses: {},
+  originWavesAssetId: process.env.ORIGIN_WAVES_ASSET_ID || '11111111111111111111111111111111',
+  wavesAssetId: process.env.WAVES_ASSET_ID || 'WAVES',
+  dappAddresses: {
+    store: process.env.DAPP_ADDRESS_STORE || '3MrDcz4LFFjPhXdtu7YCqFSnHc3pD1tcWLa',
+  },
 }
 
 export default config

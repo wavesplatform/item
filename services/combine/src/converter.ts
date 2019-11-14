@@ -163,7 +163,7 @@ const getSellArgs = (args: CallArg[]): { price: number; priceAsset: string } => 
   const price = args[0].value
   const priceAssetBytes = base64Decode(args[1].value.replace('base64:', ''))
   const assetId = base58Encode(priceAssetBytes)
-  const priceAsset = assetId === globalConfig.originWavesAssetId ? 'WAVES' : assetId
+  const priceAsset = assetId === globalConfig.originWavesAssetId ? globalConfig.wavesAssetId : assetId
 
   return { price, priceAsset }
 }

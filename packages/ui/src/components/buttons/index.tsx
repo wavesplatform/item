@@ -5,41 +5,42 @@ import { Icon } from '../icon'
 export interface ButtonProps extends StyledButtonProps {
 }
 
-export const Button = (props: ButtonProps) => (
+export const Button = ({ sx, ...rest }: ButtonProps) => (
   <StyledButton
     type={'button'}
-    borderRadius={'md'}
-    px={'md'}
-    py={'sm'}
-    fontSize={'body'}
     variant={'primary'}
+    {...rest}
     sx={{
+      px: 'md',
+      py: 'sm',
+      fontSize: 'body',
+      borderRadius: 'md',
       borderWidth: '2px',
       borderStyle: 'solid',
       borderColor: 'transparent',
+      cursor: rest.disabled ? 'default' : 'pointer',
+      opacity: rest.disabled ? .5 : 1,
+      ...sx,
     }}
-    {...props}
-  >
-    {props.children}
-  </StyledButton>
+  />
 )
 
 export interface IconButtonProps extends ButtonProps {
   glyph: string
 }
 
-export const IconButton = ({ glyph, ...rest }: IconButtonProps) => (
+export const IconButton = ({ glyph, sx, ...rest }: IconButtonProps) => (
   <Button
-    borderRadius={'circle'}
-    px={0}
-    py={0}
-    fontSize={'lg'}
-    width={'40px'}
-    height={'40px'}
-    sx={{
-      lineHeight: 0,
-    }}
     {...rest}
+    sx={{
+      borderRadius: 'circle',
+      fontSize: 'lg',
+      p: 0,
+      width: '40px',
+      height: '40px',
+      lineHeight: 0,
+      ...sx,
+    }}
   >
     <Icon glyph={glyph}/>
   </Button>

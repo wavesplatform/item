@@ -11,7 +11,7 @@ import { signWithKeeper } from '@item/utils'
 
 export const create = <V extends ItemVersions>(
   params: ICreateParamsMap[V],
-  chainId: TChainId = globalConfig.chainId
+  chainId: TChainId = globalConfig.chainId,
 ): TIntent<[TIssueTx, TDataTx]> => {
   const txs = memoizee(
     async (seed: string = ''): Promise<[TIssueTx, TDataTx]> => {
@@ -23,7 +23,7 @@ export const create = <V extends ItemVersions>(
       }
 
       return txs
-    }
+    },
   )
 
   return {
@@ -37,7 +37,7 @@ export const create = <V extends ItemVersions>(
 
 export const update = <V extends ItemVersions>(
   params: IUpdateParamsMap[V],
-  chainId: TChainId = globalConfig.chainId
+  chainId: TChainId = globalConfig.chainId,
 ): TIntent<[TDataTx]> => {
   const txs = memoizee(
     async (seed: string = ''): Promise<[TDataTx]> => {
@@ -49,7 +49,7 @@ export const update = <V extends ItemVersions>(
       }
 
       return txs
-    }
+    },
   )
 
   return {
