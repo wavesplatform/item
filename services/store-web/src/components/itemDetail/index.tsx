@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { ImageWrapper, Overview, ParamValue, StyledParamKey } from './style'
 import { Box, BoxProps, Flex, FlexProps, Heading, HeadingProps, Image, Link, Text } from 'rebass'
 import { recordToArray } from '@item/utils'
-import { Button, DappHeading, getImageSrc, IconButton, IconButtonProps, Quantity } from '@item/ui'
+import { Button, DappHeading, getImageSrc, IconButton, IconButtonProps, Quantity, toWaves, Price } from '@item/ui'
 import useCurrentUser from '../../hooks/currentUser'
 import { useHistory, useLocation } from 'react-router'
 import { IDapp, IItem } from '@item/types'
 import { OrderModal } from '../modals/order'
 import LotTable from './lotTable'
+import { getProfitLot, ProfitPriceType } from '../../helpers/order'
 
 type TProps = {
   item: IItem
@@ -27,6 +28,9 @@ export const ItemDetail = ({ item, isPage, onClose }: TProps) => {
   const history = useHistory()
   const location = useLocation()
   const { params, dapp, lots } = item
+
+  const bestLot = lots && getProfitLot(lots, ProfitPriceType.Min)
+  const bestPrice = bestLot && toWaves(bestLot.price)
 
   // Copy of misc
   const misc = { ...params.misc }
@@ -78,13 +82,13 @@ export const ItemDetail = ({ item, isPage, onClose }: TProps) => {
             {miscParams(misc)}
           </ParamList>
           <Flex justifyContent={'space-between'} flexDirection={'column'}>
-            <Button
+            {bestPrice && <Button
               onClick={() => authGuard(() => setBuyModalActive(true))}
               variant='primary'
               mb={'md'}
             >
-              Buy
-            </Button>
+              Buy for <Price value={bestPrice}/>
+            </Button>}
             <Button
               variant={'secondary'}
               onClick={() => authGuard(() => setSellModalActive(true))}
@@ -94,7 +98,8 @@ export const ItemDetail = ({ item, isPage, onClose }: TProps) => {
             <OrderModal
               item={item as IItem}
               type={'buy'}
-              lotId={'LOTID'}
+              defaultPrice={bestPrice && bestPrice.toFixed()}
+              lotId={bestLot && bestLot.txId}
               isOpen={buyModalActive}
               onClose={() => setBuyModalActive(false)}
             />

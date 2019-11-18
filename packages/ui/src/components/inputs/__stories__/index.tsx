@@ -7,6 +7,7 @@ storiesOf('Inputs', module)
   .add('Text Input', () => (
     <Box>
       <TextInput placeholder={'Tommy Vercetti'} mb={'md'}>Name</TextInput>
+      <TextInput placeholder={'Tommy Vercetti'} disabled={true} mb={'md'}>Disabled</TextInput>
       <TextInput placeholder={'Tommy Vercetti'} variant={'input.flat'} mb={'md'}>Flat Input</TextInput>
       <TextInput placeholder={'Tommy Vercetti'} size={'lg'} mb={'md'}>Large Input</TextInput>
       <TextInput placeholder={'Without label'} mb={'md'}/>
@@ -19,6 +20,7 @@ storiesOf('Inputs', module)
   .add('With Unit', () => (
     <Box>
       <TextInputWithUnit placeholder={'123'} mb={'md'}>Value</TextInputWithUnit>
+      <TextInputWithUnit placeholder={'123'} disabled mb={'md'}>Value</TextInputWithUnit>
     </Box>
   ))
   .add('With Icon', () => (

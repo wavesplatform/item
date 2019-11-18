@@ -22,3 +22,13 @@ export interface IItem {
   params: IItemParams
   lots?: ILot[]
 }
+
+export interface ISearchItemObject {
+  objectID: string
+  id: string,
+  txId?: string
+  name?: string
+  quantity?: string | number
+  dapp?: IDapp
+  params?: IItemParams
+}

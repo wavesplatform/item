@@ -107,6 +107,7 @@ const forms = {
     },
     '&:focus, &:focus-within': {
       borderColor: 'grays.6',
+      borderStyle: 'solid',
       boxShadow: `0 0 0 1px ${colors.grays[6]}`,
     },
   },

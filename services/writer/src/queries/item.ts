@@ -15,3 +15,9 @@ export const deleteItem = (txId: string) => {
     txId,
   })
 }
+
+export const getItem = (txId: string) => {
+  return prisma.item({
+    txId,
+  })
+}

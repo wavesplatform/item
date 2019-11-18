@@ -1,11 +1,13 @@
 import { Job, queues } from '@item/queues'
-import * as Debug from 'debug'
-import { Operation, OPERATION_TYPE } from '@item/types'
+import Debug from 'debug'
+import { IItem, Operation, OPERATION_TYPE } from '@item/types'
 import { ItemCreateInput, ItemParamsCreateInput, LotCreateInput } from './__generated__/prisma-client'
 import { deleteItem, upsertItem } from './queries/item'
 import { deleteManyItemParamses, updateItemParams, upsertItemParams } from './queries/item-params'
 import { LotUpdateMutation } from './types'
 import { deleteLot, getLotByTxId, updateLot, upsertLot } from './queries/lot'
+import { saveItemObject } from './algolia/events/items'
+import { toSearchItemObject } from '@item/utils'
 
 const debug = Debug('writer')
 
@@ -38,6 +40,7 @@ const processItemOp = async ({ data: op }: Job<ItemOperation>) => {
         // We are sure that the creator of the item is already in db,
         // because our observer listens only to dapp from db
         await upsertItem(op.data)
+        // item && await saveItemObject(toSearchItemObject(item))
         break
       case OPERATION_TYPE.DELETE:
         debug(`➖ Deleting item ${op.txId}`)

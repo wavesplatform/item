@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react'
 import { Box, Flex, FlexProps } from 'rebass'
-import { Input, Label } from '@rebass/forms'
+import { Input, InputProps, Label } from '@rebass/forms'
 import { Icon } from '../icon'
 import { variant } from 'styled-system'
 import { StyleSize } from '../../styles'
@@ -33,20 +33,12 @@ export interface TextInputWithUnitProps extends TextInputProps {
 }
 
 export const TextInputWithUnit = ({ children, variant = 'input', unit, ...rest }: TextInputWithUnitProps) => {
-  const { id } = rest
+  const { id, disabled } = rest
 
   return (
     <Wrapper {...rest}>
       {children && <Label htmlFor={id} mb={'sm'}>{children}</Label>}
-      <StyledInput
-        as={'div'}
-        sx={{
-          display: 'flex',
-          alignItems: 'center',
-          p: 0,
-        }}
-        variant={variant}
-      >
+      <DummyInput variant={variant} disabled={disabled}>
         <InnerInput {...rest} variant={variant}/>
         <Flex
           sx={{
@@ -62,7 +54,7 @@ export const TextInputWithUnit = ({ children, variant = 'input', unit, ...rest }
         >
           {unit ? unit : 'Waves'}
         </Flex>
-      </StyledInput>
+      </DummyInput>
     </Wrapper>
   )
 }
@@ -74,21 +66,12 @@ export interface TextInputWithIconProps extends TextInputProps {
 export const TextInputWithIcon = (
   { children, variant = 'input', glyph, ...rest }: TextInputWithIconProps,
 ) => {
-  const { id } = rest
+  const { id, disabled } = rest
 
   return (
     <Wrapper {...rest}>
       {children && <Label htmlFor={id} mb={'sm'}>{children}</Label>}
-      <StyledInput
-        as={'div'}
-        sx={{
-          display: 'flex',
-          flexDirection: 'row-reverse',
-          alignItems: 'center',
-          p: 0,
-        }}
-        variant={variant}
-      >
+      <DummyInput sx={{ flexDirection: 'row-reverse' }} variant={variant} disabled={disabled}>
         <InnerInput {...rest} variant={variant}/>
         {glyph && <Box sx={{
           lineHeight: 1,
@@ -96,7 +79,7 @@ export const TextInputWithIcon = (
           fontSize: 'lg',
           color: 'grays.4',
         }}><Icon glyph={glyph}/></Box>}
-      </StyledInput>
+      </DummyInput>
     </Wrapper>
   )
 }
@@ -136,7 +119,10 @@ const FilledInput = (
     disabled={disabled}
     variant={variant}
     type={type}
-    sx={sx}
+    sx={{
+      opacity: disabled ? .5 : 1,
+      ...sx,
+    }}
     size={size}
   />
 
@@ -151,6 +137,21 @@ const InnerInput = (props: TextInputProps) =>
       '&:focus': { boxShadow: 'none' },
     }}
   />
+
+const DummyInput = ({ sx, ...rest }: InputProps) => {
+  const { disabled } = rest
+  return <StyledInput
+    as={'div'}
+    {...rest}
+    sx={{
+      display: 'flex',
+      alignItems: 'center',
+      p: 0,
+      opacity: disabled ? .5 : 1,
+      ...sx,
+    }}
+  />
+}
 
 const inputSizeStyle = variant({
   prop: 'size',

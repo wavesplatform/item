@@ -24,3 +24,9 @@ export const deleteManyItemParamses = (txId: string) => {
     txId,
   })
 }
+
+export const getItemParams = (paramsId: string) => {
+  return prisma.itemParams({
+    paramsId,
+  })
+}

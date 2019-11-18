@@ -9,6 +9,11 @@ const header = {
   zIndex: 3,
 }
 
+const footer = {
+  borderTop: '1px solid',
+  borderColor: 'grays.7',
+}
+
 const navs = {
   item: {
     color: 'text',
@@ -43,6 +48,7 @@ const modal = {
 export const theme = {
   ...baseTheme,
   header,
+  footer,
   navs,
   modal,
 }

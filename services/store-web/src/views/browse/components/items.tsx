@@ -8,7 +8,6 @@ import { Button, ItemCard, Loading, NullState } from '@item/ui'
 import { Grid } from '../../../components/layout'
 import { Link as RouterLink } from 'react-router-dom'
 import { IItem } from '@item/types'
-import Item from './item'
 
 type TProps = {
   address?: string
@@ -100,48 +99,11 @@ export const Items = ({ address, searchString, inclusions }: TProps) => {
   const itemGrid = (<Grid sx={{
       gridGap: 'lg',
       gridTemplateColumns: 'repeat(auto-fill, minmax(12rem, 1fr))',
-      gridAutoFlow: 'row dense',
     }}>
       {items.map(item => (
-        <>
-          <RouterLink
-            onClick={ev => {
-              ev.stopPropagation()
-              ev.preventDefault()
-              setAssetId(item.txId)
-            }}
-            to={`/item/${item.txId}`}
-            key={item.id}
-          >
-            <ItemCard
-              item={item as IItem}
-              sx={item.txId === assetId ? {
-                cursor: 'default',
-                backgroundColor: 'transparent',
-                backgroundImage: 'linear-gradient(0deg, transparent 5%, #111725)',
-                '&:hover': {
-                  backgroundColor: 'transparent',
-                },
-              } : {}}
-            />
-          </RouterLink>
-          {item.txId === assetId && <Box
-            sx={{
-              gridColumnStart: 1,
-              gridColumnEnd: -1,
-              px: 'xl',
-              py: 6,
-            }}
-            key={item.id}
-          >
-            <Box sx={{
-              mx: 'auto',
-              maxWidth: '720px',
-            }}>
-              <Item assetId={assetId} onClose={() => setAssetId('')}/>
-            </Box>
-          </Box>}
-        </>
+        <RouterLink to={`/item/${item.txId}`} key={item.id}>
+          <ItemCard item={item as IItem}/>
+        </RouterLink>
       ))}
     </Grid>
   )

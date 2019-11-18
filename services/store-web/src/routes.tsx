@@ -10,6 +10,7 @@ import BrowseView from './views/browse'
 import ItemView from './views/item'
 import ProfileView from './views/profile'
 import authFallback from './components/route/authFallback'
+import { Footer } from './components/footer'
 
 export const Body = styled(Box)`
   position: relative;
@@ -42,6 +43,7 @@ class Routes extends Component {
           {/*Not found*/}
           <Redirect from='*' to='/'/>
         </Switch>
+        <Route component={Footer}/>
       </Body>
     )
   }

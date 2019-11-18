@@ -23,6 +23,7 @@ export const Item: ItemResolvers.Type = {
     return ctx.prisma.lotsConnection({
       where: {
         item: { txId },
+        left_gt: 0,
         cancelled_not: true,
       },
       first: first ? Math.min(first, maxFirstPerRequest) : maxFirstPerRequest,

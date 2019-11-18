@@ -1,4 +1,4 @@
-import * as Debug from 'debug'
+import Debug from 'debug'
 import * as http from 'http'
 import { config } from './config'
 import { initProcessOperations } from './operations'
