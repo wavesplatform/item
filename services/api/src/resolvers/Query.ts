@@ -2,14 +2,15 @@ import { QueryResolvers } from '../__generated__/graphqlgen'
 import initIndex from '../helpers/algolia'
 import { ItemWhereInput, UserRole } from '../__generated__/prisma-client'
 import { SearchableItem } from '../types'
+import config from '../config'
 
 const itemsSearchIndex = initIndex('items')
-const maxFirstPerRequest = 20
+const maxFirstPerRequest = config.maxFirstPerRequest
 
 export const Query: QueryResolvers.Type = {
   ...QueryResolvers.defaultResolvers,
 
-  items: async (parent, { filter, orderBy, first, after }, ctx) => {
+  items: async (parent, { filter, orderBy, cursorInfo: { after, first } = {} }, ctx) => {
     const where: ItemWhereInput = filter
       ? {
         // Dapp filter
@@ -23,7 +24,7 @@ export const Query: QueryResolvers.Type = {
     if (filter && filter.inclusions) {
       const forSale = filter.inclusions.includes('sale')
       if (forSale) {
-        // where.lots_some = { stock_gt: 0 }
+        // where.lots_some = { left_gt: 0 }
       }
     }
 
@@ -34,7 +35,12 @@ export const Query: QueryResolvers.Type = {
     }
 
     const items = await ctx.prisma.itemsConnection({
-      where,
+      where: {
+        ...where,
+        params_some: {
+          id_not: null,
+        },
+      },
       first: first ? Math.min(first, maxFirstPerRequest) : maxFirstPerRequest,
       after,
       orderBy,
@@ -66,6 +72,16 @@ export const Query: QueryResolvers.Type = {
 
   inventory: (parent, args, ctx) => {
     throw new Error('Resolver not implemented')
+  },
+
+  lots: (parent, { filter: { seller } = {}, cursorInfo: { after, first } = {} }, ctx) => {
+    return ctx.prisma.lotsConnection({
+      where: {
+        seller: { address: seller },
+      },
+      first: first ? Math.min(first, maxFirstPerRequest) : maxFirstPerRequest,
+      after,
+    })
   },
 
   me: (parent, args, ctx) => {

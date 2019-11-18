@@ -1,4 +1,5 @@
 import { IDapp } from './dapp'
+import { ILot } from './lot'
 
 export interface IItemParams {
   txId?: string
@@ -19,4 +20,5 @@ export interface IItem {
   reissuable?: boolean
   timestamp?: string | number
   params: IItemParams
+  lots?: ILot[]
 }

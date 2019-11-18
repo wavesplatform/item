@@ -40,10 +40,10 @@ export const ProfileDropdown = (props: TProps) => {
           <Price value={toWaves(account.balance.available).toFixed(3)}/>
         </DropdownItem>}
         <RouterLink to={'/profile'}>
-          <DropdownItem>Inventory</DropdownItem>
+          <DropdownItem>Profile</DropdownItem>
         </RouterLink>
         <RouterLink to={'/dashboard'}>
-          <DropdownItem>Dashboard</DropdownItem>
+          <DropdownItem>Dapp</DropdownItem>
         </RouterLink>
         <DropdownItem sx={{ cursor: 'pointer' }} onClick={async () => {
           removeToken()

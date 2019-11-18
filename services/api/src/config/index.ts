@@ -12,6 +12,7 @@ export const config = {
     appId: process.env.ALGOLIA_APP_ID,
     apiSecret: process.env.ALGOLIA_API_SECRET,
   },
+  maxFirstPerRequest: 20,
 }
 
 export default config

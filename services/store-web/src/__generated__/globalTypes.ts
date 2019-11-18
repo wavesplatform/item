@@ -11,6 +11,11 @@ export enum UserRole {
   USER = "USER",
 }
 
+export interface CursorInfo {
+  after?: string | null;
+  first?: number | null;
+}
+
 export interface DappInfo {
   name?: string | null;
   url?: string | null;
@@ -23,6 +28,10 @@ export interface ItemFilter {
   dappAddress?: string | null;
   searchString?: string | null;
   inclusions?: string[] | null;
+}
+
+export interface LotFilter {
+  seller?: string | null;
 }
 
 export interface SigninUser {

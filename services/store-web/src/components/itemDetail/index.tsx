@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import { ImageWrapper, Overview, StyledParamKey, ParamValue } from './style'
+import { ImageWrapper, Overview, ParamValue, StyledParamKey } from './style'
 import { Box, BoxProps, Flex, FlexProps, Heading, HeadingProps, Image, Link, Text } from 'rebass'
 import { recordToArray } from '@item/utils'
-import { Button, DappHeading, IconButton, Quantity, IconButtonProps, defaultImage } from '@item/ui'
+import { Button, DappHeading, getImageSrc, IconButton, IconButtonProps, Quantity } from '@item/ui'
 import useCurrentUser from '../../hooks/currentUser'
 import { useHistory, useLocation } from 'react-router'
-import { ItemQuery_item } from '../../graphql/queries/__generated__/ItemQuery'
 import { IDapp, IItem } from '@item/types'
 import { OrderModal } from '../modals/order'
+import LotTable from './lotTable'
 
 type TProps = {
-  item: ItemQuery_item
+  item: IItem
   onClose?: () => void
   isPage?: boolean
 }
@@ -26,7 +26,7 @@ export const ItemDetail = ({ item, isPage, onClose }: TProps) => {
   const { me } = useCurrentUser()
   const history = useHistory()
   const location = useLocation()
-  const { params, dapp } = item
+  const { params, dapp, lots } = item
 
   // Copy of misc
   const misc = { ...params.misc }
@@ -34,8 +34,6 @@ export const ItemDetail = ({ item, isPage, onClose }: TProps) => {
   const description = misc['description'] || misc['Description']
   delete misc['description']
   delete misc['Description']
-
-  const imageUrl = params.storageImageUrl || defaultImage
 
   const authGuard = (next: () => void) => {
     // Redirect if not auth
@@ -47,93 +45,93 @@ export const ItemDetail = ({ item, isPage, onClose }: TProps) => {
   }
 
   return (
-    <Flex sx={{ position: 'relative', flexDirection: isPage ? 'row-reverse' : 'row' }}>
-      {/*Left Side*/}
-      <Box sx={{ flex: 1, minWidth: 0 }}>
-        <Flex alignItems={'start'} mb={'lg'} justifyContent={'space-between'}>
-          <Heading
-            mb={0}
-            flex={1}
-            as={isPage ? 'h1' : 'h2'}
-          >
-            {item.name}
-          </Heading>
-          {!isPage && <Flex ml={'base'} mt={'2px'}>
-            <Link href={`/item/${item.txId}`} target='_blank'>
-              <DisplayButton glyph={'tab_unselected'}/>
-            </Link>
-            {onClose && <DisplayButton glyph={'call_received'} ml={'xs'} onClick={onClose}/>}
-          </Flex>}
-        </Flex>
-        <Box mb={'lg'}>
-          <DappHeading dapp={dapp as IDapp} size={'sm'}/>
+    <>
+      <Flex sx={{ position: 'relative', flexDirection: isPage ? 'row-reverse' : 'row' }}>
+        {/*Left Side*/}
+        <Box sx={{ flex: 1, minWidth: 0 }}>
+          <Flex alignItems={'start'} mb={'lg'} justifyContent={'space-between'}>
+            <Heading
+              mb={0}
+              flex={1}
+              as={isPage ? 'h1' : 'h2'}
+            >
+              {item.name}
+            </Heading>
+            {!isPage && <Flex ml={'base'} mt={'2px'}>
+              <Link href={`/item/${item.txId}`} target='_blank'>
+                <DisplayButton glyph={'tab_unselected'}/>
+              </Link>
+              {onClose && <DisplayButton glyph={'call_received'} ml={'xs'} onClick={onClose}/>}
+            </Flex>}
+          </Flex>
+          <Box mb={'lg'}>
+            <DappHeading dapp={dapp as IDapp} size={'sm'}/>
+          </Box>
+          {description && <Text color={'grays.2'} mb={'lg'}>{description}</Text>}
+          <ParamList width={1} mb={'lg'}>
+            {item.quantity && <Param>
+              <ParamKey>Quantity</ParamKey>
+              <ParamValue>
+                <Quantity value={item.quantity}/>
+              </ParamValue>
+            </Param>}
+            {miscParams(misc)}
+          </ParamList>
+          <Flex justifyContent={'space-between'} flexDirection={'column'}>
+            <Button
+              onClick={() => authGuard(() => setBuyModalActive(true))}
+              variant='primary'
+              mb={'md'}
+            >
+              Buy
+            </Button>
+            <Button
+              variant={'secondary'}
+              onClick={() => authGuard(() => setSellModalActive(true))}
+            >
+              Sell
+            </Button>
+            <OrderModal
+              item={item as IItem}
+              type={'buy'}
+              lotId={'LOTID'}
+              isOpen={buyModalActive}
+              onClose={() => setBuyModalActive(false)}
+            />
+            <OrderModal
+              item={item as IItem}
+              type={'sell'}
+              isOpen={sellModalActive}
+              onClose={() => setSellModalActive(false)}
+            />
+          </Flex>
+          <Box mt={'base'}>
+          </Box>
         </Box>
-        {description && <Text color={'grays.2'} mb={'lg'}>{description}</Text>}
-        <ParamList width={1} mb={'lg'}>
-          {item.quantity && <Param>
-            <ParamKey>Quantity</ParamKey>
-            <ParamValue>
-              <Quantity value={item.quantity}/>
-            </ParamValue>
-          </Param>}
-          {miscParams(misc)}
-        </ParamList>
-        <Flex justifyContent={'space-between'} flexDirection={'column'}>
-          <Button
-            onClick={() => authGuard(() => setBuyModalActive(true))}
-            variant='primary'
-            mb={'md'}
-          >
-            Buy
-          </Button>
-          <Button
-            variant={'secondary'}
-            onClick={() => authGuard(() => setSellModalActive(true))}
-          >
-            Sell
-          </Button>
-          <OrderModal
-            item={item as IItem}
-            type={'buy'}
-            lotId={'LOTID'}
-            isOpen={buyModalActive}
-            onClose={() => setBuyModalActive(false)}
-          />
-          <OrderModal
-            item={item as IItem}
-            type={'sell'}
-            isOpen={sellModalActive}
-            onClose={() => setSellModalActive(false)}
-          />
-        </Flex>
-        <Box mt={'base'}>
+
+        {/*Right Side*/}
+        <Box sx={{ flexBasis: '50%', mr: isPage ? 'lg' : 0, ml: isPage ? 0 : 'lg' }}>
+          <Overview>
+            <ImageWrapper>
+              <Image
+                src={getImageSrc(item)}
+                alt={`Item #${item.id}`}/>
+            </ImageWrapper>
+          </Overview>
         </Box>
-      </Box>
-      {/*Right Side*/}
-      <Box sx={{ flexBasis: '50%', mr: isPage ? 'lg' : 0, ml: isPage ? 0 : 'lg' }}>
-        <Overview>
-          <ImageWrapper>
-            <Image
-              src={imageUrl}
-              alt={`Item #${item.id}`}/>
-          </ImageWrapper>
-        </Overview>
-      </Box>
-    </Flex>
+      </Flex>
+      {lots && !!lots.length && <LotTable lots={lots} mt={'md'}/>}
+    </>
   )
 }
 
 const miscParams = (miscRecord: Record<string, any>) => {
-  const misc = recordToArray(miscRecord)
-
-  const list = misc.map((miscPair, index) => (
+  return recordToArray(miscRecord).map((miscPair, index) => (
     <Param key={index}>
       <ParamKey>{miscPair.key}</ParamKey>
       <ParamValue>{miscPair.value}</ParamValue>
     </Param>
   ))
-
-  return list
 }
 
 const DisplayButton = (props: IconButtonProps) =>

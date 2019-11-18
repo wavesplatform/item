@@ -18,7 +18,7 @@ export const getInvokeScriptRange = (dateStart: DateTimeInput, dateEnd?: DateTim
 export const overwriteInvokeScriptRange = async (
   invokeScripts: InvokeScriptCreateInput[],
   dateStart: DateTimeInput,
-  dateEnd?: DateTimeInput
+  dateEnd?: DateTimeInput,
 ) => {
   const nextTxsIds = invokeScripts.map(invokeScript => invokeScript.txId)
 

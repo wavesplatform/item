@@ -32,17 +32,18 @@ export const DappNav = (props: DappNavProps) => {
       flexDirection: 'column',
       borderWidth: 0,
     }}>
-      {dapps.map(dapp => (<RouterLink
-        to={{
-          pathname: `/items/${dapp.address}`,
-          search: location.search,
-        }}
-        key={dapp.id}
-      >
-        <ListItem>
-          <DappHeading dapp={dapp as IDapp} size={'md'}/>
+      {dapps.map(dapp => (
+        <ListItem sx={{ p: 0 }} key={dapp.id}>
+          <RouterLink
+            to={{
+              pathname: `/items/${dapp.address}`,
+              search: location.search,
+            }}
+          >
+            <DappHeading dapp={dapp as IDapp} size={'md'} sx={{ px: 'lg', py: 'md' }}/>
+          </RouterLink>
         </ListItem>
-      </RouterLink>))}
+      ))}
     </List>
   )
 

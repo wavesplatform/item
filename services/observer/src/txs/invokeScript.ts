@@ -10,10 +10,10 @@ import { getInvokeScriptTxs } from '../api'
 export const getInvokeScriptTxsForPeriod = async (
   address: string,
   timeStart: number,
-  timeEnd?: number
+  timeEnd?: number,
 ): Promise<InvokeScriptTransaction[]> => {
   const chunks = getInvokeScriptTxs({
-    sender: address,
+    dapp: address,
     timeStart,
     timeEnd,
   })

@@ -7,13 +7,20 @@ const config = {
 }
 
 const queueNames = {
+  // Polling job
   pollingQueue: 'POLLING',
+
+  // Txs
   issueTxsQueue: 'ISSUE_TXS',
   dataTxsQueue: 'DATA_TXS',
   invokeTxsQueue: 'INVOKE_TXS',
+
+  // Operations
   itemOpsQueue: 'ITEM_OPS',
   paramsOpsQueue: 'PARAMS_OPS',
   lotOpsQueue: 'LOT_OPS',
+
+  // Preserve media files on bucket
   preserveMediaQueue: 'PRESERVE_MEDIA',
 }
 

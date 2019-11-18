@@ -1,4 +1,7 @@
 import { ItemResolvers } from '../__generated__/graphqlgen'
+import config from '../config'
+
+const maxFirstPerRequest = config.maxFirstPerRequest
 
 export const Item: ItemResolvers.Type = {
   ...ItemResolvers.defaultResolvers,
@@ -16,7 +19,14 @@ export const Item: ItemResolvers.Type = {
     return params[0]
   },
 
-  balance: (parent, args, ctx) => {
-    throw new Error('Resolver not implemented')
+  lots: ({ txId }, { cursorInfo: { after, first } = {} }, ctx) => {
+    return ctx.prisma.lotsConnection({
+      where: {
+        item: { txId },
+        cancelled_not: true,
+      },
+      first: first ? Math.min(first, maxFirstPerRequest) : maxFirstPerRequest,
+      after,
+    })
   },
 }

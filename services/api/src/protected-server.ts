@@ -16,7 +16,7 @@ class ProtectedApolloServer extends ApolloServer {
           variables: req.body.variables,
           createError: (max, actual) => {
             return new Error(
-              `GraphQL query exceeds maximum complexity, please remove some nesting or fields and try again. (max: ${max}, actual: ${actual})`
+              `GraphQL query exceeds maximum complexity, please remove some nesting or fields and try again. (max: ${max}, actual: ${actual})`,
             )
           },
         }),

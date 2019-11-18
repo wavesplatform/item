@@ -6,23 +6,22 @@ import { IconButton, IconButtonProps } from '../buttons'
 export interface ModalProps extends BoxProps {
   isOpen?: boolean
   onClose?: () => void
+  hideCloseButton?: boolean
   container?: Element | null
 }
 
-export const Modal = ({ isOpen, onClose, sx, children, container, ...rest }: ModalProps) => {
+export const Modal = ({ isOpen, onClose, hideCloseButton, sx, children, container, ...rest }: ModalProps) => {
   const modal = <Box
     tx={'modal'}
     variant={'backdrop'}
     onClick={onClose}
     sx={{
       position: 'fixed',
-      alignItems: 'center',
-      justifyContent: 'center',
       top: 0,
       left: 0,
       right: 0,
       bottom: 0,
-      overflowY: 'visible',
+      overflowY: 'auto',
       overflowX: 'hidden',
       zIndex: 998,
       display: isOpen ? 'flex' : 'none',
@@ -39,9 +38,10 @@ export const Modal = ({ isOpen, onClose, sx, children, container, ...rest }: Mod
         overflow: 'visible',
         zIndex: 999,
         position: 'relative',
+        m: 'auto',
         ...sx,
       }}>
-      <CloseButton onClick={onClose}/>
+      {!hideCloseButton && <CloseButton onClick={onClose}/>}
       {children}
     </Box>
   </Box>

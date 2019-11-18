@@ -1,31 +1,31 @@
 import React from 'react'
-import { Box, Flex, Image } from 'rebass'
+import { Box, BoxProps, Flex, Image } from 'rebass'
 import { IItem } from '@item/types'
-import emptyImage from '../image/empty.svg'
 import { ImageWrapper, Overview, StyledItemCard, Title } from './style'
 import Quantity from '../globals/quantity'
 import { DappHeading } from '../heading'
+import { getImageSrc } from '../../helpers'
 
 export type ItemCardStyle = 'base' | 'short'
 
-export interface ItemCardProps {
+export interface ItemCardProps extends Omit<BoxProps, 'style'> {
   item: IItem
   style?: ItemCardStyle
 }
 
-export const ItemCard = ({ item, style, ...rest }: ItemCardProps) => {
+export const ItemCard = ({ item, style, sx, ...rest }: ItemCardProps) => {
   const isShort = style === 'short'
-  const { imageUrl, storageImageUrl, name } = item.params
-  const image = storageImageUrl || imageUrl || emptyImage
+  const { name } = item.params
 
   return (
     <StyledItemCard
-      bg={'grays.8'}
-      borderRadius={'lg'}
       sx={{
+        bg: 'grays.8',
+        borderRadius: 'lg',
         '&:hover': {
           bg: 'grays.7',
         },
+        ...sx,
       }}
       {...rest}
     >
@@ -44,7 +44,7 @@ export const ItemCard = ({ item, style, ...rest }: ItemCardProps) => {
         <Overview>
           <ImageWrapper>
             <Image
-              src={image}
+              src={getImageSrc(item)}
               alt={`Item #${item.id}`}/>
           </ImageWrapper>
         </Overview>

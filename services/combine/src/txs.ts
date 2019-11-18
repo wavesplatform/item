@@ -3,12 +3,12 @@ import { DataTransaction, IssueTransaction } from '@waves/waves-rest'
 import { getIssueRange, overwriteIssueRange } from './queries/issue'
 import * as Debug from 'debug'
 import { combineItemOps, combineLotOps, combineParamsOps } from './combine'
-import { dataTxToDataInput, issueTxToIssueInput } from './converter'
+import { dataTxToDataInput, invokeScriptTxToInvokeScriptInput, issueTxToIssueInput } from './converter'
 import { deleteData, getDataRange, overwriteDataRange } from './queries/data'
 import config from './config'
 import { Operation, OPERATION_TYPE } from '@item/types'
 import { InvokeScriptTransaction } from '@waves/waves-rest/types'
-import { getInvokeScriptRange } from './queries/invokeScript'
+import { getInvokeScriptRange, overwriteInvokeScriptRange } from './queries/invokeScript'
 
 const debug = Debug('combine')
 
@@ -25,23 +25,7 @@ const lotOpsQueue = queues.lotOpsQueue
 export const initProcessTxs = () => {
   issueTxsQueue.process(processIssueTxs)
   dataTxsQueue.process(processDataTxs)
-}
-
-/**
- * If all attempts to save params have failed,
- * we remove the data tx so that it is processed the next time
- */
-export const handlingFailedParams = () => {
-  paramsOpsQueue.on('global:failed', async (jobId: number) => {
-    const { data: op }: Job<Operation> = await paramsOpsQueue.getJob(jobId)
-
-    if (op.type === OPERATION_TYPE.CREATE) {
-      const txId = op.data.txId
-
-      debug(`🔙 Remove data ${txId}`)
-      await deleteData(txId)
-    }
-  })
+  invokeTxsQueue.process(processInvokeScriptTxs)
 }
 
 const processIssueTxs = async ({ data: { txs, timeStart, timeEnd } }: Job<TxsJobData<IssueTransaction>>) => {
@@ -50,10 +34,10 @@ const processIssueTxs = async ({ data: { txs, timeStart, timeEnd } }: Job<TxsJob
     const dateEnd = timeEnd && new Date(timeEnd)
 
     // Get latest saved issue txs from DB
-    const currentIssues = await getIssueRange(dateStart, dateEnd)
+    const current = await getIssueRange(dateStart, dateEnd)
 
     // Generate operations
-    const ops = combineItemOps(currentIssues, txs)
+    const ops = combineItemOps(current, txs)
 
     // Broadcast operations to queue for writer
     for (const op of ops) {
@@ -61,8 +45,8 @@ const processIssueTxs = async ({ data: { txs, timeStart, timeEnd } }: Job<TxsJob
     }
 
     // Overwrite prev issues in DB
-    const nextIssues = txs.map(tx => issueTxToIssueInput(tx))
-    await overwriteIssueRange(nextIssues, dateStart, dateEnd)
+    const next = txs.map(tx => issueTxToIssueInput(tx))
+    await overwriteIssueRange(next, dateStart, dateEnd)
   } catch (err) {
     debug(err.message)
     throw err
@@ -89,7 +73,7 @@ const processDataTxs = async ({ data: { txs, timeStart, timeEnd } }: Job<TxsJobD
       })
     }
 
-    // Overwrite prev issues in DB
+    // Overwrite prev datas in DB
     const next = txs.map(tx => dataTxToDataInput(tx))
     await overwriteDataRange(next, dateStart, dateEnd)
   } catch (err) {
@@ -98,9 +82,9 @@ const processDataTxs = async ({ data: { txs, timeStart, timeEnd } }: Job<TxsJobD
   }
 }
 
-const processInvokeScriptTxs = async ({
-  data: { txs, timeStart, timeEnd },
-}: Job<TxsJobData<InvokeScriptTransaction>>) => {
+const processInvokeScriptTxs = async (
+  { data: { txs, timeStart, timeEnd } }: Job<TxsJobData<InvokeScriptTransaction>>,
+) => {
   try {
     const dateStart = new Date(timeStart)
     const dateEnd = timeEnd && new Date(timeEnd)
@@ -120,10 +104,28 @@ const processInvokeScriptTxs = async ({
       })
     }
 
-    // Overwrite prev issues in DB
-    // ...
+    // Overwrite prev invokes in DB
+    const next = txs.map(tx => invokeScriptTxToInvokeScriptInput(tx))
+    await overwriteInvokeScriptRange(next, dateStart, dateEnd)
   } catch (err) {
     debug(err.message)
     throw err
   }
+}
+
+/**
+ * If all attempts to save params have failed,
+ * we remove the data tx so that it is processed the next time
+ */
+export const handlingFailedParams = () => {
+  paramsOpsQueue.on('global:failed', async (jobId: number) => {
+    const { data: op }: Job<Operation> = await paramsOpsQueue.getJob(jobId)
+
+    if (op.type === OPERATION_TYPE.CREATE) {
+      const txId = op.data.txId
+
+      debug(`🔙 Remove data ${txId}`)
+      await deleteData(txId)
+    }
+  })
 }

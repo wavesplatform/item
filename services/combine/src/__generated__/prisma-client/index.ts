@@ -426,8 +426,12 @@ export type LotOrderByInput =
   | "priceAsset_DESC"
   | "price_ASC"
   | "price_DESC"
-  | "stock_ASC"
-  | "stock_DESC"
+  | "total_ASC"
+  | "total_DESC"
+  | "left_ASC"
+  | "left_DESC"
+  | "cancelled_ASC"
+  | "cancelled_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -543,7 +547,9 @@ export interface LotUpdateWithoutItemDataInput {
   seller?: Maybe<UserUpdateOneWithoutLotsInput>;
   priceAsset?: Maybe<String>;
   price?: Maybe<Float>;
-  stock?: Maybe<Int>;
+  total?: Maybe<Int>;
+  left?: Maybe<Int>;
+  cancelled?: Maybe<Boolean>;
 }
 
 export interface LotSubscriptionWhereInput {
@@ -771,7 +777,9 @@ export interface LotUpdateManyMutationInput {
   txId?: Maybe<String>;
   priceAsset?: Maybe<String>;
   price?: Maybe<Float>;
-  stock?: Maybe<Int>;
+  total?: Maybe<Int>;
+  left?: Maybe<Int>;
+  cancelled?: Maybe<Boolean>;
 }
 
 export interface IssueUpdateInput {
@@ -793,7 +801,9 @@ export interface LotCreateInput {
   seller?: Maybe<UserCreateOneWithoutLotsInput>;
   priceAsset: String;
   price: Float;
-  stock: Int;
+  total: Int;
+  left: Int;
+  cancelled?: Maybe<Boolean>;
 }
 
 export interface IssueUpdateManyMutationInput {
@@ -962,14 +972,24 @@ export interface LotWhereInput {
   price_lte?: Maybe<Float>;
   price_gt?: Maybe<Float>;
   price_gte?: Maybe<Float>;
-  stock?: Maybe<Int>;
-  stock_not?: Maybe<Int>;
-  stock_in?: Maybe<Int[] | Int>;
-  stock_not_in?: Maybe<Int[] | Int>;
-  stock_lt?: Maybe<Int>;
-  stock_lte?: Maybe<Int>;
-  stock_gt?: Maybe<Int>;
-  stock_gte?: Maybe<Int>;
+  total?: Maybe<Int>;
+  total_not?: Maybe<Int>;
+  total_in?: Maybe<Int[] | Int>;
+  total_not_in?: Maybe<Int[] | Int>;
+  total_lt?: Maybe<Int>;
+  total_lte?: Maybe<Int>;
+  total_gt?: Maybe<Int>;
+  total_gte?: Maybe<Int>;
+  left?: Maybe<Int>;
+  left_not?: Maybe<Int>;
+  left_in?: Maybe<Int[] | Int>;
+  left_not_in?: Maybe<Int[] | Int>;
+  left_lt?: Maybe<Int>;
+  left_lte?: Maybe<Int>;
+  left_gt?: Maybe<Int>;
+  left_gte?: Maybe<Int>;
+  cancelled?: Maybe<Boolean>;
+  cancelled_not?: Maybe<Boolean>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -1157,7 +1177,9 @@ export interface LotCreateWithoutSellerInput {
   item: ItemCreateOneWithoutLotsInput;
   priceAsset: String;
   price: Float;
-  stock: Int;
+  total: Int;
+  left: Int;
+  cancelled?: Maybe<Boolean>;
 }
 
 export interface ItemUpdateManyMutationInput {
@@ -1243,7 +1265,9 @@ export interface LotCreateWithoutItemInput {
   seller?: Maybe<UserCreateOneWithoutLotsInput>;
   priceAsset: String;
   price: Float;
-  stock: Int;
+  total: Int;
+  left: Int;
+  cancelled?: Maybe<Boolean>;
 }
 
 export interface ItemUpdateManyWithoutDappInput {
@@ -1386,7 +1410,9 @@ export interface LotUpdateInput {
   seller?: Maybe<UserUpdateOneWithoutLotsInput>;
   priceAsset?: Maybe<String>;
   price?: Maybe<Float>;
-  stock?: Maybe<Int>;
+  total?: Maybe<Int>;
+  left?: Maybe<Int>;
+  cancelled?: Maybe<Boolean>;
 }
 
 export interface UserUpdateWithoutItemsDataInput {
@@ -1608,7 +1634,9 @@ export interface LotUpdateWithoutSellerDataInput {
   item?: Maybe<ItemUpdateOneRequiredWithoutLotsInput>;
   priceAsset?: Maybe<String>;
   price?: Maybe<Float>;
-  stock?: Maybe<Int>;
+  total?: Maybe<Int>;
+  left?: Maybe<Int>;
+  cancelled?: Maybe<Boolean>;
 }
 
 export type LotWhereUniqueInput = AtLeastOne<{
@@ -1969,7 +1997,9 @@ export interface LotUpdateManyDataInput {
   txId?: Maybe<String>;
   priceAsset?: Maybe<String>;
   price?: Maybe<Float>;
-  stock?: Maybe<Int>;
+  total?: Maybe<Int>;
+  left?: Maybe<Int>;
+  cancelled?: Maybe<Boolean>;
 }
 
 export interface LotUpdateManyWithWhereNestedInput {
@@ -2028,14 +2058,24 @@ export interface LotScalarWhereInput {
   price_lte?: Maybe<Float>;
   price_gt?: Maybe<Float>;
   price_gte?: Maybe<Float>;
-  stock?: Maybe<Int>;
-  stock_not?: Maybe<Int>;
-  stock_in?: Maybe<Int[] | Int>;
-  stock_not_in?: Maybe<Int[] | Int>;
-  stock_lt?: Maybe<Int>;
-  stock_lte?: Maybe<Int>;
-  stock_gt?: Maybe<Int>;
-  stock_gte?: Maybe<Int>;
+  total?: Maybe<Int>;
+  total_not?: Maybe<Int>;
+  total_in?: Maybe<Int[] | Int>;
+  total_not_in?: Maybe<Int[] | Int>;
+  total_lt?: Maybe<Int>;
+  total_lte?: Maybe<Int>;
+  total_gt?: Maybe<Int>;
+  total_gte?: Maybe<Int>;
+  left?: Maybe<Int>;
+  left_not?: Maybe<Int>;
+  left_in?: Maybe<Int[] | Int>;
+  left_not_in?: Maybe<Int[] | Int>;
+  left_lt?: Maybe<Int>;
+  left_lte?: Maybe<Int>;
+  left_gt?: Maybe<Int>;
+  left_gte?: Maybe<Int>;
+  cancelled?: Maybe<Boolean>;
+  cancelled_not?: Maybe<Boolean>;
   createdAt?: Maybe<DateTimeInput>;
   createdAt_not?: Maybe<DateTimeInput>;
   createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
@@ -2794,7 +2834,9 @@ export interface Lot {
   txId: String;
   priceAsset: String;
   price: Float;
-  stock: Int;
+  total: Int;
+  left: Int;
+  cancelled?: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -2806,7 +2848,9 @@ export interface LotPromise extends Promise<Lot>, Fragmentable {
   seller: <T = UserPromise>() => T;
   priceAsset: () => Promise<String>;
   price: () => Promise<Float>;
-  stock: () => Promise<Int>;
+  total: () => Promise<Int>;
+  left: () => Promise<Int>;
+  cancelled: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -2820,7 +2864,9 @@ export interface LotSubscription
   seller: <T = UserSubscription>() => T;
   priceAsset: () => Promise<AsyncIterator<String>>;
   price: () => Promise<AsyncIterator<Float>>;
-  stock: () => Promise<AsyncIterator<Int>>;
+  total: () => Promise<AsyncIterator<Int>>;
+  left: () => Promise<AsyncIterator<Int>>;
+  cancelled: () => Promise<AsyncIterator<Boolean>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
@@ -2832,7 +2878,9 @@ export interface LotNullablePromise extends Promise<Lot | null>, Fragmentable {
   seller: <T = UserPromise>() => T;
   priceAsset: () => Promise<String>;
   price: () => Promise<Float>;
-  stock: () => Promise<Int>;
+  total: () => Promise<Int>;
+  left: () => Promise<Int>;
+  cancelled: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -2898,7 +2946,9 @@ export interface LotPreviousValues {
   txId: String;
   priceAsset: String;
   price: Float;
-  stock: Int;
+  total: Int;
+  left: Int;
+  cancelled?: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
 }
@@ -2910,7 +2960,9 @@ export interface LotPreviousValuesPromise
   txId: () => Promise<String>;
   priceAsset: () => Promise<String>;
   price: () => Promise<Float>;
-  stock: () => Promise<Int>;
+  total: () => Promise<Int>;
+  left: () => Promise<Int>;
+  cancelled: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
 }
@@ -2922,7 +2974,9 @@ export interface LotPreviousValuesSubscription
   txId: () => Promise<AsyncIterator<String>>;
   priceAsset: () => Promise<AsyncIterator<String>>;
   price: () => Promise<AsyncIterator<Float>>;
-  stock: () => Promise<AsyncIterator<Int>>;
+  total: () => Promise<AsyncIterator<Int>>;
+  left: () => Promise<AsyncIterator<Int>>;
+  cancelled: () => Promise<AsyncIterator<Boolean>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }

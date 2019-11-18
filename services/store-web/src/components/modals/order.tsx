@@ -32,9 +32,10 @@ export const OrderModal = ({ item, type, defaultPrice, lotId, ...rest }: OrderMo
 
   const confirm = async () => {
     const { network } = publicState
-    if (!keeperApi) return
+    if (!keeperApi || !network) return
     const amountBn = new BigNumber(amount).toNumber()
     const priceInSatoshiBn = toSatoshi(price).toNumber()
+
     if (isBuy) {
       // Buying
       if (!lotId) return
@@ -42,7 +43,6 @@ export const OrderModal = ({ item, type, defaultPrice, lotId, ...rest }: OrderMo
       await request.broadcast()
     } else {
       // Selling
-      console.log('sell')
       const request = sell(item.txId, amountBn, config.wavesAssetId, priceInSatoshiBn)
       await request.broadcast()
     }

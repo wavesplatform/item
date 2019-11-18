@@ -98,6 +98,7 @@ type ItemParams {
   id: ID! @id
   # One data tx can contains many params
   txId: String!
+
   # Concat txIds (data, issue)
   paramsId: String! @unique
   item: Item! @unique @relation(name: "ItemParams")
@@ -117,7 +118,9 @@ type Lot {
 
   priceAsset: String!
   price: Float!
-  stock: Int!
+  total: Int!
+  left: Int!
+  cancelled: Boolean @default(value: false)
 
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt

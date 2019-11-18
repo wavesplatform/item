@@ -2,7 +2,7 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { ItemFilter } from "./../../../__generated__/globalTypes";
+import { ItemFilter, CursorInfo } from "./../../../__generated__/globalTypes";
 
 // ====================================================
 // GraphQL query operation: MoreItemsQuery
@@ -64,6 +64,5 @@ export interface MoreItemsQuery {
 
 export interface MoreItemsQueryVariables {
   filter?: ItemFilter | null;
-  after?: string | null;
-  first?: number | null;
+  cursorInfo?: CursorInfo | null;
 }

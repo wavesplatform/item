@@ -10,7 +10,7 @@ import { DataTransaction } from '@waves/waves-rest'
 export const getDataTxsForPeriod = async (
   address: string,
   timeStart: number,
-  timeEnd?: number
+  timeEnd?: number,
 ): Promise<DataTransaction[]> => {
   const chunks = getDataTxs({
     sender: address,

@@ -7,7 +7,7 @@ services:
       - /app/node_modules
     command: yarn dev
     environment:
-      NETWORK: testnet
+      CHAIN_ID: T
       REDIS_URL: redis://redis:6379
       PRISMA_HOST: prisma
       BUCKET_NAME: ${BUCKET_NAME}

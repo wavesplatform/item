@@ -7,7 +7,7 @@ export const txsForItemV1Create = (
   params: ICreateItemParamsV1,
   chainId: TChainId,
   senderPublicKey: string,
-  seed: string
+  seed: string,
 ): [TIssueTx, TDataTx] => {
   const { jsonPayload } = createItemV1Payload(params)
 
@@ -24,7 +24,7 @@ export const txsForItemV1Create = (
         senderPublicKey,
         fee: params.quantity === 1 ? 100000 : undefined,
       },
-      seed
+      seed,
     ),
   }
 
@@ -40,7 +40,7 @@ export const txsForItemV1Update = (
   params: IUpdateItemParamsV1,
   chainId: TChainId,
   senderPublicKey: string,
-  seed: string
+  seed: string,
 ): [TDataTx] => {
   const { jsonPayload } = createItemV1Payload(params)
 

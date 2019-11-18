@@ -43,7 +43,7 @@ export const startPolling = async () => {
       repeat: {
         every: config.pollingRepeatEvery,
       },
-    }
+    },
   )
 }
 
@@ -61,11 +61,15 @@ const processPolling = async () => {
   try {
     const timeStart = Date.now() - config.fetchOffsetTxs
     const addresses = ['3N2MUXXWL1Ws9bCAdrR1xoZWKwBAtyaowFH']
+    const storeAddress = config.dappAddresses.store
 
     await Promise.all([
       fetchTxs<IssueTransaction>(getIssueTxsForPeriod, issueTxsQueue, addresses, timeStart),
       fetchTxs<DataTransaction>(getDataTxsForPeriod, dataTxsQueue, addresses, timeStart),
-      fetchTxs<InvokeScriptTransaction>(getInvokeScriptTxsForPeriod, invokeTxsQueue, addresses, timeStart),
+      // Listen invoke txs like buy/sell etc.
+      fetchTxs<InvokeScriptTransaction>(getInvokeScriptTxsForPeriod, invokeTxsQueue, [
+        storeAddress,
+      ], timeStart),
     ])
   } catch (err) {
     debug(err.message)
@@ -78,7 +82,7 @@ const fetchTxs = async <Tx>(
   queue: Queue<TxsJobData<Tx>>,
   addresses: string[],
   timeStart: number,
-  timeEnd?: number
+  timeEnd?: number,
 ) => {
   // Fetch txs for specified addresses
   const txs = await collectTxs<Tx>(getTxFn, addresses, timeStart, timeEnd)

@@ -102,7 +102,7 @@ export const cancel = (
       const tx = cancelIntent(lotId).invoke(seed, {
         payment: [],
         chainId,
-        dApp,
+        ...(dApp ? { dApp } : {}),
       })
 
       if (!seed) {

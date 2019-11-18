@@ -25,23 +25,14 @@ describe('store', async () => {
   })
 
   it('can sell', async () => {
-    const request = sell(
-      null,
-      1,
-      'WAVES',
-      100,
-      testChainId,
-      address(accounts.store)
-    )
+    const request = sell(null, 1, 'WAVES', 100, testChainId, address(accounts.store))
     const [invokeTx] = await request.txs(accounts.seller)
     await request.broadcast(accounts.seller)
 
     await waitForTx(invokeTx.id)
   })
 
-  it('can buy', async () => {
-  })
+  it('can buy', async () => {})
 
-  it('can cancel', async () => {
-  })
+  it('can cancel', async () => {})
 })

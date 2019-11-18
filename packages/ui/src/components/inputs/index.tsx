@@ -6,17 +6,6 @@ import { variant } from 'styled-system'
 import { StyleSize } from '../../styles'
 import styled from '@emotion/styled'
 
-const inputSizeStyle = variant({
-  prop: 'size',
-  variants: {
-    lg: {
-      fontSize: '1.1rem',
-      px: 'lg',
-      py: 'md',
-    },
-  },
-})
-
 export interface TextInputProps extends FlexProps {
   defaultValue?: string
   value?: any
@@ -25,17 +14,17 @@ export interface TextInputProps extends FlexProps {
   autoFocus?: boolean
   disabled?: boolean
   id?: string
+  type?: string
   size?: StyleSize
 }
 
-export const TextInput = ({ children, variant = 'input', sx, ...rest }: TextInputProps) => {
+export const TextInput = ({ children, variant = 'input', ...rest }: TextInputProps) => {
   const { id } = rest
-
   return (
-    <Flex flexDirection={'column'} width={1} sx={sx} {...rest}>
+    <Wrapper {...rest}>
       {children && <Label htmlFor={id} mb={'sm'}>{children}</Label>}
       <FilledInput {...rest} variant={variant}/>
-    </Flex>
+    </Wrapper>
   )
 }
 
@@ -43,13 +32,11 @@ export interface TextInputWithUnitProps extends TextInputProps {
   unit?: string
 }
 
-export const TextInputWithUnit = (
-  { children, variant = 'input', unit, sx, size, ...rest }: TextInputWithUnitProps
-) => {
+export const TextInputWithUnit = ({ children, variant = 'input', unit, ...rest }: TextInputWithUnitProps) => {
   const { id } = rest
 
   return (
-    <Flex flexDirection={'column'} width={1} sx={sx} {...rest}>
+    <Wrapper {...rest}>
       {children && <Label htmlFor={id} mb={'sm'}>{children}</Label>}
       <StyledInput
         as={'div'}
@@ -60,7 +47,7 @@ export const TextInputWithUnit = (
         }}
         variant={variant}
       >
-        <InnerInput {...rest} variant={variant} size={size}/>
+        <InnerInput {...rest} variant={variant}/>
         <Flex
           sx={{
             alignItems: 'center',
@@ -76,7 +63,7 @@ export const TextInputWithUnit = (
           {unit ? unit : 'Waves'}
         </Flex>
       </StyledInput>
-    </Flex>
+    </Wrapper>
   )
 }
 
@@ -85,12 +72,12 @@ export interface TextInputWithIconProps extends TextInputProps {
 }
 
 export const TextInputWithIcon = (
-  { children, variant = 'input', glyph, sx, size, ...rest }: TextInputWithIconProps
+  { children, variant = 'input', glyph, ...rest }: TextInputWithIconProps,
 ) => {
   const { id } = rest
 
   return (
-    <Flex flexDirection={'column'} width={1} sx={sx} {...rest}>
+    <Wrapper {...rest}>
       {children && <Label htmlFor={id} mb={'sm'}>{children}</Label>}
       <StyledInput
         as={'div'}
@@ -102,7 +89,7 @@ export const TextInputWithIcon = (
         }}
         variant={variant}
       >
-        <InnerInput {...rest} variant={variant} size={size}/>
+        <InnerInput {...rest} variant={variant}/>
         {glyph && <Box sx={{
           lineHeight: 1,
           pl: 'md',
@@ -110,12 +97,33 @@ export const TextInputWithIcon = (
           color: 'grays.4',
         }}><Icon glyph={glyph}/></Box>}
       </StyledInput>
-    </Flex>
+    </Wrapper>
+  )
+}
+
+const Wrapper = (props: TextInputProps) => {
+  // Exclude input props
+  const {
+    variant,
+    defaultValue,
+    value,
+    placeholder,
+    onChange,
+    autoFocus,
+    disabled,
+    id,
+    type,
+    size,
+    ...wrapper
+  } = props
+
+  return (
+    <Flex flexDirection={'column'} width={1} {...wrapper} />
   )
 }
 
 const FilledInput = (
-  { defaultValue, value, placeholder, onChange, autoFocus, disabled, id, variant, type, sx, size }: TextInputProps
+  { defaultValue, value, placeholder, onChange, autoFocus, disabled, id, variant, type, sx, size }: TextInputProps,
 ) =>
   <StyledInput
     id={id}
@@ -143,6 +151,17 @@ const InnerInput = (props: TextInputProps) =>
       '&:focus': { boxShadow: 'none' },
     }}
   />
+
+const inputSizeStyle = variant({
+  prop: 'size',
+  variants: {
+    lg: {
+      fontSize: '1.1rem',
+      px: 'lg',
+      py: 'md',
+    },
+  },
+})
 
 const StyledInput = styled(Input)`
   ${inputSizeStyle};

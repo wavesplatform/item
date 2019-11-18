@@ -1,9 +1,9 @@
-import { Box, BoxProps, Card, Flex, Heading } from 'rebass'
+import { Box, BoxProps, Flex, Heading } from 'rebass'
 import { truncate } from '../globals'
 import styled from '@emotion/styled'
 import { borders, BordersProps } from 'styled-system'
 
-export const StyledDappCard = styled(Card)`
+export const StyledDappCard = styled(Box)`
   position: relative;
   display: flex;
   flex-direction: column;

@@ -25,10 +25,15 @@ const navs = {
 
 const modal = {
   backdrop: {
-    bg: transparentize(.7, '#03060f'),
+    bg: transparentize(.5, '#03060f'),
     p: 'lg',
   },
   content: {
+    bg: 'grays.8',
+    borderRadius: 'lg',
+    p: 'xl',
+  },
+  itemContent: {
     bg: 'grays.8',
     borderRadius: 'lg',
     p: 'xl',

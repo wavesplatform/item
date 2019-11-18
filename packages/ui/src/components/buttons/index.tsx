@@ -3,9 +3,10 @@ import { StyledButton, StyledButtonProps } from './style'
 import { Icon } from '../icon'
 
 export interface ButtonProps extends StyledButtonProps {
+  isLoading?: boolean
 }
 
-export const Button = ({ sx, ...rest }: ButtonProps) => (
+export const Button = ({ sx, children, isLoading, ...rest }: ButtonProps) => (
   <StyledButton
     type={'button'}
     variant={'primary'}
@@ -22,7 +23,9 @@ export const Button = ({ sx, ...rest }: ButtonProps) => (
       opacity: rest.disabled ? .5 : 1,
       ...sx,
     }}
-  />
+  >
+    {isLoading ? 'Loading...' : children}
+  </StyledButton>
 )
 
 export interface IconButtonProps extends ButtonProps {

@@ -18,7 +18,7 @@ export const getDataRange = (dateStart: DateTimeInput, dateEnd?: DateTimeInput) 
 export const overwriteDataRange = async (
   datas: DataCreateInput[],
   dateStart: DateTimeInput,
-  dateEnd?: DateTimeInput
+  dateEnd?: DateTimeInput,
 ) => {
   const nextTxsIds = datas.map(data => data.txId)
 

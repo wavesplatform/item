@@ -1,10 +1,10 @@
 import React from 'react'
 import { Icon, Loading } from '@item/ui'
-import { PlatformStatsQuery } from '../../../../graphql/queries/__generated__/PlatformStatsQuery'
-import { getPlatformStatsQuery } from '../../../../graphql/queries/getPlatformStats'
 import { Flex, FlexProps, Text } from 'rebass'
 import { useQuery } from '@apollo/react-hooks'
 import styled from '@emotion/styled'
+import { PlatformStatsQuery } from '../../../graphql/queries/__generated__/PlatformStatsQuery'
+import { getPlatformStatsQuery } from '../../../graphql/queries/getPlatformStats'
 
 type TProps = {}
 type TData = PlatformStatsQuery

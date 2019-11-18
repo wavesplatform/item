@@ -11,7 +11,7 @@ type TProps = {}
 export const Support = (props: TProps) => (
   <Flex>
     <Box width={1 / 2} mr={'xl'}>
-      <Title>Development</Title>
+      <Heading sx={{ fontSize: 'h1', mb: 'lg' }}>Development</Heading>
       <Text mb={'xl'} color={'grays.3'}>
         If you have any questions, check out the documentation<br/>
         or feel free to ask them in the developer chat.
@@ -33,7 +33,7 @@ export const Support = (props: TProps) => (
       </Flex>
     </Box>
     <Box width={1 / 2}>
-      <Title>Partnership</Title>
+      <Heading sx={{ fontSize: 'h1', mb: 'lg' }}>Partnership</Heading>
       <Text mb={'xl'} color={'grays.3'}>
         Fill in the form and we will connect with you shortly.
       </Text>
@@ -64,10 +64,6 @@ const DocsItem = (props: PropsWithChildren<LinkProps>) => (
     </DocsCard>
   </ExternalLink>
 )
-
-const Title = styled(Heading)`
-  font-size: 1.5rem;
-`
 
 const ExternalLink = styled(Link)`
   max-width: 256px;

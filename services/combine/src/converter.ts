@@ -1,6 +1,6 @@
 import { DataTransaction, IssueTransaction } from '@waves/waves-rest'
 import {
-  DataCreateInput,
+  DataCreateInput, InvokeScriptCreateInput,
   IssueCreateInput,
   ItemCreateInput,
   ItemParamsCreateInput,
@@ -86,6 +86,20 @@ export const dataEntryToParamsInput = (txId: string, timestamp: number, entry: D
 
 // InvokeScript Txs
 
+export const invokeScriptTxToInvokeScriptInput = (tx: InvokeScriptTransaction): InvokeScriptCreateInput => {
+  const { id, timestamp, sender, senderPublicKey, dApp, feeAssetId, call, payment } = tx
+  return {
+    txId: id,
+    dapp: dApp,
+    feeAssetId,
+    call,
+    payment: { set: payment },
+    timestamp: new Date(timestamp),
+    sender,
+    senderPublicKey,
+  }
+}
+
 export const sellTxToLotInput = (tx: InvokeScriptTransaction): LotCreateInput => {
   const {
     id: txId,
@@ -109,7 +123,8 @@ export const sellTxToLotInput = (tx: InvokeScriptTransaction): LotCreateInput =>
     seller: { connect: { address: sender } },
     priceAsset,
     price,
-    stock: amount.toNumber(),
+    total: amount.toNumber(),
+    left: amount.toNumber(),
   }
 }
 

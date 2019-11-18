@@ -18,7 +18,7 @@ export const getIssueRange = (dateStart: DateTimeInput, dateEnd?: DateTimeInput)
 export const overwriteIssueRange = async (
   issues: IssueCreateInput[],
   dateStart: DateTimeInput,
-  dateEnd?: DateTimeInput
+  dateEnd?: DateTimeInput,
 ) => {
   const nextTxsIds = issues.map(issue => issue.txId)
 

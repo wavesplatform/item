@@ -7,6 +7,9 @@ import HomeView from './views/home'
 import Header from './components/header'
 import SigninView from './views/signin'
 import BrowseView from './views/browse'
+import ItemView from './views/item'
+import ProfileView from './views/profile'
+import authFallback from './components/route/authFallback'
 
 export const Body = styled(Box)`
   position: relative;
@@ -14,6 +17,10 @@ export const Body = styled(Box)`
   min-height: 100%;
   padding-bottom: 6rem;
 `
+
+const ProfileFallback = authFallback(ProfileView, () => (
+  <Redirect to={'/signin'}/>
+))
 
 class Routes extends Component {
   render(): ReactNode {
@@ -26,9 +33,11 @@ class Routes extends Component {
           {/*Items*/}
           <Route key='route-items' path='/items/:address([0-9a-fA-f]{35})' component={BrowseView}/>
           <Route key='route-items' path='/items' component={BrowseView}/>
+          <Route key='route-item' path='/item/:assetId([0-9a-fA-f]{42,44})' component={ItemView}/>
 
           {/*User*/}
           <Route key='route-signin' path='/signin' component={SigninView}/>
+          <Route key='route-profile' path='/profile' component={ProfileFallback}/>
 
           {/*Not found*/}
           <Redirect from='*' to='/'/>

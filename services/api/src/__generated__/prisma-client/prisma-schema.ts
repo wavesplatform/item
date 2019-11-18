@@ -1482,7 +1482,9 @@ type Lot {
   seller: User
   priceAsset: String!
   price: Float!
-  stock: Int!
+  total: Int!
+  left: Int!
+  cancelled: Boolean
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1500,7 +1502,9 @@ input LotCreateInput {
   seller: UserCreateOneWithoutLotsInput
   priceAsset: String!
   price: Float!
-  stock: Int!
+  total: Int!
+  left: Int!
+  cancelled: Boolean
 }
 
 input LotCreateManyWithoutItemInput {
@@ -1519,7 +1523,9 @@ input LotCreateWithoutItemInput {
   seller: UserCreateOneWithoutLotsInput
   priceAsset: String!
   price: Float!
-  stock: Int!
+  total: Int!
+  left: Int!
+  cancelled: Boolean
 }
 
 input LotCreateWithoutSellerInput {
@@ -1528,7 +1534,9 @@ input LotCreateWithoutSellerInput {
   item: ItemCreateOneWithoutLotsInput!
   priceAsset: String!
   price: Float!
-  stock: Int!
+  total: Int!
+  left: Int!
+  cancelled: Boolean
 }
 
 type LotEdge {
@@ -1545,8 +1553,12 @@ enum LotOrderByInput {
   priceAsset_DESC
   price_ASC
   price_DESC
-  stock_ASC
-  stock_DESC
+  total_ASC
+  total_DESC
+  left_ASC
+  left_DESC
+  cancelled_ASC
+  cancelled_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -1558,7 +1570,9 @@ type LotPreviousValues {
   txId: String!
   priceAsset: String!
   price: Float!
-  stock: Int!
+  total: Int!
+  left: Int!
+  cancelled: Boolean
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -1614,14 +1628,24 @@ input LotScalarWhereInput {
   price_lte: Float
   price_gt: Float
   price_gte: Float
-  stock: Int
-  stock_not: Int
-  stock_in: [Int!]
-  stock_not_in: [Int!]
-  stock_lt: Int
-  stock_lte: Int
-  stock_gt: Int
-  stock_gte: Int
+  total: Int
+  total_not: Int
+  total_in: [Int!]
+  total_not_in: [Int!]
+  total_lt: Int
+  total_lte: Int
+  total_gt: Int
+  total_gte: Int
+  left: Int
+  left_not: Int
+  left_in: [Int!]
+  left_not_in: [Int!]
+  left_lt: Int
+  left_lte: Int
+  left_gt: Int
+  left_gte: Int
+  cancelled: Boolean
+  cancelled_not: Boolean
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]
@@ -1667,21 +1691,27 @@ input LotUpdateInput {
   seller: UserUpdateOneWithoutLotsInput
   priceAsset: String
   price: Float
-  stock: Int
+  total: Int
+  left: Int
+  cancelled: Boolean
 }
 
 input LotUpdateManyDataInput {
   txId: String
   priceAsset: String
   price: Float
-  stock: Int
+  total: Int
+  left: Int
+  cancelled: Boolean
 }
 
 input LotUpdateManyMutationInput {
   txId: String
   priceAsset: String
   price: Float
-  stock: Int
+  total: Int
+  left: Int
+  cancelled: Boolean
 }
 
 input LotUpdateManyWithoutItemInput {
@@ -1718,7 +1748,9 @@ input LotUpdateWithoutItemDataInput {
   seller: UserUpdateOneWithoutLotsInput
   priceAsset: String
   price: Float
-  stock: Int
+  total: Int
+  left: Int
+  cancelled: Boolean
 }
 
 input LotUpdateWithoutSellerDataInput {
@@ -1726,7 +1758,9 @@ input LotUpdateWithoutSellerDataInput {
   item: ItemUpdateOneRequiredWithoutLotsInput
   priceAsset: String
   price: Float
-  stock: Int
+  total: Int
+  left: Int
+  cancelled: Boolean
 }
 
 input LotUpdateWithWhereUniqueWithoutItemInput {
@@ -1804,14 +1838,24 @@ input LotWhereInput {
   price_lte: Float
   price_gt: Float
   price_gte: Float
-  stock: Int
-  stock_not: Int
-  stock_in: [Int!]
-  stock_not_in: [Int!]
-  stock_lt: Int
-  stock_lte: Int
-  stock_gt: Int
-  stock_gte: Int
+  total: Int
+  total_not: Int
+  total_in: [Int!]
+  total_not_in: [Int!]
+  total_lt: Int
+  total_lte: Int
+  total_gt: Int
+  total_gte: Int
+  left: Int
+  left_not: Int
+  left_in: [Int!]
+  left_not_in: [Int!]
+  left_lt: Int
+  left_lte: Int
+  left_gt: Int
+  left_gte: Int
+  cancelled: Boolean
+  cancelled_not: Boolean
   createdAt: DateTime
   createdAt_not: DateTime
   createdAt_in: [DateTime!]

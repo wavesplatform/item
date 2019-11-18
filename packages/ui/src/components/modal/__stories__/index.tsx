@@ -12,3 +12,14 @@ storiesOf('Modal', module)
       </Modal>
     </Flex>
   ))
+  .add('Scroll', () => (
+    <Flex>
+      <Modal isOpen={true} container={document.getElementById('root')!}>
+        Start
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        End
+      </Modal>
+    </Flex>
+  ))

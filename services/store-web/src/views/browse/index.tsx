@@ -52,7 +52,7 @@ export const BrowseView = () => {
     // Update if at least 400ms have passed
     const searchParamSub = searchParam$
       .pipe(
-        debounce(() => timer(400))
+        debounce(() => timer(400)),
       )
       .subscribe(search => {
         // Update state & url
@@ -68,8 +68,7 @@ export const BrowseView = () => {
   })
 
   const match = useRouteMatch<MatchParams>()
-  const params = (match && match.params) || {}
-  const { address } = params
+  const { address } = (match && match.params) || {}
 
   return (
     <ViewWrapper py={0}>

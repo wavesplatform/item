@@ -6,6 +6,8 @@ import { config } from './config'
 const debug = Debug('observer')
 
 debug('👀 Observer is starting...')
+debug(`🧬 Chain ID: ${config.chainId}`)
+debug(`Store: ${config.dappAddresses.store}`)
 
 // Worker
 const server = http.createServer(async (req, res) => {

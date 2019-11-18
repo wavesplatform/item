@@ -1,3 +1,5 @@
+import { ILot } from './lot'
+
 export type UserRole = 'USER' | 'DAPP'
 
 export interface UserImages {
@@ -11,5 +13,6 @@ export interface IUser {
   address: string
   publicKey?: string
   role?: UserRole
+  lots?: ILot[]
   image?: UserImages
 }

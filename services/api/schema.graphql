@@ -56,10 +56,13 @@ type User {
   role: UserRole!
   permissions: [UserPermission!]!
 
+  lots(cursorInfo: CursorInfo): LotConnection
+
   # Dapp fields
   image: Json
   meta: Json
   items: [Item!]
+
   totalItems: Int
 }
 
@@ -67,14 +70,16 @@ type Item {
   id: ID!
   txId: String!
   dapp: User!
+
   name: String!
   quantity: Int!
   reissuable: Boolean!
   timestamp: DateTime!
   params: ItemParams!
+  lots(cursorInfo: CursorInfo): LotConnection
+
   createdAt: DateTime!
   updatedAt: DateTime!
-  balance: Int
 }
 
 type ItemEdge {
@@ -89,9 +94,11 @@ type ItemConnection {
 
 type ItemParams {
   id: ID!
+
   paramsId: String!
   txId: String!
   item: Item!
+
   version: Int!
   name: String!
   imageUrl: String!
@@ -100,12 +107,45 @@ type ItemParams {
   timestamp: DateTime!
 }
 
+type Lot {
+  id: ID!
+
+  txId: String!
+  item: Item!
+  seller: User
+
+  priceAsset: String!
+  price: Float!
+  total: Int!
+  left: Int!
+  cancelled: Boolean
+}
+
+type LotEdge {
+  node: Lot!
+  cursor: String!
+}
+
+type LotConnection {
+  pageInfo: PageInfo!
+  edges: [LotEdge!]
+}
+
 # Inputs
+
+input CursorInfo {
+  after: String
+  first: Int
+}
 
 input ItemFilter {
   dappAddress: String
   searchString: String
   inclusions: [String!]
+}
+
+input LotFilter {
+  seller: String
 }
 
 input SigninUser {
@@ -131,11 +171,12 @@ input UserInfo {
 # Queries
 
 type Query {
-  items(filter: ItemFilter, orderBy: ItemOrderByInput, after: String, first: Int): ItemConnection
+  items(filter: ItemFilter, orderBy: ItemOrderByInput, cursorInfo: CursorInfo): ItemConnection
   item(assetId: String!): Item
   dapps: [User!]!
   user(address: String!): User
-  inventory(address: String!, orderBy: ItemOrderByInput): [Item!]!
+  inventory(address: String!, filter: ItemFilter, orderBy: ItemOrderByInput, cursorInfo: CursorInfo): ItemConnection
+  lots(filter: LotFilter, cursorInfo: CursorInfo): LotConnection
   me: User @auth
   platformStats: PlatformStats!
 }

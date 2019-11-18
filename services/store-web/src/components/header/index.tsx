@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Box, BoxProps, Flex, FlexProps, Heading, Link, Text } from 'rebass'
 import { Link as RouterLink, useHistory } from 'react-router-dom'
-import { Route, RouteComponentProps } from 'react-router'
+import { Route } from 'react-router'
 import { Container } from '../layout'
 import { Icon, UserHeading } from '@item/ui'
 import config from '../../config'
@@ -10,11 +10,8 @@ import useCurrentUser from '../../hooks/currentUser'
 import ProfileDropdown from './profileDropdown'
 import { IUser } from '@item/types'
 
-type TProps = RouteComponentProps
-
-export const Header = (props: TProps) => {
+export const Header = () => {
   const { me } = useCurrentUser()
-  // const me = { address: '3N341VEEExcAt9FtSJ7taaUTCgGQpVbGS1Y' }
 
   return (
     <Box height={'52px'}>

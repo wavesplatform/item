@@ -16,6 +16,11 @@ storiesOf('Button', module)
       <Button variant={'dark'}>Dark</Button>
     </Box>
   ))
+  .add('Loading', () => (
+    <Box>
+      <Button variant={'secondary'} isLoading={true}>Default</Button>
+    </Box>
+  ))
   .add('Sizes', () => (
     <Flex alignItems={'flex-start'}>
       <Button variant={'secondary'} size={'sm'} mr={'sm'}>Small button</Button>

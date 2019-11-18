@@ -62,11 +62,11 @@ const processParamsOp = async ({ data: op }: Job<ParamsOperation>) => {
         // Preserve media
         // If storage url isn't set
         !storageImageUrl &&
-          (await preserveMediaQueue.add({
-            url: imageUrl,
-            id: paramsId,
-            entity: 'items',
-          }))
+        (await preserveMediaQueue.add({
+          url: imageUrl,
+          id: paramsId,
+          entity: 'items',
+        }))
 
         break
       case OPERATION_TYPE.UPDATE:
@@ -98,17 +98,16 @@ const processLotOp = async ({ data: op }: Job<LotOperation>) => {
 
         // Cancelling
         if (cancel) {
-          // Reset stock for cancel
-          await updateLot({ txId, stock: 0 })
+          await updateLot({ txId, cancelled: true })
           break
         }
 
         // Buying
         if (amount) {
           const lot = await getLotByTxId(txId)
-          const { stock } = lot
+          const { left } = lot
 
-          await updateLot({ txId, stock: Math.max(stock - amount, 0) })
+          await updateLot({ txId, left: Math.max(left - amount, 0) })
         }
 
         break

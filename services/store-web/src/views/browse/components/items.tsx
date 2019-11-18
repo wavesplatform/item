@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Sticky, StickyContainer } from 'react-sticky'
-import { Box, BoxProps } from 'rebass'
+import { Box } from 'rebass'
 import { getMoreItemsQuery } from '../../../graphql/queries/getItems'
 import { MoreItemsQuery, MoreItemsQueryVariables } from '../../../graphql/queries/__generated__/MoreItemsQuery'
-import Item from './item'
 import { ItemInclusion } from './inclusions'
 import { useQuery } from '@apollo/react-hooks'
 import { Button, ItemCard, Loading, NullState } from '@item/ui'
 import { Grid } from '../../../components/layout'
 import { Link as RouterLink } from 'react-router-dom'
 import { IItem } from '@item/types'
+import Item from './item'
 
 type TProps = {
   address?: string
@@ -35,11 +34,11 @@ export const Items = ({ address, searchString, inclusions }: TProps) => {
         searchString,
         inclusions,
       },
-      first: 20,
+      cursorInfo: {
+        first: 20,
+      },
     },
   })
-
-  const stickyOffset = 52 + 12 // Header height + lg padding
 
   const connection = data && data.items
   if (!connection && loading) {
@@ -65,18 +64,17 @@ export const Items = ({ address, searchString, inclusions }: TProps) => {
     />
   }
 
-  if (assetId) {
-    // TODO: hook to force update sticky
-    window.dispatchEvent(new Event('scroll'))
-  }
-
   const loadMore = () => {
     const { pageInfo } = connection!
+    const { cursorInfo } = variables
 
     fetchMore({
       variables: {
         ...variables,
-        after: pageInfo.endCursor,
+        cursorInfo: {
+          ...cursorInfo,
+          after: pageInfo.endCursor,
+        },
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult || !fetchMoreResult.items) {
@@ -91,96 +89,79 @@ export const Items = ({ address, searchString, inclusions }: TProps) => {
           ...prev,
           items: {
             ...prevItems,
-            pageInfo: {
-              ...prevItems.pageInfo,
-              ...pageInfo,
-            },
-            edges: [
-              ...prevItems.edges!,
-              ...newEdges!,
-            ],
+            pageInfo: { ...prevItems.pageInfo, ...pageInfo },
+            edges: [...prevItems.edges!, ...newEdges!],
           },
         } : prev
       },
     })
   }
 
-  const itemsGrid = (<Grid sx={{
+  const itemGrid = (<Grid sx={{
       gridGap: 'lg',
       gridTemplateColumns: 'repeat(auto-fill, minmax(12rem, 1fr))',
+      gridAutoFlow: 'row dense',
     }}>
-      {items.map(item => (<RouterLink
-        onClick={ev => {
-          ev.stopPropagation()
-          ev.preventDefault()
-          setAssetId(item.txId)
-        }}
-        to={`/item/${item.txId}`}
-        key={item.id}
-      >
-        <ItemCard item={item as IItem}/>
-      </RouterLink>))}
+      {items.map(item => (
+        <>
+          <RouterLink
+            onClick={ev => {
+              ev.stopPropagation()
+              ev.preventDefault()
+              setAssetId(item.txId)
+            }}
+            to={`/item/${item.txId}`}
+            key={item.id}
+          >
+            <ItemCard
+              item={item as IItem}
+              sx={item.txId === assetId ? {
+                cursor: 'default',
+                backgroundColor: 'transparent',
+                backgroundImage: 'linear-gradient(0deg, transparent 5%, #111725)',
+                '&:hover': {
+                  backgroundColor: 'transparent',
+                },
+              } : {}}
+            />
+          </RouterLink>
+          {item.txId === assetId && <Box
+            sx={{
+              gridColumnStart: 1,
+              gridColumnEnd: -1,
+              px: 'xl',
+              py: 6,
+            }}
+            key={item.id}
+          >
+            <Box sx={{
+              mx: 'auto',
+              maxWidth: '720px',
+            }}>
+              <Item assetId={assetId} onClose={() => setAssetId('')}/>
+            </Box>
+          </Box>}
+        </>
+      ))}
     </Grid>
   )
 
-  // TODO: need to replace sticky library
   return (
     <Box sx={{ position: 'relative', minHeight: '460px' }}>
-      <ItemsSide isConstrained={!!assetId}>
-        {itemsGrid}
-        {hasNextPage && <Button width={1} size={'lg'} mt={'lg'} onClick={loadMore} disabled={loading}>
-          {loading ? 'Loading...' : 'Load more'}
-        </Button>}
-      </ItemsSide>
-      <ItemSide isActive={!!assetId}>
-        <StickyContainer style={{ height: '100%' }}>
-          {assetId && <Sticky topOffset={-stickyOffset} bottomOffset={0}>
-            {({ style, isSticky, distanceFromTop, distanceFromBottom }) => (
-              <Box style={distanceFromBottom > stickyOffset ? {
-                ...style,
-                top: stickyOffset,
-              } : (isSticky && {
-                ...style,
-                position: 'absolute',
-                top: 'auto',
-                left: 'auto',
-                bottom: 0,
-              }) || {}}>
-                <Item assetId={assetId} onClose={() => setAssetId('')}/>
-              </Box>
-            )}
-          </Sticky>}
-        </StickyContainer>
-      </ItemSide>
+      {itemGrid}
+      {hasNextPage && <Button
+        width={1}
+        size={'lg'}
+        variant={'secondary'}
+        mt={'lg'}
+        onClick={loadMore}
+        disabled={loading}
+        isLoading={loading}
+      >
+        Load more
+      </Button>}
     </Box>
   )
-}
-
-const ItemsSide = ({ isConstrained, ...rest }: BoxProps & { isConstrained: boolean }) => {
-  const constrained = isConstrained ? {
-    width: '50%',
-    pr: 0,
-  } : {}
-  return <Box {...rest} sx={{
-    ...constrained,
-  }}/>
-}
-
-const ItemSide = ({ isActive, ...rest }: BoxProps & { isActive: boolean }) => {
-  const shown = isActive ? {
-    right: 0,
-    opacity: 1,
-  } : {}
-  return <Box {...rest} sx={{
-    position: 'absolute',
-    right: '-50%',
-    width: '50%',
-    top: 0,
-    height: '100%',
-    opacity: 0,
-    pl: 'lg',
-    ...shown,
-  }}/>
 }
 
 export default Items

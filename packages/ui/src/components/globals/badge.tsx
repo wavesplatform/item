@@ -10,18 +10,18 @@ const StyledBadge = styled(Box)<BoxProps & BordersProps>`
   ${borders}
 `
 
-export const Badge = (props: PropsWithChildren<BoxProps>) => (
+export const Badge = ({ sx, ...rest }: PropsWithChildren<BoxProps>) =>
   <StyledBadge
     as={'span'}
-    p={'xs'}
-    bg={'text'}
-    fontSize={'sm'}
-    color={'background'}
-    borderRadius={'sm'}
-    {...props}
-  >
-    {props.children}
-  </StyledBadge>
-)
+    {...rest}
+    sx={{
+      p: 'xs',
+      bg: 'text',
+      fontSize: 'sm',
+      color: 'background',
+      borderRadius: 'sm',
+      ...sx,
+    }}
+  />
 
 export default Badge

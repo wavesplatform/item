@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Container, Section, ViewContainer, ViewWrapper } from '../../components/layout'
 import { useHistory } from 'react-router'
 import { Subject, timer } from 'rxjs'
-import { Box, Flex, Heading, Text } from 'rebass'
+import { Box, Flex, Heading, HeadingProps, Text } from 'rebass'
 import { Link as RouterLink } from 'react-router-dom'
 import queryString from 'query-string'
 import { Stats } from './components/stats'
@@ -11,6 +11,8 @@ import Support from '../../components/support'
 import styled from '@emotion/styled'
 import Search from './components/search'
 import { debounce } from 'rxjs/operators'
+import Items from './components/items'
+import Dapps from './components/dapps'
 
 const searchParam$ = new Subject<string>()
 
@@ -20,7 +22,7 @@ export const HomeView = () => {
   useEffect(() => {
     const searchParamSub = searchParam$
       .pipe(
-        debounce(() => timer(200))
+        debounce(() => timer(200)),
       )
       .subscribe(search => {
         if (search.length < 3) return
@@ -65,7 +67,7 @@ export const HomeView = () => {
           <Box mt={'xl'}>
             <ItemsWrapper>
               <ItemsWrapperInner>
-                items
+                <Items/>
               </ItemsWrapperInner>
             </ItemsWrapper>
           </Box>
@@ -78,8 +80,8 @@ export const HomeView = () => {
       </ItemsSection>
       <Section>
         <ViewContainer>
-          <Title>Popular Dapps</Title>
-          dapps
+          <Heading sx={{ fontSize: 'h1', mb: 'lg' }}>Popular Dapps</Heading>
+          <Dapps/>
         </ViewContainer>
       </Section>
       <Section>
@@ -92,10 +94,6 @@ export const HomeView = () => {
 }
 
 export default HomeView
-
-const Title = styled(Heading)`
-  font-size: 1.5rem;
-`
 
 const ItemsSection = styled(Section)`
   background: linear-gradient(

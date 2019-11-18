@@ -148,15 +148,33 @@ const dropdown = {
 }
 
 const list = {
-  default: {
+  container: {
     borderColor: 'grays.7',
     borderStyle: 'solid',
     borderWidth: '1px',
   },
   item: {
     borderWidth: '1px 0 0',
+    borderStyle: 'solid',
     borderColor: 'grays.7',
 
+    '&:hover, &:focus': {
+      bg: 'grays.8',
+    },
+
+    '&:first-of-type': {
+      borderTopWidth: 0,
+    },
+  },
+  itemActive: {
+    variant: 'list.item',
+    bg: 'grays.8',
+  },
+}
+
+const tabs = {
+  container: {},
+  item: {
     '&:hover, &:focus': {
       bg: 'grays.8',
     },
@@ -179,6 +197,25 @@ const modal = {
   },
 }
 
+const table = {
+  container: {},
+  head: {
+    color: 'grays.4',
+    borderColor: 'grays.7',
+    borderStyle: 'solid',
+    borderWidth: '0 0 1px',
+  },
+  row: {
+    '&:nth-of-type(2n)': {
+      bg: 'whites.8',
+    },
+  },
+  cell: {
+    m: 0,
+    p: 'sm',
+  },
+}
+
 export const baseTheme = {
   ...preset,
   buttons,
@@ -186,4 +223,6 @@ export const baseTheme = {
   dropdown,
   list,
   modal,
+  tabs,
+  table,
 }

@@ -8,12 +8,12 @@ const apiConfig: IApiConfig =
   config.network !== 'custom'
     ? wavesApiConfig[config.network]
     : {
-      nodes: config.node,
-      api: config.api,
-      matcher: 'https://matcher.testnet.wavesnodes.com/matcher/',
-      matcherPublicKey: '8QUAqtTckM5B8gvcuP7mMswat9SjKUuafJMusEoSn1Gy',
-      chainId: globalConfig.chainId,
-    }
+        nodes: config.node,
+        api: config.api,
+        matcher: 'https://matcher.testnet.wavesnodes.com/matcher/',
+        matcherPublicKey: '8QUAqtTckM5B8gvcuP7mMswat9SjKUuafJMusEoSn1Gy',
+        chainId: globalConfig.chainId,
+      }
 
 const { broadcast } = wavesApi(apiConfig, axiosHttp(axios))
 

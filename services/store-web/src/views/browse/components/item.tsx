@@ -5,6 +5,7 @@ import { getItemByAssetIdQuery } from '../../../graphql/queries/getItem'
 import { Loading } from '@item/ui'
 import { NullState } from '@item/ui'
 import ItemDetail from '../../../components/itemDetail'
+import { IItem } from '@item/types'
 
 type TProps = {
   assetId: string
@@ -14,7 +15,7 @@ type TProps = {
 type TData = ItemQuery
 type TVariables = ItemQueryVariables
 
-export const Item = ({ onClose, assetId }: TProps) => {
+export const Item = ({ assetId, onClose }: TProps) => {
   const { data, loading } = useQuery<TData, TVariables>(getItemByAssetIdQuery, {
     fetchPolicy: 'cache-and-network',
     variables: {
@@ -34,8 +35,17 @@ export const Item = ({ onClose, assetId }: TProps) => {
     />
   }
 
+  const { lots: lotsConnection, ...itemInfo } = item
+  // Get only first 20 lots
+  const lots =
+    lotsConnection &&
+    lotsConnection.edges &&
+    lotsConnection.edges.length
+      ? lotsConnection.edges.map(edge => edge.node)
+      : []
+
   return <ItemDetail
-    item={item}
+    item={{ ...itemInfo, lots } as IItem}
     isPage={false}
     onClose={onClose}
   />

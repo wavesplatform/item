@@ -121,7 +121,7 @@ type ProcessNewTxFunction<Tx = any, O = Operation> = (tx: Tx) => O[]
 const combineOps = <Entry = any, Tx = any>(
   current: Entry[],
   newTxs: Tx[],
-  processNewTxFn: ProcessNewTxFunction<Tx, Operation>
+  processNewTxFn: ProcessNewTxFunction<Tx, Operation>,
 ): Operation[] => {
   const ops: Operation[] = []
 

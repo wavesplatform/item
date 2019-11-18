@@ -1,10 +1,13 @@
+import { chains, config as globalConfig } from '@item/config'
+
 const dayMs = 86400 * 1000
 
 export const config = {
+  ...globalConfig,
+  chainConfig: chains[globalConfig.chainId],
   port: process.env.PORT || 4001,
-  network: process.env.NETWORK || 'testnet',
   pollingRepeatEvery: 5000,
-  fetchOffsetTxs: 10 * dayMs,
+  fetchOffsetTxs: 1 * dayMs,
 }
 
 export default config

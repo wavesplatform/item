@@ -31,7 +31,7 @@ const Switch = (props: TSwitchProps) => {
 const authFallback = (
   Component: ComponentType<any>,
   FallbackComponent: ComponentType<any>,
-  isDapp: boolean = false
+  isDapp: boolean = false,
 ) => {
   return (props: any) => (
     <Switch {...props} Component={Component} FallbackComponent={FallbackComponent} isDapp={isDapp}/>

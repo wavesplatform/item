@@ -3,7 +3,9 @@ import { truncate } from '../globals'
 import styled from '@emotion/styled'
 import { borders, BordersProps } from 'styled-system'
 
-export const StyledItemCard = styled(Box)<BoxProps & BordersProps>`
+export const StyledItemCard = styled(Box, {
+  shouldForwardProp: prop => prop !== 'style',
+})<BoxProps & BordersProps>`
   position: relative;
   display: flex;
   flex-direction: column;

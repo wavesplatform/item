@@ -19,7 +19,7 @@ export const Price = ({ value, ...rest }: IProps) => {
   return (
     <Wrapper {...rest}>
       <Flex alignItems={'center'}>
-        <Text mr={'xs'}>{valueBn.toFixed()}</Text>
+        <Text sx={{ lineHeight: 'heading' }} mr={'xs'}>{valueBn.toFixed()}</Text>
         <Icon glyph={'waves'} fontSize={'sm'}/>
       </Flex>
     </Wrapper>

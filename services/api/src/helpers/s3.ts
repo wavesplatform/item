@@ -41,7 +41,7 @@ export const uploadImage = async (file: FileUpload, entity: EntityTypes, id: str
         }
 
         resolve(data.Location)
-      }
+      },
     )
   })
 }

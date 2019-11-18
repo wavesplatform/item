@@ -10,7 +10,7 @@ import { IssueTransaction } from '@waves/waves-rest'
 export const getIssueTxsForPeriod = async (
   address: string,
   timeStart: number,
-  timeEnd?: number
+  timeEnd?: number,
 ): Promise<IssueTransaction[]> => {
   const chunks = getIssueTxs({
     sender: address,

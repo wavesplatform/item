@@ -13,7 +13,7 @@ export const collectTxs = async <Tx>(
   getTxsFn: GetTxFunction<Tx>,
   addresses: string[],
   timeStart: number,
-  timeEnd?: number
+  timeEnd?: number,
 ): Promise<Tx[]> => {
   return [].concat(...(await Promise.all(addresses.map(address => getTxsFn(address, timeStart, timeEnd)))))
 }

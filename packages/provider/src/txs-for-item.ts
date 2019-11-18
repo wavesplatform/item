@@ -6,7 +6,7 @@ export const txsForItemCreate = <V extends ItemVersions>(
   params: ICreateParamsMap[V],
   chainId: TChainId,
   senderPublicKey: string,
-  seed: string = ''
+  seed: string = '',
 ): [TIssueTx, TDataTx] => {
   switch (params.version) {
     case 1:
@@ -20,7 +20,7 @@ export const txsForItemUpdate = <V extends ItemVersions>(
   params: IUpdateParamsMap[V],
   chainId: TChainId,
   senderPublicKey: string,
-  seed: string = ''
+  seed: string = '',
 ): [TDataTx] => {
   switch (params.version) {
     case 1:

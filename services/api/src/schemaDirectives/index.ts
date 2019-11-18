@@ -4,7 +4,7 @@ import { defaultFieldResolver, GraphQLField, GraphQLInterfaceType, GraphQLObject
 export class AuthDirective extends SchemaDirectiveVisitor {
   visitFieldDefinition(
     field: GraphQLField<any, any>,
-    details: { objectType: GraphQLObjectType | GraphQLInterfaceType }
+    details: { objectType: GraphQLObjectType | GraphQLInterfaceType },
   ): GraphQLField<any, any> | void | null {
     const { resolve = defaultFieldResolver } = field
     const { requires } = this.args
@@ -36,7 +36,7 @@ export class AuthDirective extends SchemaDirectiveVisitor {
 export class InternalDirective extends SchemaDirectiveVisitor {
   visitFieldDefinition(
     field: GraphQLField<any, any>,
-    details: { objectType: GraphQLObjectType | GraphQLInterfaceType }
+    details: { objectType: GraphQLObjectType | GraphQLInterfaceType },
   ): GraphQLField<any, any> | void | null {
     const { resolve = defaultFieldResolver } = field
 

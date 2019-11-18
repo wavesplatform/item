@@ -9,14 +9,20 @@ import { ItemParams } from './ItemParams'
 import { PlatformStats } from './PlatformStats'
 import { Mutation } from './Mutation'
 import { AuthPayload } from './AuthPayload'
+import { LotEdge } from './LotEdge'
+import { Lot } from './Lot'
+import { LotConnection } from './LotConnection'
 
 export const resolvers: Resolvers = {
   AuthPayload,
   Query,
-  ItemConnection,
-  PageInfo,
-  ItemEdge,
   Item,
+  ItemEdge,
+  ItemConnection,
+  Lot,
+  LotEdge,
+  LotConnection,
+  PageInfo,
   User,
   ItemParams,
   PlatformStats,

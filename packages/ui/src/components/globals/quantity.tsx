@@ -27,7 +27,7 @@ export const Quantity = ({ value, ...rest }: IProps) => {
     return (
       <Wrapper {...rest}>
         <Flex alignItems={'center'}>
-          <Text mr={'xs'}>{valueBn.toFixed()}</Text>
+          <Text sx={{ lineHeight: 'heading' }} mr={'xs'}>{valueBn.toFixed()}</Text>
           <Icon glyph={'fiber_smart_record'} fontSize={'sm'}/>
         </Flex>
       </Wrapper>

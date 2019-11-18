@@ -30,5 +30,4 @@ export const withCurrentUser = <TProps extends {}>(WrappedComponent: ComponentTy
   }
 }
 
-
 export default useCurrentUser

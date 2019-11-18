@@ -15,7 +15,7 @@ export interface IConfig {
   chainId: string
 
   originWavesAssetId: string
-  wavesAssetId: string,
+  wavesAssetId: string
   dappAddresses: IDappAddresses
 }
 
