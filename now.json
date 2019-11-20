@@ -4,6 +4,9 @@
     "DEBUG": "writer",
     "BUCKET_NAME": "@bucket-name",
     "S3_TOKEN": "@s3-token",
-    "S3_SECRET": "@s3-secret"
+    "S3_SECRET": "@s3-secret",
+    "PRISMA_HOST": "@prisma-host",
+    "PRISMA_SERVICE": "@prisma-service",
+    "PRISMA_STAGE": "@prisma-stage"
   }
 }

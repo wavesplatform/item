@@ -9,7 +9,9 @@ services:
     environment:
       CHAIN_ID: T
       REDIS_URL: redis://redis:6379
-      PRISMA_HOST: prisma
+      PRISMA_HOST: http://prisma:4466
+      PRISMA_SERVICE: default
+      PRISMA_STAGE: default
       BUCKET_NAME: ${BUCKET_NAME}
       S3_TOKEN: ${S3_TOKEN}
       S3_SECRET: ${S3_SECRET}
