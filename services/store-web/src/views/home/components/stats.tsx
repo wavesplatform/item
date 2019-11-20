@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, Loading } from '@item/ui'
+import { Icon, Loading } from '@item-protocol/ui'
 import { Flex, FlexProps, Text } from 'rebass'
 import { useQuery } from '@apollo/react-hooks'
 import styled from '@emotion/styled'

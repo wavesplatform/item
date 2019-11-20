@@ -2,7 +2,7 @@ import { Box, Card, Flex, Heading, Image, ImageProps, Link, LinkProps, Text } fr
 import config from '../../config'
 import manualImage from './manual.svg'
 import docsImage from './docs.svg'
-import { Button, themeGet } from '@item/ui'
+import { Button, themeGet } from '@item-protocol/ui'
 import React, { PropsWithChildren } from 'react'
 import styled from '@emotion/styled/macro'
 

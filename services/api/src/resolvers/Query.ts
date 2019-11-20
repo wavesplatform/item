@@ -13,11 +13,11 @@ export const Query: QueryResolvers.Type = {
   items: async (parent, { filter, orderBy, cursorInfo: { after, first } = {} }, ctx) => {
     const where: ItemWhereInput = filter
       ? {
-        // Dapp filter
-        dapp: {
-          address: filter.dappAddress,
-        },
-      }
+          // Dapp filter
+          dapp: {
+            address: filter.dappAddress,
+          },
+        }
       : {}
 
     // Inclusions

@@ -1,6 +1,6 @@
 import React from 'react'
-import { ILot } from '@item/types'
-import { Price, Table, TBody, Td, THead, toWaves, Tr, UserHeading } from '@item/ui'
+import { ILot } from '@item-protocol/types'
+import { Price, Table, TBody, Td, THead, toWaves, Tr, UserHeading } from '@item-protocol/ui'
 import config from '../../config'
 import { BoxProps, Link } from 'rebass'
 

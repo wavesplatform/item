@@ -1,5 +1,5 @@
 import { config } from './config'
-import { Queue, queues, TxsJobData } from '@item/queues'
+import { Queue, queues, TxsJobData } from '@item-protocol/queues'
 import { collectTxs, GetTxFunction } from './collect'
 import * as Debug from 'debug'
 import { DataTransaction, IssueTransaction } from '@waves/waves-rest'
@@ -67,9 +67,7 @@ const processPolling = async () => {
       fetchTxs<IssueTransaction>(getIssueTxsForPeriod, issueTxsQueue, addresses, timeStart),
       fetchTxs<DataTransaction>(getDataTxsForPeriod, dataTxsQueue, addresses, timeStart),
       // Listen invoke txs like buy/sell etc.
-      fetchTxs<InvokeScriptTransaction>(getInvokeScriptTxsForPeriod, invokeTxsQueue, [
-        storeAddress,
-      ], timeStart),
+      fetchTxs<InvokeScriptTransaction>(getInvokeScriptTxsForPeriod, invokeTxsQueue, [storeAddress], timeStart),
     ])
   } catch (err) {
     debug(err.message)

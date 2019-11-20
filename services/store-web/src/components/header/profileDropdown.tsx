@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 import { Box } from 'rebass'
 import { Link as RouterLink } from 'react-router-dom'
-import { DropdownItem, DropdownList, Price, toWaves } from '@item/ui'
+import { DropdownItem, DropdownList, Price, toWaves } from '@item-protocol/ui'
 import styled from '@emotion/styled'
 import { KeeperContext } from '../../contexts/keeper'
 import { removeToken } from '../../helpers/auth'

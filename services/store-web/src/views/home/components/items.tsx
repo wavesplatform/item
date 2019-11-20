@@ -2,10 +2,10 @@ import React from 'react'
 import { getMoreItemsQuery } from '../../../graphql/queries/getItems'
 import { MoreItemsQuery, MoreItemsQueryVariables } from '../../../graphql/queries/__generated__/MoreItemsQuery'
 import { useQuery } from '@apollo/react-hooks'
-import { ItemCard, Loading, NullState } from '@item/ui'
+import { ItemCard, Loading, NullState } from '@item-protocol/ui'
 import { Grid } from '../../../components/layout'
 import { Link as RouterLink } from 'react-router-dom'
-import { IItem } from '@item/types'
+import { IItem } from '@item-protocol/types'
 
 type TData = MoreItemsQuery
 type TVariables = MoreItemsQueryVariables

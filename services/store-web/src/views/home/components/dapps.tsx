@@ -1,9 +1,9 @@
 import React from 'react'
 import { useQuery } from '@apollo/react-hooks'
-import { DappCard, Loading, NullState } from '@item/ui'
+import { DappCard, Loading, NullState } from '@item-protocol/ui'
 import { Grid } from '../../../components/layout'
 import { Link as RouterLink } from 'react-router-dom'
-import { IDapp } from '@item/types'
+import { IDapp } from '@item-protocol/types'
 import { DappsQuery } from '../../../graphql/queries/__generated__/DappsQuery'
 import { getDappsQuery } from '../../../graphql/queries/getDapps'
 

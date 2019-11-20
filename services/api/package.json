@@ -1,9 +1,10 @@
 {
-  "name": "@item/api",
+  "name": "@item-protocol/api",
   "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "private": true,
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "start": "node ./dist/index.js",
@@ -33,7 +34,7 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
-    "@item/types": "^1.0.0",
+    "@item-protocol/types": "^1.0.0",
     "@types/algoliasearch": "^3.30.18",
     "@types/express": "^4.17.1",
     "@types/graphql": "^14.5.0",

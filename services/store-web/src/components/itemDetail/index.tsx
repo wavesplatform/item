@@ -1,11 +1,20 @@
 import React, { useState } from 'react'
 import { ImageWrapper, Overview, ParamValue, StyledParamKey } from './style'
 import { Box, BoxProps, Flex, FlexProps, Heading, HeadingProps, Image, Link, Text } from 'rebass'
-import { recordToArray } from '@item/utils'
-import { Button, DappHeading, getImageSrc, IconButton, IconButtonProps, Quantity, toWaves, Price } from '@item/ui'
+import { recordToArray } from '@item-protocol/utils'
+import {
+  Button,
+  DappHeading,
+  getImageSrc,
+  IconButton,
+  IconButtonProps,
+  Quantity,
+  toWaves,
+  Price,
+} from '@item-protocol/ui'
 import useCurrentUser from '../../hooks/currentUser'
 import { useHistory, useLocation } from 'react-router'
-import { IDapp, IItem } from '@item/types'
+import { IDapp, IItem } from '@item-protocol/types'
 import { OrderModal } from '../modals/order'
 import LotTable from './lotTable'
 import { getProfitLot, ProfitPriceType } from '../../helpers/order'

@@ -1,10 +1,10 @@
 import memoizee from 'memoizee'
-import { ICreateParamsMap, ItemVersions, IUpdateParamsMap, TDataTx, TIntent, TIssueTx } from '@item/types'
+import { ICreateParamsMap, ItemVersions, IUpdateParamsMap, TDataTx, TIntent, TIssueTx } from '@item-protocol/types'
 import { publicKey, TChainId } from '@waves/ts-lib-crypto'
 import { broadcast } from './api'
 import { txsForItemCreate, txsForItemUpdate } from './txs-for-item'
-import { config as globalConfig } from '@item/config'
-import { signWithKeeper } from '@item/utils'
+import { config as globalConfig } from '@item-protocol/config'
+import { signWithKeeper } from '@item-protocol/utils'
 
 // export type CreateItem<V extends ItemVersions> = () => ITxs<[TIssueTx, TDataTx]> & IBroadcast
 // export type UpdateItem<V extends ItemVersions> = () => ITxs<[TDataTx]> & IBroadcast

@@ -1,13 +1,13 @@
-import { Job, queues } from '@item/queues'
+import { Job, queues } from '@item-protocol/queues'
 import Debug from 'debug'
-import { IItem, Operation, OPERATION_TYPE } from '@item/types'
+import { IItem, Operation, OPERATION_TYPE } from '@item-protocol/types'
 import { ItemCreateInput, ItemParamsCreateInput, LotCreateInput } from './__generated__/prisma-client'
 import { deleteItem, upsertItem } from './queries/item'
 import { deleteManyItemParamses, updateItemParams, upsertItemParams } from './queries/item-params'
 import { LotUpdateMutation } from './types'
 import { deleteLot, getLotByTxId, updateLot, upsertLot } from './queries/lot'
 import { saveItemObject } from './algolia/events/items'
-import { toSearchItemObject } from '@item/utils'
+import { toSearchItemObject } from '@item-protocol/utils'
 
 const debug = Debug('writer')
 

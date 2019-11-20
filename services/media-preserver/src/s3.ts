@@ -1,6 +1,6 @@
 import stream from 'stream'
 import config from './config'
-import { EntityTypes } from '@item/types'
+import { EntityTypes } from '@item-protocol/types'
 import uuidv4 = require('uuid/v4')
 import S3 = require('aws-sdk/clients/s3')
 

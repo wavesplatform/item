@@ -1,7 +1,7 @@
 import React from 'react'
 import { Description, Title, Wrapper, WrapperProps } from './style'
 import { UserAvatar } from '../image'
-import { IDapp } from '@item/types'
+import { IDapp } from '@item-protocol/types'
 import { Box } from 'rebass'
 import { StyleSize } from '../../styles'
 

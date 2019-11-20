@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import { TextInputWithIcon } from '@item/ui'
+import { TextInputWithIcon } from '@item-protocol/ui'
 
 type TProps = {
   defaultValue?: string

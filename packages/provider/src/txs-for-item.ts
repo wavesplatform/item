@@ -1,4 +1,4 @@
-import { ICreateParamsMap, ItemVersions, IUpdateParamsMap, TDataTx, TIssueTx } from '@item/types'
+import { ICreateParamsMap, ItemVersions, IUpdateParamsMap, TDataTx, TIssueTx } from '@item-protocol/types'
 import { TChainId } from '@waves/ts-lib-crypto'
 import { txsForItemV1Create, txsForItemV1Update } from './v1'
 

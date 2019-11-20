@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button } from '@item/ui'
+import { Button } from '@item-protocol/ui'
 
 export const inclusionsMap = { sale: '' }
 export type ItemInclusion = keyof typeof inclusionsMap

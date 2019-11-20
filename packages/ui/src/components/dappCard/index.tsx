@@ -2,7 +2,7 @@ import React from 'react'
 import { StyledDappCard, Inner, Overview, Image, Title } from './style'
 import { Flex, Text } from 'rebass'
 import { UserAvatar } from '../image'
-import { IDapp } from '@item/types'
+import { IDapp } from '@item-protocol/types'
 import emptyImage from '../image/empty.svg'
 
 export type DappCardStyle = 'base' | 'short'

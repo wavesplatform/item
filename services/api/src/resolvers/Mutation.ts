@@ -1,7 +1,7 @@
 import { MutationResolvers } from '../__generated__/graphqlgen'
 import { createToken, verifySignature } from '../helpers/auth'
 import { uploadImage } from '../helpers/s3'
-import { FileUpload } from '@item/types'
+import { FileUpload } from '@item-protocol/types'
 
 export const Mutation: MutationResolvers.Type = {
   ...MutationResolvers.defaultResolvers,

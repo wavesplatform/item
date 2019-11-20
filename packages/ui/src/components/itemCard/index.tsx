@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, BoxProps, Flex, Image } from 'rebass'
-import { IItem } from '@item/types'
+import { IItem } from '@item-protocol/types'
 import { ImageWrapper, Overview, StyledItemCard, Title } from './style'
 import Quantity from '../globals/quantity'
 import { DappHeading } from '../heading'

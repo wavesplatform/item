@@ -1,10 +1,13 @@
 {
-  "name": "@item/ui",
+  "name": "@item-protocol/ui",
   "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w",
@@ -26,7 +29,7 @@
     "@emotion/babel-preset-css-prop": "^10.0.17",
     "@emotion/core": "^10.0.17",
     "@emotion/styled": "^10.0.17",
-    "@item/types": "^1.0.0",
+    "@item-protocol/types": "^1.0.0",
     "@rebass/forms": "^4.0.6",
     "@storybook/addon-actions": "^5.2.1",
     "@storybook/addon-links": "^5.2.1",

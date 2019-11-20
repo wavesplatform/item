@@ -2,7 +2,7 @@ import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { Flex } from 'rebass'
 import { UserHeading } from '../userHeading'
-import { IDapp, IUser } from '@item/types'
+import { IDapp, IUser } from '@item-protocol/types'
 import { DappHeading } from '../dappHeading'
 
 const user: IUser = {

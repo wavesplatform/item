@@ -1,5 +1,5 @@
 import { ByteVector, contract } from '@waves/ts-contract'
-import { config as globalConfig } from '@item/config'
+import { config as globalConfig } from '@item-protocol/config'
 
 export interface StoreContract {
   sell: (price: number, priceAsset: ByteVector) => any

@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import { TextInputWithIcon, TextInputWithIconProps } from '@item/ui'
+import { TextInputWithIcon, TextInputWithIconProps } from '@item-protocol/ui'
 
 type TProps = {
   onSearch?: (searchString: string) => void

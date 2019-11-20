@@ -1,4 +1,4 @@
-import { ItemVersions, TCreateParams } from '@item/types'
+import { ItemVersions, TCreateParams } from '@item-protocol/types'
 
 export const parseParamsPayload = (value: string, version?: ItemVersions): TCreateParams => {
   const json = JSON.parse(value)

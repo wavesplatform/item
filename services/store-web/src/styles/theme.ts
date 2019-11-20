@@ -1,4 +1,4 @@
-import { baseTheme } from '@item/ui'
+import { baseTheme } from '@item-protocol/ui'
 import { transparentize } from 'polished'
 
 const header = {

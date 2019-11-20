@@ -25,7 +25,7 @@ export interface IItem {
 
 export interface ISearchItemObject {
   objectID: string
-  id: string,
+  id: string
   txId?: string
   name?: string
   quantity?: string | number

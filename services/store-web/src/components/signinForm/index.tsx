@@ -6,7 +6,7 @@ import { useHistory } from 'react-router'
 import { useMutation } from '@apollo/react-hooks'
 import config from '../../config'
 import { setToken } from '../../helpers/auth'
-import { Button, TextInput, Toast } from '@item/ui'
+import { Button, TextInput, Toast } from '@item-protocol/ui'
 import { Box } from 'rebass'
 import { isFirefox } from '../../helpers/browser'
 

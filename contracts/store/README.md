@@ -13,13 +13,13 @@ This package contains implementations of store contract based on [item protocol]
 **Install**
 
 ```bash
-yarn add @item/contracts-store
+yarn add @item-protocol/contracts-store
 ```
 
 ## Usage
 
 ```typescript
-import { sell } from '@item/contracts-store'
+import { sell } from '@item-protocol/contracts-store'
 
 const seed = 'your seed'
 
@@ -32,7 +32,7 @@ export default async () => {
 
 ## Configuration
 
-Item protocol uses a shared configuration package `@item/config`, some fields use environment variables. To change [ChainId](../../packages/config/src/index.ts), run the command:
+Item protocol uses a shared configuration package `@item-protocol/config`, some fields use environment variables. To change [ChainId](../../packages/config/src/index.ts), run the command:
 ```bash
 export CHAIN_ID=W
 ```
@@ -54,7 +54,7 @@ yarn install
 To build this package, run the following from the monorepo root directory:
 
 ```bash
-yarn build --scope @item/contracts-store
+yarn build --scope @item-protocol/contracts-store
 ```
 
 ### Run Tests

@@ -1,0 +1,12 @@
+{
+  "rules": [
+    {
+      "pathname": "/api",
+      "dest": "api.item.market"
+    },
+    {
+      "pathname": "/api/**",
+      "dest": "api.item.market"
+    }
+  ]
+}

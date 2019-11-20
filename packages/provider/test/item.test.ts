@@ -1,5 +1,5 @@
 import { address, ChaidId } from '@waves/ts-lib-crypto'
-import { ItemVersions } from '@item/types'
+import { ItemVersions } from '@item-protocol/types'
 import { create, update } from '../src'
 
 const testChainId = process.env.CHAIN_ID

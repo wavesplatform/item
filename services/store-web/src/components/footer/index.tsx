@@ -1,7 +1,7 @@
 import React from 'react'
 import { Flex } from 'rebass'
 import { Link as RouterLink } from 'react-router-dom'
-import { Icon } from '@item/ui'
+import { Icon } from '@item-protocol/ui'
 
 export const Footer = () =>
   <Flex

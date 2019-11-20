@@ -1,4 +1,4 @@
-import { chains, config as globalConfig } from '@item/config'
+import { chains, config as globalConfig } from '@item-protocol/config'
 
 const dayMs = 86400 * 1000
 

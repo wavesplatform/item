@@ -1,5 +1,5 @@
 import { config } from '../config'
-import { EntityTypes, FileUpload } from '@item/types'
+import { EntityTypes, FileUpload } from '@item-protocol/types'
 import uuidv4 = require('uuid/v4')
 import S3 = require('aws-sdk/clients/s3')
 

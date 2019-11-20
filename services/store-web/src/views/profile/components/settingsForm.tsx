@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { updateUserInfoMutation } from '../../../graphql/mutations/updateUserInfo'
 import { UpdateUserInfo, UpdateUserInfoVariables } from '../../../graphql/mutations/__generated__/UpdateUserInfo'
 import { Box } from 'rebass'
-import { Button, TextInput } from '@item/ui'
+import { Button, TextInput } from '@item-protocol/ui'
 
 export const SettingsForm = () => {
   const { me } = useCurrentUser()

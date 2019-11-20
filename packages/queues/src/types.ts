@@ -1,6 +1,6 @@
 import * as Bull from 'bull'
 import { DataTransaction, IssueTransaction } from '@waves/waves-rest'
-import { EntityTypes, Operation } from '@item/types'
+import { EntityTypes, Operation } from '@item-protocol/types'
 import { InvokeScriptTransaction } from '@waves/waves-rest/types'
 
 export type Job<JobData = any> = Bull.Job<JobData>

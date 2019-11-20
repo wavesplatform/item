@@ -1,9 +1,12 @@
 {
-  "name": "@item/config",
+  "name": "@item-protocol/config",
   "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "fix": "run-s fix:tslint fix:prettier",

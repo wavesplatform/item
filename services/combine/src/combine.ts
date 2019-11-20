@@ -7,7 +7,7 @@ import {
   LotCreateInput,
 } from './__generated__/prisma-client'
 import { DataTransaction, IssueTransaction } from '@waves/waves-rest'
-import { Operation, OPERATION_TYPE } from '@item/types'
+import { Operation, OPERATION_TYPE } from '@item-protocol/types'
 import {
   buyTxToLotInput,
   cancelTxToLotInput,

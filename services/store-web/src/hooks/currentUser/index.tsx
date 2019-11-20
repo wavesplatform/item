@@ -1,5 +1,5 @@
 import { MeQuery } from '../../graphql/queries/__generated__/MeQuery'
-import { IUser } from '@item/types'
+import { IUser } from '@item-protocol/types'
 import { useQuery } from '@apollo/react-hooks'
 import { getMeQuery } from '../../graphql/queries/getMe'
 import React, { ComponentType } from 'react'

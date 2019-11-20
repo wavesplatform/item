@@ -1,5 +1,5 @@
 import config from '../config'
-import { ILot } from '@item/types'
+import { ILot } from '@item-protocol/types'
 import { BigNumber } from '@waves/bignumber'
 
 export const generateExchangeLink = (address: string, amount: string): string => {

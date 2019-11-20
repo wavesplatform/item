@@ -1,6 +1,6 @@
 import React from 'react'
 import { Title, Wrapper, WrapperProps } from './style'
-import { IUser } from '@item/types'
+import { IUser } from '@item-protocol/types'
 import { UserAvatar } from '../image'
 import { StyleSize } from '../../styles/theme'
 

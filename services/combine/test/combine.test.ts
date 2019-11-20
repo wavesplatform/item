@@ -1,6 +1,6 @@
 import { dataTx, invokeScriptBuyTx, invokeScriptCancelTx, invokeScriptSellTx, issueTx } from './txs'
 import { combineItemOps, combineLotOps, combineParamsOps } from '../src/combine'
-import { OPERATION_TYPE } from '@item/types'
+import { OPERATION_TYPE } from '@item-protocol/types'
 import { dataMock, invokeScriptMock, issueMock } from './entries'
 
 describe('combine', () => {

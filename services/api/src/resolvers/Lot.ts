@@ -6,7 +6,7 @@ export const Lot: LotResolvers.Type = {
   item: ({ txId }, args, ctx) => {
     return ctx.prisma.lot({ txId }).item()
   },
-  
+
   seller: ({ txId }, args, ctx) => {
     return ctx.prisma.lot({ txId }).seller()
   },

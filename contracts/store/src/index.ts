@@ -1,5 +1,5 @@
 import memoizee from 'memoizee'
-import { TIntent, TInvokeScriptTx } from '@item/types'
+import { TIntent, TInvokeScriptTx } from '@item-protocol/types'
 import {
   address,
   base58Decode,
@@ -9,8 +9,8 @@ import {
   publicKey,
   TChainId,
 } from '@waves/ts-lib-crypto'
-import { config as globalConfig } from '@item/config'
-import { signWithKeeper } from '@item/utils'
+import { config as globalConfig } from '@item-protocol/config'
+import { signWithKeeper } from '@item-protocol/utils'
 import { broadcast, getValueByKey } from './api'
 import { buy as buyIntent, cancel as cancelIntent, sell as sellIntent } from './store'
 import { BigNumber } from '@waves/bignumber'

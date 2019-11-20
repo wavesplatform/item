@@ -3,12 +3,12 @@ import { Box, BoxProps, Flex, FlexProps, Heading, Link, Text } from 'rebass'
 import { Link as RouterLink, useHistory } from 'react-router-dom'
 import { Route } from 'react-router'
 import { Container } from '../layout'
-import { Icon, UserHeading } from '@item/ui'
+import { Icon, UserHeading } from '@item-protocol/ui'
 import config from '../../config'
 import styled from '@emotion/styled'
 import useCurrentUser from '../../hooks/currentUser'
 import ProfileDropdown from './profileDropdown'
-import { IUser } from '@item/types'
+import { IUser } from '@item-protocol/types'
 
 export const Header = () => {
   const { me } = useCurrentUser()

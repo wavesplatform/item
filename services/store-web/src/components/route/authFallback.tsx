@@ -1,6 +1,6 @@
 import React, { ComponentType } from 'react'
 import { UserRole } from '../../__generated__/globalTypes'
-import { Loading } from '@item/ui'
+import { Loading } from '@item-protocol/ui'
 import useCurrentUser from '../../hooks/currentUser'
 
 type TSwitchProps = {

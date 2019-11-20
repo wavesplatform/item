@@ -1,6 +1,7 @@
 import { DataTransaction, IssueTransaction } from '@waves/waves-rest'
 import {
-  DataCreateInput, InvokeScriptCreateInput,
+  DataCreateInput,
+  InvokeScriptCreateInput,
   IssueCreateInput,
   ItemCreateInput,
   ItemParamsCreateInput,
@@ -11,8 +12,8 @@ import { BigNumber } from '@waves/bignumber'
 import { base58Encode, base64Decode } from '@waves/ts-lib-crypto'
 import { isAssetId } from './utils'
 import { LotUpdateMutation } from './types'
-import { parseParamsPayload } from '@item/utils'
-import { config as globalConfig } from '@item/config'
+import { parseParamsPayload } from '@item-protocol/utils'
+import { config as globalConfig } from '@item-protocol/config'
 
 // Issue Txs
 

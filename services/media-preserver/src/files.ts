@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { uploadImageWithStream } from './s3'
 import https from 'https'
-import { EntityTypes } from '@item/types'
+import { EntityTypes } from '@item-protocol/types'
 
 export const getFileStream = (url: string, maxFileSizeByte: number) => {
   return axios.get(url, {

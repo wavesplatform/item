@@ -1,4 +1,4 @@
-import { IItem } from '@item/types'
+import { IItem } from '@item-protocol/types'
 import { defaultImage } from '../components/image'
 
 export const getImageSrc = ({ params }: IItem) => {

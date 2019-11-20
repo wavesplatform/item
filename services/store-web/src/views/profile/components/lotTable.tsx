@@ -1,9 +1,21 @@
 import React from 'react'
-import { ILot } from '@item/types'
-import { Button, getImageSrc, Price, Table, TBody, Td as BaseTd, THead, toWaves, Tr, Badge, Truncate } from '@item/ui'
+import { ILot } from '@item-protocol/types'
+import {
+  Button,
+  getImageSrc,
+  Price,
+  Table,
+  TBody,
+  Td as BaseTd,
+  THead,
+  toWaves,
+  Tr,
+  Badge,
+  Truncate,
+} from '@item-protocol/ui'
 import { Box, BoxProps, Flex, Heading, Link, Image, FlexProps } from 'rebass'
 import config from '../../../config'
-import { cancel } from '@item/contracts-store'
+import { cancel } from '@item-protocol/contracts-store'
 
 type LotTableProps = {
   lots: ILot[]

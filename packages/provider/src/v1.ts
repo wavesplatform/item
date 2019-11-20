@@ -1,7 +1,7 @@
-import { ICreateItemParamsV1, IUpdateItemParamsV1, TDataTx, TIssueTx } from '@item/types'
+import { ICreateItemParamsV1, IUpdateItemParamsV1, TDataTx, TIssueTx } from '@item-protocol/types'
 import { address, TChainId } from '@waves/ts-lib-crypto'
 import { data, issue } from '@waves/waves-transactions'
-import { parseParamsPayload } from '@item/utils'
+import { parseParamsPayload } from '@item-protocol/utils'
 
 export const txsForItemV1Create = (
   params: ICreateItemParamsV1,

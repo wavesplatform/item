@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
 import { getItemByAssetIdQuery } from '../../../graphql/queries/getItem'
-import { Loading } from '@item/ui'
+import { Loading } from '@item-protocol/ui'
 import ItemDetail from '../../../components/itemDetail'
 import React from 'react'
 import { Redirect } from 'react-router'
 import { ItemQuery, ItemQueryVariables } from '../../../graphql/queries/__generated__/ItemQuery'
-import { IItem } from '@item/types'
+import { IItem } from '@item-protocol/types'
 
 type TProps = {
   assetId: string

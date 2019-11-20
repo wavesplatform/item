@@ -1,4 +1,4 @@
-import { Job, queues, TxsJobData } from '@item/queues'
+import { Job, queues, TxsJobData } from '@item-protocol/queues'
 import { DataTransaction, IssueTransaction } from '@waves/waves-rest'
 import { getIssueRange, overwriteIssueRange } from './queries/issue'
 import * as Debug from 'debug'
@@ -6,7 +6,7 @@ import { combineItemOps, combineLotOps, combineParamsOps } from './combine'
 import { dataTxToDataInput, invokeScriptTxToInvokeScriptInput, issueTxToIssueInput } from './converter'
 import { deleteData, getDataRange, overwriteDataRange } from './queries/data'
 import config from './config'
-import { Operation, OPERATION_TYPE } from '@item/types'
+import { Operation, OPERATION_TYPE } from '@item-protocol/types'
 import { InvokeScriptTransaction } from '@waves/waves-rest/types'
 import { getInvokeScriptRange, overwriteInvokeScriptRange } from './queries/invokeScript'
 
@@ -82,9 +82,9 @@ const processDataTxs = async ({ data: { txs, timeStart, timeEnd } }: Job<TxsJobD
   }
 }
 
-const processInvokeScriptTxs = async (
-  { data: { txs, timeStart, timeEnd } }: Job<TxsJobData<InvokeScriptTransaction>>,
-) => {
+const processInvokeScriptTxs = async ({
+                                        data: { txs, timeStart, timeEnd },
+                                      }: Job<TxsJobData<InvokeScriptTransaction>>) => {
   try {
     const dateStart = new Date(timeStart)
     const dateEnd = timeEnd && new Date(timeEnd)

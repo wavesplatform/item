@@ -1,8 +1,8 @@
 import { uploadFileByUrl } from './files'
 import Debug from 'debug'
 import config from './config'
-import { EntityTypes, OPERATION_TYPE } from '@item/types'
-import { Job, PreserveMediaJobData, queues } from '@item/queues'
+import { EntityTypes, OPERATION_TYPE } from '@item-protocol/types'
+import { Job, PreserveMediaJobData, queues } from '@item-protocol/queues'
 
 const debug = Debug('media-preserver')
 

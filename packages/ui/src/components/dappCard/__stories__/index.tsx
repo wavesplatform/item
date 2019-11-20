@@ -1,7 +1,7 @@
 import React from 'react'
 import { storiesOf } from '@storybook/react'
 import { Box } from 'rebass'
-import { IDapp } from '@item/types'
+import { IDapp } from '@item-protocol/types'
 import { DappCard } from '../index'
 
 const dapp: IDapp = {

@@ -1,6 +1,6 @@
 import { Box, Heading, Text } from 'rebass'
 import styled from '@emotion/styled'
-import { truncate } from '@item/ui'
+import { truncate } from '@item-protocol/ui'
 
 export const StyledParamKey = styled(Heading)`
   ${truncate};

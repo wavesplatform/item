@@ -12,7 +12,7 @@
     "bootstrap": "lerna bootstrap",
     "build": "lerna run --stream --concurrency 1 --sort build",
     "start": "lerna run --stream --parallel start",
-    "dev": "cross-env DEBUG=observer,combine,writer,api,media-preserver lerna run --stream --parallel dev",
+    "dev": "cross-env DEBUG=observer,combine,writer,api,media-preserver lerna run --parallel dev",
     "fix": "lerna run --stream --concurrency 1 fix",
     "test": "lerna run --stream --concurrency 1 --sort test",
     "test:e2e": "cypress run",
