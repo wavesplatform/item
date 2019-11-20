@@ -1,6 +1,6 @@
 {
   "name": "@item-protocol/queues",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -20,7 +20,7 @@
     "bull": "^3.10.0"
   },
   "devDependencies": {
-    "@item-protocol/types": "^1.0.0",
+    "@item-protocol/types": "^1.1.0",
     "@types/bull": "^3.10.2",
     "@types/node": "^12.7.2",
     "@waves/waves-rest": "^0.0.36",

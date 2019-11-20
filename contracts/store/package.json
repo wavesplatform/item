@@ -1,6 +1,6 @@
 {
   "name": "@item-protocol/contracts-store",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,8 +15,8 @@
     "test:contract": "surfboard test store.ride-test.js"
   },
   "dependencies": {
-    "@item-protocol/config": "^1.0.0",
-    "@item-protocol/utils": "^1.0.0",
+    "@item-protocol/config": "^1.1.0",
+    "@item-protocol/utils": "^1.1.0",
     "@waves/bignumber": "^0.0.1",
     "@waves/ts-contract": "^0.0.10",
     "@waves/ts-lib-crypto": "^1.3.1",
@@ -24,7 +24,7 @@
     "memoizee": "^0.4.14"
   },
   "devDependencies": {
-    "@item-protocol/types": "^1.0.0",
+    "@item-protocol/types": "^1.1.0",
     "@waves/surfboard": "^1.6.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.18.2",

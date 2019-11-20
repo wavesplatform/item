@@ -1,6 +1,6 @@
 {
   "name": "@item-protocol/media-preserver",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,13 +17,13 @@
     "test:watch": "test:jest -- --watch"
   },
   "dependencies": {
-    "@item-protocol/queues": "^1.0.0",
+    "@item-protocol/queues": "^1.1.0",
     "aws-sdk": "^2.524.0",
     "axios": "^0.19.0",
     "debug": "^4.1.1"
   },
   "devDependencies": {
-    "@item-protocol/types": "^1.0.0",
+    "@item-protocol/types": "^1.1.0",
     "@types/node": "^12.7.2",
     "nodemon": "^1.19.1",
     "npm-run-all": "^4.1.5",
