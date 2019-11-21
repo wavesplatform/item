@@ -17,8 +17,8 @@
     "test": "lerna run --stream --concurrency 1 --sort test",
     "test:e2e": "cypress run",
     "cypress:open": "cypress open",
-    "prisma:generate": "cross-env PRISMA_HOST=http://prisma:4466 prisma generate",
-    "prisma:deploy:dev": "cross-env PRISMA_HOST=http://localhost:4466 PRISMA_SERVIE=default PRISMA_STAGE=default prisma deploy",
+    "prisma:generate": "cross-env PRISMA_ENDPOINT=http://prisma:4466 prisma generate",
+    "prisma:deploy:dev": "cross-env PRISMA_ENDPOINT=http://localhost:4466 prisma deploy",
     "prisma:deploy": "prisma deploy -e .env"
   },
   "devDependencies": {

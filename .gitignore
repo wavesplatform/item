@@ -10,7 +10,7 @@ build/
 coverage/
 
 # Deploy
-now-secrets.json
+**/now-secrets.json
 
 # Logs
 yarn-error.log

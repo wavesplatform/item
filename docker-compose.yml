@@ -8,10 +8,8 @@ services:
     command: yarn dev
     environment:
       CHAIN_ID: T
-      REDIS_URL: redis://redis:6379
-      PRISMA_HOST: http://prisma:4466
-      PRISMA_SERVICE: default
-      PRISMA_STAGE: default
+      REDIS_HOST: redis
+      PRISMA_ENDPOINT: http://prisma:4466
       BUCKET_NAME: ${BUCKET_NAME}
       S3_TOKEN: ${S3_TOKEN}
       S3_SECRET: ${S3_SECRET}
