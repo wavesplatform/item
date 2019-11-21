@@ -1,6 +1,6 @@
 {
   "name": "@item-protocol/ui",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -23,12 +23,12 @@
     "@emotion/babel-preset-css-prop": "^10.0.17",
     "@emotion/core": "^10.0.17",
     "@emotion/styled": "^10.0.17",
-    "@waves/bignumber": "^0.0.1",
     "@rebass/forms": "^4.0.6",
-    "rebass": "^4.0.5",
-    "identity-img": "^1.0.0",
+    "@waves/bignumber": "^0.0.1",
     "emotion-theming": "^10.0.19",
-    "polished": "^3.4.1"
+    "identity-img": "^1.0.0",
+    "polished": "^3.4.1",
+    "rebass": "^4.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
