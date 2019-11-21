@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "env": {
     "DEBUG": "writer",
     "BUCKET_NAME": "@bucket-name",
