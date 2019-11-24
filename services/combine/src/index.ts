@@ -8,14 +8,18 @@ const debug = Debug('combine')
 debug('🚜 Combine is starting...')
 
 // Worker
-http.createServer(async (req, res) => {
+const server = http.createServer(async (req, res) => {
   res.writeHead(200, { 'Content-Type': 'application/json' })
   res.end(JSON.stringify({ status: 'UP' }))
-}).listen(config.port)
+})
 
 const run = async () => {
   handlingFailedParams()
   initProcessTxs()
 }
 
-run()
+run().then(() => {
+  server.listen(config.port, () => {
+    debug(`💉 Healthcheck running at ${config.port} port`)
+  })
+})

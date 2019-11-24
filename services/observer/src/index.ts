@@ -10,10 +10,10 @@ debug(`🧬 Chain ID: ${config.chainId}`)
 debug(`Store: ${config.dappAddresses.store}`)
 
 // Worker
-http.createServer(async (req, res) => {
+const server = http.createServer(async (req, res) => {
   res.writeHead(200, { 'Content-Type': 'application/json' })
   res.end(JSON.stringify({ status: 'UP', completed: await getCompletedCount() }))
-}).listen(config.port)
+})
 
 const run = async () => {
   initProcessPolling()
@@ -23,4 +23,8 @@ const run = async () => {
   await startPolling()
 }
 
-run()
+run().then(() => {
+  server.listen(config.port, () => {
+    debug(`💉 Healthcheck running at ${config.port} port`)
+  })
+})
