@@ -9,9 +9,6 @@ dist/
 build/
 coverage/
 
-# Deploy
-**/now-secrets.json
-
 # Logs
 yarn-error.log
 npm-debug.log

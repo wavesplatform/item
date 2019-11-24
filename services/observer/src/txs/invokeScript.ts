@@ -1,5 +1,5 @@
 import { InvokeScriptTransaction } from '@waves/waves-rest/types'
-import { getInvokeScriptTxs } from '../api'
+import { getInvokeScriptTxs } from '../wavesApi'
 
 /**
  * Get all chunks of txs and then concat them

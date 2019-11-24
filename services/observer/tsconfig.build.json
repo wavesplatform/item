@@ -1,8 +1,12 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "baseUrl": ".",
     "outDir": "./dist"
   },
-  "include": ["./src"]
+  "include": [
+    "./src"
+  ]
 }

@@ -1,4 +1,4 @@
-import { getIssueTxs } from '../api'
+import { getIssueTxs } from '../wavesApi'
 import { IssueTransaction } from '@waves/waves-rest'
 
 /**

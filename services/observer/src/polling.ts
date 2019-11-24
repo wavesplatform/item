@@ -1,7 +1,7 @@
 import { config } from './config'
 import { Queue, queues, TxsJobData } from '@item-protocol/queues'
 import { collectTxs, GetTxFunction } from './collect'
-import * as Debug from 'debug'
+import Debug from 'debug'
 import { DataTransaction, IssueTransaction } from '@waves/waves-rest'
 import { InvokeScriptTransaction } from '@waves/waves-rest/types'
 import { getIssueTxsForPeriod } from './txs/issue'

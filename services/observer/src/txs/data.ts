@@ -1,4 +1,4 @@
-import { getDataTxs } from '../api'
+import { getDataTxs } from '../wavesApi'
 import { DataTransaction } from '@waves/waves-rest'
 
 /**

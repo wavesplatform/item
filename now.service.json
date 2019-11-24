@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "name": "item-SERVICE",
+  "env": {
+    "DEBUG": "observer,combine,writer,api,media-preserver",
+    "NODE_ENV": "production",
+    "PRISMA_ENDPOINT": "https://salty-crag-85704.herokuapp.com/item-store/dev",
+    "REDIS_HOST": "db-redis-ams3-69455-do-user-3367468-0.db.ondigitalocean.com",
+    "REDIS_PORT": "25061",
+    "REDIS_PASSWORD": "@redis-password",
+    "S3_TOKEN": "AKIAU5UFNXYP3DKTKO4I",
+    "S3_SECRET": "@s3-secret",
+    "BUCKET_NAME": "storage.item.market",
+    "ALGOLIA_APP_ID": "WRZ10I83XZ",
+    "ALGOLIA_API_SECRET": "@algolia-api-secret",
+    "ALGOLIA_PREFIX": "dev_",
+    "JWT_SECRET": "@jwt-secret",
+    "CHAIN_ID": "T",
+    "DAPP_ADDRESS_STORE": "3MrDcz4LFFjPhXdtu7YCqFSnHc3pD1tcWLa"
+  },
+  "builds": [
+    { "src": "services/SERVICE/dist/index.js", "use": "@now/node" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/services/SERVICE/dist/index.js" }
+  ]
+}

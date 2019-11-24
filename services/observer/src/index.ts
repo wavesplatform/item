@@ -1,5 +1,5 @@
-import * as Debug from 'debug'
-import * as http from 'http'
+import Debug from 'debug'
+import http from 'http'
 import { getCompletedCount, initProcessPolling, startPolling } from './polling'
 import { config } from './config'
 

@@ -1,7 +1,7 @@
 import memoizee from 'memoizee'
 import { ICreateParamsMap, ItemVersions, IUpdateParamsMap, TDataTx, TIntent, TIssueTx } from '@item-protocol/types'
 import { publicKey, TChainId } from '@waves/ts-lib-crypto'
-import { broadcast } from './api'
+import { broadcast } from './wavesApi'
 import { txsForItemCreate, txsForItemUpdate } from './txs-for-item'
 import { config as globalConfig } from '@item-protocol/config'
 import { signWithKeeper } from '@item-protocol/utils'

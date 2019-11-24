@@ -5,8 +5,6 @@ import { initProcessOperations } from './operations'
 
 const debug = Debug('writer')
 
-console.log(process.env.REDIS_HOST)
-
 debug('📖 Writer is starting...')
 
 // Worker
