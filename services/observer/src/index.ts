@@ -20,7 +20,7 @@ const run = async () => {
 
   // Restart job
   debug('⌚️ Start polling...')
-  // await startPolling()
+  await startPolling()
 }
 
 run()

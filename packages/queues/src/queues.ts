@@ -3,12 +3,7 @@ import { ProcessCallbackFunction } from 'bull'
 import { Queues } from './types'
 
 const config = {
-  production: process.env.NODE_ENV === 'production',
-  redis: {
-    host: process.env.REDIS_HOST || 'localhost',
-    port: process.env.REDIS_PORT || 6379,
-    password: process.env.REDIS_PASSWORD,
-  },
+  redisUrl: process.env.REDIS_HOST || 'redis://localhost:6379',
 }
 
 const queueNames = {
@@ -30,20 +25,7 @@ const queueNames = {
 }
 
 const createQueue = (name: string) => {
-  const { host, port, password } = config.redis
-  const redisOptions = config.production
-    ? {
-      host,
-      port: +port,
-      password,
-      tls: {},
-    }
-    : {
-      host,
-      port: +port,
-    }
-
-  return new Bull(name, { redis: redisOptions })
+  return new Bull(name, config.redisUrl)
 }
 
 const processQueue = <T = any>(name: string, cb: ProcessCallbackFunction<T>) => {
