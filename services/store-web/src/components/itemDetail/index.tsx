@@ -25,11 +25,6 @@ type TProps = {
   isPage?: boolean
 }
 
-type TState = {
-  buyModalShow?: boolean
-  sellModalShow?: boolean
-}
-
 export const ItemDetail = ({ item, isPage, onClose }: TProps) => {
   const [buyModalActive, setBuyModalActive] = useState(false)
   const [sellModalActive, setSellModalActive] = useState(false)

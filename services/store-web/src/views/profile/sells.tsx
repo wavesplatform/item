@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { MoreLotsQuery, MoreLotsQueryVariables } from '../../graphql/queries/__generated__/MoreLotsQuery'
 import { getMoreLotsQuery } from '../../graphql/queries/getLots'
 import useCurrentUser from '../../hooks/currentUser'
-import { Loading, NullState } from '@item-protocol/ui'
+import { Button, Loading, NullState } from '@item-protocol/ui'
 import LotTable from './components/lotTable'
 import { ILot } from '@item-protocol/types'
 
@@ -50,9 +50,53 @@ export const SellsView = () => {
     />
   }
 
+  const loadMore = () => {
+    const { pageInfo } = connection!
+    const { cursorInfo } = variables
+
+    fetchMore({
+      variables: {
+        ...variables,
+        cursorInfo: {
+          ...cursorInfo,
+          after: pageInfo.endCursor,
+        },
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult || !fetchMoreResult.lots) {
+          return prev
+        }
+
+        const prevLots = prev.lots!
+        const newEdges = fetchMoreResult.lots.edges!
+        const pageInfo = fetchMoreResult.lots.pageInfo
+
+        return newEdges.length ? {
+          ...prev,
+          lots: {
+            ...prevLots,
+            pageInfo: { ...prevLots.pageInfo, ...pageInfo },
+            edges: [...prevLots.edges!, ...newEdges!],
+          },
+        } : prev
+      },
+    })
+  }
+
   return (
     <Box mb={'lg'}>
       <LotTable lots={lots as ILot[]}/>
+      {hasNextPage && <Button
+        width={1}
+        size={'lg'}
+        variant={'secondary'}
+        mt={'lg'}
+        onClick={loadMore}
+        disabled={loading}
+        isLoading={loading}
+      >
+        Load more
+      </Button>}
     </Box>
   )
 }

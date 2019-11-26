@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Box } from 'rebass'
 import { getMoreItemsQuery } from '../../../graphql/queries/getItems'
 import { MoreItemsQuery, MoreItemsQueryVariables } from '../../../graphql/queries/__generated__/MoreItemsQuery'
@@ -19,11 +19,11 @@ type TData = MoreItemsQuery
 type TVariables = MoreItemsQueryVariables
 
 export const Items = ({ address, searchString, inclusions }: TProps) => {
-  const [assetId, setAssetId] = useState<string>('')
+  // const [assetId, setAssetId] = useState<string>('')
 
-  useEffect(() => {
-    setAssetId('')
-  }, [address, searchString])
+  // useEffect(() => {
+  //   setAssetId('')
+  // }, [address, searchString])
 
   const { data, loading, fetchMore, variables } = useQuery<TData, TVariables>(getMoreItemsQuery, {
     fetchPolicy: 'cache-and-network',
