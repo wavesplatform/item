@@ -3,7 +3,7 @@ import { ProcessCallbackFunction } from 'bull'
 import { Queues } from './types'
 
 const config = {
-  redisUrl: process.env.REDIS_HOST || 'redis://localhost:6379',
+  redisUrl: process.env.REDIS_URL || 'redis://localhost:6379',
 }
 
 const queueNames = {
