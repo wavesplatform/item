@@ -9,7 +9,7 @@ on:
 
 # Environment variables available to all jobs and steps in this workflow
 env:
-  GKE_PROJECT: ${{ secrets.GCP_PROJECT }}
+  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
   GITHUB_SHA: ${{ github.sha }}
   GKE_ZONE: us-central1-a
   GKE_CLUSTER: item-cluster-1
@@ -41,7 +41,7 @@ jobs:
       run: |
         docker build -t gcr.io/"$GCP_PROJECT"/"$IMAGE":"$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg GITHUB_REF="$GITHUB_REF" .
+          --build-arg GITHUB_REF="$GITHUB_REF" ./services/api
 
     # Push the Docker image to Google Container Registry
     - name: Publish
