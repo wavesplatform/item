@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "react-scripts start",
+    "clean": "rimraf build",
     "build": "react-scripts build",
     "test": "cross-env CI=true react-scripts test --env=jsdom --passWithNoTests",
     "eject": "react-scripts eject",

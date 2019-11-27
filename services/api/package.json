@@ -7,6 +7,7 @@
   "private": true,
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "clean": "rimraf dist",
     "start": "node ./dist/index.js",
     "dev": "nodemon",
     "fix": "run-s fix:tslint fix:prettier",
