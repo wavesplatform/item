@@ -18,14 +18,9 @@ aliases:
     name: Lerna bootstrap
     command: yarn bootstrap
 
-  - &build
-    name: Build all services & packages
+  - &build-packages
+    name: Build all packages
     command: yarn build
-
-  - &start
-    name: Start all services in the background
-    command: yarn start
-    background: true
 
 defaults: &defaults
   working_directory: ~/item
@@ -34,18 +29,6 @@ node_defaults: &node_defaults
   <<: *defaults
   docker:
     - image: circleci/node:11
-
-prisma_config: &prisma_config
-  PRISMA_CONFIG: |
-    port: 4466
-    databases:
-      default:
-        connector: postgres
-        host: postgres
-        port: 5432
-        user: prisma
-        password: prisma
-        migrations: true
 
 jobs:
   checkout_env:
@@ -65,7 +48,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/item
-      - run: *build
+      - run: *build-packages
       - persist_to_workspace:
           root: .
           paths:
