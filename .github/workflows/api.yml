@@ -15,6 +15,7 @@ env:
   REPLICAS: 1
   SERVICE_NAME: api
   IMAGE: api
+  KUBE_NAMESPACE: item
 
 jobs:
   setup-build-publish-deploy:
