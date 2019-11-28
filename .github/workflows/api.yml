@@ -65,7 +65,9 @@ jobs:
         helm dependency update charts/$SERVICE_NAME/
         helm upgrade --install \
           --wait \
+          --timeout 120s \
           --set service.enabled="true" \
+          --set releaseOverride="production" \
           --set image.repository="gcr.io/$GCP_PROJECT/$IMAGE" \
           --set image.tag="$GITHUB_SHA" \
           --set image.pullPolicy=IfNotPresent \
