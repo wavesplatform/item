@@ -62,7 +62,6 @@ jobs:
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GCP_PROJECT
         kubectl describe namespace "$KUBE_NAMESPACE" || kubectl create namespace "$KUBE_NAMESPACE"
-        helm repo add common https://kubernetes-charts-incubator.storage.googleapis.com/
         helm dependency update charts/$SERVICE_NAME/
         helm upgrade --install \
           --wait \
