@@ -13,8 +13,8 @@ env:
   GKE_ZONE: us-central1-a
   GKE_CLUSTER: item-cluster-1
   REPLICAS: 1
-  IMAGE: ${{ github.workflow }}
-  SERVICE_NAME: ${{ github.workflow }}
+  SERVICE_NAME: api
+  IMAGE: $SERVICE_NAME
 
 jobs:
   setup-build-publish-deploy:
