@@ -18,4 +18,7 @@ RUN apk del .build-deps
 # Copy all service files to the container
 COPY . .
 
+# Build typescript
+RUN yarn build
+
 CMD ["yarn", "start"]
