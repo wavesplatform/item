@@ -1,9 +1,10 @@
 # Alias node base image
 FROM node:11-alpine
 
-WORKDIR /app
+WORKDIR /item/services/app
 
 COPY package.json yarn.lock ./
+COPY ../../tsconfig.json /item
 
 # Build deps for alpine
 RUN apk update && apk upgrade && \
