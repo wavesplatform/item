@@ -12,6 +12,7 @@
     "bootstrap": "lerna bootstrap",
     "clean": "lerna run --stream --concurrency 1 --sort clean",
     "build": "lerna run --stream --concurrency 1 --sort build",
+    "build:packages": "lerna run --stream --concurrency 1 --sort build --no-private",
     "start": "lerna run --stream --concurrency 1 --sort start",
     "dev": "cross-env DEBUG=observer,combine,writer,api,media-preserver lerna run --parallel dev",
     "fix": "lerna run --stream --concurrency 1 fix",

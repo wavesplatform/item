@@ -23,7 +23,8 @@ COPY . .
 # Bootstrap packages
 RUN yarn bootstrap
 
-# Build typescript
-RUN yarn build --scope @item-protocol/$SERVICE_NAME
+# Build packages && service
+RUN yarn build:packages && \
+    yarn build --scope @item-protocol/$SERVICE_NAME
 
 CMD ["yarn", "start", "--scope", "@item-protocol/$SERVICE_NAME"]
