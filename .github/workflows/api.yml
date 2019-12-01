@@ -16,6 +16,8 @@ env:
   SERVICE_NAME: api
   IMAGE: api
   KUBE_NAMESPACE: item
+  POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+  POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
 
 jobs:
   setup-build-publish-deploy:
@@ -60,6 +62,8 @@ jobs:
 
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
+      env:
+        RELEASE_NAME: production
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GCP_PROJECT
         kubectl describe namespace "$KUBE_NAMESPACE" || kubectl create namespace "$KUBE_NAMESPACE"
@@ -68,13 +72,16 @@ jobs:
           --wait \
           --timeout 120s \
           --set service.enabled="true" \
-          --set releaseOverride="production" \
+          --set releaseOverride="$RELEASE_NAME" \
           --set image.repository="gcr.io/$GCP_PROJECT/$IMAGE" \
           --set image.tag="$GITHUB_SHA" \
           --set image.pullPolicy=IfNotPresent \
           --set replicaCount="$REPLICAS" \
           --set prisma.enabled="true" \
           --set prisma.nameOverride="prisma" \
+          --set prisma.database.host="$POSTGRES_HOST" \
+          --set prisma.database.password="$POSTGRES_PASSWORD" \
+          --set prisma.database.port="5432" \
           --namespace="$KUBE_NAMESPACE" \
-          "$SERVICE_NAME" \
+          "$RELEASE_NAME" \
           charts/$SERVICE_NAME/
