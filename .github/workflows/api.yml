@@ -42,8 +42,10 @@ jobs:
     - name: Build
       run: |
         docker build -t gcr.io/$GCP_PROJECT/$IMAGE:$GITHUB_SHA \
+          -f ./services/$SERVICE_NAME/Dockerfile \
+          --build-arg SERVICE_NAME="$SERVICE_NAME" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
-          --build-arg GITHUB_REF="$GITHUB_REF" ./services/$SERVICE_NAME
+          --build-arg GITHUB_REF="$GITHUB_REF" .
 
     # Push the Docker image to Google Container Registry
     - name: Publish

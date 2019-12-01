@@ -1,10 +1,12 @@
 # Alias node base image
 FROM node:11-alpine
 
+ARG SERVICE_NAME
+
 WORKDIR /item/services/app
 
-COPY package.json yarn.lock ./
-COPY ../../tsconfig.json /item
+COPY services/$SERVICE_NAME/package.json services/$SERVICE_NAME/yarn.lock ./
+COPY tsconfig.json /item
 
 # Build deps for alpine
 RUN apk update && apk upgrade && \
@@ -17,9 +19,9 @@ RUN yarn cache clean --force && yarn --frozen-lockfile
 RUN apk del .build-deps
 
 # Copy all service files to the container
-COPY . .
+COPY services/$SERVICE_NAME .
 
 # Build typescript
-RUN yarn build
+RUN yarn build && ls -la
 
 CMD ["yarn", "start"]
