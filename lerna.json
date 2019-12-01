@@ -1,7 +1,8 @@
 {
   "packages": [
     "contracts/*",
-    "packages/*"
+    "packages/*",
+    "services/*"
   ],
   "npmClient": "yarn",
   "useWorkspaces": true,

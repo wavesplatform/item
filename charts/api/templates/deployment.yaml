@@ -23,7 +23,7 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         command: ["yarn"]
-        args: ["start"]
+        args: ["start", "--scope", "@item-protocol/{{ .Chart.Name }}"]
         env:
         - name: NODE_ENV
           value: {{ .Values.releaseOverride | quote }}

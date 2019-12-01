@@ -3,10 +3,9 @@ FROM node:11-alpine
 
 ARG SERVICE_NAME
 
-WORKDIR /item/services/app
+WORKDIR /app
 
-COPY services/$SERVICE_NAME/package.json services/$SERVICE_NAME/yarn.lock ./
-COPY tsconfig.json /item
+COPY package.json yarn.lock lerna.json ./
 
 # Build deps for alpine
 RUN apk update && apk upgrade && \
@@ -19,9 +18,12 @@ RUN yarn cache clean --force && yarn --frozen-lockfile
 RUN apk del .build-deps
 
 # Copy all service files to the container
-COPY services/$SERVICE_NAME .
+COPY . .
+
+# Bootstrap packages
+RUN yarn bootstrap
 
 # Build typescript
-RUN yarn build && ls -la
+RUN yarn build --scope @item-protocol/$SERVICE_NAME
 
-CMD ["yarn", "start"]
+CMD ["yarn", "start", "--scope", "@item-protocol/$SERVICE_NAME"]
