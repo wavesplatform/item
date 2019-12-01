@@ -17,6 +17,7 @@ env:
   IMAGE: api
   KUBE_NAMESPACE: item
   POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
+  POSTGRES_USER: postgres
   POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
 
 jobs:
@@ -80,6 +81,7 @@ jobs:
           --set prisma.enabled="true" \
           --set prisma.nameOverride="prisma" \
           --set prisma.database.host="$POSTGRES_HOST" \
+          --set prisma.database.user="$POSTGRES_USER" \
           --set prisma.database.password="$POSTGRES_PASSWORD" \
           --set prisma.database.port="5432" \
           --namespace="$KUBE_NAMESPACE" \
