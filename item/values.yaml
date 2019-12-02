@@ -1,6 +1,8 @@
 application:
   track: stable
   tier: web
+tags:
+  api: false
 api:
   enabled: true
   name: web
