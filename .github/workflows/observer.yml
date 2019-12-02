@@ -78,7 +78,7 @@ jobs:
           --wait \
           --timeout 120s \
           --set global.prismaEndpoint="http://$RELEASE_NAME-prisma:4466" \
-          --set global.redisUrl="redis://$RELEASE_NAME-redis:6379" \
+          --set global.redisUrl="redis://$RELEASE_NAME-redis-master:6379" \
           --set global.jwtSecret="$JWT_SECRET" \
           --set global.s3Token="$S3_TOKEN" \
           --set global.s3Secret="$S3_SECRET" \
