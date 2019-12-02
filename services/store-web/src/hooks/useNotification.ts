@@ -3,6 +3,7 @@ import { UINotification, UINotificationType } from '@item-protocol/ui'
 import { getNotifications } from '../graphql/queries/getNotifications'
 import { removeNotification as removeNotificationMutation } from '../graphql/mutations/removeNotification'
 import { createNotification as createNotificationMutation } from '../graphql/mutations/createNotification'
+import { ReactNode } from 'react'
 
 export const useNotification: () => AppNotificationApi = () => {
   const defaultData: NotificationQueryData = { notifications: [] }
@@ -32,7 +33,7 @@ export const useNotification: () => AppNotificationApi = () => {
   const aliases = aliasNames.reduce((previous, aliasName) => {
     return {
       ...previous,
-      [aliasName]: (context: React.ReactNode, options: NotificationOpenAliasOptions) =>
+      [aliasName]: (context: ReactNode, options: NotificationOpenAliasOptions) =>
         open(context, { type: aliasName, ...options }),
     }
   }, {})
@@ -41,19 +42,20 @@ export const useNotification: () => AppNotificationApi = () => {
 }
 
 // #region types
-export interface AppNotification extends UINotification {
+export interface AppNotification extends Omit<UINotification, 'content'> {
   __typename: 'Notification'
   id: NotificationId
+  content: ReactNode | ((close: AppNotificationApi['close']) => ReactNode)
 }
 interface NotificationQueryData {
   notifications: Array<AppNotification>
 }
 type NotificationId = number
 
-type NotificationOpen = (content: React.ReactNode, options: NotificationOpenOptions) => void
+type NotificationOpen = (content: ReactNode, options: NotificationOpenOptions) => void
 interface NotificationOpenOptions extends Pick<UINotification, 'type' | 'icon'> {}
 
-type NotificationOpenAlias = (content: React.ReactNode, options: NotificationOpenAliasOptions) => void
+type NotificationOpenAlias = (content: ReactNode, options: NotificationOpenAliasOptions) => void
 interface NotificationOpenAliasOptions extends Pick<NotificationOpenOptions, 'icon'> {}
 
 interface AppNotificationApi extends NotificatonAliases {
