@@ -73,7 +73,7 @@ jobs:
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GCP_PROJECT
         kubectl describe namespace "$KUBE_NAMESPACE" || kubectl create namespace "$KUBE_NAMESPACE"
-        helm dependency update item/
+        helm dependency update item/charts/$SERVICE_NAME/
         helm upgrade --install \
           --wait \
           --timeout 120s \
@@ -97,4 +97,4 @@ jobs:
           --set api.replicaCount="$REPLICAS" \
           --namespace="$KUBE_NAMESPACE" \
           "$RELEASE_NAME" \
-          item/
+          item/charts/$SERVICE_NAME/
