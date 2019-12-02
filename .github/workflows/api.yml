@@ -1,4 +1,4 @@
-name: Build and Deploy to GKE
+name: Api - Build & deploy to cluster
 
 on:
   push:
