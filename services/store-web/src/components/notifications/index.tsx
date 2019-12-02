@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Notice } from '@item-protocol/ui'
 import { Flex } from 'rebass'
 import { useNotification, AppNotification } from '../../hooks/useNotification'
@@ -21,13 +20,15 @@ export const Notifications = () => {
         bottom: 'md',
         right: 'md',
       }}>
-      {notifications.map(({ id, ...notification }) => {
+      {notifications.map(({ id, content, ...notification }) => {
+        const notificationContent = typeof content === 'function' ? content(handleRemove(id)) : content
+
         return (
           <Notice
             key={id}
-            notification={notification}
+            notification={{ content: notificationContent, ...notification }}
             onClose={handleRemove(id)}
-            // duration={4200}
+            duration={4200}
             onTimeoutEnd={handleRemove(id)}
             sx={{
               '&:not(:first-of-type)': {
