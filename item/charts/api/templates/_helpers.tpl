@@ -1,5 +1,12 @@
 {{/* vim: set filetype=mustache: */}}
 {{/*
+Fullname of core chart.
+*/}}
+{{- define "core.fullname" -}}
+{{- printf "%s-item" .Release.Name | trimSuffix "-app" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
 Expand the name of the chart.
 */}}
 {{- define "api.name" -}}

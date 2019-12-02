@@ -38,19 +38,19 @@ spec:
         - name: S3_SECRET
           valueFrom:
             secretKeyRef:
-              name: {{ template "fullname" . }}
+              name: {{ template "core.fullname" . }}
               key: s3-secret
         - name: ALGOLIA_APP_ID
           value: {{ .Values.global.algoliaAppId | quote }}
         - name: ALGOLIA_API_SECRET
           valueFrom:
             secretKeyRef:
-              name: {{ template "fullname" . }}
+              name: {{ template "core.fullname" . }}
               key: algolia-api-secret
         - name: JWT_SECRET
           valueFrom:
             secretKeyRef:
-              name: {{ template "fullname" . }}
+              name: {{ template "core.fullname" . }}
               key: jwt-secret
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
