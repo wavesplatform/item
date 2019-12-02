@@ -4,8 +4,8 @@ on:
   push:
     branches:
     - master
-    paths:
-    - 'services/observer/*'
+#    paths:
+#    - 'services/observer/*'
 
 # Environment variables available to all jobs and steps in this workflow
 env:
@@ -100,6 +100,5 @@ jobs:
           --set observer.image.pullPolicy=IfNotPresent \
           --set observer.replicaCount="$REPLICAS" \
           --namespace="$KUBE_NAMESPACE" \
-          --reuse-values \
           "$RELEASE_NAME" \
           item/

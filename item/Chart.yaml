@@ -13,13 +13,13 @@ dependencies:
   condition: redis.enabled
 - name: api
   version: 0.0.1
-  repository: "file://./subcharts/api"
+  repository: "file://./services/api"
   condition: api.enabled
   tags:
   - api
 - name: observer
   version: 0.0.1
-  repository: "file://./subcharts/observer"
+  repository: "file://./services/observer"
   condition: observer.enabled
   tags:
   - observer
