@@ -73,7 +73,7 @@ jobs:
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GCP_PROJECT
         kubectl describe namespace "$KUBE_NAMESPACE" || kubectl create namespace "$KUBE_NAMESPACE"
-        helm dependency update item/charts/$SERVICE_NAME/
+        helm dependency update item/
         helm upgrade --install \
           --wait \
           --timeout 120s \
@@ -84,11 +84,17 @@ jobs:
           --set global.s3Secret="$S3_SECRET" \
           --set global.algoliaAppId="$ALGOLIA_APP_ID" \
           --set global.algoliaApiSecret="$ALGOLIA_API_SECRET" \
-          --set enabled="true" \
-          --set image.repository="gcr.io/$GCP_PROJECT/$IMAGE" \
-          --set image.tag="$GITHUB_SHA" \
-          --set image.pullPolicy=IfNotPresent \
-          --set replicaCount="$REPLICAS" \
+          --set prisma.enabled="true" \
+          --set prisma.nameOverride="prisma" \
+          --set prisma.database.host="$POSTGRES_HOST" \
+          --set prisma.database.user="$POSTGRES_USER" \
+          --set prisma.database.password="$POSTGRES_PASSWORD" \
+          --set prisma.database.port="5432" \
+          --set api.enabled="true" \
+          --set api.image.repository="gcr.io/$GCP_PROJECT/$IMAGE" \
+          --set api.image.tag="$GITHUB_SHA" \
+          --set api.image.pullPolicy=IfNotPresent \
+          --set api.replicaCount="$REPLICAS" \
           --namespace="$KUBE_NAMESPACE" \
           "$RELEASE_NAME" \
-          item/charts/$SERVICE_NAME/
+          item/
