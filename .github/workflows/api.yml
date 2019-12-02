@@ -98,5 +98,6 @@ jobs:
           --set api.image.pullPolicy=IfNotPresent \
           --set api.replicaCount="$REPLICAS" \
           --namespace="$KUBE_NAMESPACE" \
+          --reuse-values \
           "$RELEASE_NAME" \
           item/
