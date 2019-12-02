@@ -7,8 +7,17 @@ dependencies:
   version: 1.2.1
   repository: "https://kubernetes-charts.storage.googleapis.com/"
   condition: prisma.enabled
+- name: redis
+  version: 10.2.0
+  repository: "https://kubernetes-charts.storage.googleapis.com/"
+  condition: redis.enabled
 - name: api
   version: 0.0.1
   condition: api.enabled
   tags:
   - api
+- name: observer
+  version: 0.0.1
+  condition: observer.enabled
+  tags:
+  - observer

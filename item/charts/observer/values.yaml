@@ -9,9 +9,5 @@ application:
 service:
   name: web
   type: ClusterIP
-  externalPort: 3000
-  internalPort: 3000
-  url: http://my.host.com/
-ingress:
-  enabled: true
+  port: 3001
 resources:

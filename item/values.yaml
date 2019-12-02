@@ -3,15 +3,11 @@ application:
   tier: web
 tags:
   api: false
-api:
-  enabled: true
-  name: web
-  type: ClusterIP
-  externalPort: 3000
-  internalPort: 3000
-  url: http://my.host.com/
+  observer: false
 prisma:
   enabled: true
   image:
     tag: 1.34-heroku
+redis:
+  enabled: true
 resources:
