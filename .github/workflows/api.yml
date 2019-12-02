@@ -89,8 +89,6 @@ jobs:
           --set prisma.database.user="$POSTGRES_USER" \
           --set prisma.database.password="$POSTGRES_PASSWORD" \
           --set prisma.database.port="5432" \
-          --set redis.enabled="true" \
-          --set redis.nameOverride="redis" \
           --set api.enabled="true" \
           --set api.releaseOverride="$RELEASE_NAME" \
           --set api.image.repository="gcr.io/$GCP_PROJECT/$IMAGE" \
@@ -98,6 +96,5 @@ jobs:
           --set api.image.pullPolicy=IfNotPresent \
           --set api.replicaCount="$REPLICAS" \
           --namespace="$KUBE_NAMESPACE" \
-          --reuse-values \
           "$RELEASE_NAME" \
           item/
