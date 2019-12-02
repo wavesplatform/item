@@ -99,5 +99,6 @@ jobs:
           --set observer.image.pullPolicy=IfNotPresent \
           --set observer.replicaCount="$REPLICAS" \
           --namespace="$KUBE_NAMESPACE" \
+          --reuse-values \
           "$RELEASE_NAME" \
           item/
