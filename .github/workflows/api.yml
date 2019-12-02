@@ -79,7 +79,7 @@ jobs:
           --timeout 120s \
           --set service.enabled="true" \
           --set releaseOverride="$RELEASE_NAME" \
-          --set prismaEndpoint="$RELEASE_NAME-prisma" \
+          --set prismaEndpoint="http://$RELEASE_NAME-prisma:4466" \
           --set jwt.secret="$JWT_SECRET" \
           --set s3.token="$S3_TOKEN" \
           --set s3.secret="$S3_SECRET" \
