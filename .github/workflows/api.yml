@@ -90,5 +90,5 @@ jobs:
           --set image.pullPolicy=IfNotPresent \
           --set replicaCount="$REPLICAS" \
           --namespace="$KUBE_NAMESPACE" \
-          "$RELEASE_NAME-$SERVICE_NAME" \
+          "$RELEASE_NAME" \
           item/charts/$SERVICE_NAME/
