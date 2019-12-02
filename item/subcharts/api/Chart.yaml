@@ -1,0 +1,8 @@
+apiVersion: v1
+description: GraphQL API
+name: api
+version: 0.0.1
+- name: prisma
+  version: 1.2.1
+  repository: "https://kubernetes-charts.storage.googleapis.com/"
+  condition: prisma.enabled
