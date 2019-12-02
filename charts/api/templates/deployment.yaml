@@ -29,6 +29,8 @@ spec:
           value: {{ .Values.releaseOverride | quote }}
         - name: PORT
           value: {{ .Values.service.internalPort | quote }}
+        - name: DEBUG
+          value: api
         - name: PRISMA_ENDPOINT
           value: {{ .Values.prismaEndpoint | quote }}
         - name: S3_TOKEN
