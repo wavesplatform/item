@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { sell } from '../src'
 
 // WIP: tests don't works now, need waves test environment
@@ -32,7 +34,9 @@ describe('store', async () => {
     await waitForTx(invokeTx.id)
   })
 
-  it('can buy', async () => {})
+  it('can buy', async () => {
+  })
 
-  it('can cancel', async () => {})
+  it('can cancel', async () => {
+  })
 })
