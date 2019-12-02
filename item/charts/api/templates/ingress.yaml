@@ -2,9 +2,9 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: {{ template "fullname" . }}
+  name: {{ template "api.fullname" . }}
   labels:
-    app: {{ template "appname" . }}
+    app: {{ template "api.appname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version| replace "+" "_" }}"
   annotations:
     kubernetes.io/tls-acme: "true"
@@ -12,14 +12,14 @@ metadata:
 spec:
   tls:
   - hosts:
-    - {{ template "hostname" .Values.service.url }}
-    secretName: {{ template "fullname" . }}-tls
+    - {{ template "api.hostname" .Values.service.url }}
+    secretName: {{ template "api.fullname" . }}-tls
   rules:
-  - host: {{ template "hostname" .Values.service.url }}
+  - host: {{ template "api.hostname" .Values.service.url }}
     http:
       paths:
       - path: /
         backend:
-          serviceName: {{ template "fullname" . }}
+          serviceName: {{ template "api.fullname" . }}
           servicePort: {{ .Values.service.externalPort }}
 {{- end -}}

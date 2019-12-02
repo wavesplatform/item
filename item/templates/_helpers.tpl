@@ -20,10 +20,3 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- $releaseName := default .Release.Name .Values.releaseOverride -}}
 {{- printf "%s-%s" $releaseName $name | trimSuffix "-app" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
-
-{{/*
-Get a hostname from URL
-*/}}
-{{- define "hostname" -}}
-{{- . | trimPrefix "http://" |  trimPrefix "https://" | trimSuffix "/" | quote -}}
-{{- end -}}

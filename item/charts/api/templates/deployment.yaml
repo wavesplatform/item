@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ template "appname" . }}
+    app: {{ template "api.appname" . }}
     track: "{{ .Values.application.track }}"
     tier: "{{ .Values.application.tier }}"
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-  name: {{ template "fullname" . }}
+  name: {{ template "api.fullname" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "appname" . }}
+      app: {{ template "api.appname" . }}
   template:
     metadata:
       labels:
-        app: {{ template "appname" . }}
+        app: {{ template "api.appname" . }}
         track: "{{ .Values.application.track }}"
         tier: "{{ .Values.application.tier }}"
         chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
@@ -32,16 +32,16 @@ spec:
         - name: DEBUG
           value: api
         - name: PRISMA_ENDPOINT
-          value: {{ .Values.prismaEndpoint | quote }}
+          value: {{ .Values.global.prismaEndpoint | quote }}
         - name: S3_TOKEN
-          value: {{ .Values.s3.token | quote }}
+          value: {{ .Values.global.s3Token | quote }}
         - name: S3_SECRET
           valueFrom:
             secretKeyRef:
               name: {{ template "fullname" . }}
               key: s3-secret
         - name: ALGOLIA_APP_ID
-          value: {{ .Values.algolia.appId | quote }}
+          value: {{ .Values.global.algoliaAppId | quote }}
         - name: ALGOLIA_API_SECRET
           valueFrom:
             secretKeyRef:

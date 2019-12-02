@@ -1,20 +1,13 @@
-replicaCount: 1
-image:
-  repository: https://github.com/wavesplatform/item
-  tag: stable
-  pullPolicy: Always
 application:
   track: stable
   tier: web
-service:
-  enabled: true
+api:
+  enabled: false
   name: web
   type: ClusterIP
   externalPort: 3000
   internalPort: 3000
   url: http://my.host.com/
-ingress:
-  enabled: true
 prisma:
   enabled: true
   image:
