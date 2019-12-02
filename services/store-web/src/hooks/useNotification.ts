@@ -6,14 +6,13 @@ import { createNotification as createNotificationMutation } from '../graphql/mut
 import { ReactNode } from 'react'
 
 export const useNotification: () => AppNotificationApi = () => {
-  const defaultData: NotificationQueryData = { notifications: [] }
-  const { data = defaultData } = useQuery<NotificationQueryData>(getNotifications)
+  const { data = { notifications: [] } } = useQuery<NotificationQueryData>(getNotifications)
 
   const [createNotification] = useMutation(createNotificationMutation)
   const [removeNotification] = useMutation(removeNotificationMutation)
 
   const { notifications } = data
-  const open: NotificationOpen = (content, options) =>
+  const open: OpenNotification = (content, options) =>
     createNotification({
       variables: {
         notification: {
@@ -30,15 +29,14 @@ export const useNotification: () => AppNotificationApi = () => {
 
   const aliasNames: Array<NotificationAliasesNames> = ['error', 'success', 'warn']
 
-  const aliases = aliasNames.reduce((previous, aliasName) => {
+  const aliases = aliasNames.reduce((preparedAliases, aliasName) => {
     return {
-      ...previous,
-      [aliasName]: (context: ReactNode, options: NotificationOpenAliasOptions) =>
-        open(context, { type: aliasName, ...options }),
+      ...preparedAliases,
+      [aliasName]: (context: ReactNode, options: OpenAliasOptions) => open(context, { type: aliasName, ...options }),
     }
   }, {})
 
-  return { notifications, open, close, ...(aliases as NotificatonAliases) }
+  return { notifications, open, close, ...(aliases as OpenAliases) }
 }
 
 // #region types
@@ -47,23 +45,28 @@ export interface AppNotification extends Omit<UINotification, 'content'> {
   id: NotificationId
   content: ReactNode | ((close: AppNotificationApi['close']) => ReactNode)
 }
-interface NotificationQueryData {
+
+interface AppNotificationApi extends NotificationActions, OpenAliases {
   notifications: Array<AppNotification>
 }
-type NotificationId = number
 
-type NotificationOpen = (content: ReactNode, options: NotificationOpenOptions) => void
-interface NotificationOpenOptions extends Pick<UINotification, 'type' | 'icon'> {}
+type OpenNotification = (content: ReactNode, options: OpenOptions) => void
+type OpenNotificationAlias = (content: ReactNode, options: OpenAliasOptions) => void
 
-type NotificationOpenAlias = (content: ReactNode, options: NotificationOpenAliasOptions) => void
-interface NotificationOpenAliasOptions extends Pick<NotificationOpenOptions, 'icon'> {}
+interface OpenOptions extends Pick<UINotification, 'type' | 'icon'> {}
+interface OpenAliasOptions extends Pick<OpenOptions, 'icon'> {}
 
-interface AppNotificationApi extends NotificatonAliases {
-  open: NotificationOpen
+interface NotificationActions {
+  open: OpenNotification
   close: (id: NotificationId) => void
-  notifications: Array<AppNotification>
 }
 
 type NotificationAliasesNames = Exclude<UINotificationType, 'default'>
-interface NotificatonAliases extends Record<NotificationAliasesNames, NotificationOpenAlias> {}
+interface OpenAliases extends Record<NotificationAliasesNames, OpenNotificationAlias> {}
+
+interface NotificationQueryData {
+  notifications: Array<AppNotification>
+}
+
+type NotificationId = number
 // #endregion
