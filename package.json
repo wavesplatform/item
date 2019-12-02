@@ -19,8 +19,7 @@
     "test:e2e": "cypress run",
     "cypress:open": "cypress open",
     "prisma:generate": "cross-env PRISMA_ENDPOINT=http://prisma:4466 prisma generate",
-    "prisma:deploy:dev": "cross-env PRISMA_ENDPOINT=http://localhost:4466 prisma deploy",
-    "prisma:deploy": "prisma deploy -e .env"
+    "prisma:deploy": "cross-env PRISMA_ENDPOINT=http://localhost:4466 prisma deploy"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",
