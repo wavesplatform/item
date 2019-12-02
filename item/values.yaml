@@ -10,5 +10,4 @@ prisma:
     tag: 1.34-heroku
 redis:
   enabled: true
-  usePassword: false
 resources:

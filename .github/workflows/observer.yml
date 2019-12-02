@@ -92,6 +92,7 @@ jobs:
           --set prisma.database.port="5432" \
           --set redis.enabled="true" \
           --set redis.nameOverride="redis" \
+          --set redis.usePassword="false" \
           --set observer.enabled="true" \
           --set observer.releaseOverride="$RELEASE_NAME" \
           --set observer.image.repository="gcr.io/$GCP_PROJECT/$IMAGE" \
