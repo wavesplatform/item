@@ -23,12 +23,33 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         command: ["yarn"]
-        args: ["start", "--scope", "@item-protocol/{{ .Chart.Name }}"]
+        args: ["start"]
         env:
         - name: NODE_ENV
           value: {{ .Values.releaseOverride | quote }}
         - name: PORT
           value: {{ .Values.service.internalPort | quote }}
+        - name: PRISMA_ENDPOINT
+          value: {{ .Values.prismaEndpoint | quote }}
+        - name: S3_TOKEN
+          value: {{ .Values.s3.token | quote }}
+        - name: S3_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" . }}
+              key: s3-secret
+        - name: ALGOLIA_APP_ID
+          value: {{ .Values.algolia.appId | quote }}
+        - name: ALGOLIA_API_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" . }}
+              key: algolia-api-secret
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "fullname" . }}
+              key: jwt-secret
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
