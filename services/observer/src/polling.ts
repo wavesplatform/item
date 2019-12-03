@@ -60,7 +60,7 @@ export const getCompletedCount = async () => {
 const processPolling = async () => {
   try {
     const timeStart = Date.now() - config.fetchOffsetTxs
-    const addresses = []//['3N2MUXXWL1Ws9bCAdrR1xoZWKwBAtyaowFH']
+    const addresses = ['3N2MUXXWL1Ws9bCAdrR1xoZWKwBAtyaowFH']
     const storeAddress = config.dappAddresses.store
 
     await Promise.all([
