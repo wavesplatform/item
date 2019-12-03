@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ template "api.appname" . }}
+    app: {{ template "appname" . }}
     track: "{{ .Values.application.track }}"
     tier: "{{ .Values.application.tier }}"
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-  name: {{ template "api.fullname" . }}
+  name: {{ template "fullname" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "api.appname" . }}
+      app: {{ template "appname" . }}
   template:
     metadata:
       labels:
-        app: {{ template "api.appname" . }}
+        app: {{ template "appname" . }}
         track: "{{ .Values.application.track }}"
         tier: "{{ .Values.application.tier }}"
         chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
@@ -24,34 +24,14 @@ spec:
       - name: {{ .Chart.Name }}
         command: ["yarn"]
         args: ["start"]
+        envFrom:
+        - configMapRef:
+            name: {{ template "corename" . }}
+        - secretRef:
+            name: {{ template "corename" . }}
         env:
-        - name: NODE_ENV
-          value: {{ .Values.releaseOverride | quote }}
         - name: PORT
           value: {{ .Values.service.internalPort | quote }}
-        - name: DEBUG
-          value: api
-        - name: PRISMA_ENDPOINT
-          value: {{ .Values.global.prismaEndpoint | quote }}
-        - name: S3_TOKEN
-          value: {{ .Values.global.s3Token | quote }}
-        - name: S3_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "item.fullname" . }}
-              key: s3-secret
-        - name: ALGOLIA_APP_ID
-          value: {{ .Values.global.algoliaAppId | quote }}
-        - name: ALGOLIA_API_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "item.fullname" . }}
-              key: algolia-api-secret
-        - name: JWT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: {{ template "item.fullname" . }}
-              key: jwt-secret
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:

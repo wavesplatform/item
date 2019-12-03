@@ -1,9 +1,6 @@
 application:
   track: stable
   tier: web
-tags:
-  api: false
-  observer: false
 prisma:
   enabled: true
   image:
