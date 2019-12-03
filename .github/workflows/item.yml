@@ -49,6 +49,11 @@ jobs:
         POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+        S3_TOKEN: ${{ secrets.S3_TOKEN }}
+        S3_SECRET: ${{ secrets.S3_SECRET }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+        ALGOLIA_API_SECRET: ${{ secrets.ALGOLIA_API_SECRET }}
         KUBE_NAMESPACE: item
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GCP_PROJECT
