@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: {{ template "observer.appname" . }}
+    app: {{ template "appname" . }}
     track: "{{ .Values.application.track }}"
     tier: "{{ .Values.application.tier }}"
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-  name: {{ template "observer.fullname" . }}
+  name: {{ template "fullname" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "observer.appname" . }}
+      app: {{ template "appname" . }}
   template:
     metadata:
       labels:
-        app: {{ template "observer.appname" . }}
+        app: {{ template "appname" . }}
         track: "{{ .Values.application.track }}"
         tier: "{{ .Values.application.tier }}"
         chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
@@ -24,17 +24,14 @@ spec:
       - name: {{ .Chart.Name }}
         command: ["yarn"]
         args: ["start"]
+        envFrom:
+        - configMapRef:
+            name: {{ template "fullname" . }}
+        - secretRef:
+            name: {{ template "fullname" . }}
         env:
-        - name: NODE_ENV
-          value: {{ .Values.releaseOverride | quote }}
         - name: PORT
           value: {{ .Values.service.port | quote }}
-        - name: DEBUG
-          value: observer
-        - name: REDIS_URL
-          value: {{ .Values.global.redisUrl | quote }}
-        - name: PRISMA_ENDPOINT
-          value: {{ .Values.global.prismaEndpoint | quote }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
