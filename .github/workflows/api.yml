@@ -5,7 +5,7 @@ on:
     branches:
     - master
     paths:
-    - 'services/api/*'
+    - 'services/api/**'
 
 # Environment variables available to all jobs and steps in this workflow
 env:
@@ -68,9 +68,9 @@ jobs:
         kubectl describe namespace $CORE_NAMESPACE || kubectl create namespace $CORE_NAMESPACE
         kubectl describe namespace $NAMESPACE || kubectl create namespace $NAMESPACE
 
-        kubectl get configmap $RELEASE_NAME-item --namespace=$CORE_NAMESPACE --export -o yaml | \
+        kubectl get configmap $RELEASE_NAME-item --namespace=$CORE_NAMESPACE -oyaml | \
           kubectl apply --namespace=$NAMESPACE -f -
-        kubectl get secret $RELEASE_NAME-item --namespace=$CORE_NAMESPACE --export -o yaml | \
+        kubectl get secret $RELEASE_NAME-item --namespace=$CORE_NAMESPACE -oyaml | \
           kubectl apply --namespace=$NAMESPACE -f -
 
         helm dependency update item/services/$SERVICE_NAME/
