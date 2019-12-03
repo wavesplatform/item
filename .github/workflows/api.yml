@@ -61,7 +61,7 @@ jobs:
     - name: Deploy
       env:
         RELEASE_NAME: production
-        KUBE_NAMESPACE: item-$SERVICE_NAME
+        KUBE_NAMESPACE: item-api
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GCP_PROJECT
         kubectl describe namespace "$KUBE_NAMESPACE" || kubectl create namespace "$KUBE_NAMESPACE"
