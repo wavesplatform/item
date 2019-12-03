@@ -138,11 +138,12 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@item-protocol/queues@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@item-protocol/queues/-/queues-1.1.4.tgz#28ce42622db97f2b5bc80f5e16944fee296bdfab"
-  integrity sha512-CJdDsO8yIifRYYfSLWEFvUzD9tzX6FSgZuJMqCUJnk+tdbojaWzDJKwRHchuZdOImOwW2Y+NSotL6BDb2FXO1A==
+"@item-protocol/queues@^1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@item-protocol/queues/-/queues-1.1.5.tgz#4cf9b5431137e5b0a5b452d221877519f10891dd"
+  integrity sha512-79M6FvhU8X2KMQLe7tYKlLMYNy15Uh3il9EQKs6RzmGZqTKKtcuJCBAeG3OVXQbER9My15MR4FYDTxvhxhXfHw==
   dependencies:
+    "@waves/waves-rest" "^0.0.43"
     bull "^3.10.0"
 
 "@item-protocol/types@^1.1.0":
@@ -464,7 +465,14 @@
     js-sha3 "^0.8.0"
     node-forge "^0.8.5"
 
-"@waves/waves-transactions@^3.24.0":
+"@waves/waves-rest@^0.0.43":
+  version "0.0.43"
+  resolved "https://registry.yarnpkg.com/@waves/waves-rest/-/waves-rest-0.0.43.tgz#9bc7a362138ee541c9265977fd898c9f3fd63458"
+  integrity sha512-uCNcKZAp9bJgfpHD6dsdR7NnMJU11/j9tMAdvMraYAyHn7fZZkiKKlmdRDRcCnBn6DW8rw4U+LbU6PBGD4gEKg==
+  dependencies:
+    "@waves/waves-transactions" "^3.10.1"
+
+"@waves/waves-transactions@^3.10.1", "@waves/waves-transactions@^3.24.0":
   version "3.24.0"
   resolved "https://registry.yarnpkg.com/@waves/waves-transactions/-/waves-transactions-3.24.0.tgz#f019aa694af2dfbeb8d51af46fd559599ae21406"
   integrity sha512-wzDK1CeP3nGn2hzWT4Em4SDNt8T3nLq7U3qnEqj4yF3zMnsis2FAf76EWRQQ9KsuatNt7i40YIu6kclMfSBLcQ==

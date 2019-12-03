@@ -18,7 +18,7 @@
     "test:watch": "test:jest -- --watch"
   },
   "dependencies": {
-    "@item-protocol/queues": "^1.1.4",
+    "@item-protocol/queues": "^1.1.5",
     "algoliasearch": "^3.35.1",
     "debug": "^4.1.1",
     "prisma-client-lib": "^1.34.8"
