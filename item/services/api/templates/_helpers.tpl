@@ -3,7 +3,7 @@
 Fullname of core chart.
 */}}
 {{- define "corename" -}}
-{{- printf "%s-item.item" .Release.Name | trimSuffix "-app" | trunc 63 | trimSuffix "-" -}}
+{{- printf "%s-item" .Release.Name | trimSuffix "-app" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*

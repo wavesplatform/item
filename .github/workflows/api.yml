@@ -61,10 +61,18 @@ jobs:
     - name: Deploy
       env:
         RELEASE_NAME: production
-        KUBE_NAMESPACE: item-api
+        CORE_NAMESPACE: item
+        NAMESPACE: item-api
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GCP_PROJECT
-        kubectl describe namespace "$KUBE_NAMESPACE" || kubectl create namespace "$KUBE_NAMESPACE"
+        kubectl describe namespace $CORE_NAMESPACE || kubectl create namespace $CORE_NAMESPACE
+        kubectl describe namespace $NAMESPACE || kubectl create namespace $NAMESPACE
+
+        kubectl get configmap $RELEASE_NAME-item --namespace=$CORE_NAMESPACE --export -o yaml | \
+          kubectl apply --namespace=$NAMESPACE -f -
+        kubectl get secret $RELEASE_NAME-item --namespace=$CORE_NAMESPACE --export -o yaml | \
+          kubectl apply --namespace=$NAMESPACE -f -
+
         helm dependency update item/services/$SERVICE_NAME/
         helm upgrade --install \
           --wait \
@@ -74,6 +82,6 @@ jobs:
           --set image.tag="$GITHUB_SHA" \
           --set image.pullPolicy=IfNotPresent \
           --set replicaCount="$REPLICAS" \
-          --namespace="$KUBE_NAMESPACE" \
+          --namespace="$NAMESPACE" \
           "$RELEASE_NAME" \
           item/services/$SERVICE_NAME/
