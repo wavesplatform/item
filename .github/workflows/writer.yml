@@ -1,0 +1,91 @@
+name: Writer - Build & deploy to cluster
+
+on:
+  push:
+    branches:
+    - master
+    paths:
+    - 'services/writer/**'
+
+# Environment variables available to all jobs and steps in this workflow
+env:
+  GCP_PROJECT: ${{ secrets.GCP_PROJECT }}
+  GKE_ZONE: us-central1-a
+  GKE_CLUSTER: item-cluster-1
+  REPLICAS: 1
+  SERVICE_NAME: writer
+  IMAGE: writer
+  RELEASE_NAME: production
+  NAMESPACE: item-writer
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@master
+
+    # Setup gcloud CLI
+    - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      with:
+        version: '270.0.0'
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+
+    # Configure docker to use the gcloud command-line tool as a credential helper
+    - run: |
+        # Set up docker to authenticate
+        # via gcloud command-line tool.
+        gcloud auth configure-docker
+
+    # Build the Docker image
+    - name: Build
+      run: |
+        docker build -t gcr.io/$GCP_PROJECT/$IMAGE:$GITHUB_SHA \
+          --build-arg SERVICE_NAME="$SERVICE_NAME" \
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" .
+
+    # Push the Docker image to Google Container Registry
+    - name: Publish
+      run: |
+        docker push gcr.io/$GCP_PROJECT/$IMAGE:$GITHUB_SHA
+
+    # Install helm
+    - name: Install Helm
+      run: |
+        curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 > get_helm.sh
+        chmod 700 get_helm.sh
+        ./get_helm.sh
+
+    # Deploy the Docker image to the GKE cluster
+    - name: Deploy
+      env:
+        S3_TOKEN: ${{ secrets.S3_TOKEN }}
+        S3_SECRET: ${{ secrets.S3_SECRET }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+        ALGOLIA_API_SECRET: ${{ secrets.ALGOLIA_API_SECRET }}
+      run: |
+        gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GCP_PROJECT
+        kubectl describe namespace $NAMESPACE || kubectl create namespace $NAMESPACE
+        helm dependency update item/services/$SERVICE_NAME/
+        helm upgrade --install \
+          --wait \
+          --timeout 120s \
+          --set releaseOverride="$RELEASE_NAME" \
+          --set image.repository="gcr.io/$GCP_PROJECT/$IMAGE" \
+          --set image.tag="$GITHUB_SHA" \
+          --set image.pullPolicy=IfNotPresent \
+          --set replicaCount="$REPLICAS" \
+          --set prismaEndpoint="http://$RELEASE_NAME-prisma.item:4466" \
+          --set redisUrl="redis://$RELEASE_NAME-redis-master.item:6379" \
+          --set s3Token="$S3_TOKEN" \
+          --set algoliaAppId="$ALGOLIA_APP_ID" \
+          --set jwtSecret="$JWT_SECRET" \
+          --set s3Secret="$S3_SECRET" \
+          --set algoliaApiSecret="$ALGOLIA_API_SECRET" \
+          --namespace="$NAMESPACE" \
+          "$RELEASE_NAME" \
+          item/services/$SERVICE_NAME/
