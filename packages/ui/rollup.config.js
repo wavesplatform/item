@@ -38,8 +38,6 @@ export default {
     'polished',
     'identity-img',
     '@waves/bignumber',
-    'rxjs',
-    'rxjs/operators',
   ],
   plugins: [
     external(),
