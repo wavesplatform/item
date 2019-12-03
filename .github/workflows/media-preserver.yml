@@ -6,6 +6,7 @@ on:
     - master
     paths:
     - 'services/media-preserver/**'
+    - 'item/services/media-preserver/**'
 
 # Environment variables available to all jobs and steps in this workflow
 env:

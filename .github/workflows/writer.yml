@@ -6,6 +6,7 @@ on:
     - master
     paths:
     - 'services/writer/**'
+    - 'item/services/writer/**'
 
 # Environment variables available to all jobs and steps in this workflow
 env:

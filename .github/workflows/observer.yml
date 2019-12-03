@@ -6,6 +6,7 @@ on:
     - master
     paths:
     - 'services/observer/**'
+    - 'item/services/observer/**'
 
 # Environment variables available to all jobs and steps in this workflow
 env:
