@@ -16,7 +16,6 @@ env:
   SERVICE_NAME: api
   IMAGE: api
   RELEASE_NAME: production
-  CORE_NAMESPACE: item
   NAMESPACE: item-api
 
 jobs:
@@ -60,22 +59,17 @@ jobs:
         chmod 700 get_helm.sh
         ./get_helm.sh
 
-    # Copy configs from core namespace
-    - name: Copy configs & prepeare namespaces
-      run: |
-        gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GCP_PROJECT
-        kubectl describe namespace $CORE_NAMESPACE || kubectl create namespace $CORE_NAMESPACE
-        kubectl describe namespace $NAMESPACE || kubectl create namespace $NAMESPACE
-        kubectl get configmap $RELEASE_NAME-item --namespace=$CORE_NAMESPACE -oyaml | \
-          sed 's/namespace: $CORE_NAMESPACE/namespace: $NAMESPACE/' | \
-          kubectl create -f -
-        kubectl get secret $RELEASE_NAME-item --namespace=$CORE_NAMESPACE -oyaml | \
-          sed 's/namespace: $CORE_NAMESPACE/namespace: $NAMESPACE/' | \
-          kubectl create -f -
-
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
+      env:
+        S3_TOKEN: ${{ secrets.S3_TOKEN }}
+        S3_SECRET: ${{ secrets.S3_SECRET }}
+        JWT_SECRET: ${{ secrets.JWT_SECRET }}
+        ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+        ALGOLIA_API_SECRET: ${{ secrets.ALGOLIA_API_SECRET }}
       run: |
+        gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GCP_PROJECT
+        kubectl describe namespace $NAMESPACE || kubectl create namespace $NAMESPACE
         helm dependency update item/services/$SERVICE_NAME/
         helm upgrade --install \
           --wait \
@@ -85,6 +79,13 @@ jobs:
           --set image.tag="$GITHUB_SHA" \
           --set image.pullPolicy=IfNotPresent \
           --set replicaCount="$REPLICAS" \
+          --set prismaEndpoint="http://$RELEASE_NAME-prisma.item:4466" \
+          --set redisUrl="redis://$RELEASE_NAME-redis-master.item:6379" \
+          --set s3Token="$S3_TOKEN" \
+          --set algoliaAppId="$ALGOLIA_APP_ID" \
+          --set jwtSecret="$JWT_SECRET" \
+          --set s3Secret="$S3_SECRET" \
+          --set algoliaApiSecret="$ALGOLIA_API_SECRET" \
           --namespace="$NAMESPACE" \
           "$RELEASE_NAME" \
           item/services/$SERVICE_NAME/

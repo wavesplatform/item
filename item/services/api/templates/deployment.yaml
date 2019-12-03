@@ -26,9 +26,9 @@ spec:
         args: ["start"]
         envFrom:
         - configMapRef:
-            name: {{ template "corename" . }}
+            name: {{ template "fullname" . }}
         - secretRef:
-            name: {{ template "corename" . }}
+            name: {{ template "fullname" . }}
         env:
         - name: PORT
           value: {{ .Values.service.internalPort | quote }}
