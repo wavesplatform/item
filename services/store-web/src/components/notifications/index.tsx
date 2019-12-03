@@ -1,14 +1,14 @@
 import React from 'react'
-import { Notice } from '@item-protocol/ui'
 import { Flex } from 'rebass'
 import { useNotification, AppNotification } from '../../hooks/useNotification'
+import { AppNotice } from './AppNotice'
 
 export const Notifications = () => {
   const notificationsAPI = useNotification()
   if (!notificationsAPI) return null
 
   const { notifications, close } = notificationsAPI
-  const handleRemove = (id: AppNotification['id']) => () => close(id)
+  const remove = (id: AppNotification['id']) => close(id)
 
   return (
     <Flex
@@ -20,23 +20,9 @@ export const Notifications = () => {
         bottom: 'md',
         right: 'md',
       }}>
-      {notifications.map(({ id, content, ...notification }) => {
-        const notificationContent = typeof content === 'function' ? content(handleRemove(id)) : content
-
-        return (
-          <Notice
-            key={id}
-            notification={{ content: notificationContent, ...notification }}
-            onClose={handleRemove(id)}
-            duration={4200}
-            onTimeoutEnd={handleRemove(id)}
-            sx={{
-              '&:not(:first-of-type)': {
-                mb: 'sm',
-              },
-            }}
-          />
-        )
+      {notifications.map(({ id, ...notification }) => {
+        const handleClose = () => remove(id)
+        return <AppNotice key={id} onClose={handleClose} notification={notification} />
       })}
     </Flex>
   )

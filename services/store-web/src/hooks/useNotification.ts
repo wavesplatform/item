@@ -1,5 +1,5 @@
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { UINotification, UINotificationType } from '@item-protocol/ui'
+import { UINotification, UINotificationType, NoticeProps } from '@item-protocol/ui'
 import { getNotifications } from '../graphql/queries/getNotifications'
 import { removeNotification as removeNotificationMutation } from '../graphql/mutations/removeNotification'
 import { createNotification as createNotificationMutation } from '../graphql/mutations/createNotification'
@@ -43,15 +43,16 @@ export const useNotification: () => AppNotificationApi = () => {
 export interface AppNotification extends Omit<UINotification, 'content'> {
   __typename: 'Notification'
   id: NotificationId
-  content: ReactNode | ((close: AppNotificationApi['close']) => ReactNode)
+  content: Content
+  autoClose?: boolean
 }
 
 interface AppNotificationApi extends NotificationActions, OpenAliases {
   notifications: Array<AppNotification>
 }
 
-type OpenNotification = (content: ReactNode, options: OpenOptions) => void
-type OpenNotificationAlias = (content: ReactNode, options: OpenAliasOptions) => void
+type OpenNotification = (content: Content, options?: OpenOptions) => void
+type OpenNotificationAlias = (content: Content, options?: OpenAliasOptions) => void
 
 interface OpenOptions extends Pick<UINotification, 'type' | 'icon'> {}
 interface OpenAliasOptions extends Pick<OpenOptions, 'icon'> {}
@@ -69,4 +70,9 @@ interface NotificationQueryData {
 }
 
 type NotificationId = number
+export type Content = ReactNode | ((props: ContentRenderProps) => ReactNode)
+
+interface ContentRenderProps {
+  onClose: NoticeProps['onClose']
+}
 // #endregion
