@@ -1,11 +1,11 @@
-name: Api - Build & deploy to cluster
+name: Media Preserver - Build & deploy to cluster
 
 on:
   push:
     branches:
     - master
     paths:
-    - 'services/api/**'
+    - 'services/media-preserver/**'
 
 # Environment variables available to all jobs and steps in this workflow
 env:
@@ -13,11 +13,10 @@ env:
   GKE_ZONE: us-central1-a
   GKE_CLUSTER: item-cluster-1
   REPLICAS: 1
-  SERVICE_NAME: api
-  SERVICE_URL: https://api.item.sh/
-  IMAGE: api
+  SERVICE_NAME: media-preserver
+  IMAGE: media-preserver
   RELEASE_NAME: production
-  NAMESPACE: item-api
+  NAMESPACE: item-media-preserver
 
 jobs:
   setup-build-publish-deploy:
@@ -76,7 +75,6 @@ jobs:
           --wait \
           --timeout 120s \
           --set releaseOverride="$RELEASE_NAME" \
-          --set service.url="$SERVICE_URL" \
           --set image.repository="gcr.io/$GCP_PROJECT/$IMAGE" \
           --set image.tag="$GITHUB_SHA" \
           --set image.pullPolicy=IfNotPresent \
