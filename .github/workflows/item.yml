@@ -4,8 +4,8 @@ on:
   push:
     branches:
     - master
-    paths:
-    - 'item/*'
+#    paths:
+#    - 'item/*'
 
 # Environment variables available to all jobs and steps in this workflow
 env:
