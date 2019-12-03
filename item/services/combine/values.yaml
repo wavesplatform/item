@@ -1,0 +1,13 @@
+replicaCount: 1
+image:
+  repository: https://github.com/wavesplatform/item
+  tag: stable
+  pullPolicy: Always
+application:
+  track: stable
+  tier: web
+service:
+  name: web
+  type: ClusterIP
+  port: 3002
+resources:

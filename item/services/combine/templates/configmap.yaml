@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    app: {{ template "appname" . }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+data:
+  NODE_ENV: {{ .Values.releaseOverride | quote }}
+  DEBUG: observer,combine,writer,api,media-preserver
+  PRISMA_ENDPOINT: {{ .Values.prismaEndpoint | quote }}
+  REDIS_URL: {{ .Values.redisUrl | quote }}
+  S3_TOKEN: {{ .Values.s3Token | quote }}
+  ALGOLIA_APP_ID: {{ .Values.algoliaAppId | quote }}
