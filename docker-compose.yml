@@ -1,10 +1,14 @@
 version: "3"
 services:
-  dev:
-    build: ./
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      args:
+        SERVICE_NAME: api
     volumes:
-      - .:/app
-      - /app/node_modules
+      - ./services/api:/item/services/app
+      - /item/services/app/node_modules
     command: yarn dev
     environment:
       CHAIN_ID: T
@@ -15,10 +19,6 @@ services:
       S3_SECRET: ${S3_SECRET}
     ports:
       - "4000:4000"
-      - "4001:4001"
-      - "4002:4002"
-      - "4003:4003"
-      - "4004:4004"
     links:
       - redis
       - prisma
