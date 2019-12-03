@@ -78,6 +78,7 @@ jobs:
           --set prisma.database.port="5432" \
           --set redis.enabled="true" \
           --set redis.nameOverride="redis" \
+          --set redis.usePassword="false" \
           --namespace="$KUBE_NAMESPACE" \
           "$RELEASE_NAME" \
           item/
