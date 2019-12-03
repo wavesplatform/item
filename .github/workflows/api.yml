@@ -4,8 +4,8 @@ on:
   push:
     branches:
     - master
-    paths:
-    - 'services/api/**'
+#    paths:
+#    - 'services/api/**'
 
 # Environment variables available to all jobs and steps in this workflow
 env:
@@ -15,6 +15,9 @@ env:
   REPLICAS: 1
   SERVICE_NAME: api
   IMAGE: api
+  RELEASE_NAME: production
+  CORE_NAMESPACE: item
+  NAMESPACE: item-api
 
 jobs:
   setup-build-publish-deploy:
@@ -57,22 +60,22 @@ jobs:
         chmod 700 get_helm.sh
         ./get_helm.sh
 
-    # Deploy the Docker image to the GKE cluster
-    - name: Deploy
-      env:
-        RELEASE_NAME: production
-        CORE_NAMESPACE: item
-        NAMESPACE: item-api
+    # Copy configs from core namespace
+    - name: Copy configs & prepeare namespaces
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GCP_PROJECT
         kubectl describe namespace $CORE_NAMESPACE || kubectl create namespace $CORE_NAMESPACE
         kubectl describe namespace $NAMESPACE || kubectl create namespace $NAMESPACE
-
         kubectl get configmap $RELEASE_NAME-item --namespace=$CORE_NAMESPACE -oyaml | \
-          kubectl apply --namespace=$NAMESPACE -f -
+          sed 's/namespace: $CORE_NAMESPACE/namespace: $NAMESPACE/' | \
+          kubectl create -f -
         kubectl get secret $RELEASE_NAME-item --namespace=$CORE_NAMESPACE -oyaml | \
-          kubectl apply --namespace=$NAMESPACE -f -
+          sed 's/namespace: $CORE_NAMESPACE/namespace: $NAMESPACE/' | \
+          kubectl create -f -
 
+    # Deploy the Docker image to the GKE cluster
+    - name: Deploy
+      run: |
         helm dependency update item/services/$SERVICE_NAME/
         helm upgrade --install \
           --wait \
