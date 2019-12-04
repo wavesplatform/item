@@ -3,16 +3,7 @@ import { ToastProps, Toast } from '../toasts'
 import { IconProps, Icon } from '../icon'
 import { Flex, Box } from 'rebass'
 
-export function Notice({
-  notification,
-  children,
-  onClose,
-  variant: toastVariant,
-  sx,
-  onTimeoutEnd,
-  duration,
-  ...toastProps
-}: NoticeProps) {
+export function Notice({ notification, children, onClose, variant: toastVariant, sx, ...toastProps }: NoticeProps) {
   const { content, type = 'default' } = notification
 
   const variant = getVariant(type, toastVariant)
@@ -79,8 +70,6 @@ function getIcon(type?: UINotificationType, glyph?: UINotificationIcon) {
 export interface NoticeProps extends ToastProps {
   notification: UINotification
   onClose?: MouseEventHandler
-  onTimeoutEnd?: () => void
-  duration?: number
 }
 
 export interface UINotification {
