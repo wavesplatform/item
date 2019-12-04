@@ -13,14 +13,11 @@ import Search from './components/search'
 import { debounce } from 'rxjs/operators'
 import Items from './components/items'
 import Dapps from './components/dapps'
-import { useNotification } from '../../hooks/useNotification'
 
 const searchParam$ = new Subject<string>()
 
 export const HomeView = () => {
   const history = useHistory()
-
-  const api = useNotification()
 
   useEffect(() => {
     const searchParamSub = searchParam$.pipe(debounce(() => timer(200))).subscribe(search => {
@@ -79,17 +76,6 @@ export const HomeView = () => {
                 Show All
               </Button>
             </RouterLink>
-            <Button
-              onClick={() =>
-                api.error(({ onClose }) => (
-                  <>
-                    <h3>Custom message</h3>
-                    <Button onClick={onClose}>Close</Button>
-                  </>
-                ))
-              }>
-              Notic
-            </Button>
           </Flex>
         </ViewContainer>
       </ItemsSection>
