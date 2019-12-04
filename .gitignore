@@ -28,4 +28,4 @@ local.log
 .Trashes
 
 # Env variables
-.env
+.env*

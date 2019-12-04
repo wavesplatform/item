@@ -13,7 +13,6 @@
     "build": "lerna run --stream --concurrency 1 --sort build",
     "build:packages": "lerna run --stream --concurrency 1 --sort build --no-private",
     "start": "lerna run --stream --concurrency 1 --sort start",
-    "dev": "cross-env DEBUG=observer,combine,writer,api,media-preserver lerna run --parallel dev",
     "fix": "lerna run --stream --concurrency 1 fix",
     "test": "lerna run --stream --concurrency 1 --sort test",
     "test:e2e": "cypress run",
