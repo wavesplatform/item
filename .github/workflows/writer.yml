@@ -70,7 +70,7 @@ jobs:
         ALGOLIA_API_SECRET: ${{ secrets.ALGOLIA_API_SECRET }}
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GCP_PROJECT
-        kubectl describe namespace $NAMESPACE || kubectl create namespace $NAMESPACE
+        kubectl get namespace $NAMESPACE || kubectl create namespace $NAMESPACE
         helm dependency update item/services/$SERVICE_NAME/
         helm upgrade --install \
           --wait \
