@@ -14,6 +14,8 @@ env:
   GKE_ZONE: us-central1-a
   GKE_CLUSTER: item-cluster-1
   REPLICAS: 1
+  RELEASE_NAME: production
+  NAMESPACE: item
 
 jobs:
   setup-deploy:
@@ -46,7 +48,6 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       env:
-        RELEASE_NAME: production
         POSTGRES_HOST: ${{ secrets.POSTGRES_HOST }}
         POSTGRES_USER: postgres
         POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
@@ -55,10 +56,9 @@ jobs:
         JWT_SECRET: ${{ secrets.JWT_SECRET }}
         ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
         ALGOLIA_API_SECRET: ${{ secrets.ALGOLIA_API_SECRET }}
-        NAMESPACE: item
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone $GKE_ZONE --project $GCP_PROJECT
-        kubectl describe namespace "$NAMESPACE" || kubectl create namespace "$NAMESPACE"
+        kubectl describe namespace $NAMESPACE || kubectl create namespace $NAMESPACE
         helm dependency update item/
         helm upgrade --install \
           --wait \
