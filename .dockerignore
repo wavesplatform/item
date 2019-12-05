@@ -1,5 +1,5 @@
 # Dependencies
-node_modules/
+**/node_modules/
 
 # Generated
 **/tmp-resolvers
@@ -24,4 +24,7 @@ local.log
 ._*
 .Spotlight-V100
 .Trashes
+
+# Env variables
+.env*
 

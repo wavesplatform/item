@@ -13,6 +13,9 @@ x-build: &default-build
   context: ./
   dockerfile: Dockerfile
 
+x-ignore:
+  - &default-ignore /item/services/app/node_modules
+
 services:
   api:
     << : *default-service
@@ -22,7 +25,7 @@ services:
         SERVICE_NAME: api
     volumes:
       - ./services/api:/item/services/app
-      - /item/services/app/node_modules
+      - *default-ignore
     ports:
       - "4000:4000"
   observer:
@@ -32,10 +35,10 @@ services:
       args:
         SERVICE_NAME: observer
     volumes:
-    - ./services/observer:/item/services/app
-    - /item/services/app/node_modules
+      - ./services/observer:/item/services/app
+      - *default-ignore
     ports:
-    - "4001:4001"
+      - "4001:4001"
   combine:
     <<: *default-service
     build:
@@ -43,10 +46,10 @@ services:
       args:
         SERVICE_NAME: combine
     volumes:
-    - ./services/combine:/item/services/app
-    - /item/services/app/node_modules
+      - ./services/combine:/item/services/app
+      - *default-ignore
     ports:
-    - "4002:4002"
+      - "4002:4002"
   writer:
     <<: *default-service
     build:
@@ -54,10 +57,10 @@ services:
       args:
         SERVICE_NAME: writer
     volumes:
-    - ./services/writer:/item/services/app
-    - /item/services/app/node_modules
+      - ./services/writer:/item/services/app
+      - *default-ignore
     ports:
-    - "4003:4003"
+      - "4003:4003"
   media-preserver:
     <<: *default-service
     build:
@@ -65,10 +68,10 @@ services:
       args:
         SERVICE_NAME: media-preserver
     volumes:
-    - ./services/media-preserver:/item/services/app
-    - /item/services/app/node_modules
+      - ./services/media-preserver:/item/services/app
+      - *default-ignore
     ports:
-    - "4004:4004"
+      - "4004:4004"
   redis:
     image: redis
     ports:

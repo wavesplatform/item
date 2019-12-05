@@ -75,7 +75,6 @@ jobs:
         helm dependency update item/services/$SERVICE_NAME/
         helm upgrade --install \
           --wait \
-          --timeout 120s \
           --set releaseOverride="$RELEASE_NAME" \
           --set service.url="$SERVICE_URL" \
           --set image.repository="gcr.io/$GCP_PROJECT/$IMAGE" \

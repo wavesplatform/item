@@ -62,7 +62,6 @@ jobs:
         helm dependency update item/
         helm upgrade --install \
           --wait \
-          --timeout 120s \
           --set releaseOverride="$RELEASE_NAME" \
           --set prismaEndpoint="http://$RELEASE_NAME-prisma.$NAMESPACE:4466" \
           --set redisUrl="redis://$RELEASE_NAME-redis-master.$NAMESPACE:6379" \
