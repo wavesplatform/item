@@ -5,7 +5,8 @@
   "private": true,
   "workspaces": [
     "contracts/*",
-    "packages/*"
+    "packages/*",
+    "services/store-web"
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
