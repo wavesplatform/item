@@ -3,7 +3,7 @@ name: Media Preserver - Build & deploy to cluster
 on:
   push:
     branches:
-    - master
+    - 'releases/**'
     paths:
     - 'services/media-preserver/**'
     - 'item/services/media-preserver/**'

@@ -3,7 +3,7 @@ name: Api - Build & deploy to cluster
 on:
   push:
     branches:
-    - master
+    - 'releases/**'
     paths:
     - 'services/api/**'
     - 'item/services/api/**'

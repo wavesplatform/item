@@ -3,7 +3,7 @@ name: Item - Prepare dependencies
 on:
   push:
     branches:
-    - master
+    - 'releases/**'
 #    paths:
 #    - 'item/**'
 #    - '!item/services/**'

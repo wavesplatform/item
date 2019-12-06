@@ -3,7 +3,7 @@ name: Combine - Build & deploy to cluster
 on:
   push:
     branches:
-    - master
+    - 'releases/**'
     paths:
     - 'services/combine/**'
     - 'item/services/combine/**'

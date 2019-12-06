@@ -64,8 +64,7 @@ const processParamsOp = async ({ data: op }: Job<ParamsOperation>) => {
 
         // Preserve media
         // If storage url isn't set
-        !storageImageUrl &&
-        (await preserveMediaQueue.add({
+        !storageImageUrl && (await preserveMediaQueue.add({
           url: imageUrl,
           id: paramsId,
           entity: 'items',

@@ -4,11 +4,11 @@ export const config = {
   port: process.env.PORT || 4002,
   paramsBackoff: {
     type: 'exponential',
-    delay: 2 * minuteMs,
+    delay: .5 * minuteMs,
   },
   lotBackoff: {
     type: 'exponential',
-    delay: 2 * minuteMs,
+    delay: .5 * minuteMs,
   },
 }
 

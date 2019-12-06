@@ -3,7 +3,7 @@ name: Writer - Build & deploy to cluster
 on:
   push:
     branches:
-    - master
+    - 'releases/**'
     paths:
     - 'services/writer/**'
     - 'item/services/writer/**'

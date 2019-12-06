@@ -3,7 +3,7 @@ name: Observer - Build & deploy to cluster
 on:
   push:
     branches:
-    - master
+    - 'releases/**'
     paths:
     - 'services/observer/**'
     - 'item/services/observer/**'

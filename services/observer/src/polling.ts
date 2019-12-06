@@ -7,6 +7,7 @@ import { InvokeScriptTransaction } from '@waves/waves-rest/types'
 import { getIssueTxsForPeriod } from './txs/issue'
 import { getDataTxsForPeriod } from './txs/data'
 import { getInvokeScriptTxsForPeriod } from './txs/invokeScript'
+import { getDapps } from './queries/user'
 
 const debug = Debug('observer')
 
@@ -60,7 +61,7 @@ export const getCompletedCount = async () => {
 const processPolling = async () => {
   try {
     const timeStart = Date.now() - config.fetchOffsetTxs
-    const addresses = ['3N2MUXXWL1Ws9bCAdrR1xoZWKwBAtyaowFH']
+    const addresses = (await getDapps()).map(dapp => dapp.address)
     const storeAddress = config.dappAddresses.store
 
     await Promise.all([

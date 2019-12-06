@@ -4,6 +4,8 @@ datamodel:
 
 generate:
   - generator: typescript-client
+    output: ../services/observer/src/__generated__/prisma-client/
+  - generator: typescript-client
     output: ../services/combine/src/__generated__/prisma-client/
   - generator: typescript-client
     output: ../services/writer/src/__generated__/prisma-client/
