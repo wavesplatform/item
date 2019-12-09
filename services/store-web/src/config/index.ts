@@ -9,6 +9,7 @@ export const config = {
   docsUrl: process.env.REACT_APP_DOCS_URL || 'http://localhost:8080',
   exchangeUrl: 'https://coinomat.com/api/v2/indacoin/buy.php',
   explorerUrl: `https://wavesexplorer.com/${globalConfig.chainId === 'T' ? 'testnet/' : ''}`,
+  discordUrl: process.env.REACT_APP_DISCORD_URL || 'https://discord.gg/ArJm2gm',
 }
 
 export default config

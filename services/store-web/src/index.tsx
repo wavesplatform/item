@@ -15,6 +15,7 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import { theme } from './styles/theme'
 import { KeeperProvider } from './contexts/keeper'
 import { getToken } from './helpers/auth'
+import { DiscordWidget } from './components/widgets/discord'
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers = {} }: Record<string, any>) => {
@@ -60,6 +61,11 @@ class App extends Component {
               <Router>
                 <Routes/>
               </Router>
+              <DiscordWidget url={config.discordUrl}>
+                Talk to us on
+                <br />
+                Discord
+              </DiscordWidget>
             </KeeperProvider>
           </ApolloProvider>
         </Fragment>
