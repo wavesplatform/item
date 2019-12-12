@@ -14,6 +14,7 @@
     "build": "lerna run --stream --concurrency 1 --sort build",
     "build:packages": "lerna run --stream --concurrency 1 --sort build --no-private",
     "start": "lerna run --stream --concurrency 1 --sort start",
+    "start:web": "lerna run --stream --concurrency 1 --sort start --scope=*/store-web",
     "fix": "lerna run --stream --concurrency 1 fix",
     "test": "lerna run --stream --concurrency 1 --sort test",
     "test:e2e": "cypress run",
