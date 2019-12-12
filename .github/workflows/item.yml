@@ -4,9 +4,9 @@ on:
   push:
     branches:
     - 'releases/**'
-#    paths:
-#    - 'item/**'
-#    - '!item/services/**'
+    paths:
+    - 'item/**'
+    - '!item/services/**'
 
 # Environment variables available to all jobs and steps in this workflow
 env:
