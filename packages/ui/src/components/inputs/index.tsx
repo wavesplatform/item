@@ -22,8 +22,12 @@ export const TextInput = ({ children, variant = 'input', ...rest }: TextInputPro
   const { id } = rest
   return (
     <Wrapper {...rest}>
-      {children && <Label htmlFor={id} mb={'sm'}>{children}</Label>}
-      <FilledInput {...rest} variant={variant}/>
+      {children && (
+        <Label htmlFor={id} mb={'sm'}>
+          {children}
+        </Label>
+      )}
+      <FilledInput {...rest} variant={variant} />
     </Wrapper>
   )
 }
@@ -37,9 +41,13 @@ export const TextInputWithUnit = ({ children, variant = 'input', unit, ...rest }
 
   return (
     <Wrapper {...rest}>
-      {children && <Label htmlFor={id} mb={'sm'}>{children}</Label>}
+      {children && (
+        <Label htmlFor={id} mb={'sm'}>
+          {children}
+        </Label>
+      )}
       <DummyInput variant={variant} disabled={disabled}>
-        <InnerInput {...rest} variant={variant}/>
+        <InnerInput {...rest} variant={variant} />
         <Flex
           sx={{
             alignItems: 'center',
@@ -50,8 +58,7 @@ export const TextInputWithUnit = ({ children, variant = 'input', unit, ...rest }
             px: 'md',
             fontSize: 'sm',
             color: 'grays.4',
-          }}
-        >
+          }}>
           {unit ? unit : 'Waves'}
         </Flex>
       </DummyInput>
@@ -63,22 +70,29 @@ export interface TextInputWithIconProps extends TextInputProps {
   glyph?: string
 }
 
-export const TextInputWithIcon = (
-  { children, variant = 'input', glyph, ...rest }: TextInputWithIconProps,
-) => {
+export const TextInputWithIcon = ({ children, variant = 'input', glyph, ...rest }: TextInputWithIconProps) => {
   const { id, disabled } = rest
 
   return (
     <Wrapper {...rest}>
-      {children && <Label htmlFor={id} mb={'sm'}>{children}</Label>}
+      {children && (
+        <Label htmlFor={id} mb={'sm'}>
+          {children}
+        </Label>
+      )}
       <DummyInput sx={{ flexDirection: 'row-reverse' }} variant={variant} disabled={disabled}>
-        <InnerInput {...rest} variant={variant}/>
-        {glyph && <Box sx={{
-          lineHeight: 1,
-          pl: 'md',
-          fontSize: 'lg',
-          color: 'grays.4',
-        }}><Icon glyph={glyph}/></Box>}
+        <InnerInput {...rest} variant={variant} />
+        {glyph && (
+          <Box
+            sx={{
+              lineHeight: 1,
+              pl: 'md',
+              fontSize: 'lg',
+              color: 'grays.4',
+            }}>
+            <Icon glyph={glyph} />
+          </Box>
+        )}
       </DummyInput>
     </Wrapper>
   )
@@ -86,28 +100,24 @@ export const TextInputWithIcon = (
 
 const Wrapper = (props: TextInputProps) => {
   // Exclude input props
-  const {
-    variant,
-    defaultValue,
-    value,
-    placeholder,
-    onChange,
-    autoFocus,
-    disabled,
-    id,
-    type,
-    size,
-    ...wrapper
-  } = props
+  const { variant, defaultValue, value, placeholder, onChange, autoFocus, disabled, id, type, size, ...wrapper } = props
 
-  return (
-    <Flex flexDirection={'column'} width={1} {...wrapper} />
-  )
+  return <Flex flexDirection={'column'} width={1} {...wrapper} />
 }
 
-const FilledInput = (
-  { defaultValue, value, placeholder, onChange, autoFocus, disabled, id, variant, type, sx, size }: TextInputProps,
-) =>
+const FilledInput = ({
+  defaultValue,
+  value,
+  placeholder,
+  onChange,
+  autoFocus,
+  disabled,
+  id,
+  variant,
+  type,
+  sx,
+  size,
+}: TextInputProps) => (
   <StyledInput
     id={id}
     defaultValue={defaultValue}
@@ -120,13 +130,14 @@ const FilledInput = (
     variant={variant}
     type={type}
     sx={{
-      opacity: disabled ? .5 : 1,
+      opacity: disabled ? 0.5 : 1,
       ...sx,
     }}
     size={size}
   />
+)
 
-const InnerInput = (props: TextInputProps) =>
+const InnerInput = (props: TextInputProps) => (
   <FilledInput
     {...props}
     sx={{
@@ -137,20 +148,23 @@ const InnerInput = (props: TextInputProps) =>
       '&:focus': { boxShadow: 'none' },
     }}
   />
+)
 
 const DummyInput = ({ sx, ...rest }: InputProps) => {
   const { disabled } = rest
-  return <StyledInput
-    as={'div'}
-    {...rest}
-    sx={{
-      display: 'flex',
-      alignItems: 'center',
-      p: 0,
-      opacity: disabled ? .5 : 1,
-      ...sx,
-    }}
-  />
+  return (
+    <StyledInput
+      as={'div'}
+      {...rest}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        p: 0,
+        opacity: disabled ? 0.5 : 1,
+        ...sx,
+      }}
+    />
+  )
 }
 
 const inputSizeStyle = variant({
@@ -168,3 +182,4 @@ const StyledInput = styled(Input)`
   ${inputSizeStyle};
 `
 
+export { ImageInput } from './image'
