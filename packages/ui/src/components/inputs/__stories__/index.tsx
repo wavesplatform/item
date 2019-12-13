@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { storiesOf } from '@storybook/react'
 import { Box, Flex } from 'rebass'
-import { TextInput, TextInputWithIcon, TextInputWithUnit, ImageInput } from '..'
+import { TextInput, TextInputWithIcon, TextInputWithUnit, ImageInput, TextArea } from '..'
 import { Icon } from '../../icon'
 
 storiesOf('Inputs', module)
@@ -23,9 +23,12 @@ storiesOf('Inputs', module)
       <TextInput placeholder={'3123'} type={'number'} mb={'md'}>
         Number
       </TextInput>
-      <TextInput placeholder={'Tommy Vercetti'} sx={{ border: '2px dashed', borderColor: 'grays.7', p: 'md' }}>
+      <TextInput mb='md' placeholder={'Tommy Vercetti'} sx={{ border: '2px dashed', borderColor: 'grays.7', p: 'md' }}>
         Styled only wrapper
       </TextInput>
+      <TextArea placeholder='This is textarea' rows={5}>
+        Textarea
+      </TextArea>
     </Box>
   ))
   .add('With Unit', () => (

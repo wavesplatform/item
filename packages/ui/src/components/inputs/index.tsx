@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react'
 import { Box, Flex, FlexProps } from 'rebass'
-import { Input, InputProps, Label } from '@rebass/forms'
+import { Input, InputProps, Label, Textarea } from '@rebass/forms'
 import { Icon } from '../icon'
 import { variant } from 'styled-system'
 import { StyleSize } from '../../styles'
@@ -28,6 +28,20 @@ export const TextInput = ({ children, variant = 'input', ...rest }: TextInputPro
         </Label>
       )}
       <FilledInput {...rest} variant={variant} />
+    </Wrapper>
+  )
+}
+
+export const TextArea = ({ children, variant = 'input', ...rest }: TextInputProps) => {
+  const { id } = rest
+  return (
+    <Wrapper {...rest}>
+      {children && (
+        <Label htmlFor={id} mb={'sm'}>
+          {children}
+        </Label>
+      )}
+      <Textarea {...rest} variant={variant} />
     </Wrapper>
   )
 }
