@@ -4,7 +4,7 @@ import { ImageInput } from '@item-protocol/ui'
 
 export const EditableCover = ({ pageSRC, iconSRC, onPageChange, onIconChange }: CoverInput) => {
   return (
-    <Flex alignItems='center' height={110} sx={{ position: 'relative' }} px='xl'>
+    <Flex mb='sm' alignItems='center' height={110} sx={{ position: 'relative' }} px='xl'>
       <ImageInput
         onChange={onPageChange}
         src={pageSRC}
