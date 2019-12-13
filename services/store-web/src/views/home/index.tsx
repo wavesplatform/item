@@ -20,19 +20,15 @@ export const HomeView = () => {
   const history = useHistory()
 
   useEffect(() => {
-    const searchParamSub = searchParam$
-      .pipe(
-        debounce(() => timer(200)),
-      )
-      .subscribe(search => {
-        if (search.length < 3) return
+    const searchParamSub = searchParam$.pipe(debounce(() => timer(200))).subscribe(search => {
+      if (search.length < 3) return
 
-        // Update state & url
-        history.push({
-          pathname: '/items',
-          search: queryString.stringify({ search }),
-        })
+      // Update state & url
+      history.push({
+        pathname: '/items',
+        search: queryString.stringify({ search }),
       })
+    })
 
     return () => {
       if (searchParamSub) {
@@ -48,17 +44,20 @@ export const HomeView = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-        }}
-      >
+        }}>
         <Container>
           <Heading as={'h1'} textAlign={'center'} mb={6}>
-            A safe place to trade <Text color={'primary'} as={'span'}>your</Text> digital posessions.
+            A safe place to trade{' '}
+            <Text color={'primary'} as={'span'}>
+              your
+            </Text>{' '}
+            digital posessions.
           </Heading>
           <Container maxWidth={'840px'}>
-            <Search onSearch={newSearchString => searchParam$.next(newSearchString)}/>
+            <Search onSearch={newSearchString => searchParam$.next(newSearchString)} />
           </Container>
           <Box mt={'xl'}>
-            <Stats/>
+            <Stats />
           </Box>
         </Container>
       </Section>
@@ -67,13 +66,15 @@ export const HomeView = () => {
           <Box mt={'xl'}>
             <ItemsWrapper>
               <ItemsWrapperInner>
-                <Items/>
+                <Items />
               </ItemsWrapperInner>
             </ItemsWrapper>
           </Box>
           <Flex mt={'xl'} justifyContent={'center'}>
             <RouterLink to={'/items'}>
-              <Button size={'lg'} width={'128px'} variant={'primary'}>Show All</Button>
+              <Button size={'lg'} width={'128px'} variant={'primary'}>
+                Show All
+              </Button>
             </RouterLink>
           </Flex>
         </ViewContainer>
@@ -81,12 +82,12 @@ export const HomeView = () => {
       <Section>
         <ViewContainer>
           <Heading sx={{ fontSize: 'h1', mb: 'lg' }}>Popular Dapps</Heading>
-          <Dapps/>
+          <Dapps />
         </ViewContainer>
       </Section>
       <Section>
         <ViewContainer>
-          <Support/>
+          <Support />
         </ViewContainer>
       </Section>
     </ViewWrapper>
@@ -97,11 +98,11 @@ export default HomeView
 
 const ItemsSection = styled(Section)`
   background: linear-gradient(
-      15deg,
-      #0d1424 0%, 
-      ${themeGet('colors.background')} 40%,
-      ${themeGet('colors.background')} 100%
-    );
+    15deg,
+    #0d1424 0%,
+    ${themeGet('colors.background')} 40%,
+    ${themeGet('colors.background')} 100%
+  );
 `
 
 const ItemsWrapper = styled(Box)`
