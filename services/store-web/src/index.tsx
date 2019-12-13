@@ -15,8 +15,6 @@ import { ApolloProvider } from '@apollo/react-hooks'
 import { theme } from './styles/theme'
 import { KeeperProvider } from './contexts/keeper'
 import { getToken } from './helpers/auth'
-import { Notifications } from './components/notifications'
-import { resolvers } from './resolvers'
 
 const authMiddleware = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers = {} }: Record<string, any>) => {
@@ -43,11 +41,10 @@ const cache = new InMemoryCache()
 const client = new ApolloClient({
   link: from([authMiddleware, httpLink]),
   cache,
-  resolvers,
 })
 
 cache.writeData({
-  data: { notifications: [] },
+  data: {},
 })
 
 class App extends Component {
@@ -57,14 +54,13 @@ class App extends Component {
     return (
       <ThemeProvider theme={theme}>
         <Fragment>
-          <Global styles={globalStyle} />
+          <Global styles={globalStyle}/>
           <ApolloProvider client={client}>
             <KeeperProvider>
               <Router>
-                <Routes />
+                <Routes/>
               </Router>
             </KeeperProvider>
-            <Notifications />
           </ApolloProvider>
         </Fragment>
       </ThemeProvider>
@@ -72,7 +68,7 @@ class App extends Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App/>, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
