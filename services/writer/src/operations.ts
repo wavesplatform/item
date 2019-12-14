@@ -6,6 +6,7 @@ import { deleteItem, upsertItem } from './queries/item'
 import { deleteManyItemParamses, updateItemParams, upsertItemParams } from './queries/item-params'
 import { LotUpdateMutation } from './types'
 import { deleteLot, getLotByTxId, updateLot, upsertLot } from './queries/lot'
+import config from './config'
 // import { saveItemObject } from './algolia/events/items'
 // import { toSearchItemObject } from '@item-protocol/utils'
 
@@ -64,7 +65,7 @@ const processParamsOp = async ({ data: op }: Job<ParamsOperation>) => {
 
         // Preserve media
         // If storage url isn't set
-        !storageImageUrl && (await preserveMediaQueue.add({
+        !storageImageUrl && config.preserveMedia && (await preserveMediaQueue.add({
           url: imageUrl,
           id: paramsId,
           entity: 'items',
