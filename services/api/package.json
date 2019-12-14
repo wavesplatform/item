@@ -16,7 +16,8 @@
     "test": "run-s test:jest",
     "test:jest": "jest --passWithNoTests --config=jest.json",
     "test:watch": "test:jest -- --watch",
-    "generate:resolvers": "graphqlgen"
+    "generate:resolvers": "graphqlgen",
+    "mutations:dapp": "PRISMA_ENDPOINT=http://localhost:4466 ts-node ./src/mutations/dapp.ts"
   },
   "dependencies": {
     "@waves/signature-generator": "^5.2.1",
