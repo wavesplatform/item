@@ -44,7 +44,6 @@ const MiscListItem = ({ miscItem, onRemove, onUpdate }: MiscListItemProps) => {
   )
 }
 
-// #region types
 interface MiscEditorProps {
   value: Array<MiscItem>
   onChange: (value: Array<MiscItem>) => void
@@ -63,4 +62,3 @@ type MiscItem = {
   key: string
   value: string
 }
-// #endregion
