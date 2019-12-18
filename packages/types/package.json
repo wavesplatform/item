@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "clean": "rimraf dist",
     "fix": "run-s fix:tslint fix:prettier",
     "fix:prettier": "prettier --write \"{src,test}/**/*.ts\" --ignore-path ../../.prettierignore",
     "fix:tslint": "tslint --fix -t stylish -p ."
