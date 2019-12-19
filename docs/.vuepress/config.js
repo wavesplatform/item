@@ -17,6 +17,7 @@ module.exports = {
         collapsable: true,
         children: [
           '/guides/setup-local-item-protocol',
+          '/guides/deploy-custom-item-store-instance',
         ],
       },
       {
