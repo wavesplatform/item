@@ -6,15 +6,18 @@
   "workspaces": [
     "contracts/*",
     "packages/*",
-    "services/store-web"
+    "services/store-web",
+    "services/docs-web"
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "clean": "lerna run --stream --concurrency 1 --sort clean",
     "build": "lerna run --stream --concurrency 1 --sort build",
     "build:packages": "lerna run --stream --concurrency 1 --sort build --no-private",
+    "build:docs": "yarn --cwd docs build",
     "start": "lerna run --stream --concurrency 1 --sort start",
-    "start:web": "lerna run --stream --concurrency 1 --sort start --scope=*/store-web",
+    "start:web": "yarn --cwd services/store-web start",
+    "start:docs": "yarn --cwd docs start",
     "fix": "lerna run --stream --concurrency 1 fix",
     "test": "lerna run --stream --concurrency 1 --sort test",
     "test:e2e": "cypress run",

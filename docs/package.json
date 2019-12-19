@@ -1,0 +1,15 @@
+{
+  "name": "@item-protocol/docs",
+  "version": "1.0.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "vuepress build .",
+    "start": "vuepress dev .",
+    "now-build": "yarn build && mv .vuepress/dist dist"
+  },
+  "devDependencies": {
+    "@vue/babel-preset-app": "^4.1.1",
+    "vuepress": "^1.2.0"
+  }
+}
