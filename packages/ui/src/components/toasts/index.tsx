@@ -23,12 +23,15 @@ const StyledToast = styled(Box)<ToastProps>`
   ${toastStyle};
 `
 
-export const Toast = (props: ToastProps) =>
+export const Toast = ({ sx, ...rest }: ToastProps) =>
   <StyledToast
     variant={'default'}
-    px={4}
-    py={3}
-    borderRadius={'md'}
-    alignItems={'center'}
-    {...props}
+    sx={{
+      px: 'lg',
+      py: 'md',
+      borderRadius: 'md',
+      alignItems: 'center',
+      ...sx,
+    }}
+    {...rest}
   />
