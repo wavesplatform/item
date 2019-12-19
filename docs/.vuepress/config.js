@@ -7,6 +7,10 @@ module.exports = {
     docsDir: 'docs',
     docsBranch: 'master',
     editLinks: true,
+    nav: [
+      { text: 'Home', link: '/' },
+      { text: 'GitHub', link: 'https://github.com/wavesplatform/item' },
+    ],
     sidebar: [
       {
         title: 'Guides',
