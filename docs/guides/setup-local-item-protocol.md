@@ -23,13 +23,13 @@ CHAIN_ID=T
 DAPP_ADDRESS_STORE=3MrDcz4LFFjPhXdtu7YCqFSnHc3pD1tcWLa
 ```
 Where:
-Environment variable | Description | Default value
---|--|--
-DEBUG | To display logs from the micro-services | observer,combine,writer,api,media-preserver
-PRISMA_ENDPOINT | To match the URL of a running Prisma server | http://prisma:4466
-REDIS_URL | To connect to Redis server at the localhost:6379 | redis://redis:6379
-CHAIN_ID | To connect to the [blockchain network](https://confluence.wavesplatform.com/display/MAIN/Blockchain+Network) | T
-DAPP_ADDRESS_STORE | The DApp address of store contract based on the item protocol | 3MrDcz4LFFjPhXdtu7YCqFSnHc3pD1tcWLa
+| Environment variable | Description | Default value |
+| -- | -- | -- |
+| DEBUG | To display logs from the micro-services | observer,combine,writer,api,media-preserver |
+| PRISMA_ENDPOINT | To match the URL of a running Prisma server | http://prisma:4466 |
+| REDIS_URL | To connect to Redis server at the localhost:6379 | redis://redis:6379 |
+| CHAIN_ID | To connect to the [blockchain network](https://confluence.wavesplatform.com/display/MAIN/Blockchain+Network) | T |
+| DAPP_ADDRESS_STORE | The DApp address of store contract based on the item protocol | 3MrDcz4LFFjPhXdtu7YCqFSnHc3pD1tcWLa |
 
 
 The  **.env.secrets**  file can be empty or filled up with the following variables:
