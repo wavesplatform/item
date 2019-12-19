@@ -1,7 +1,8 @@
 module.exports = {
-  title: 'Item Protocol Documentation',
-  description: 'How to use Item Protocol',
+  title: 'Docs',
+  description: 'Item Protocol Documentation',
   themeConfig: {
+    logo: '/assets/logo.svg',
     docsRepo: 'wavesplatform/item',
     docsDir: 'docs',
     docsBranch: 'master',
@@ -14,6 +15,23 @@ module.exports = {
           '/guides/setup-local-item-protocol',
         ],
       },
+      {
+        title: 'Protocol Concept',
+        collapsable: true,
+        children: [],
+      },
+      {
+        title: 'Tools/Libraries',
+        collapsable: true,
+        children: [],
+      },
+      {
+        title: 'API Reference',
+        collapsable: true,
+        children: [],
+      },
     ],
+    searchPlaceholder: 'Search...',
+    lastUpdated: 'Last Updated',
   },
 }
