@@ -14,9 +14,10 @@
     "clean": "lerna run --stream --concurrency 1 --sort clean",
     "build": "lerna run --stream --concurrency 1 --sort build",
     "build:packages": "lerna run --stream --concurrency 1 --sort build --no-private",
+    "build:docs": "vuepress build docs",
     "start": "lerna run --stream --concurrency 1 --sort start",
     "start:web": "yarn --cwd services/store-web start",
-    "start:docs": "yarn --cwd services/docs-web start",
+    "start:docs": "vuepress dev docs",
     "fix": "lerna run --stream --concurrency 1 fix",
     "test": "lerna run --stream --concurrency 1 --sort test",
     "test:e2e": "cypress run",
@@ -27,6 +28,7 @@
   "devDependencies": {
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.2",
+    "@vue/babel-preset-app": "^4.1.1",
     "cross-env": "^5.2.0",
     "cypress": "^3.4.1",
     "jest": "^24.9.0",
@@ -37,6 +39,7 @@
     "ts-jest": "^24.0.2",
     "tslint": "^5.19.0",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.5.3"
+    "typescript": "^3.5.3",
+    "vuepress": "^1.2.0"
   }
 }
