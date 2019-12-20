@@ -17,6 +17,7 @@
     "build:docs": "yarn --cwd docs build",
     "start": "lerna run --stream --concurrency 1 --sort start",
     "start:web": "yarn --cwd services/store-web start",
+    "start:storybook": "yarn --cwd packages/ui storybook",
     "start:docs": "yarn --cwd docs start",
     "fix": "lerna run --stream --concurrency 1 fix",
     "test": "lerna run --stream --concurrency 1 --sort test",
