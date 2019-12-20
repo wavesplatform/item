@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, THead, Tr, Td as BaseTd, TBody, Quantity, Truncate, Button, IconButton } from '@item-protocol/ui'
+import { Table, THead, Tr, Td as BaseTd, TBody, Quantity, Truncate, IconButton } from '@item-protocol/ui'
 import { Box, FlexProps, Image, Heading, Link } from 'rebass'
 import { Link as RouterLink } from 'react-router-dom'
 
