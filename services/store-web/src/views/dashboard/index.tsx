@@ -1,5 +1,5 @@
 import React from 'react'
-import { ViewWrapper, ViewContainer } from '../../components/layout'
+import { ViewContainer } from '../../components/layout'
 import { Box } from 'rebass'
 import { useState } from 'react'
 import { useCurrentUser } from '../../hooks/currentUser'
@@ -16,7 +16,7 @@ export const Dashboard = () => {
   if (!me) return null
 
   return (
-    <ViewWrapper py={0}>
+    <>
       <Box sx={{ borderBottom: ({ colors }) => `1px solid ${colors.secondary}` }}>
         <ViewContainer minHeight={128} display='flex' sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
           <GameHeading dapp={me} />
@@ -42,7 +42,7 @@ export const Dashboard = () => {
           </Switch>
         </Box>
       </ViewContainer>
-    </ViewWrapper>
+    </>
   )
 }
 
