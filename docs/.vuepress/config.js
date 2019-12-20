@@ -14,7 +14,7 @@ module.exports = {
     sidebar: [
       {
         title: 'Guides',
-        collapsable: true,
+        collapsable: false,
         children: [
           '/guides/setup-local-item-protocol',
           '/guides/deploy-custom-item-store-instance',
@@ -22,17 +22,22 @@ module.exports = {
       },
       {
         title: 'Protocol Concept',
-        collapsable: true,
-        children: [],
+        collapsable: false,
+        children: [
+          '/protocol-concept/core',
+          '/protocol-concept/store',
+        ],
       },
       {
         title: 'Tools/Libraries',
-        collapsable: true,
-        children: [],
+        collapsable: false,
+        children: [
+          'tools-libs/overview',
+        ],
       },
       {
         title: 'API Reference',
-        collapsable: true,
+        collapsable: false,
         children: [],
       },
     ],
