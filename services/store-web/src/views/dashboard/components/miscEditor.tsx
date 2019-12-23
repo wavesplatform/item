@@ -1,11 +1,11 @@
 import React, { ReactNode, ChangeEvent } from 'react'
 import { Button, TextInput, IconButton } from '@item-protocol/ui'
-import { Flex, Box } from 'rebass'
+import { Flex, Box, BoxProps } from 'rebass'
 
-export const MiscEditor = ({ label, onAdd, value, onChange }: MiscEditorProps) => {
+export const MiscEditor = ({ children, onAdd, value, onChange, ...boxPropx }: MiscEditorProps) => {
   return (
-    <>
-      {label}
+    <Box {...boxPropx}>
+      {children}
       <Box mb='md'>
         {value.map((miscItem, index, miscItems) => {
           const itemsBefore = miscItems.slice(0, index)
@@ -13,20 +13,19 @@ export const MiscEditor = ({ label, onAdd, value, onChange }: MiscEditorProps) =
 
           const handleRemove = () => onChange([...itemsBefore, ...itemsAfter])
 
-          const updateMiscItem = (updatedMiscItem: Partial<MiscItem>) => {
-            const updatedItem = { ...miscItem, ...updatedMiscItem }
+          const updateField = (fieldName: keyof MiscItem) => (e: ChangeEvent<HTMLInputElement>) => {
+            const { value } = e.currentTarget
+            const updatedItem = { ...miscItem, [fieldName]: value }
             onChange([...itemsBefore, updatedItem, ...itemsAfter])
           }
-          const handleUpdate = (fieldName: keyof MiscItem) => (e: ChangeEvent<HTMLInputElement>) => {
-            const inputValue = e.currentTarget.value
-            updateMiscItem({ [fieldName]: inputValue })
-          }
 
-          return <MiscListItem key={index} miscItem={miscItem} onRemove={handleRemove} onUpdate={handleUpdate} />
+          return <MiscListItem key={index} miscItem={miscItem} onRemove={handleRemove} onUpdate={updateField} />
         })}
       </Box>
-      <Button onClick={onAdd}>Add record</Button>
-    </>
+      <Button variant='secondary' onClick={onAdd}>
+        Add record
+      </Button>
+    </Box>
   )
 }
 
@@ -44,7 +43,7 @@ const MiscListItem = ({ miscItem, onRemove, onUpdate }: MiscListItemProps) => {
   )
 }
 
-interface MiscEditorProps {
+type MiscEditorProps = Omit<BoxProps, 'value' | 'onChange'> & {
   value: Array<MiscItem>
   onChange: (value: Array<MiscItem>) => void
   onAdd: () => void
@@ -58,7 +57,7 @@ interface MiscListItemProps {
 }
 
 // not sure where to put this one
-type MiscItem = {
+export type MiscItem = {
   key: string
   value: string
 }
