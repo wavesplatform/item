@@ -126,6 +126,13 @@ const forms = {
       variant: 'forms.flatField',
     },
   },
+  switch: {
+    bg: 'secondary',
+    border: 'none',
+    thumb: {
+      bg: 'text',
+    },
+  },
 }
 
 const dropdown = {
