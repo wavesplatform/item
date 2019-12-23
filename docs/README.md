@@ -18,6 +18,6 @@ The Item market will enable gamers to have true ownership over their virtual ite
 
 # Documentation Navigation Guide
 
-* Go to the **Guides** section to learn [how to setup the item protocol locally](/guides/setup-local-item-protocol.md) on your machine for your own development and to learn [how to deploy a custom item store instance ](/guides/deploy-custom-item-store-instance.md).
+* Go to the **Guides** section to learn [how to setup the item protocol locally](../guides/setup-local-item-protocol.md) on your machine for your own development and to learn [how to deploy a custom item store instance ](/guides/deploy-custom-item-store-instance.md).
 
-* Go to the **Protocol Concept** section to understand the [core architecture of the item protocol](/protocol-concept/core.md) and to understand the [main implementations of store contract based on the item protocol](docs/protocol-concept/store.md).
+* Go to the **Protocol Concept** section to understand the [core architecture of the item protocol](../protocol-concept/core.md) and to understand the [main implementations of store contract based on the item protocol](docs/protocol-concept/store.md).
