@@ -8,10 +8,12 @@ module.exports = {
     docsBranch: 'master',
     editLinks: true,
     nav: [
-      { text: 'Home', link: '/' },
+      { text: 'Overview', link: '/' },
+      { text: 'Item Protocol', link: 'https://item.sh' },
       { text: 'GitHub', link: 'https://github.com/wavesplatform/item' },
     ],
     sidebar: [
+      ['/', 'Overview'],
       {
         title: 'Guides',
         collapsable: false,
