@@ -8,6 +8,7 @@ import { EditDappModal } from '../../components/modals/editDapp'
 import { GameHeading } from '../../components/gameHeading'
 import { Route, Link as RouterLink, Switch, Redirect } from 'react-router-dom'
 import { DashboardItems } from './items'
+import { ItemForm } from './components/itemForm'
 
 export const Dashboard = () => {
   const [modalVisible, setModalVisible] = useState(false)
@@ -37,7 +38,8 @@ export const Dashboard = () => {
       <ViewContainer>
         <Box py='lg'>
           <Switch>
-            <Route path='/dashboard/items' component={DashboardItems}></Route>
+            <Route path='/dashboard/create-item' component={ItemForm} />
+            <Route path='/dashboard/items' component={DashboardItems} />
             <Redirect to='/dashboard/items' />
           </Switch>
         </Box>
