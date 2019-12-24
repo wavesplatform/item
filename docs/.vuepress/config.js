@@ -8,7 +8,7 @@ module.exports = {
     docsBranch: 'master',
     editLinks: true,
     nav: [
-      { text: 'Overview', link: '/' },
+      { text: 'Getting Started', link: '/' },
       { text: 'Item Protocol', link: 'https://item.sh' },
       { text: 'GitHub', link: 'https://github.com/wavesplatform/item' },
     ],
@@ -17,25 +17,20 @@ module.exports = {
       {
         title: 'Guides',
         collapsable: false,
-        children: [
-          '/guides/setup-local-item-protocol',
-          '/guides/deploy-custom-item-store-instance',
-        ],
+        path: '/guides/',
+        children: ['/guides/setup-local-item-protocol', '/guides/deploy-custom-item-store-instance'],
       },
       {
         title: 'Protocol Concept',
         collapsable: false,
-        children: [
-          '/protocol-concept/core',
-          '/protocol-concept/store',
-        ],
+        path: '/protocol-concept/',
+        children: ['/protocol-concept/core', '/protocol-concept/store'],
       },
       {
         title: 'Tools/Libraries',
         collapsable: false,
-        children: [
-          'tools-libs/overview',
-        ],
+        path: '/tools-libs/',
+        children: [],
       },
       {
         title: 'API Reference',
