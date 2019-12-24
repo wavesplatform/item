@@ -26,7 +26,7 @@ export const PageData = of([
           },
           {
             name: 'button-link',
-            text: 'mailto: gaming@wavesplatform.com',
+            text: 'https://airtable.com/shr8Z21VbnmoS8Q4c',
           },
           {
             name: 'link-caption',
@@ -52,7 +52,7 @@ export const PageData = of([
             title: 'Get started',
             description: null,
             content:
-              '<p><a href="mailto:gaming@wavesplatform.com">Get started</a></p>',
+              '<p><a href="https://airtable.com/shr8Z21VbnmoS8Q4c" target="_blank">Get started</a></p>',
             index: null,
             name: 'start',
             json: null,
@@ -274,7 +274,7 @@ export const PageData = of([
             index: null,
             name: 'button',
             json: null,
-            link: 'mailto:gaming@wavesplatform.com',
+            link: 'https://airtable.com/shr8Z21VbnmoS8Q4c',
           },
           {
             title: 'For developers',
