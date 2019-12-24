@@ -1,6 +1,6 @@
 # Item Protocol
 
-The [**Item Protocol**](/docs/protocol-concept/core.md) is an infrastructure for tokenization of the game items.
+The [**Item Protocol**](/protocol-concept/core.md) is an infrastructure for tokenization of the game items.
 
 This protocol will provide a fast and convenient tokenization with a quick and easy integration of the market into particular games.
 
