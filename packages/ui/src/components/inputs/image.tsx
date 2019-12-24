@@ -30,7 +30,6 @@ export const ImageInput = ({ src, onChange, placeholder, sx, ...labelProps }: Im
         width={0}
         height={0}
         type='file'
-        id='file'
         name='file'
         accept={'.png, .jpg, .jpeg'}
         multiple={false}
