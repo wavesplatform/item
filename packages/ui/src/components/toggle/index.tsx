@@ -1,7 +1,7 @@
 import React from 'react'
 import { Switch, Label, LabelProps } from '@rebass/forms'
 
-export const Toggle = ({ checked, onChange, children, name, ...wrapperProps }: ToggleProps) => (
+export const Toggle = ({ checked, onChange, children, name, disabled, ...wrapperProps }: ToggleProps) => (
   <Label
     as='label'
     htmlFor={name}
@@ -9,7 +9,7 @@ export const Toggle = ({ checked, onChange, children, name, ...wrapperProps }: T
       // events fires twice, if we don't prevent the default behaviour
       e.preventDefault()
 
-      onChange(e)
+      if (!disabled) onChange(e)
     }}
     {...wrapperProps}>
     {children}
