@@ -1,0 +1,52 @@
+<div
+  class="intro intro--theme-{{ theme }}"
+  [style.background-image]="'url(' + (block?.media)[0]?.url + ')'"
+>
+  <div class="intro__top">
+    <div class="container intro__container">
+      <div class="intro__general">
+        <!-- Header -->
+        <h1 class="intro__title" [innerHTML]="block?.title | saveHtml"></h1>
+
+        <!-- Description -->
+        <h4
+          class="intro__description"
+          *ngIf="block?.description"
+          [innerHTML]="block?.description | saveHtml"
+        ></h4>
+
+        <div class="intro__buttons">
+          <div
+            class="intro__button"
+            *ngFor="let button of block?.list; let i = index"
+          >
+            <a
+              class="btn btn-primary"
+              [class.btn-primary]="i === 0"
+              [class.btn-outline-primary]="i > 0"
+              [attr.href]="button.link"
+              [innerHTML]="button?.title | saveHtml"
+            ></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="intro__promo">
+        <div class="intro__promo-top">
+          <div
+            class="intro__promo-prcnt h1"
+            [innerHTML]="(block?.labels)['prcnt']?.text | saveHtml"
+          ></div>
+          <div
+            class="intro__promo-comment"
+            [innerHTML]="(block?.labels)['comment']?.text | saveHtml"
+          ></div>
+        </div>
+        <div
+          class="intro__promo-desc"
+          [innerHTML]="block?.content | saveHtml"
+        ></div>
+      </div>
+    </div>
+  </div>
+</div>

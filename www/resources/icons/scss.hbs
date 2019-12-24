@@ -1,0 +1,17 @@
+// Script-generated file, do not modify by hand
+
+{{# each codepoints }}
+$icon-{{ @key }}-content: '\\{{ this }}';
+{{/ each }}
+
+@mixin icon-classes {
+{{# each codepoints }}
+  {{# if ../baseSelector }}
+  {{ ../baseSelector }}.{{ ../classPrefix }}{{ @key }}:before {
+  {{ else }}
+  {{ baseTag }}.{{ ../classPrefix }}{{ @key }}:before {
+  {{/ if }}
+    content: $icon-{{ @key }}-content;
+  }
+{{/ each }}
+}

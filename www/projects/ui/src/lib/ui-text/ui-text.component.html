@@ -1,0 +1,19 @@
+<div class="ui-text ui-txet--theme-{{ theme }}" *ngIf="!!block">
+  <div class="container">
+    <h2
+      *ngIf="block?.title"
+      class="ui-text__title"
+      [innerHTML]="block?.title | saveHtml"
+    ></h2>
+    <div
+      *ngIf="block?.description"
+      class="ui-text__desc"
+      [innerHTML]="block?.description | saveHtml"
+    ></div>
+    <div
+      *ngIf="block?.content"
+      class="ui-text__content"
+      [innerHTML]="block?.content | saveHtml"
+    ></div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+// Script-generated file, do not modify by hand
+
+$icon-fb-content: '\f101';
+$icon-ld-content: '\f102';
+$icon-md-content: '\f103';
+$icon-rd-content: '\f104';
+$icon-tg-content: '\f105';
+$icon-tw-content: '\f106';
+$icon-vk-content: '\f107';
+$icon-waves-content: '\f108';
+$icon-yt-content: '\f109';
+
+@mixin icon-classes {
+  .icon-fb:before {
+    content: $icon-fb-content;
+  }
+  .icon-ld:before {
+    content: $icon-ld-content;
+  }
+  .icon-md:before {
+    content: $icon-md-content;
+  }
+  .icon-rd:before {
+    content: $icon-rd-content;
+  }
+  .icon-tg:before {
+    content: $icon-tg-content;
+  }
+  .icon-tw:before {
+    content: $icon-tw-content;
+  }
+  .icon-vk:before {
+    content: $icon-vk-content;
+  }
+  .icon-waves:before {
+    content: $icon-waves-content;
+  }
+  .icon-yt:before {
+    content: $icon-yt-content;
+  }
+}

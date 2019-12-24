@@ -1,0 +1,85 @@
+@import '../styles/functions';
+@import '../styles/override';
+
+/*Font response*/
+$browser-context: 20; // Default
+
+// Base colors
+$body-bg: #000;
+$body-color: #fff;
+
+$primary: #52f59c;
+$secondary: #1f50c3;
+$success: #28a745;
+$info: #17a2b8;
+$warning: #ffc107;
+$danger: #dc3545;
+$light: #f8f9fa;
+$dark: #343a40;
+
+$theme-colors: ();
+$theme-colors: map-merge(
+  (
+    'primary': $primary,
+    'secondary': $secondary,
+    'success': $success,
+    'info': $info,
+    'warning': $warning,
+    'danger': $danger,
+    'light': $light,
+    'dark': $dark,
+  ),
+  $theme-colors
+);
+
+// Grid
+$grid-gutter-width: 3.4482758621%;
+
+// Fonts
+$font-family-sans-serif: 'Noto Sans', 'Helvetica Neue', -apple-system,
+  sans-serif;
+$headings-font-family: 'Montserrat', Arial, sans-serif;
+$font-size-base: 1;
+$line-height-base: 1.5;
+$font-type-scale-mobile: 0.7;
+
+// Headings
+$h1-font-size: rem(65);
+$h2-font-size: rem(65);
+$h3-font-size: rem(38);
+$h4-font-size: rem(24);
+
+$headings-line-height: 1.1;
+$headings-font-weight: 700;
+$headings-margin-bottom: 1rem;
+
+// Color
+$link-color: #0055ff;
+
+// Button
+$input-btn-padding-y: 1rem;
+$input-btn-padding-x: 2.125rem;
+$input-btn-font-size: 1.125rem;
+
+$btn-padding-y-lg: rem(34);
+$btn-padding-x-lg: rem(68);
+
+$input-bg: transparent;
+$input-disabled-bg: transparent;
+$ng-select-disabled-text: transparent;
+$input-color: white;
+$input-border-color: rgba(255, 255, 255, 0.51);
+$enable-validation-icons: false;
+
+$form-feedback-valid-color: rgba(255, 255, 255, 1);
+
+// Buttons
+$btn-border-radius: 0;
+$btn-border-radius-lg: 0;
+$btn-border-radius-sm: 0;
+$input-border-radius: 0;
+$input-border-radius-lg: 0;
+$input-border-radius-sm: 0;
+
+$block-padding-top: 8vw;
+$block-padding-bottom: 6vw;

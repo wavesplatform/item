@@ -1,0 +1,30 @@
+<div class="contacts contacts--theme-{{ theme }}" *ngIf="!!block">
+  <div class="container">
+    <div class="contacts__row">
+      <div class="contacts__left">
+        <h2 class="contacts__title" [innerHtml]="block?.title | saveHtml"></h2>
+        <div
+          class="contacts__content"
+          [innerHTML]="block?.content | saveHtml"
+        ></div>
+      </div>
+
+      <div
+        *ngIf="!!(block?.list)['photo']?.content"
+        class="contacts__image"
+        [innerHTML]="(block?.list)['photo'].content | saveHtml"
+      ></div>
+
+      <div *ngIf="!(block?.list)['photo']?.content" class="contacts__image">
+        <ng-content></ng-content>
+      </div>
+    </div>
+
+    <div class="contacts__row" *ngIf="(block?.list)['route']?.content">
+      <div
+        class="contacts__map"
+        [innerHTML]="(block?.list)['route'].content | saveHtml"
+      ></div>
+    </div>
+  </div>
+</div>

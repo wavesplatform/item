@@ -1,0 +1,55 @@
+@import 'mixins';
+
+.documentations {
+  padding: $block-padding-top 0 $block-padding-bottom;
+
+  &__title {
+    margin-bottom: 1em;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    display: flex;
+    background: #e5e5e5;
+    min-height: 10vw;
+    width: span(5);
+    padding-left: 3vw;
+    margin-right: gutter();
+    margin-bottom: gutter();
+    @include media('<=phone') {
+      margin: 0 0 rem(15) 0;
+      width: 100%;
+      padding: rem(10) rem(15);
+    }
+
+    &-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &-icon {
+      margin-right: rem(15);
+      ::ng-deep img {
+        max-height: rem(60);
+      }
+    }
+    &-caption {
+      @include media('<=phone') {
+        font-size: rem(20);
+      }
+    }
+  }
+}
+
+.documentations {
+  &--theme-light {
+    background: white;
+    color: black;
+  }
+}

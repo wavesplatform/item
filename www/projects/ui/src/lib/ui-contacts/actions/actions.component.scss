@@ -1,0 +1,54 @@
+@import 'mixins';
+
+.contacts {
+  position: relative;
+  padding: $block-padding-top 0 $block-padding-bottom;
+  min-height: 30vw;
+
+  &__row {
+    display: flex;
+  }
+
+  &__left {
+    width: span(6);
+    @include media('<=phone') {
+      width: 100%;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+
+    .btn {
+      margin-right: gutter();
+    }
+  }
+
+  &__attach {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: span(6);
+    margin-left: gutter();
+
+    @include media('<=phone') {
+      position: relative;
+      display: block;
+      left: 0;
+      margin: rem(15) 0 0;
+    }
+  }
+}
+
+.contacts {
+  &--theme-light {
+    background: white;
+    color: black;
+    border-bottom: 4px solid #1f50c3;
+  }
+
+  &--theme-dark {
+    background: black;
+    color: white;
+  }
+}

@@ -1,0 +1,17 @@
+<div class="left-column left-column--theme-{{ theme }}">
+  <div class="container">
+    <div class="left-column__content">
+      <h3 [innerHTML]="block?.title | saveHtml"></h3>
+
+      <div
+        class="left-column__desc"
+        [innerHTML]="block?.content | saveHtml"
+      ></div>
+    </div>
+  </div>
+
+  <div
+    class="left-column__cover"
+    [style.background-image]="'url(' + (block?.media)[0]?.url + ')'"
+  ></div>
+</div>

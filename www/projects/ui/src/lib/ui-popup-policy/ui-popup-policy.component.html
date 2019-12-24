@@ -1,0 +1,17 @@
+<div
+  *ngIf="isShow && !!this.content"
+  class="popup-policy popup-policy--theme-{{ theme }}"
+>
+  <div class="container">
+    <div class="popup-policy__text-col">
+      <div
+        class="popup-policy__text"
+        [innerHTML]="this.content | saveHtml"
+      ></div>
+    </div>
+    <div class="popup-policy__button-col">
+      <button (click)="close()" class="btn btn-primary">Accept</button>
+    </div>
+    <div (click)="close()" class="popup-policy__close"></div>
+  </div>
+</div>

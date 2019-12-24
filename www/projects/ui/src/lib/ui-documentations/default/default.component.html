@@ -1,0 +1,23 @@
+<div class="documentations documentations--theme-{{ theme }}">
+  <div class="container">
+    <h2 class="documentations__title" [innerHTML]="block?.title"></h2>
+    <div class="documentations__list">
+      <a
+        [attr.href]="product?.link"
+        class="h4 documentations__item"
+        *ngFor="let product of block?.list"
+      >
+        <span class="h4 documentations__item-box">
+          <span
+            class="documentations__item-icon"
+            [innerHTML]="product?.description | saveInnerHtml"
+          ></span>
+          <span
+            class="documentations__item-caption"
+            [innerHTML]="product?.title | saveHtml"
+          ></span>
+        </span>
+      </a>
+    </div>
+  </div>
+</div>

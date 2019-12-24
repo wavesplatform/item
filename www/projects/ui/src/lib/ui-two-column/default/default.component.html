@@ -1,0 +1,27 @@
+<div class="two-column two-column--theme-{{ theme }}">
+  <div class="container">
+    <div class="two-column__content">
+      <div class="two-column__left">
+        <h2 [innerHTML]="block?.title | saveHtml"></h2>
+
+        <div
+          class="two-column__content"
+          [innerHTML]="block?.content | saveHtml"
+        ></div>
+      </div>
+
+      <div class="two-column__right">
+        <div
+          class="two-column__right-item"
+          *ngFor="let description of block?.list"
+        >
+          <h4 [innerHTML]="description?.title | saveHtml"></h4>
+          <div
+            class="two-column__right-content"
+            [innerHTML]="description?.content | saveHtml"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

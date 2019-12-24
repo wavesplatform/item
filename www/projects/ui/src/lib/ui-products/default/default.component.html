@@ -1,0 +1,23 @@
+<div class="products container products--theme-{{ theme }}">
+  <h2 class="products__title" [innerHTML]="block?.title"></h2>
+
+  <div class="products__list">
+    <div class="product products__item" *ngFor="let product of block?.list">
+      <h3 class="product__title">
+        <span
+          class="product__title-icon"
+          [innerHTML]="product?.description | saveInnerHtml"
+        ></span>
+        <span
+          class="product__title-caption"
+          [innerHTML]="product?.title | saveHtml"
+        ></span>
+      </h3>
+
+      <div
+        class="product__content"
+        [innerHTML]="product?.content | saveHtml"
+      ></div>
+    </div>
+  </div>
+</div>

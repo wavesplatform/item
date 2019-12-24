@@ -1,0 +1,40 @@
+<div class="about about--theme-{{ theme }}" *ngIf="!!block">
+  <div class="container">
+    <h2 class="about__title" [innerHTML]="block?.title | saveHtml"></h2>
+    <div class="about__desc" [innerHTML]="block?.content | saveHtml"></div>
+
+    <div class="about__jumbotron-box mt-5" *ngIf="(block?.list)['jumbotron']">
+      <h4
+        class="about__jumbotron"
+        [innerHTML]="(block?.list)['jumbotron']?.title | saveHtml"
+      ></h4>
+      <div
+        class="about__content"
+        [innerHTML]="(block?.list)['jumbotron']?.content | saveHtml"
+      ></div>
+      <div class="about__links">
+        <a
+          class="about__link mr-3 mb-1"
+          [attr.href]="item?.text"
+          *ngFor="let item of block?.labels; trackBy: trackByFn"
+          >{{ item.name }}</a
+        >
+      </div>
+    </div>
+
+    <div class="about__links-box" *ngIf="(block?.list)['link']">
+      <h4
+        class="about__links-box-title"
+        [innerHTML]="(block?.labels)['link-header'].text | saveHtml"
+      ></h4>
+      <div class="about__links">
+        <div class="about__link" *ngFor="let item of (block?.list)['link']">
+          <a
+            [attr.href]="item['link']"
+            [innerHTML]="item.content | saveInnerHtml"
+          ></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

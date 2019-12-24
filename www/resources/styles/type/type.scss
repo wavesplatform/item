@@ -1,0 +1,30 @@
+$font-type-scale-mobile: 0.75 !default;
+h1 {
+  font-size: $h1-font-size;
+  margin-bottom: rem(60);
+  @media screen and (max-width: 767px) {
+    font-size: calc(#{$h1-font-size}*#{$font-type-scale-mobile});
+  }
+}
+h2 {
+  margin-bottom: rem(60);
+  @media screen and (max-width: 767px) {
+    font-size: calc(#{$h2-font-size}*#{$font-type-scale-mobile});
+  }
+}
+h3 {
+  @media screen and (max-width: 767px) {
+    font-size: calc(#{$h3-font-size}*#{$font-type-scale-mobile});
+  }
+}
+
+p + h1,
+p + h2,
+p + h3,
+p + h4,
+p + .h1,
+p + .h2,
+p + .h3,
+p + .h4 {
+  margin-top: rem(60);
+}

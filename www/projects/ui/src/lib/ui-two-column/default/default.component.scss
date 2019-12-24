@@ -1,0 +1,31 @@
+@import 'mixins';
+
+.two-column {
+  padding: $block-padding-top 0 $block-padding-bottom;
+
+  &__content {
+    display: flex;
+  }
+
+  &__left {
+    width: span(6);
+    padding-right: 10vw;
+  }
+
+  &__right {
+    margin-left: gutter();
+    width: span(6);
+  }
+}
+
+.two-column {
+  &--theme-light {
+    background: white;
+    color: black;
+  }
+
+  &--theme-dark {
+    background: black;
+    color: white;
+  }
+}

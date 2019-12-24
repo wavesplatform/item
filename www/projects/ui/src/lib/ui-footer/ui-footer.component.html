@@ -1,0 +1,9 @@
+<div #footerBlock *ngIf="!!block">
+  <div [ngSwitch]="view">
+    <!--    <neutrino *ngSwitchCase="'neutrino'" [block]="block"></neutrino>-->
+    <!--    <item-protocol *ngSwitchCase="'item-protocol'" [block]="block"></item-protocol>-->
+    <part-default *ngSwitchDefault [block]="block" [theme]="theme">
+      <ng-content></ng-content>
+    </part-default>
+  </div>
+</div>

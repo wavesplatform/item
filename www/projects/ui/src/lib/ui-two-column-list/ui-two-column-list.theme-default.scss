@@ -1,0 +1,35 @@
+@import 'mixins';
+
+@mixin block-theme-default() {
+  .two-column {
+    background: white;
+    color: black;
+    padding: rem(140) 0 rem(129);
+
+    &--theme-enterprise {
+      padding-bottom: rem(56);
+    }
+
+    &__item {
+      display: flex;
+      padding-top: rem(4);
+      margin-bottom: rem(36);
+
+      &-icon {
+        flex: 0 0 rem(40);
+
+        p {
+          img {
+            max-width: 100%;
+            height: auto;
+          }
+        }
+      }
+
+      &-text {
+        flex: 1 1 auto;
+        padding-top: rem(1);
+      }
+    }
+  }
+}

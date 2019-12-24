@@ -1,0 +1,49 @@
+<div class="intro container">
+  <div class="intro__bg"></div>
+  <div id="intro__canvas" class="intro__canvas"></div>
+  <div class="intro__top">
+    <!--      Info about event-->
+    <div class="intro__description">
+      <div
+        class="intro__date"
+        [innerHTML]="(block?.labels)['date']?.text | saveHtml"
+      ></div>
+      <div
+        class="intro__location"
+        [innerHTML]="(block?.labels)['location']?.text | saveHtml"
+        *ngIf="!(block?.labels)['location-link']"
+      ></div>
+      <div class="intro__location" *ngIf="(block?.labels)['location-link']">
+        <a
+          [attr.href]="(block?.labels)['location-link']?.text"
+          [innerHTML]="(block?.labels)['location']?.text | saveHtml"
+        ></a>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <h1 class="intro__title" [innerHTML]="block?.title | saveHtml"></h1>
+
+    <!-- Description -->
+    <h4
+      class="intro__description"
+      *ngIf="block?.description"
+      [innerHTML]="block?.description | saveHtml"
+    ></h4>
+
+    <div class="intro__button" *ngIf="(block?.labels)['button']">
+      <a class="btn btn-primary" [routerLink]="" fragment="registration">
+        {{ (block?.labels)['button']?.text }}
+      </a>
+    </div>
+
+    <div class="intro__top-image"></div>
+  </div>
+
+  <div class="intro__bottom" *ngIf="block?.content">
+    <div
+      class="intro__bottom-desc"
+      [innerHTML]="block?.content | saveHtml"
+    ></div>
+  </div>
+</div>

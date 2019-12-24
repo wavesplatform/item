@@ -1,0 +1,48 @@
+@import 'mixins';
+
+.two-column {
+  padding: $block-padding-top 0 $block-padding-bottom;
+
+  &__title {
+    margin-bottom: 1em;
+  }
+
+  &__item {
+    display: flex;
+    padding-top: rem(4);
+    margin-bottom: rem(36);
+
+    &-icon {
+      flex: 0 0 rem(40);
+
+      p {
+        img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
+    }
+
+    &-text {
+      flex: 1 1 auto;
+      padding-top: rem(1);
+    }
+  }
+}
+
+.two-column {
+  &--theme-light {
+    background: white;
+    color: black;
+  }
+
+  &--theme-dark {
+    background: black;
+    color: white;
+  }
+
+  &--theme-violet {
+    background: #360b90;
+    color: white;
+  }
+}

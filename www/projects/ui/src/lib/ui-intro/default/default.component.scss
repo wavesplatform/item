@@ -1,0 +1,104 @@
+@import 'mixins';
+
+.intro {
+  position: relative;
+  padding-top: rem(242);
+  padding-bottom: rem(124);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  @media screen and (max-width: 767px) {
+    padding-top: rem(180);
+  }
+
+  &__canvas {
+    background: transparent;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  &__top {
+    padding-right: span(4);
+    position: relative;
+    @media screen and (max-width: 1024px) {
+    }
+    @media screen and (max-width: 767px) {
+      padding-right: 0;
+    }
+  }
+
+  &__description {
+    position: relative;
+    z-index: 10;
+    font-size: rem(22);
+    display: flex;
+    margin-bottom: rem(22);
+    margin-top: rem(-44);
+    @media screen and (max-width: 767px) {
+      font-size: rem(20);
+      flex-wrap: wrap;
+    }
+    div {
+      margin-right: rem(50);
+      @media screen and (max-width: 767px) {
+        margin-right: rem(20);
+        margin-bottom: rem(5);
+      }
+      &:last-child {
+        margin-right: 0;
+        @media screen and (max-width: 767px) {
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  &__location {
+    color: $primary;
+  }
+
+  &__title {
+    font-weight: bold;
+    max-width: 70vw;
+    line-height: 1.3;
+    letter-spacing: rem(0.1);
+    position: relative;
+    z-index: 10;
+    margin-bottom: rem(60);
+  }
+
+  &__button {
+    position: relative;
+    z-index: 10;
+    .btn {
+      border: 3px solid $primary;
+      padding: rem(14) rem(43) rem(13);
+    }
+  }
+
+  &__bottom {
+    margin-top: rem(180);
+    margin-left: span(3) + gutter();
+    position: relative;
+    z-index: 10;
+    letter-spacing: 0.1vw;
+    @media screen and (max-width: 767px) {
+      margin-top: rem(100);
+      margin-left: 0;
+    }
+    &-desc {
+      ::ng-deep h4 {
+        font-weight: normal;
+        letter-spacing: 0.1px;
+      }
+      ::ng-deep p {
+        margin-top: rem(9);
+      }
+    }
+  }
+}

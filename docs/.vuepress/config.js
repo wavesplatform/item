@@ -35,6 +35,7 @@ module.exports = {
       {
         title: 'API Reference',
         collapsable: false,
+        path: '/api/',
         children: [],
       },
     ],

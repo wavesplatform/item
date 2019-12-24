@@ -1,0 +1,77 @@
+@import '../mixins';
+
+$container-small-max-widths: (
+  sm: 38.75rem,
+  xl: 38.75rem,
+);
+
+html.dev-mode .container {
+  background: susy-svg-grid() no-repeat scroll !important;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+// Container widths
+//
+// Set the container width, and override it for fixed navbars in media queries.
+html:not(.dev-mode) .container {
+  // Меняем на плавное изменение процентов
+  //@include make-container();
+  //@include make-container-max-widths();
+
+  // 4.5% при 1024px -> 10% при 2100px
+  @include css-lock-vw(4.5, 10, 1024, 2100, 'margin-left', '%', 1);
+  @include css-lock-vw(4.5, 10, 1024, 2100, 'margin-right', '%', 1);
+
+  //@media screen and (min-width: 1024px) {
+  //  margin: 0 4.5%;
+  //}
+  //@media screen and (min-width: 1160px) {
+  //  margin: 0 5%;
+  //}
+  //@media screen and (min-width: 1300px) {
+  //  margin: 0 5.5%;
+  //}
+  //@media screen and (min-width: 1400px) {
+  //  margin: 0 6%;
+  //}
+  //@media screen and (min-width: 1500px) {
+  //  margin: 0 6.5%;
+  //}
+  //@media screen and (min-width: 1600px) {
+  //  margin: 0 7%;
+  //}
+  //@media screen and (min-width: 1700px) {
+  //  margin: 0 7.5%;
+  //}
+  //@media screen and (min-width: 1800px) {
+  //  margin: 0 8%;
+  //}
+  //@media screen and (min-width: 1900px) {
+  //  margin: 0 8.5%;
+  //}
+  //@media screen and (min-width: 2000px) {
+  //  margin: 0 9%;
+  //}
+  //@media screen and (min-width: 2100px) {
+  //  margin: 0 10%;
+  //}
+}
+
+// Fluid container
+//
+// Utilizes the mixin meant for fixed width containers, but with 100% width for
+// fluid, full width layouts.
+
+.container-fluid {
+  @include make-container();
+}
+
+.container-small {
+  @include make-container-max-widths($container-small-max-widths);
+
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
+  justify-content: center;
+}

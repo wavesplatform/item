@@ -1,0 +1,24 @@
+@import 'mixins';
+@import './ui-text-theme-default';
+@import './ui-text-theme-randomizer';
+@if variable_exists(theme) {
+  @if $theme == 'randomizer' {
+    @include block-theme-randomizer;
+  } @else {
+    @include block-theme-default;
+  }
+} @else {
+  @include block-theme-default;
+}
+
+.ui-text {
+  &--theme-waves {
+    background: white;
+    color: black;
+  }
+
+  &--theme-enterprise {
+    background: white;
+    color: black;
+  }
+}

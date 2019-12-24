@@ -1,0 +1,68 @@
+@mixin css-lock(
+  $min-size: 1,
+  $max-size: 1.4,
+  $min-origin-width: 786,
+  $max-origin-width: 1600,
+  $property: font-size,
+  $unit: rem,
+  // Коэффициент влияния изменения ширины экрана на изменяемое значение
+    // 16 означает, что требуемая величина будет изменяться в 16 раз медленнее изменения ширины экрана
+    $em: 16
+) {
+  $min-size: strip-unit($min-size);
+  $max-size: strip-unit($max-size);
+  $min-width: $min-origin-width;
+  $max-width: $max-origin-width;
+  $delta: ($max-size * $em) - ($min-size * $em); // Приводим к пикселям
+  $delta-width: $max-width - $min-width; // В пикселях
+
+  // Вторая часть выражения - коэффициент мещения от минимальной ширины экрана до максимальной ширины экрана
+  // 0 - 1 Например, изменение от 1024 до 2100 будет означать, что при ширине экрана 1024 коэффициент равен 0. А при ширине 2100 равен 1
+  //((100vw - #{$min-width}px) / (#{$max-width} - #{$min-width}))
+
+  // #{$min-size}#{$unit} - базовое значение
+
+  // (#{$max-size} - #{$min-size}) - дельта, которую домножаем на коэффициент положения
+
+  #{$property}: calc(
+    #{$min-size}#{$unit} + (#{$delta} * ((100vw - #{$min-width}px) / #{$delta-width}))
+  );
+  //     #{$min-size}#{$unit} + (#{$delta}#{$unit} * ((100vw - #{$min-width}px) / (#{$max-width} - #{$min-width})))
+
+  @media (max-width: #{$min-origin-width}px) {
+    #{$property}: #{$min-size}#{$unit};
+  }
+
+  @media (min-width: #{$max-origin-width}px) {
+    #{$property}: #{$max-size}#{$unit};
+  }
+}
+
+// Для изменения размера vw от размера экрана
+@mixin css-lock-vw(
+  $min-size: 0,
+  $max-size: 10,
+  $min-origin-width: 786,
+  $max-origin-width: 1600,
+  $property: width,
+  $unit: vw,
+  // Коэффициент влияния изменения ширины экрана на изменяемое значение
+    // 16 означает, что требуемая величина будет изменяться в 16 раз медленнее изменения ширины экрана
+    $em: 1
+) {
+  $min-size: strip-unit($min-size);
+  $max-size: strip-unit($max-size);
+  $min-width: $min-origin-width;
+  $max-width: $max-origin-width;
+  $delta: ($max-size * $em) - ($min-size * $em); // Приводим к пикселям
+
+  #{$property}: calc(((100vw - #{$min-width}px) / #{$delta}) + #{$min-size}vw);
+
+  @media (max-width: #{$min-origin-width}px) {
+    #{$property}: #{$min-size}#{$unit};
+  }
+
+  @media (min-width: #{$max-origin-width}px) {
+    #{$property}: #{$max-size}#{$unit};
+  }
+}

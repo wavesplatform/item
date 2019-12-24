@@ -1,0 +1,180 @@
+@import 'mixins';
+
+.footer {
+  padding-top: rem(50);
+  padding-bottom: rem(50);
+  font-size: 16px;
+
+  @include media('<phone') {
+    margin-top: 60px;
+    margin-bottom: 30px;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: -20px;
+    margin-right: -20px;
+    font-size: rem(16);
+
+    @include media('<phone') {
+      flex-wrap: wrap;
+      margin-left: -5px;
+      margin-right: -5px;
+    }
+
+    &-logo {
+      flex: 0 0 calc(100% * 2 / 12);
+
+      @include media('<phone') {
+        flex: 0 0 calc(100% * 4 / 12);
+      }
+
+      a {
+        display: block;
+
+        img {
+          width: 80px;
+          height: 17px;
+          display: block;
+
+          &.white {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-left: -20px;
+    margin-right: -20px;
+
+    @include media('<phone') {
+      margin-top: 25px;
+      flex-wrap: wrap;
+      flex-direction: column;
+      max-height: 800px;
+    }
+
+    &-logo {
+      max-height: 60px;
+
+      ::ng-deep svg {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    &-col {
+      padding: 0 20px 0;
+      flex: 0 0 calc(100% * 2 / 12);
+      box-sizing: border-box;
+
+      ::ng-deep {
+        ul {
+          list-style: none;
+          padding-left: 0;
+          margin-bottom: 0;
+        }
+
+        li {
+          margin-bottom: 0.05rem;
+        }
+
+        li:before {
+          display: none;
+        }
+      }
+
+      @include media('<phone') {
+        flex: 0 0 calc(100% * 6 / 12);
+        margin-bottom: 28px;
+      }
+    }
+
+    &__block {
+      margin-bottom: 28px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    &__item {
+      ::ng-deep {
+        a {
+          text-decoration: none;
+          opacity: 0.5;
+          font-size: 14px;
+          transition: opacity 0.4s ease;
+          line-height: 1.3;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+
+      &:first-child {
+        padding-bottom: 0.3rem;
+
+        a:not(.gray) {
+          opacity: 0.8;
+
+          &:hover {
+            opacity: 1;
+          }
+        }
+
+        a:not(.gray),
+        span:not(.gray) {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  &--theme-violet {
+    background: #120347;
+    color: white;
+
+    a {
+      color: white;
+    }
+
+    ::ng-deep a {
+      color: white;
+    }
+  }
+
+  &--theme-dark {
+    background: #120347;
+    color: white;
+
+    a {
+      color: white;
+    }
+
+    ::ng-deep a {
+      color: white;
+    }
+  }
+
+  &--theme-light {
+    background: #fff;
+    color: black;
+
+    a {
+      color: black;
+    }
+
+    ::ng-deep a {
+      color: black;
+    }
+  }
+}

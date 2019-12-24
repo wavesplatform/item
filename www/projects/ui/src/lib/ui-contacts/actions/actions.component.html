@@ -1,0 +1,28 @@
+<div class="contacts contacts--theme-{{ theme }}" *ngIf="!!block">
+  <div class="container">
+    <div class="contacts__row">
+      <div class="contacts__left">
+        <h2 class="contacts__title" [innerHtml]="block?.title | saveHtml"></h2>
+        <div
+          class="contacts__content"
+          [innerHTML]="block?.content | saveHtml"
+        ></div>
+
+        <div class="contacts__buttons">
+          <a
+            class="btn"
+            *ngFor="let action of block?.list; let i = index"
+            [class.btn-secondary]="i === 0"
+            [class.btn-outline-secondary]="i > 0"
+            [innerHTML]="action.title | saveHtml"
+            [attr.href]="action.link"
+          ></a>
+        </div>
+      </div>
+
+      <div class="contacts__attach">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

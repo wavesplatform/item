@@ -1,0 +1,51 @@
+@import 'mixins';
+$spacing: 1.8;
+ul,
+ol {
+  margin-bottom: #{$spacing}rem;
+  counter-reset: item;
+  padding-left: #{$spacing}rem;
+  list-style-type: none;
+
+  li {
+    margin-bottom: 0.75rem;
+    line-height: $spacing;
+
+    &:before {
+      font-weight: bold;
+      position: absolute;
+      color: white;
+    }
+  }
+}
+
+ol {
+  & > li:before {
+    position: absolute;
+    margin: 0 0 0 -#{$spacing}rem;
+    content: counter(item) '.';
+    counter-increment: item;
+    font-weight: 400;
+    color: $primary;
+  }
+}
+
+ul {
+  li {
+    position: relative;
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0.85em;
+      transform: translateY(-50%);
+      left: -#{$spacing}rem;
+      background: $primary;
+      height: 0.8em;
+      width: 0.8em;
+      border-radius: 1em;
+    }
+  }
+  & > li:before {
+  }
+}

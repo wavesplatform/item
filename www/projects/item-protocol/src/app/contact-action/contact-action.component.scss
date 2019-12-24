@@ -1,0 +1,37 @@
+@import 'mixins';
+
+.contact-action {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+
+  &__circle {
+    width: 5vw;
+    height: 5vw;
+    border-radius: 5vw;
+    background: $primary;
+    margin: 1vw;
+    transition: background-color 3s ease-in-out;
+
+    &:hover {
+      transition: background-color 0.3s ease;
+      background-color: $secondary;
+    }
+
+    &--active {
+      background-color: $secondary;
+    }
+  }
+
+  @include media('<=phone') {
+    display: flex;
+    max-height: 7vw;
+    overflow: hidden;
+    &__circle {
+    }
+  }
+}

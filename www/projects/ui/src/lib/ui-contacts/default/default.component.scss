@@ -1,0 +1,31 @@
+@import 'mixins';
+
+.contacts {
+  padding: $block-padding-top 0 $block-padding-bottom;
+
+  &__row {
+    display: flex;
+  }
+
+  &__left {
+    width: span(6);
+  }
+
+  &__image {
+    width: span(6);
+    margin-left: gutter();
+  }
+}
+
+.contacts {
+  &--theme-light {
+    background: white;
+    color: black;
+    border-bottom: 4px solid #1f50c3;
+  }
+
+  &--theme-dark {
+    background: black;
+    color: white;
+  }
+}

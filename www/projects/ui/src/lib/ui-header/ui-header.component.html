@@ -1,0 +1,28 @@
+<header class="header" *ngIf="!!block">
+  <div class="header__row">
+    <div class="header__logo col-auto">
+      <a [routerLink]="['/']">
+        <ng-content></ng-content>
+      </a>
+    </div>
+    <div class="header__menu col p-0">
+      <div
+        class="header__menu__item d-none d-sm-flex"
+        *ngFor="let link of block?.list; trackBy: trackByFn"
+        [innerHTML]="link.content | saveHtml"
+      ></div>
+      <div
+        class="header__menu__item header__menu__item--button"
+        *ngIf="(block?.labels)['button']"
+      >
+        <a
+          class="btn btn-primary btn-lg"
+          [routerLink]=""
+          fragment="registration"
+        >
+          {{ (block?.labels)['button']?.text }}
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

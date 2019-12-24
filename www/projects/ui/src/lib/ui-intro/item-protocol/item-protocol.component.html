@@ -1,0 +1,47 @@
+<div class="intro">
+  <div class="intro__top">
+    <div class="container intro__top-inner">
+      <div class="intro__general">
+        <!-- Header -->
+        <h1 class="intro__title" [innerHTML]="block?.title | saveHtml"></h1>
+
+        <!-- Description -->
+        <h4
+          class="intro__description"
+          *ngIf="block?.description"
+          [innerHTML]="block?.description | saveHtml"
+        ></h4>
+
+        <div class="intro__button" *ngIf="(block?.labels)['button']">
+          <a
+            class="btn btn-primary"
+            [attr.href]="(block?.labels)['button-link'].text"
+          >
+            {{ (block?.labels)['button']?.text }}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="intro__graphic"></div>
+  </div>
+
+  <div class="intro__bottom">
+    <div class="container intro__bottom-inner">
+      <div class="intro__points">
+        <div class="intro__points-circle"></div>
+        <div class="intro__points-circle"></div>
+        <div class="intro__points-circle"></div>
+      </div>
+      <div class="intro__info" [innerHTML]="block?.content | saveHtml"></div>
+    </div>
+
+    <div class="intro__massive">
+      <div
+        class="intro__massive-circle"
+        [class.intro__massive-circle--active]="circle === '1'"
+        *ngFor="let circle of circles; trackBy: trackByFn"
+      ></div>
+    </div>
+  </div>
+</div>

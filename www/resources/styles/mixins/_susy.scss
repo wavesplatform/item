@@ -1,0 +1,21 @@
+/*===============*/
+/*LAYOUT*/
+/*===============*/
+@import '~susy/sass/susy';
+@import '~susy/sass/plugins/svg-grid';
+$susy: (
+  'columns': susy-repeat(12),
+  'gutters': 2/3,
+  'spread': 'narrow',
+  'container-spread': 'narrow',
+);
+/*===============*/
+/*MEDIA QUERIES*/
+/*===============*/
+@import '~include-media/dist/_include-media.scss';
+$breakpoints: (
+  phone: 767px,
+  tablet: 1025px,
+  desktop: 1200px,
+);
+//////////

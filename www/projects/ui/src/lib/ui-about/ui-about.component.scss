@@ -1,0 +1,76 @@
+@import 'mixins';
+
+.about {
+  padding: $block-padding-top 0 $block-padding-bottom;
+
+  &__desc {
+    max-width: 800px;
+  }
+
+  &__jumbotron-box {
+    padding-left: 30vw;
+    @media screen and (max-width: 767px) {
+      padding-left: 0;
+    }
+  }
+
+  &__jumbotron {
+    font-weight: 300;
+  }
+
+  &__links {
+    max-width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__links-box {
+    padding-top: $block-padding-top / 2;
+  }
+
+  &__links-box-title {
+    margin-bottom: 1em;
+  }
+
+  &__links {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__link {
+    filter: grayscale(1);
+    transition: filter 2s ease;
+    @include media('<=phone') {
+      flex: 0 0 50%;
+      padding: rem(15);
+    }
+
+    a {
+      display: block;
+      text-decoration: none;
+    }
+
+    &:hover {
+      transition: filter 0.5s ease;
+      filter: grayscale(0);
+    }
+  }
+}
+
+.about {
+  &--theme-light {
+    background: white;
+    color: black;
+  }
+
+  &--theme-gray {
+    background: #f3f3f3;
+    color: black;
+  }
+
+  &--theme-dark {
+    background: black;
+    color: white;
+  }
+}

@@ -1,0 +1,36 @@
+@import 'mixins';
+
+@mixin block-theme-item() {
+  .two-column {
+    background: white;
+    color: black;
+    padding: rem(110) 0 rem(60);
+
+    &__title {
+      margin-bottom: 1em;
+    }
+
+    &__item {
+      display: flex;
+      padding-top: rem(5);
+      margin-bottom: rem(36);
+
+      &-icon {
+        flex: 0 0 rem(40);
+        line-height: $h3-font-size;
+
+        p {
+          img {
+            max-width: 100%;
+            height: auto;
+          }
+        }
+      }
+
+      &-text {
+        flex: 1 1 auto;
+        padding-top: rem(1);
+      }
+    }
+  }
+}

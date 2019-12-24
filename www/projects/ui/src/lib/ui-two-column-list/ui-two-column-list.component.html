@@ -1,0 +1,14 @@
+<div #twoColumnListBlock *ngIf="!!block">
+  <div [ngSwitch]="view">
+    <part-simple
+      *ngSwitchCase="'simple'"
+      [block]="block"
+      [theme]="theme"
+    ></part-simple>
+    <part-default
+      *ngSwitchDefault
+      [block]="block"
+      [theme]="theme"
+    ></part-default>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+@import 'mixins';
+::ng-deep .item-protocol-homepage {
+  .h1,
+  h1 {
+    @include media('<=phone') {
+      font-size: 36px;
+    }
+  }
+  .h2,
+  h2 {
+    @include media('<=phone') {
+      font-size: 32px;
+    }
+  }
+  .h3,
+  h3 {
+    @include media('<=phone') {
+      font-size: 27px;
+    }
+  }
+}

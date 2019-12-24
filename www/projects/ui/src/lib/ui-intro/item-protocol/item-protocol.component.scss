@@ -1,0 +1,156 @@
+@import 'mixins';
+.intro {
+  padding-top: rem(100);
+  &__title {
+  }
+
+  &__top {
+    border-top: 4px solid $secondary;
+    position: relative;
+
+    &-inner {
+      display: grid;
+      grid-template-areas: 'general general none';
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto;
+    }
+  }
+
+  &__general {
+    grid-area: general;
+    border-right: 4px solid $secondary;
+    padding: rem(50) 0 rem(50) 0;
+    @include media('<=phone') {
+      border-right: none;
+      padding-bottom: rem(20);
+    }
+  }
+
+  &__description {
+    margin-bottom: $h3-font-size;
+  }
+
+  &__graphic {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 36.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &:after {
+      content: '';
+      display: block;
+      background: $secondary;
+      border-radius: 1000px;
+      width: 25vw;
+      height: 25vw;
+    }
+  }
+
+  &__bottom {
+    position: relative;
+    border-top: 4px solid $secondary;
+    min-height: 27vw;
+    @include media('<=phone') {
+      border-top: none;
+    }
+
+    &-inner {
+      display: grid;
+      //grid-template-areas: "points info massive";
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto;
+      @include media('<=phone') {
+        display: block;
+      }
+    }
+  }
+
+  &__points {
+    grid-column: 1 / span 1;
+    border-right: 4px solid $secondary;
+    position: relative;
+    min-height: 27vw;
+    @include media('<=phone') {
+      border-right: none;
+      min-height: 18vw;
+      margin-bottom: rem(10);
+    }
+
+    &-circle {
+      position: absolute;
+      width: 4vw;
+      height: 4vw;
+      margin: 0.5vw;
+      transition: background-color 2s ease-in-out;
+      background: $secondary;
+      border-radius: 5vw;
+      top: 70%;
+      left: 50%;
+
+      &:last-child {
+        top: 15%;
+        left: 76%;
+      }
+
+      &:first-child {
+        top: 35%;
+        left: 13%;
+      }
+
+      &:hover {
+        transition: background-color 0.3s ease;
+        background: $primary;
+      }
+    }
+  }
+
+  &__info {
+    padding: 3vw 4vw;
+    grid-column: 2 / span 1;
+    border-right: 4px solid $secondary;
+    min-height: 27vw;
+    @include media('<=phone') {
+      border-right: none;
+    }
+  }
+
+  &__massive {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 36.5vw;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 3vw 4vw;
+    @include media('<=phone') {
+      width: 100%;
+      position: relative;
+    }
+
+    &-circle {
+      width: 5vw;
+      height: 5vw;
+      margin: auto 1vw auto;
+      background-color: $primary;
+      border-radius: 5vw;
+      transition: background-color 3s ease-in-out;
+
+      &:hover {
+        transition: background-color 0.3s ease;
+        background-color: $secondary;
+      }
+
+      &--active {
+        background-color: $secondary;
+      }
+    }
+  }
+}

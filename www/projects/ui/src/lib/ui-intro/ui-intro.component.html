@@ -1,0 +1,14 @@
+<div #introBlock *ngIf="!!block">
+  <div [ngSwitch]="view">
+    <part-neutrino
+      *ngSwitchCase="'neutrino'"
+      [block]="block"
+      [theme]="theme"
+    ></part-neutrino>
+    <part-item-protocol
+      *ngSwitchCase="'item-protocol'"
+      [block]="block"
+    ></part-item-protocol>
+    <part-default *ngSwitchDefault [block]="block"></part-default>
+  </div>
+</div>

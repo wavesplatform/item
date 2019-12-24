@@ -1,0 +1,21 @@
+@mixin block-theme-randomizer() {
+  .ui-text {
+    padding: 0;
+    margin-top: rem(113);
+    margin-bottom: rem(184);
+    @include media('<=phone') {
+      margin-top: rem(80);
+      margin-bottom: rem(130);
+    }
+    &__title {
+      margin-bottom: 31px;
+    }
+    &__desc {
+      font-size: rem(22);
+      line-height: calc(28 / 22);
+      margin-bottom: rem(30);
+    }
+    &__content {
+    }
+  }
+}

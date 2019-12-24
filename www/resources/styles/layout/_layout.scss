@@ -1,0 +1,38 @@
+@import 'mixins';
+
+html,
+body {
+  height: 100%;
+}
+.main-layout {
+  overflow: hidden;
+}
+html.dev-mode {
+  font-size: 22px;
+}
+html:not(.dev-mode) {
+  // Список заменяем на плавное изменение величины font-size
+  @include css-lock(1.1, 1.72, 320, 2300);
+
+  //font-size: 16px;
+  //@media screen and (max-width: 1024px) {
+  //  font-size: 15px;
+  //}
+  //@media screen and (max-width: 767px) {
+  //  font-size: 16px;
+  //}
+  //@media screen and (min-width: 1600px) {
+  //  font-size: 17px;
+  //}
+  //@media screen and (min-width: 1900px) {
+  //  font-size: 18px;
+  //}
+  //@media screen and (min-width: 2300px) {
+  //  font-size: 19px;
+  //}
+}
+
+.page-content {
+  overflow: hidden;
+  flex: 1 1 auto;
+}

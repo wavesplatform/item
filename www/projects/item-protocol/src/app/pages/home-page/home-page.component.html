@@ -1,0 +1,63 @@
+<div class="main-layout home item-protocol-homepage">
+  <ui-header [pageSlug]="page?.slug" [anchors]="anchors">
+    <app-logo></app-logo>
+  </ui-header>
+
+  <div class="page-content">
+    <div class="home__intro">
+      <ui-intro
+        view="item-protocol"
+        blockName="intro"
+        [pageSlug]="page?.slug"
+      ></ui-intro>
+    </div>
+
+    <div class="home__list">
+      <ui-two-column-list [pageSlug]="page?.slug"></ui-two-column-list>
+    </div>
+
+    <ui-two-column-list
+      blockName="benefits"
+      theme="light"
+      view="default"
+      [pageSlug]="page?.slug"
+    ></ui-two-column-list>
+
+    <div class="home__text" #slider>
+      <ui-products
+        view="default"
+        theme="item-protocol"
+        blockName="products"
+        [pageSlug]="page?.slug"
+      ></ui-products>
+    </div>
+
+    <div class="home_doc" #doc>
+      <ui-documentations
+        view="default"
+        theme="light"
+        blockName="documentations"
+        [pageSlug]="page?.slug"
+      ></ui-documentations>
+    </div>
+
+    <div class="home__about" #market>
+      <ui-about theme="dark" [pageSlug]="page?.slug"></ui-about>
+    </div>
+
+    <div class="home__contacts" #contacts>
+      <ui-contacts
+        view="actions"
+        theme="light"
+        blockName="contacts"
+        [pageSlug]="page?.slug"
+      >
+        <app-contact-action></app-contact-action>
+      </ui-contacts>
+    </div>
+  </div>
+
+  <ui-footer blockName="footer" theme="light" [pageSlug]="page?.slug">
+    <app-logo></app-logo>
+  </ui-footer>
+</div>

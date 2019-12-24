@@ -1,0 +1,57 @@
+<div class="footer footer--theme-{{ theme }}">
+  <div class="container">
+    <div class="footer__top" *ngIf="site?.social">
+      <div
+        class="footer__top-logo"
+        *ngFor="let link of site?.social; trackBy: trackByFn"
+      >
+        <a [attr.href]="link.text" *ngIf="link?.text">
+          <span class="icon icon-{{ link.name }}"></span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer__bottom" *ngIf="!!block">
+      <div class="footer__bottom-col">
+        <div class="footer__bottom-logo">
+          <a
+            [attr.href]="(block?.labels)['logo-link'].text"
+            *ngIf="!(block?.media)[0]"
+          >
+            <ng-content></ng-content>
+          </a>
+          <a
+            [attr.href]="(block?.labels)['logo-link'].text"
+            *ngIf="!!(block?.media)[0]"
+          >
+            <img [attr.src]="(block?.media)[0].url" />
+          </a>
+          <div
+            class="mt-2"
+            *ngIf="block?.description"
+            [innerHTML]="block?.description"
+          ></div>
+        </div>
+      </div>
+      <div
+        class="footer__bottom-col"
+        *ngFor="let col of block?.list; trackBy: trackByFn"
+      >
+        <div class="footer__bottom__block">
+          <div class="footer__bottom__item">
+            <a
+              *ngIf="col?.link"
+              [attr.href]="col?.link"
+              [innerHTML]="col?.title | saveHtml"
+            ></a>
+            <span *ngIf="!col?.link" [innerHTML]="col?.title | saveHtml"></span>
+          </div>
+          <div
+            class="footer__bottom__item"
+            [innerHTML]="col?.content | saveHtml"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

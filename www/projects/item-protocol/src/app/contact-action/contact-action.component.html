@@ -1,0 +1,7 @@
+<div class="contact-action">
+  <div
+    class="contact-action__circle"
+    [class.contact-action__circle--active]="item === '1'"
+    *ngFor="let item of circles; trackBy: trackByFn"
+  ></div>
+</div>

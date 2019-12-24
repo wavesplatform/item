@@ -1,0 +1,12 @@
+<div *ngIf="!!block">
+  <div [ngSwitch]="view">
+    <part-actions *ngSwitchCase="'actions'" [block]="block" [theme]="theme">
+      <ng-content></ng-content>
+    </part-actions>
+    <part-default
+      *ngSwitchDefault
+      [block]="block"
+      [theme]="theme"
+    ></part-default>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="two-column two-column--theme-{{ theme }}">
+  <div class="container">
+    <h2 class="two-column__title" [innerHTML]="block?.title | saveHtml"></h2>
+    <div
+      class="two-column__content"
+      *ngIf="block?.content"
+      [innerHTML]="block?.content | saveHtml"
+    ></div>
+
+    <div class="two-column__items row">
+      <div
+        class="col-12 col-md-6"
+        *ngFor="let list of block?.list; trackBy: trackByFn"
+      >
+        <div class="two-column__item">
+          <div
+            class="two-column__item-text"
+            [innerHTML]="list.content | saveHtml"
+          ></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
