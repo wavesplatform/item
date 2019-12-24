@@ -38,7 +38,8 @@ export const Dashboard = () => {
       <ViewContainer>
         <Box py='lg'>
           <Switch>
-            <Route path='/dashboard/create-item' component={ItemForm} />
+            <Route key='edit-item' path='/dashboard/item/:assetId' component={ItemForm} />
+            <Route key='create-item' path='/dashboard/create-item' component={ItemForm} />
             <Route path='/dashboard/items' component={DashboardItems} />
             <Redirect to='/dashboard/items' />
           </Switch>
