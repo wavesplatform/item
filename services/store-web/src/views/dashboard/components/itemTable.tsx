@@ -32,7 +32,7 @@ export const ItemTable = ({ items }: { items: ItemsNode[] }) => {
 const ItemTableRow = ({ item }: { item: ItemsNode }) => (
   <Tr>
     <Td alignItems='center'>
-      <Image size={24} src={item.params.imageUrl} mr='sm'></Image>
+      <Image size={24} src={item.params.storageImageUrl || item.params.imageUrl} mr='sm'></Image>
       <Heading as='h3' fontSize='h3' sx={{ fontWeight: 'body' }}>
         {item.params.name}
       </Heading>
