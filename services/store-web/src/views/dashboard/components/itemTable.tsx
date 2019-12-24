@@ -21,7 +21,7 @@ export const ItemTable = ({ items }: { items: ItemsNode[] }) => {
         </THead>
         <TBody>
           {items.map(item => {
-            return <ItemTableRow item={item} />
+            return <ItemTableRow item={item} key={item.id} />
           })}
         </TBody>
       </Table>
