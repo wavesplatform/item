@@ -1,12 +1,16 @@
-# Item Protocol
+# Overview
 
-The [**Item Protocol**](/docs/protocol-concept/core.md) is an infrastructure for tokenization of the game items.
-
-This protocol will provide a fast and convenient tokenization with a quick and easy integration of the market into particular games.
+In this section you will find the introduction to Item Protocol and Item Market.
 
 ## Item
 
 An item is a virtual object within a game that can be collected by a player or, occasionally, a non-player character.
+
+## Item Protocol
+
+The [**Item Protocol**](/protocol-concept/core.md) is an infrastructure for tokenization of the game items.
+
+This protocol will provide a fast and convenient tokenization with a quick and easy integration of the market into particular games.
 
 ## Item Market
 
