@@ -1,4 +1,4 @@
-import { of } from 'rxjs'
+import { of } from 'rxjs';
 
 export const PageData = of([
   {
@@ -477,4 +477,4 @@ export const PageData = of([
       },
     ],
   },
-])
+]);

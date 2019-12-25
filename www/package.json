@@ -17,11 +17,6 @@
     "build:ssr": "run-p build:ssr:*",
     "build:ssr:item-protocol": "npm run build:client-and-server-bundles:item-protocol && npm run compile:server",
     "build:client-and-server-bundles:item-protocol": "ng build item-protocol && ng run item-protocol:server:production --bundleDependencies all",
-    "commit": "run-s commit:*",
-    "commit:prettier": "pretty-quick",
-    "push": "run-s push:*",
-    "push:lint": "npm run lint",
-    "push:test-build": "npm run build:ssr",
     "docker": "run-s docker:*",
     "docker:build": "docker build -t landing .",
     "docker:serve": "docker run -p 3000:3000 landing",
@@ -94,11 +89,5 @@
     "tslint": "~5.15.0",
     "typescript": "~3.5.3",
     "webpack-cli": "^3.1.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "if git-branch-is -r 'master|develop|stage'; then npm run commit; fi",
-      "pre-push": "if git-branch-is -r 'master|develop|stage'; then npm run push; fi"
-    }
   }
 }
