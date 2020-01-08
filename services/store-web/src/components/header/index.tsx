@@ -15,52 +15,61 @@ export const Header = () => {
 
   return (
     <Box height={'52px'}>
-      <Flex variant={'header'} height={'52px'} sx={{ left: 0, right: 0, top: 0 }}>
-        <NavbarContainer>
-          {/*Logo*/}
-          <RouterLink to={'/'}>
-            <Flex alignItems={'center'} height={'100%'}>
-              {/*<LogoImage src={logo}/>*/}
-              <Icon glyph={'layers'} mr={'xs'} color={'primary'} fontSize={'lg'}/>
-              <Heading sx={{ fontSize: 'body', fontWeight: 'body' }}>
-                <Text as={'span'} mr={'xs'}>Item Store</Text>
-                {config.chainId === 'T'
-                  ? <Text as={'span'} color={'yellow'} fontSize={'sm'}>Testnet</Text>
-                  : <Text as={'span'} color={'grays.4'} fontSize={'sm'}>Beta</Text>}
-              </Heading>
-            </Flex>
-          </RouterLink>
-          {/*Menu*/}
-          <Nav mx={'lg'}>
-            <Route path={'/items'}>
-              {({ match }) => (
-                <RouterLink to={'/items'}>
-                  <NavItem isActive={!!match}>
-                    Browse
-                  </NavItem>
-                </RouterLink>
+      <Container
+        variant='header'
+        height='52px'
+        sx={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'stretch',
+          justifyContent: 'space-between',
+          left: 0,
+          right: 0,
+          top: 0,
+        }}>
+        <RouterLink to={'/'}>
+          <Flex alignItems={'center'} height={'100%'}>
+            <Icon glyph={'layers'} mr={'xs'} color={'primary'} fontSize={'lg'} />
+            <Heading sx={{ fontSize: 'body', fontWeight: 'body' }}>
+              <Text as={'span'} mr={'xs'}>
+                Item Store
+              </Text>
+              {config.chainId === 'T' ? (
+                <Text as={'span'} color={'yellow'} fontSize={'sm'}>
+                  Testnet
+                </Text>
+              ) : (
+                <Text as={'span'} color={'grays.4'} fontSize={'sm'}>
+                  Beta
+                </Text>
               )}
-            </Route>
-            <Link href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>
-              <NavItem>
-                How to Use
-              </NavItem>
-            </Link>
-          </Nav>
-          {/*Profile*/}
-          <Nav>
-            {me ? (
-              <ProfileItem sx={{ position: 'relative', height: '100%' }} user={me}/>
-            ) : (
-              <RouterLink to={'/signin'}>
-                <NavItem>
-                  Sign In
-                </NavItem>
+            </Heading>
+          </Flex>
+        </RouterLink>
+
+        <Nav mx={'lg'}>
+          <Route path={'/items'}>
+            {({ match }) => (
+              <RouterLink to={'/items'}>
+                <NavItem isActive={!!match}>Browse</NavItem>
               </RouterLink>
             )}
-          </Nav>
-        </NavbarContainer>
-      </Flex>
+          </Route>
+          <Link href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>
+            <NavItem>How to Use</NavItem>
+          </Link>
+        </Nav>
+
+        <Nav>
+          {me ? (
+            <ProfileItem sx={{ position: 'relative', height: '100%' }} user={me} />
+          ) : (
+            <RouterLink to={'/signin'}>
+              <NavItem>Sign In</NavItem>
+            </RouterLink>
+          )}
+        </Nav>
+      </Container>
     </Box>
   )
 }
@@ -74,17 +83,14 @@ const ProfileItem = ({ user, ...rest }: { user: IUser } & BoxProps) => {
 
   useEffect(() => {
     const unlisten = history.listen(() => setDropdownActive(false))
-    return (() => unlisten())
+    return () => unlisten()
   })
 
   return (
     <Box {...rest} ref={profileDropRef}>
-      <ProfileToggle
-        onClick={() => setDropdownActive(!dropdownActive)}
-        isActive={dropdownActive}
-      >
-        <Icon glyph={dropdownActive ? 'expand_less' : 'expand_more'}/>
-        <UserHeading user={user} ml={'xs'} flexDirection={'row-reverse'}/>
+      <ProfileToggle onClick={() => setDropdownActive(!dropdownActive)} isActive={dropdownActive}>
+        <Icon glyph={dropdownActive ? 'expand_less' : 'expand_more'} />
+        <UserHeading user={user} ml={'xs'} flexDirection={'row-reverse'} />
       </ProfileToggle>
       <ProfileDropdown
         isShown={dropdownActive}
@@ -95,7 +101,7 @@ const ProfileItem = ({ user, ...rest }: { user: IUser } & BoxProps) => {
   )
 }
 
-const NavItem = ({ isActive, sx, ...rest }: FlexProps & { isActive?: boolean }) =>
+const NavItem = ({ isActive, sx, ...rest }: FlexProps & { isActive?: boolean }) => (
   <Flex
     tx={'navs'}
     variant={isActive ? 'itemActive' : 'item'}
@@ -107,8 +113,9 @@ const NavItem = ({ isActive, sx, ...rest }: FlexProps & { isActive?: boolean }) 
       ...sx,
     }}
   />
+)
 
-const ProfileToggle = ({ isActive, ...rest }: FlexProps & { isActive?: boolean }) =>
+const ProfileToggle = ({ isActive, ...rest }: FlexProps & { isActive?: boolean }) => (
   <NavItem
     {...rest}
     sx={{
@@ -119,14 +126,7 @@ const ProfileToggle = ({ isActive, ...rest }: FlexProps & { isActive?: boolean }
       borderColor: 'grays.7',
     }}
   />
-
-const NavbarContainer = styled(Container)`
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  justify-content: space-between;
-`
+)
 
 const Nav = styled(Flex)`
   flex-wrap: wrap;
