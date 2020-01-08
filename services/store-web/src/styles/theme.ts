@@ -17,17 +17,26 @@ const header = {
   borderBottom: ({ colors }: any) => `1px solid ${colors.secondary}`,
 }
 
+const footer = {
+  borderTop: ({ colors }: any) => `1px solid ${colors.secondary}`,
+  height: '6em',
+
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  right: 0,
+
+  justifyContent: 'flex-end',
+  p: 'lg',
+}
+
 const body = {
   position: 'relative',
   overflowX: 'hidden',
   minHeight: '100%',
-  paddingBottom: '6rem',
-  pt: header.height,
-}
 
-const footer = {
-  borderTop: '1px solid',
-  borderColor: 'grays.7',
+  pb: footer.height,
+  pt: header.height,
 }
 
 const navs = {
