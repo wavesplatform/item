@@ -2,11 +2,19 @@ import { baseTheme } from '@item-protocol/ui'
 import { transparentize } from 'polished'
 
 const header = {
-  bg: 'background',
-  borderBottom: '1px solid',
-  borderColor: 'grays.7',
+  width: '100%',
+  height: 52,
+
+  display: 'flex',
+  alignItems: 'stretch',
+  justifyContent: 'space-between',
+
   position: 'fixed',
+  top: 0,
   zIndex: 3,
+
+  bg: 'background',
+  borderBottom: ({ colors }: any) => `1px solid ${colors.secondary}`,
 }
 
 const footer = {
@@ -30,7 +38,7 @@ const navs = {
 
 const modal = {
   backdrop: {
-    bg: transparentize(.5, '#03060f'),
+    bg: transparentize(0.5, '#03060f'),
     p: 'lg',
   },
   content: {

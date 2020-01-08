@@ -15,18 +15,7 @@ export const Header = () => {
 
   return (
     <Box height={'52px'}>
-      <Container
-        variant='header'
-        height='52px'
-        sx={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'stretch',
-          justifyContent: 'space-between',
-          left: 0,
-          right: 0,
-          top: 0,
-        }}>
+      <Container variant='header'>
         <RouterLink to={'/'}>
           <Flex alignItems={'center'} height={'100%'}>
             <Icon glyph={'layers'} mr={'xs'} color={'primary'} fontSize={'lg'} />
