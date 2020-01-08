@@ -17,6 +17,13 @@ const header = {
   borderBottom: ({ colors }: any) => `1px solid ${colors.secondary}`,
 }
 
+const body = {
+  position: 'relative',
+  overflowX: 'hidden',
+  minHeight: '100%',
+  paddingBottom: '6rem',
+}
+
 const footer = {
   borderTop: '1px solid',
   borderColor: 'grays.7',
@@ -56,6 +63,7 @@ const modal = {
 export const theme = {
   ...baseTheme,
   header,
+  body,
   footer,
   navs,
   modal,
