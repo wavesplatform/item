@@ -22,6 +22,7 @@ const body = {
   overflowX: 'hidden',
   minHeight: '100%',
   paddingBottom: '6rem',
+  pt: header.height,
 }
 
 const footer = {

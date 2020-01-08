@@ -14,52 +14,50 @@ export const Header = () => {
   const { me } = useCurrentUser()
 
   return (
-    <Box height={'52px'}>
-      <Container variant='header'>
-        <RouterLink to={'/'}>
-          <Flex alignItems={'center'} height={'100%'}>
-            <Icon glyph={'layers'} mr={'xs'} color={'primary'} fontSize={'lg'} />
-            <Heading sx={{ fontSize: 'body', fontWeight: 'body' }}>
-              <Text as={'span'} mr={'xs'}>
-                Item Store
+    <Container variant='header'>
+      <RouterLink to={'/'}>
+        <Flex alignItems={'center'} height={'100%'}>
+          <Icon glyph={'layers'} mr={'xs'} color={'primary'} fontSize={'lg'} />
+          <Heading sx={{ fontSize: 'body', fontWeight: 'body' }}>
+            <Text as={'span'} mr={'xs'}>
+              Item Store
+            </Text>
+            {config.chainId === 'T' ? (
+              <Text as={'span'} color={'yellow'} fontSize={'sm'}>
+                Testnet
               </Text>
-              {config.chainId === 'T' ? (
-                <Text as={'span'} color={'yellow'} fontSize={'sm'}>
-                  Testnet
-                </Text>
-              ) : (
-                <Text as={'span'} color={'grays.4'} fontSize={'sm'}>
-                  Beta
-                </Text>
-              )}
-            </Heading>
-          </Flex>
-        </RouterLink>
-
-        <Nav mx={'lg'}>
-          <Route path={'/items'}>
-            {({ match }) => (
-              <RouterLink to={'/items'}>
-                <NavItem isActive={!!match}>Browse</NavItem>
-              </RouterLink>
+            ) : (
+              <Text as={'span'} color={'grays.4'} fontSize={'sm'}>
+                Beta
+              </Text>
             )}
-          </Route>
-          <Link href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>
-            <NavItem>How to Use</NavItem>
-          </Link>
-        </Nav>
+          </Heading>
+        </Flex>
+      </RouterLink>
 
-        <Nav>
-          {me ? (
-            <ProfileItem sx={{ position: 'relative', height: '100%' }} user={me} />
-          ) : (
-            <RouterLink to={'/signin'}>
-              <NavItem>Sign In</NavItem>
+      <Nav mx={'lg'}>
+        <Route path={'/items'}>
+          {({ match }) => (
+            <RouterLink to={'/items'}>
+              <NavItem isActive={!!match}>Browse</NavItem>
             </RouterLink>
           )}
-        </Nav>
-      </Container>
-    </Box>
+        </Route>
+        <Link href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>
+          <NavItem>How to Use</NavItem>
+        </Link>
+      </Nav>
+
+      <Nav>
+        {me ? (
+          <ProfileItem sx={{ position: 'relative', height: '100%' }} user={me} />
+        ) : (
+          <RouterLink to={'/signin'}>
+            <NavItem>Sign In</NavItem>
+          </RouterLink>
+        )}
+      </Nav>
+    </Container>
   )
 }
 
