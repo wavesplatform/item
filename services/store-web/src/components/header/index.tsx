@@ -15,30 +15,24 @@ export const Header = () => {
 
   return (
     <Container variant='header'>
-      <RouterLink to={'/'}>
-        <Flex alignItems={'center'} height={'100%'}>
-          <Icon glyph={'layers'} mr={'xs'} color={'primary'} fontSize={'lg'} />
+      <RouterLink to='/'>
+        <Flex alignItems='center' height='100%'>
+          <Icon glyph='layers' mr='xs' color='primary' fontSize='lg' />
           <Heading sx={{ fontSize: 'body', fontWeight: 'body' }}>
-            <Text as={'span'} mr={'xs'}>
+            <Text as='span' mr='xs'>
               Item Store
             </Text>
-            {config.chainId === 'T' ? (
-              <Text as={'span'} color={'yellow'} fontSize={'sm'}>
-                Testnet
-              </Text>
-            ) : (
-              <Text as={'span'} color={'grays.4'} fontSize={'sm'}>
-                Beta
-              </Text>
-            )}
+            <Text as='span' color={config.chainId === 'T' ? 'yellow' : 'grays.4'} fontSize='sm'>
+              {config.chainId === 'T' ? 'Testnet' : 'Beta'}
+            </Text>
           </Heading>
         </Flex>
       </RouterLink>
 
-      <Nav mx={'lg'}>
-        <Route path={'/items'}>
+      <Nav mx='lg'>
+        <Route path='/items'>
           {({ match }) => (
-            <RouterLink to={'/items'}>
+            <RouterLink to='/items'>
               <NavItem isActive={!!match}>Browse</NavItem>
             </RouterLink>
           )}
@@ -52,7 +46,7 @@ export const Header = () => {
         {me ? (
           <ProfileItem sx={{ position: 'relative', height: '100%' }} user={me} />
         ) : (
-          <RouterLink to={'/signin'}>
+          <RouterLink to='/signin'>
             <NavItem>Sign In</NavItem>
           </RouterLink>
         )}
@@ -60,8 +54,6 @@ export const Header = () => {
     </Container>
   )
 }
-
-export default Header
 
 const ProfileItem = ({ user, ...rest }: { user: IUser } & BoxProps) => {
   const [dropdownActive, setDropdownActive] = useState(false)
@@ -77,7 +69,7 @@ const ProfileItem = ({ user, ...rest }: { user: IUser } & BoxProps) => {
     <Box {...rest} ref={profileDropRef}>
       <ProfileToggle onClick={() => setDropdownActive(!dropdownActive)} isActive={dropdownActive}>
         <Icon glyph={dropdownActive ? 'expand_less' : 'expand_more'} />
-        <UserHeading user={user} ml={'xs'} flexDirection={'row-reverse'} />
+        <UserHeading user={user} ml='xs' flexDirection='row-reverse' />
       </ProfileToggle>
       <ProfileDropdown
         isShown={dropdownActive}
@@ -90,8 +82,7 @@ const ProfileItem = ({ user, ...rest }: { user: IUser } & BoxProps) => {
 
 const NavItem = ({ isActive, sx, ...rest }: FlexProps & { isActive?: boolean }) => (
   <Flex
-    tx={'navs'}
-    variant={isActive ? 'itemActive' : 'item'}
+    variant={isActive ? 'navs.itemActive' : 'navs.item'}
     {...rest}
     sx={{
       alignItems: 'center',
