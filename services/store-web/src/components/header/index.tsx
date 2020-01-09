@@ -5,7 +5,6 @@ import { Route } from 'react-router'
 import { Container } from '../layout'
 import { Icon, UserHeading } from '@item-protocol/ui'
 import config from '../../config'
-import styled from '@emotion/styled'
 import useCurrentUser from '../../hooks/currentUser'
 import ProfileDropdown from './profileDropdown'
 import { IUser } from '@item-protocol/types'
@@ -14,7 +13,7 @@ export const Header = () => {
   const { me } = useCurrentUser()
 
   return (
-    <Container variant='header'>
+    <Container variant='header' sx={{ display: 'flex', alignItems: 'stretch', justifyContent: 'space-between' }}>
       <RouterLink to='/'>
         <Flex alignItems='center' height='100%'>
           <Icon glyph='layers' mr='xs' color='primary' fontSize='lg' />
@@ -29,7 +28,7 @@ export const Header = () => {
         </Flex>
       </RouterLink>
 
-      <Nav mx='lg'>
+      <Flex mx='lg'>
         <Route path='/items'>
           {({ match }) => (
             <RouterLink to='/items'>
@@ -40,9 +39,9 @@ export const Header = () => {
         <Link href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>
           <NavItem>How to Use</NavItem>
         </Link>
-      </Nav>
+      </Flex>
 
-      <Nav>
+      <Box>
         {me ? (
           <ProfileItem sx={{ position: 'relative', height: '100%' }} user={me} />
         ) : (
@@ -50,7 +49,7 @@ export const Header = () => {
             <NavItem>Sign In</NavItem>
           </RouterLink>
         )}
-      </Nav>
+      </Box>
     </Container>
   )
 }
@@ -105,10 +104,3 @@ const ProfileToggle = ({ isActive, ...rest }: FlexProps & { isActive?: boolean }
     }}
   />
 )
-
-const Nav = styled(Flex)`
-  flex-wrap: wrap;
-  padding-left: 0;
-  margin-bottom: 0;
-  list-style: none;
-`

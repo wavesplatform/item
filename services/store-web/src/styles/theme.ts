@@ -2,12 +2,7 @@ import { baseTheme } from '@item-protocol/ui'
 import { transparentize } from 'polished'
 
 const header = {
-  width: '100%',
   height: 52,
-
-  display: 'flex',
-  alignItems: 'stretch',
-  justifyContent: 'space-between',
 
   position: 'fixed',
   top: 0,
