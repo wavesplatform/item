@@ -7,11 +7,8 @@ import { Icon, UserHeading } from '@item-protocol/ui'
 import config from '../../config'
 import useCurrentUser from '../../hooks/currentUser'
 import ProfileDropdown from './profileDropdown'
-import { IUser } from '@item-protocol/types'
 
 export const Header = () => {
-  const { me } = useCurrentUser()
-
   return (
     <Container variant='header' sx={{ display: 'flex', alignItems: 'stretch', justifyContent: 'space-between' }}>
       <RouterLink to='/'>
@@ -41,20 +38,14 @@ export const Header = () => {
         </Link>
       </Flex>
 
-      <Box>
-        {me ? (
-          <ProfileItem sx={{ position: 'relative', height: '100%' }} user={me} />
-        ) : (
-          <RouterLink to='/signin'>
-            <NavItem>Sign In</NavItem>
-          </RouterLink>
-        )}
-      </Box>
+      <ProfileItem sx={{ position: 'relative', height: '100%' }} />
     </Container>
   )
 }
 
-const ProfileItem = ({ user, ...rest }: { user: IUser } & BoxProps) => {
+const ProfileItem = (props: BoxProps) => {
+  const { me } = useCurrentUser()
+
   const [dropdownActive, setDropdownActive] = useState(false)
   const history = useHistory()
   const profileDropRef = useRef()
@@ -64,11 +55,18 @@ const ProfileItem = ({ user, ...rest }: { user: IUser } & BoxProps) => {
     return () => unlisten()
   })
 
+  if (!me)
+    return (
+      <RouterLink to='/signin'>
+        <NavItem>Sign In</NavItem>
+      </RouterLink>
+    )
+
   return (
-    <Box {...rest} ref={profileDropRef}>
+    <Box {...props} ref={profileDropRef}>
       <ProfileToggle onClick={() => setDropdownActive(!dropdownActive)} isActive={dropdownActive}>
         <Icon glyph={dropdownActive ? 'expand_less' : 'expand_more'} />
-        <UserHeading user={user} ml='xs' flexDirection='row-reverse' />
+        <UserHeading user={me} ml='xs' flexDirection='row-reverse' />
       </ProfileToggle>
       <ProfileDropdown
         isShown={dropdownActive}
