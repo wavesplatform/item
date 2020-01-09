@@ -5,7 +5,7 @@ import { Route } from 'react-router'
 import { Container } from '../layout'
 import { Icon } from '@item-protocol/ui'
 import config from '../../config'
-import { ProfileItem } from './ProfileItem'
+import { ProfileMenu } from './profileMenu'
 
 export const Header = () => {
   return (
@@ -37,7 +37,7 @@ export const Header = () => {
         </Link>
       </Flex>
 
-      <ProfileItem />
+      <ProfileMenu />
     </Container>
   )
 }

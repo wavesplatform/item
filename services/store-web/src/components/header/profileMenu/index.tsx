@@ -3,11 +3,11 @@ import { Box, BoxProps } from 'rebass'
 import { Link as RouterLink, useHistory } from 'react-router-dom'
 import { Icon, UserHeading } from '@item-protocol/ui'
 
-import { useCurrentUser } from '../../hooks/currentUser'
-import { ProfileDropdown } from './profileDropdown'
-import { NavItem } from './index'
+import { useCurrentUser } from '../../../hooks/currentUser'
+import { ProfileDropdown } from './dropdown'
+import { NavItem } from '../index'
 
-export const ProfileItem = (props: BoxProps) => {
+export const ProfileMenu = (props: BoxProps) => {
   const { me } = useCurrentUser()
 
   const [dropdownActive, setDropdownActive] = useState(false)

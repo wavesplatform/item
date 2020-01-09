@@ -3,8 +3,8 @@ import { Box } from 'rebass'
 import { Link as RouterLink } from 'react-router-dom'
 import { DropdownItem, DropdownList, Price, toWaves } from '@item-protocol/ui'
 import styled from '@emotion/styled'
-import { KeeperContext } from '../../contexts/keeper'
-import { removeToken } from '../../helpers/auth'
+import { KeeperContext } from '../../../contexts/keeper'
+import { removeToken } from '../../../helpers/auth'
 import { useApolloClient } from '@apollo/react-hooks'
 
 type TProps = {
@@ -28,35 +28,38 @@ export const ProfileDropdown = (props: TProps) => {
 
     document.addEventListener('click', onClickOutside)
 
-    return (() => {
+    return () => {
       document.removeEventListener('click', onClickOutside)
-    })
+    }
   }, [onClickOutsideCb, isShown, target])
 
   return (
     <StyledProfileDropdown sx={{ display: isShown ? 'block' : 'none' }}>
       <DropdownList>
-        {account && <DropdownItem sx={{ borderBottomWidth: '1px', borderBottomStyle: 'solid' }}>
-          <Price value={toWaves(account.balance.available).toFixed(3)}/>
-        </DropdownItem>}
+        {account && (
+          <DropdownItem sx={{ borderBottomWidth: '1px', borderBottomStyle: 'solid' }}>
+            <Price value={toWaves(account.balance.available).toFixed(3)} />
+          </DropdownItem>
+        )}
         <RouterLink to={'/profile'}>
           <DropdownItem>Profile</DropdownItem>
         </RouterLink>
         <RouterLink to={'/dashboard'}>
           <DropdownItem>Dapp</DropdownItem>
         </RouterLink>
-        <DropdownItem sx={{ cursor: 'pointer' }} onClick={async () => {
-          removeToken()
-          client.resetStore()
-          client.cache.reset()
-        }}>Logout
+        <DropdownItem
+          sx={{ cursor: 'pointer' }}
+          onClick={async () => {
+            removeToken()
+            client.resetStore()
+            client.cache.reset()
+          }}>
+          Logout
         </DropdownItem>
       </DropdownList>
     </StyledProfileDropdown>
   )
 }
-
-export default ProfileDropdown
 
 const StyledProfileDropdown = styled(Box)`
   position: absolute;
