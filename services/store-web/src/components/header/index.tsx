@@ -37,7 +37,7 @@ export const Header = () => {
         </Link>
       </Flex>
 
-      <ProfileItem sx={{ position: 'relative', height: '100%' }} />
+      <ProfileItem />
     </Container>
   )
 }

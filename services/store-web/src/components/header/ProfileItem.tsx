@@ -1,10 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Box, BoxProps, FlexProps } from 'rebass'
+import { Box, BoxProps } from 'rebass'
 import { Link as RouterLink, useHistory } from 'react-router-dom'
 import { Icon, UserHeading } from '@item-protocol/ui'
 
-import useCurrentUser from '../../hooks/currentUser'
-import ProfileDropdown from './profileDropdown'
+import { useCurrentUser } from '../../hooks/currentUser'
+import { ProfileDropdown } from './profileDropdown'
 import { NavItem } from './index'
 
 export const ProfileItem = (props: BoxProps) => {
@@ -27,11 +27,19 @@ export const ProfileItem = (props: BoxProps) => {
     )
 
   return (
-    <Box {...props} ref={profileDropRef}>
-      <ProfileToggle onClick={() => setDropdownActive(!dropdownActive)} isActive={dropdownActive}>
+    <Box sx={{ position: 'relative' }} ref={profileDropRef} {...props}>
+      <NavItem
+        onClick={() => setDropdownActive(!dropdownActive)}
+        isActive={dropdownActive}
+        sx={{
+          cursor: 'pointer',
+          borderLeft: ({ colors }) => `1px solid ${colors.secondary}`,
+          borderRight: ({ colors }) => `1px solid ${colors.secondary}`,
+        }}>
         <Icon glyph={dropdownActive ? 'expand_less' : 'expand_more'} />
         <UserHeading user={me} ml='xs' flexDirection='row-reverse' />
-      </ProfileToggle>
+      </NavItem>
+
       <ProfileDropdown
         isShown={dropdownActive}
         target={profileDropRef.current}
@@ -40,16 +48,3 @@ export const ProfileItem = (props: BoxProps) => {
     </Box>
   )
 }
-
-export const ProfileToggle = ({ isActive, ...rest }: FlexProps & { isActive?: boolean }) => (
-  <NavItem
-    {...rest}
-    sx={{
-      position: 'relative',
-      cursor: 'pointer',
-      borderLeft: '1px solid',
-      borderRight: '1px solid',
-      borderColor: 'grays.7',
-    }}
-  />
-)
