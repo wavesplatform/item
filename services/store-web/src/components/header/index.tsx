@@ -7,7 +7,7 @@ import { Navigation } from './navigation'
 export const Header = () => {
   return (
     <Flex variant='header' pl='lg' alignItems='stretch' justifyContent='space-between'>
-      <Logo />
+      <Logo display={['none', 'flex']} />
       <Navigation />
       <ProfileMenu />
     </Flex>
