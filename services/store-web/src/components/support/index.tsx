@@ -9,39 +9,44 @@ import styled from '@emotion/styled/macro'
 type TProps = {}
 
 export const Support = (props: TProps) => (
-  <Flex>
-    <Box width={1 / 2} mr={'xl'}>
+  <Flex flexDirection={['column', 'row']}>
+    <Box mr={['inherit', 'xl']}>
       <Heading sx={{ fontSize: 'h1', mb: 'lg' }}>Development</Heading>
       <Text mb={'xl'} color={'grays.3'}>
-        If you have any questions, check out the documentation<br/>
+        If you have any questions, check out the documentation
+        <br />
         or feel free to ask them in the developer chat.
       </Text>
       <Flex mb={'xl'}>
-        <DocsItem width={1 / 2} mr={'lg'} href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>
+        <DocsItem mr={'lg'} href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>
           Check out this manual
-          <DocsImage src={manualImage}/>
+          <DocsImage src={manualImage} />
         </DocsItem>
-        <DocsItem width={1 / 2} href={`${config.docsUrl}/guides/tokenizing-a-game.html`} target='_blank'>
+        <DocsItem href={`${config.docsUrl}/guides/tokenizing-a-game.html`} target='_blank'>
           Read the documentation
-          <DocsImage src={docsImage}/>
+          <DocsImage src={docsImage} />
         </DocsItem>
       </Flex>
       <Flex>
-        <ExternalLink width={1 / 2} href='https://t.me/waves_ride_dapps_dev' target='_blank'>
-          <Button size={'lg'} variant={'secondary'} width={1}>Ask in developer chat</Button>
+        <ExternalLink minWidth={1 / 2} href='https://t.me/waves_ride_dapps_dev' target='_blank'>
+          <Button size={'lg'} variant={'secondary'} width={1}>
+            Ask in developer chat
+          </Button>
         </ExternalLink>
       </Flex>
     </Box>
-    <Box width={1 / 2}>
+
+    <Box mt={['xl', 0]}>
       <Heading sx={{ fontSize: 'h1', mb: 'lg' }}>Partnership</Heading>
       <Text mb={'xl'} color={'grays.3'}>
         Fill in the form and we will connect with you shortly.
       </Text>
-      <Flex>
-        <ExternalLink flex={'1'} href='https://airtable.com/shr8Z21VbnmoS8Q4c' target='_blank'>
-          <Button variant={'primary'} size={'lg'} width={1}>Fill in the form</Button>
-        </ExternalLink>
-      </Flex>
+
+      <ExternalLink href='https://airtable.com/shr8Z21VbnmoS8Q4c' target='_blank'>
+        <Button variant={'primary'} size={'lg'} width={1}>
+          Fill in the form
+        </Button>
+      </ExternalLink>
     </Box>
   </Flex>
 )
@@ -49,17 +54,13 @@ export const Support = (props: TProps) => (
 export default Support
 
 const DocsItem = (props: PropsWithChildren<LinkProps>) => (
-  <ExternalLink
-    color={'default'}
-    {...props}
-  >
+  <ExternalLink color={'default'} {...props}>
     <DocsCard
       p={'xl'}
       pr={'100px'}
       sx={{
         borderRadius: 'md',
-      }}
-    >
+      }}>
       {props.children}
     </DocsCard>
   </ExternalLink>
@@ -74,19 +75,20 @@ const DocsCard = styled(Card)`
   position: relative;
   min-height: 100px;
   height: 100%;
-  
+
   ${ExternalLink}:hover & {
     background: ${themeGet('colors.primary')};
   }
 `
 
-const DocsImage = (props: ImageProps) =>
+const DocsImage = (props: ImageProps) => (
   <Image
     sx={{
       bottom: 'xl',
       right: 'xl',
       position: 'absolute',
-      opacity: .3,
+      opacity: 0.3,
     }}
     {...props}
   />
+)
