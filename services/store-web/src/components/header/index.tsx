@@ -1,27 +1,15 @@
 import React from 'react'
-import { Flex, FlexProps, Heading, Link, Text } from 'rebass'
+import { Flex, FlexProps, Link } from 'rebass'
 import { Link as RouterLink } from 'react-router-dom'
 import { Route } from 'react-router'
-import { Icon } from '@item-protocol/ui'
 import config from '../../config'
 import { ProfileMenu } from './profileMenu'
+import { Logo } from './logo'
 
 export const Header = () => {
   return (
     <Flex variant='header' pl='lg' alignItems='stretch' justifyContent='space-between'>
-      <RouterLink to='/'>
-        <Flex alignItems='center' height='100%'>
-          <Icon glyph='layers' mr='xs' color='primary' fontSize='lg' />
-          <Heading sx={{ fontSize: 'body', fontWeight: 'body' }}>
-            <Text as='span' mr='xs'>
-              Item Store
-            </Text>
-            <Text as='span' color={config.chainId === 'T' ? 'yellow' : 'grays.4'} fontSize='sm'>
-              {config.chainId === 'T' ? 'Testnet' : 'Beta'}
-            </Text>
-          </Heading>
-        </Flex>
-      </RouterLink>
+      <Logo />
 
       <Flex mx='lg'>
         <Route path='/items'>
