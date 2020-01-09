@@ -10,7 +10,6 @@ import { getDappsQuery } from '../../../graphql/queries/getDapps'
 type TData = DappsQuery
 
 export const Dapps = () => {
-
   const { data, loading } = useQuery<TData>(getDappsQuery, {
     fetchPolicy: 'cache-and-network',
   })
@@ -21,23 +20,22 @@ export const Dapps = () => {
   }
 
   if (!dapps || !dapps.length) {
-    return <NullState
-      heading={'Not dapps here...'}
-      message={'Maybe it hasn\'t been added yet or something\'s broken ;('}
-    />
+    return (
+      <NullState heading={'Not dapps here...'} message={"Maybe it hasn't been added yet or something's broken ;("} />
+    )
   }
 
   return (
-    <Grid sx={{
-      gridGap: 'lg',
-      gridTemplateColumns: '.24fr .19fr .19fr .19fr .19fr',
-    }}>
-      {dapps.map(dapp => (<RouterLink
-        to={`/items/${dapp.address}`}
-        key={dapp.id}
-      >
-        <DappCard dapp={dapp as IDapp}/>
-      </RouterLink>))}
+    <Grid
+      sx={{
+        gridGap: 'lg',
+        gridTemplateColumns: ['repeat(2, 1fr)', '.24fr .19fr .19fr .19fr .19fr'],
+      }}>
+      {dapps.map(dapp => (
+        <RouterLink to={`/items/${dapp.address}`} key={dapp.id}>
+          <DappCard dapp={dapp as IDapp} />
+        </RouterLink>
+      ))}
     </Grid>
   )
 }
