@@ -2,14 +2,13 @@ import React from 'react'
 import { Flex, FlexProps, Heading, Link, Text } from 'rebass'
 import { Link as RouterLink } from 'react-router-dom'
 import { Route } from 'react-router'
-import { Container } from '../layout'
 import { Icon } from '@item-protocol/ui'
 import config from '../../config'
 import { ProfileMenu } from './profileMenu'
 
 export const Header = () => {
   return (
-    <Container variant='header' sx={{ display: 'flex', alignItems: 'stretch', justifyContent: 'space-between' }}>
+    <Flex variant='header' pl='lg' alignItems='stretch' justifyContent='space-between'>
       <RouterLink to='/'>
         <Flex alignItems='center' height='100%'>
           <Icon glyph='layers' mr='xs' color='primary' fontSize='lg' />
@@ -38,7 +37,7 @@ export const Header = () => {
       </Flex>
 
       <ProfileMenu />
-    </Container>
+    </Flex>
   )
 }
 

@@ -33,8 +33,6 @@ export const ProfileMenu = (props: BoxProps) => {
         isActive={dropdownActive}
         sx={{
           cursor: 'pointer',
-          borderLeft: ({ colors }) => `1px solid ${colors.secondary}`,
-          borderRight: ({ colors }) => `1px solid ${colors.secondary}`,
         }}>
         <Icon glyph={dropdownActive ? 'expand_less' : 'expand_more'} />
         <UserHeading user={me} ml='xs' flexDirection='row-reverse' />

@@ -3,6 +3,7 @@ import { transparentize } from 'polished'
 
 const header = {
   height: 52,
+  width: '100%',
 
   position: 'fixed',
   top: 0,
