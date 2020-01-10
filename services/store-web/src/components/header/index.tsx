@@ -6,8 +6,8 @@ import { Navigation } from './navigation'
 
 export const Header = () => {
   return (
-    <Flex variant='header' pl='lg' alignItems='stretch' justifyContent='space-between'>
-      <Logo display={['none', 'flex']} />
+    <Flex variant='header' alignItems='stretch' justifyContent='space-between'>
+      <Logo ml='lg' display={['none', 'flex']} />
       <Navigation />
       <ProfileMenu />
     </Flex>
