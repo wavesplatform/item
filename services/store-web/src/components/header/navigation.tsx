@@ -6,6 +6,7 @@ import { transparentize } from 'polished'
 
 import config from '../../config'
 import { NavItem } from './index'
+import { Icon } from '@item-protocol/ui'
 
 export const Navigation = () => (
   <>
@@ -31,37 +32,39 @@ const DesktopNavigation = (props: BoxProps) => (
 )
 
 const MobileNavigation = (props: BoxProps) => {
-  const [visible, setVisible] = useState(true)
+  const [visible, setVisible] = useState(false)
 
   return (
-    <Flex
-      onClick={() => setVisible(false)}
-      flexDirection='column'
-      alignItems='center'
-      py='xl'
-      sx={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
+    <Box sx={{ alignItems: 'center' }} {...props}>
+      <Icon ml='md' onClick={() => setVisible(true)} fontSize='xl' glyph='menu' />
+      <Flex
+        onClick={() => setVisible(false)}
+        flexDirection='column'
+        alignItems='center'
+        py='xl'
+        sx={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
 
-        bg: theme => transparentize(0.1, theme.colors.dark),
-        visibility: visible ? 'visible' : 'hidden',
-        zIndex: 10,
-      }}
-      {...props}>
-      <Route path='/items'>
-        {({ match }) => (
-          <RouterLink to='/items'>
-            <NavItem isActive={!!match}>Browse</NavItem>
-          </RouterLink>
-        )}
-      </Route>
+          bg: theme => transparentize(0.1, theme.colors.dark),
+          visibility: visible ? 'visible' : 'hidden',
+          zIndex: 10,
+        }}>
+        <Route path='/items'>
+          {({ match }) => (
+            <RouterLink to='/items'>
+              <NavItem isActive={!!match}>Browse</NavItem>
+            </RouterLink>
+          )}
+        </Route>
 
-      <Link href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>
-        <NavItem>How to Use</NavItem>
-      </Link>
-    </Flex>
+        <Link href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>
+          <NavItem>How to Use</NavItem>
+        </Link>
+      </Flex>
+    </Box>
   )
 }
