@@ -18,17 +18,7 @@ export const Navigation = () => (
 
 const DesktopNavigation = (props: BoxProps) => (
   <Box mx='lg' {...props}>
-    <Route path='/items'>
-      {({ match }) => (
-        <RouterLink to='/items'>
-          <NavItem isActive={!!match}>Browse</NavItem>
-        </RouterLink>
-      )}
-    </Route>
-
-    <Link href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>
-      <NavItem>How to Use</NavItem>
-    </Link>
+    <MenuItems />
   </Box>
 )
 
@@ -57,18 +47,24 @@ const MobileNavigation = (props: BoxProps) => {
         }}>
         <Logo my='lg' />
 
-        <Route path='/items'>
-          {({ match }) => (
-            <RouterLink to='/items'>
-              <NavItem isActive={!!match}>Browse</NavItem>
-            </RouterLink>
-          )}
-        </Route>
-
-        <Link href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>
-          <NavItem>How to Use</NavItem>
-        </Link>
+        <MenuItems />
       </Flex>
     </Box>
   )
 }
+
+const MenuItems = () => (
+  <>
+    <Route path='/items'>
+      {({ match }) => (
+        <RouterLink to='/items'>
+          <NavItem isActive={!!match}>Browse</NavItem>
+        </RouterLink>
+      )}
+    </Route>
+
+    <Link href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>
+      <NavItem>How to Use</NavItem>
+    </Link>
+  </>
+)
