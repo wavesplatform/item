@@ -32,7 +32,7 @@ const MobileNavigation = (props: BoxProps) => {
       <Flex
         onClick={() => setVisible(false)}
         flexDirection='column'
-        alignItems='center'
+        fontSize='xl'
         py='xl'
         sx={{
           position: 'fixed',
@@ -41,11 +41,11 @@ const MobileNavigation = (props: BoxProps) => {
           bottom: 0,
           right: 0,
 
-          bg: theme => transparentize(0.1, theme.colors.dark),
+          bg: theme => transparentize(0.01, theme.colors.dark),
           visibility: visible ? 'visible' : 'hidden',
           zIndex: 10,
         }}>
-        <Logo my='lg' />
+        <Logo mb='xl' ml='sm' />
 
         <MenuItems />
       </Flex>

@@ -8,9 +8,9 @@ export const Logo = (props: BoxProps) => (
   <Box {...props}>
     <RouterLink to='/'>
       <Flex alignItems='center' height='100%'>
-        <Icon glyph='layers' mr='xs' color='primary' fontSize='lg' />
+        <Icon glyph='layers' mr='xs' color='primary' fontSize={['1.5em', 'lg']} />
 
-        <Heading sx={{ fontSize: 'body', fontWeight: 'body' }}>
+        <Heading sx={{ fontSize: '1em', fontWeight: 'body' }}>
           <Text as='span' mr='xs'>
             Item Store
           </Text>
