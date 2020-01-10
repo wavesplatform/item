@@ -7,6 +7,7 @@ import { transparentize } from 'polished'
 import config from '../../config'
 import { NavItem } from './index'
 import { Icon } from '@item-protocol/ui'
+import { Logo } from './logo'
 
 export const Navigation = () => (
   <>
@@ -37,6 +38,7 @@ const MobileNavigation = (props: BoxProps) => {
   return (
     <Box sx={{ alignItems: 'center' }} {...props}>
       <Icon ml='md' onClick={() => setVisible(true)} fontSize='xl' glyph='menu' />
+
       <Flex
         onClick={() => setVisible(false)}
         flexDirection='column'
@@ -53,6 +55,8 @@ const MobileNavigation = (props: BoxProps) => {
           visibility: visible ? 'visible' : 'hidden',
           zIndex: 10,
         }}>
+        <Logo my='lg' />
+
         <Route path='/items'>
           {({ match }) => (
             <RouterLink to='/items'>
