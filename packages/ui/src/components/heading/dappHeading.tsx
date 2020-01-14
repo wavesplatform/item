@@ -8,33 +8,28 @@ import { StyleSize } from '../../styles'
 export interface DappHeadingProps extends WrapperProps {
   dapp: IDapp
   size?: StyleSize
+  avatarOnly?: boolean
 }
 
-export const DappHeading = ({ dapp, size = 'md', ...rest }: DappHeadingProps) => {
+export const DappHeading = ({ dapp, size = 'md', avatarOnly, ...rest }: DappHeadingProps) => {
   const meta = dapp.meta
   const isExtended = ['xl', 'lg'].includes(size)
   return (
     <Wrapper {...rest}>
-      <UserAvatar
-        icon={dapp.image && dapp.image.icon}
-        address={dapp.address}
-        size={size}
-        mr={size}
-      />
-      <Box flex={'1'}>
-        <Title
-          as={'h1'}
-          sx={{
-            fontSize: size,
-            fontWeight: 'body',
-          }}
-        >
-          {dapp.name || dapp.address}
-        </Title>
-        {isExtended && meta && meta.description && <Description mt={'xs'}>
-          {meta.description}
-        </Description>}
-      </Box>
+      <UserAvatar icon={dapp.image && dapp.image.icon} address={dapp.address} size={size} mr={avatarOnly ? 0 : size} />
+      {!avatarOnly && (
+        <Box flex={'1'}>
+          <Title
+            as={'h1'}
+            sx={{
+              fontSize: size,
+              fontWeight: 'body',
+            }}>
+            {dapp.name || dapp.address}
+          </Title>
+          {isExtended && meta && meta.description && <Description mt={'xs'}>{meta.description}</Description>}
+        </Box>
+      )}
     </Wrapper>
   )
 }
