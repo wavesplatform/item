@@ -6,32 +6,23 @@ export const Grid = styled(Box)`
   display: grid;
 `
 
-export const Container = (props: BoxProps) =>
-  <Box
-    width={1}
-    mx={'auto'}
-    px={'lg'}
-    {...props}
-  />
+export const Container = (props: BoxProps) => <Box width={1} mx={'auto'} px={'lg'} {...props} />
 
-export const Section = (props: BoxProps) =>
-  <Box
-    py={6}
-    {...props}
-  />
+export const Section = (props: BoxProps) => <Box py={6} {...props} />
 
 export const ViewWrapper = Section
 
-export const ViewGrid = (props: BoxProps) =>
+export const ViewGrid = (props: BoxProps) => (
   <Grid
     sx={{
-      gridTemplateColumns: '16rem 1fr',
+      gridTemplateColumns: 'auto 1fr',
       gridGap: 0,
     }}
     {...props}
   />
+)
 
-export const ViewSide = (props: BoxProps) =>
+export const ViewSide = (props: BoxProps) => (
   <Box
     overflow={'hidden'}
     sx={{
@@ -41,15 +32,8 @@ export const ViewSide = (props: BoxProps) =>
     }}
     {...props}
   />
+)
 
-export const ViewContainer = (props: BoxProps) =>
-  <Container
-    maxWidth={'1280px'}
-    {...props}
-  />
+export const ViewContainer = (props: BoxProps) => <Container maxWidth={'1280px'} {...props} />
 
-export const ViewContent = (props: BoxProps) =>
-  <Box
-    p={'lg'}
-    {...props}
-  />
+export const ViewContent = (props: BoxProps) => <Box p={'lg'} {...props} />
