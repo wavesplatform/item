@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { useLocation } from 'react-router'
 import { DappHeading, List, ListItem, Loading } from '@item-protocol/ui'
@@ -7,6 +7,7 @@ import { BoxProps, Flex } from 'rebass'
 import { DappsQuery } from '../../graphql/queries/__generated__/DappsQuery'
 import { useQuery } from '@apollo/react-hooks'
 import { getDappsQuery } from '../../graphql/queries/getDapps'
+import { useBreakpointsStatus } from '../../hooks/useBreakpoints'
 
 interface DappNavProps extends BoxProps {}
 
@@ -22,6 +23,7 @@ export const DappNav = (props: DappNavProps) => {
   })
   const location = useLocation()
   const [isCollapsed, setIsCollapsed] = useState(false)
+  useAutoCollapse(setIsCollapsed)
 
   if (loading) {
     return <Loading />
@@ -64,3 +66,12 @@ export const DappNav = (props: DappNavProps) => {
 }
 
 export default DappNav
+
+const useAutoCollapse = (collapse: Function) => {
+  const [isMobile = false] = useBreakpointsStatus()
+
+  useEffect(() => {
+    if (isMobile) collapse(true)
+    else collapse(false)
+  }, [isMobile, collapse])
+}
