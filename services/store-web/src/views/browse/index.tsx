@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { ViewContent, ViewGrid, ViewSide, ViewWrapper } from '../../components/layout'
+import { ViewContent, ViewGrid, ViewSide } from '../../components/layout'
 import { useHistory, useLocation, useRouteMatch } from 'react-router'
 import { Box } from 'rebass'
 import Search from './components/search'
@@ -43,22 +43,21 @@ export const BrowseView = () => {
   const [searchString, setSearchString] = useState(defaultSearchString)
   const [inclusions, setInclusions] = useState<ItemInclusion[]>(defaultInclusions)
 
-  const setUrlParams = useCallback((params: UrlParams) => {
-    const queryParams: UrlParams = queryString.parse(location.search)
-    history.replace({ search: queryString.stringify({ ...queryParams, ...params }) })
-  }, [location, history])
+  const setUrlParams = useCallback(
+    (params: UrlParams) => {
+      const queryParams: UrlParams = queryString.parse(location.search)
+      history.replace({ search: queryString.stringify({ ...queryParams, ...params }) })
+    },
+    [location, history],
+  )
 
   useEffect(() => {
     // Update if at least 400ms have passed
-    const searchParamSub = searchParam$
-      .pipe(
-        debounce(() => timer(400)),
-      )
-      .subscribe(search => {
-        // Update state & url
-        setSearchString(search)
-        setUrlParams({ search })
-      })
+    const searchParamSub = searchParam$.pipe(debounce(() => timer(400))).subscribe(search => {
+      // Update state & url
+      setSearchString(search)
+      setUrlParams({ search })
+    })
 
     return () => {
       if (searchParamSub) {
@@ -71,31 +70,28 @@ export const BrowseView = () => {
   const { address } = (match && match.params) || {}
 
   return (
-    <ViewWrapper py={0}>
-      <ViewGrid>
-        <ViewSide>
-          <DappNav/>
-        </ViewSide>
-        <ViewContent>
-          <Box mb={'lg'}>
-            <Search defaultValue={searchString} onSearch={newSearchString => searchParam$.next(newSearchString)}/>
-          </Box>
-          <Box mb={'lg'}>
-            <Inclusions inclusions={inclusions} onChange={(inclusions: ItemInclusion[]) => {
+    <ViewGrid minHeight={'100%'}>
+      <ViewSide>
+        <DappNav />
+      </ViewSide>
+      <ViewContent>
+        <Box mb={'lg'}>
+          <Search defaultValue={searchString} onSearch={newSearchString => searchParam$.next(newSearchString)} />
+        </Box>
+        <Box mb={'lg'}>
+          <Inclusions
+            inclusions={inclusions}
+            onChange={(inclusions: ItemInclusion[]) => {
               setInclusions(inclusions)
               setUrlParams({ includes: inclusions ? inclusions.join(',') : undefined })
-            }}/>
-          </Box>
-          <Box mb={'lg'}>
-            <Items
-              address={address}
-              searchString={searchString}
-              inclusions={inclusions}
-            />
-          </Box>
-        </ViewContent>
-      </ViewGrid>
-    </ViewWrapper>
+            }}
+          />
+        </Box>
+        <Box mb={'lg'}>
+          <Items address={address} searchString={searchString} inclusions={inclusions} />
+        </Box>
+      </ViewContent>
+    </ViewGrid>
   )
 }
 
@@ -103,9 +99,7 @@ const getValidInclusions = (includesStr: string): ItemInclusion[] => {
   const includes = includesStr && includesStr.split(',')
 
   // Filter incorrect inclusions
-  return includes
-    ? includes.filter(v => Object.keys(inclusionsMap).includes(v)) as ItemInclusion[]
-    : []
+  return includes ? (includes.filter(v => Object.keys(inclusionsMap).includes(v)) as ItemInclusion[]) : []
 }
 
 export default BrowseView
