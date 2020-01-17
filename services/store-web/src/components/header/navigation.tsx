@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Link, Box, BoxProps, Flex } from 'rebass'
 import { Link as RouterLink } from 'react-router-dom'
 import { Route } from 'react-router'
@@ -23,9 +23,19 @@ const DesktopNavigation = (props: BoxProps) => (
 
 const MobileNavigation = (props: BoxProps) => {
   const [visible, setVisible] = useState(false)
+  const ref = useRef<HTMLDivElement>()
+
+  useEffect(() => {
+    const onClickOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setVisible(false)
+    }
+
+    document.addEventListener('click', onClickOutside)
+    return () => document.removeEventListener('click', onClickOutside)
+  })
 
   return (
-    <Box sx={{ alignItems: 'center' }} {...props}>
+    <Box ref={ref} sx={{ alignItems: 'center' }} {...props}>
       <Icon
         ml='md'
         onClick={() => setVisible(!visible)}
