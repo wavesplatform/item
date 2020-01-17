@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { Link, Box, BoxProps, Flex } from 'rebass'
 import { Link as RouterLink } from 'react-router-dom'
 import { Route } from 'react-router'
-import { transparentize } from 'polished'
 
 import config from '../../config'
 import { NavItem } from './index'
@@ -27,44 +26,53 @@ const MobileNavigation = (props: BoxProps) => {
 
   return (
     <Box sx={{ alignItems: 'center' }} {...props}>
-      <Icon ml='md' onClick={() => setVisible(true)} fontSize='xl' glyph='menu' />
+      <Icon
+        ml='md'
+        onClick={() => setVisible(!visible)}
+        fontSize='xl'
+        glyph={visible ? 'close' : 'menu'}
+        sx={{ zIndex: 11 }}
+      />
 
       <Flex
-        onClick={() => setVisible(false)}
         flexDirection='column'
         fontSize='xl'
-        py='xl'
+        p='xl'
         sx={{
           position: 'fixed',
           top: 0,
-          left: 0,
+          left: visible ? 0 : '-100vw',
           bottom: 0,
-          right: 0,
 
-          bg: theme => transparentize(0.01, theme.colors.dark),
-          visibility: visible ? 'visible' : 'hidden',
+          bg: 'dark',
           zIndex: 10,
         }}>
-        <Logo mb='xl' ml='sm' />
+        <Logo onClick={() => setVisible(false)} my='xl' ml='sm' />
 
-        <MenuItems />
+        <MenuItems onSelect={() => setVisible(false)} />
       </Flex>
     </Box>
   )
 }
 
-const MenuItems = () => (
-  <>
-    <Route path='/items'>
-      {({ match }) => (
-        <RouterLink to='/items'>
-          <NavItem isActive={!!match}>Browse</NavItem>
-        </RouterLink>
-      )}
-    </Route>
+const MenuItems = ({ onSelect }: { onSelect?: () => void }) => {
+  const handleClick = () => typeof onSelect === 'function' && onSelect()
 
-    <Link href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>
-      <NavItem>How to Use</NavItem>
-    </Link>
-  </>
-)
+  return (
+    <>
+      <Route path='/items'>
+        {({ match }) => (
+          <RouterLink to='/items'>
+            <NavItem onClick={handleClick} isActive={!!match}>
+              Browse
+            </NavItem>
+          </RouterLink>
+        )}
+      </Route>
+
+      <Link href={`${config.docsUrl}/guides/how-to-use.html`} target='_blank'>
+        <NavItem onClick={handleClick}>How to Use</NavItem>
+      </Link>
+    </>
+  )
+}
