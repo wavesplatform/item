@@ -428,7 +428,7 @@ export const PageData = of([
             title: 'Guides',
             description:
               '<p>' +
-              '<img src="https://s3.eu-central-1.amazonaws.com/dev.wavesplatform.com/add2667d73fc4f28a4970d54139a9479.svg" alt="text">' +
+              '<img src="/assets/i/book.svg" alt="Guides icon">' +
               '</p>',
             content: null,
             index: null,
@@ -440,7 +440,7 @@ export const PageData = of([
             title: 'Protocol Concept',
             description:
               '<p>' +
-              '<img src="https://s3.eu-central-1.amazonaws.com/dev.wavesplatform.com/717e0b68e64b4505971fb51c35ec5c98.svg" alt="text">' +
+              '<img src="/assets/i/protocol.svg" alt="Protocol concept icon">' +
               '</p>',
             content: null,
             index: null,
@@ -452,7 +452,7 @@ export const PageData = of([
             title: 'Tools/Libraries',
             description:
               '<p>' +
-              '<img src="https://s3.eu-central-1.amazonaws.com/dev.wavesplatform.com/2703bb8ae1674b3893b800c4b1c44a9a.svg" alt="text">' +
+              '<img src="/assets/i/tools.svg" alt="Tools/Libraries icon">' +
               '</p>',
             content: null,
             index: null,
@@ -464,7 +464,7 @@ export const PageData = of([
             title: 'API Reference',
             description:
               '<p>' +
-              '<img src="https://s3.eu-central-1.amazonaws.com/dev.wavesplatform.com/d948256fb1924b508735bd8216838704.svg" alt="text">' +
+              '<img src="/assets/i/api.svg" alt="Api Reference icon">' +
               '</p>',
             content: null,
             index: null,
