@@ -9,7 +9,7 @@
       "timeout": 60000
     },
     "testnet": {
-      "API_BASE": "https://testnodes.wavesnodes.com/",
+      "API_BASE": "https://nodes-testnet.wavesnodes.com/",
       "CHAIN_ID": "T",
       "SEED": "note pizza prize cinnamon circle month brisk rain hybrid model delay wash",
       "timeout": 60000

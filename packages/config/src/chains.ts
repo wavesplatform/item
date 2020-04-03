@@ -17,7 +17,7 @@ export const chains: Record<string, IChainConfig> = {
     network: 'mainnet',
   },
   T: {
-    node: 'https://testnodes.wavesnodes.com',
+    node: 'https://nodes-testnet.wavesnodes.com',
     api: 'https://api.testnet.wavesplatform.com/v0/',
     network: 'testnet',
   },

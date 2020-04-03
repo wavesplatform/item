@@ -10,7 +10,7 @@ const apiConfig: IApiConfig =
     : {
       nodes: config.node,
       api: config.api,
-      matcher: 'https://matcher.testnet.wavesnodes.com/matcher/',
+      matcher: 'https://matcher-testnet.wavesnodes.com/matcher/',
       matcherPublicKey: '8QUAqtTckM5B8gvcuP7mMswat9SjKUuafJMusEoSn1Gy',
       chainId: globalConfig.chainId,
     }
