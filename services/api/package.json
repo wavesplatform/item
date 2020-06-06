@@ -23,7 +23,7 @@
     "@waves/signature-generator": "^5.2.1",
     "@waves/waves-crypto": "^3.0.17",
     "algoliasearch": "^3.34.0",
-    "apollo-server-express": "^2.9.3",
+    "apollo-server-express": "^2.14.2",
     "aws-sdk": "^2.523.0",
     "debug": "^4.1.1",
     "express": "^4.17.1",
