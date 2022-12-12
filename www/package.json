@@ -39,7 +39,7 @@
     "@w11k/ngx-componentdestroyed": "^4.1.4",
     "cli-progress": "^3.3.1",
     "dotenv": "^8.2.0",
-    "express": "^4.15.2",
+    "express": "^4.17.3",
     "express-http-proxy": "^1.6.0",
     "icon-font-generator": "git+https://github.com/ln-e/icon-font-generator.git",
     "include-media": "^1.4.9",
