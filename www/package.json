@@ -43,7 +43,7 @@
     "express-http-proxy": "^1.6.0",
     "icon-font-generator": "git+https://github.com/ln-e/icon-font-generator.git",
     "include-media": "^1.4.9",
-    "luxon": "^1.16.0",
+    "luxon": "^1.28.1",
     "ng-yandex-metrika": "^3.0.2",
     "ngx-captcha": "^7.0.0",
     "ngx-date-countdown": "^1.1.3",
